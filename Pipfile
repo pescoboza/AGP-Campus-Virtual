@@ -9,6 +9,9 @@ autopep8 = "*"
 
 [packages]
 flask = "*"
+flask-sqlalchemy = "*"
+flask-login = "*"
+flask-migrate = "*"
 
 [requires]
 python_version = "3.8"
