@@ -1,0 +1,20 @@
+<html>
+
+<head>
+    {% if title %}
+    <title>{{title}}</title>
+    {% endif %}
+</head>
+
+<body>
+    <div>
+        <a href="/index">Inicio</a> |
+        <a href="/login">Ingresar</a>
+    </div>
+
+    <hr>
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>
