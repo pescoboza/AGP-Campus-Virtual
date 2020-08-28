@@ -15,6 +15,7 @@ flask-wtf = "*"
 flask-bootstrap = "*"
 flask-pymongo = "*"
 python-dotenv = "*"
+pymongo = {extras = ["srv"], version = "*"}
 
 [requires]
 python_version = "3.8"
