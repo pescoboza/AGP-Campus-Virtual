@@ -16,7 +16,17 @@ Enter virtual environment shell:
 pipenv shell
 ```
 
+\
+Set the Flask application environment variable:
+```
+set FLASK_APP=run.py
+```
+\
 Run web app (from inside the virtual environment):
+```
+flask run
+```
+or
 ```
 python run.py
 ```
