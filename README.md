@@ -21,6 +21,11 @@ Set the Flask application environment variable:
 ```
 set FLASK_APP=run.py
 ```
+Set the Flask evnironment to development:
+```
+set FLASK_ENV=development
+```
+
 \
 Run web app (from inside the virtual environment):
 ```
