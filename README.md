@@ -35,6 +35,17 @@ or
 ```
 python run.py
 ```
+\
+Full example:
+```
+pip install pipenv
+pipenv install
+pipenv shell
+set FLASK_APP=run.py
+set FLASK_ENV=development
+flask run
+```
+
 
 ## Auto formatting
 Please disable auto formatting for python files to keep it from messing up imports.
