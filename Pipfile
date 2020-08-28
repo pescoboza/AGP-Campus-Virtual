@@ -9,11 +9,12 @@ autopep8 = "*"
 
 [packages]
 flask = "*"
-flask-sqlalchemy = "*"
 flask-login = "*"
 flask-migrate = "*"
 flask-wtf = "*"
 flask-bootstrap = "*"
+flask-pymongo = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.8"
