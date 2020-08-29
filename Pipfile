@@ -13,9 +13,9 @@ flask-login = "*"
 flask-migrate = "*"
 flask-wtf = "*"
 flask-bootstrap = "*"
-flask-pymongo = "*"
 python-dotenv = "*"
 pymongo = {extras = ["srv"], version = "*"}
+flask-mongoengine = "*"
 
 [requires]
 python_version = "3.8"
