@@ -6,13 +6,14 @@ from app import db, login
 db_str_len = 64
 db_hash_len = 128
 
-class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(db_str_len), index=True, unique=True)
-    first_name = db.Column(db.String(db_str_len))
-    last_name = db.Column(db.String(db_str_len))
-    password_hash = db.Column(db.String(db_hash_len))
+# TODO: Figure out if one can use flask_login UserMixin with flask_mongoengine document model
+class User(UserMixin, db.Document):
+    meta = {"collection":"user"}
 
+    email = db.StringField(max_length=db_str_len, required=True)
+    first_name = db.StringField(max_length=db_str_len, required=True)
+    last_name = db.StringField(max_length=db_str_len, required=True)
+    password_hash = db.StringField(max_length=db_hash_len, required=True)
 
 
     def set_password(self, password):
@@ -25,6 +26,7 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return "<User email:{}>".format(self.email)
 
+
 @login.user_loader
 def load_user(id):
-    return User.query.get(int(id))
+    return User.objects(id=id).first()

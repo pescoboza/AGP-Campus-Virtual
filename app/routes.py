@@ -13,17 +13,21 @@ def index():
 
 @app.route("/login",methods=["GET", "POST"])
 def login():
-    # TODO: Add database integration.
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        # NOTE: Remember to unpack form fields with form.field.data.
+        user = User.objects(email=form.email.data).first()
 
-        if user is None or not user.check_password(form.password.data):
-            # TODO: Add better flashed messages.
-            flash("Usuario o contraseña inválidos.")
+        if user is None:
+            print("[DEBUG]: User not found: {}".format(form.email.data))
+            return redirect(url_for("login"))
+        
+        if not user.check_password(form.password.data):
+            print("[DEBUG]: Invalid user credentials: {} {}".format(form.email.data, form.password.data))
             return redirect(url_for("login"))
 
-        login_user(user, remember=form.remember_me.data)
+        if login_user(user, remember=form.remember_me.data):
+            print("[DEBUG]: Login from user: {} {}".format(user.email, user.first_name))
         return redirect("/index")
     
     return render_template("login.html", title="Iniciar sesión", form=form)

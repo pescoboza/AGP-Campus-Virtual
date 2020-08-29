@@ -9,11 +9,13 @@ autopep8 = "*"
 
 [packages]
 flask = "*"
-flask-sqlalchemy = "*"
 flask-login = "*"
 flask-migrate = "*"
 flask-wtf = "*"
 flask-bootstrap = "*"
+python-dotenv = "*"
+pymongo = {extras = ["srv"], version = "*"}
+flask-mongoengine = "*"
 
 [requires]
 python_version = "3.8"
