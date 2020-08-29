@@ -1,13 +1,17 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
+MONGO_TEST_DB = "AGPCampusVirtualDev"
+MONGO_TEST_URI = "mongodb+srv://admin:fractalchargeimplosion@devcluster.k7j3g.mongodb.net/AGPCampusVirtualDev?retryWrites=true&w=majority"
 
 class Config(object):
     ENV = "production"
     DEBUG = False
     SECRET_KEY = os.environ.get("SECRET_KEY")
 
-    MONGO_DBNAME = os.environ.get("MONGO_DBNAME")
-    MONGO_URI = os.environ.get("MONGO_URI")
+    MONGODB_SETTINGS = {
+        "db": os.environ.get("MONGO_DB") or MONGO_TEST_DB,
+        "host": os.environ.get("MONGO_URI") or MONGO_TEST_URI,
+    }        
 
 
     # Deprecated SQLalchemy code
@@ -20,6 +24,7 @@ class DevConfig(Config):
     DEBUG = True
     SECRET_KEY = "terces"
 
-    MONGO_DBNAME = "dbdev"
-    MONGO_URI = \
-        "mongodb+srv://admin:fractalchargeimplosion@devcluster.k7j3g.mongodb.net/devdb?retryWrites=true&w=majority"
+    MONGODB_SETTINGS = {
+        "db": MONGO_TEST_DB,
+        "host": MONGO_TEST_URI,
+    }        

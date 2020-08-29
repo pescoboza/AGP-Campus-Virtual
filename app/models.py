@@ -6,33 +6,27 @@ from app import db, login
 db_str_len = 64
 db_hash_len = 128
 
-# Old SQLAlchemy user model
-# class User(UserMixin, db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     email = db.Column(db.String(db_str_len), index=True, unique=True)
-#     first_name = db.Column(db.String(db_str_len))
-#     last_name = db.Column(db.String(db_str_len))
-#     password_hash = db.Column(db.String(db_hash_len))
+# TODO: Figure out if one can use flask_login UserMixin with flask_mongoengine document model
+class User(UserMixin, db.Document):
+    meta = {"collection":"user"}
+
+    email = db.StringField(max_length=db_str_len, required=True)
+    first_name = db.StringField(max_length=db_str_len, required=True)
+    last_name = db.StringField(max_length=db_str_len, required=True)
+    password_hash = db.StringField(max_length=db_hash_len, required=True)
 
 
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
 
-#     def set_password(self, password):
-#         self.password_hash = generate_password_hash(password)
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
-#     def check_password(self, password):
-#         return check_password_hash(self.password_hash, password)
+    # Print function
+    def __repr__(self):
+        return "<User email:{}>".format(self.email)
 
-#     # Print function
-#     def __repr__(self):
-#         return "<User email:{}>".format(self.email)
 
-# New PyMongo User model
-class User():
-    user_model ={
-        "_id": "",
-        "email": "",
-        "first_name": "",
-        "last_name": "",
-        "password_hash": ""
-    }
-
+@login.user_loader
+def load_user(id):
+    return User.objects(id=id).first()
