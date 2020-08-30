@@ -22,6 +22,16 @@ class User(UserMixin, db.Document):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    # Gets user document instance from db. Returns None if it does not exist.
+    @staticmethod
+    def get_user(email):
+        return User.objects(email=email).first()
+    
+    # Creates user without saving it the database.
+    @staticmethod
+    def create_new_user(email, first_name, last_name, password):
+        return User(email=email, first_name=first_name, last_name=last_name, password_hash=generate_password_hash(password))
+
     # Print function
     def __repr__(self):
         return "<User email:{}>".format(self.email)
