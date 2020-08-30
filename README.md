@@ -62,3 +62,7 @@ touch .vscode/settings.json
     }
 }
 ```
+
+## TODO
+- Add user registration.
+- Add user sessions.

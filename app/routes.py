@@ -11,6 +11,9 @@ from app.models import User
 def index():
     return render_template("index.html")
 
+
+# TODO: Add user registration.
+# TODO: Add user sessions.
 @app.route("/login",methods=["GET", "POST"])
 def login():
     form = LoginForm()

@@ -1,4 +1,6 @@
 import os
+from datetime import timedelta
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 MONGO_TEST_DB = "AGPCampusVirtualDev"
 MONGO_TEST_URI = "mongodb+srv://admin:fractalchargeimplosion@devcluster.k7j3g.mongodb.net/AGPCampusVirtualDev?retryWrites=true&w=majority"
@@ -13,6 +15,7 @@ class Config(object):
         "host": os.environ.get("MONGO_URI") or MONGO_TEST_URI,
     }        
 
+    REMEMBER_COOKIE_DURATION = timedelta(minutes=15)
 
     # Deprecated SQLalchemy code
     # SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL") or \
