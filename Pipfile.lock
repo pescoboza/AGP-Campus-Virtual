@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3a557bb3901845ded11edd604dface8cf542bfa44c2b1c2cd051d134b40847d0"
+            "sha256": "197f8982dd7b42dadc10371704ba29fb77d45886936c1fe95f878ed15bbe26e4"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -102,9 +102,6 @@
             "version": "==2.4.4"
         },
         "flask-wtf": {
-            "extras": [
-                "email_validator"
-            ],
             "hashes": [
                 "sha256:57b3faf6fe5d6168bda0c36b0df1d05770f8e205e18332d0376ddb954d17aef2",
                 "sha256:d417e3a0008b5ba583da1763e4db0f55a1269d9dd91dcc3eb3c026d3c5dbd720"
@@ -261,14 +258,6 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==2.8.1"
-        },
-        "python-dotenv": {
-            "hashes": [
-                "sha256:8c10c99a1b25d9a68058a1ad6f90381a62ba68230ca93966882a4dbc3bc9c33d",
-                "sha256:c10863aee750ad720f4f43436565e4c1698798d763b63234fb5021b6c616e423"
-            ],
-            "index": "pypi",
-            "version": "==0.14.0"
         },
         "python-editor": {
             "hashes": [
@@ -429,6 +418,14 @@
             ],
             "index": "pypi",
             "version": "==2.6.0"
+        },
+        "python-dotenv": {
+            "hashes": [
+                "sha256:8c10c99a1b25d9a68058a1ad6f90381a62ba68230ca93966882a4dbc3bc9c33d",
+                "sha256:c10863aee750ad720f4f43436565e4c1698798d763b63234fb5021b6c616e423"
+            ],
+            "index": "pypi",
+            "version": "==0.14.0"
         },
         "six": {
             "hashes": [
