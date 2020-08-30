@@ -64,5 +64,4 @@ touch .vscode/settings.json
 ```
 
 ## TODO
-- Add user registration.
-- Add user sessions.
+- Add proper user registration field validation.
