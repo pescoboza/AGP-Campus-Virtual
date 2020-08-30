@@ -6,15 +6,15 @@ verify_ssl = true
 [dev-packages]
 pylint = "*"
 autopep8 = "*"
+python-dotenv = "*"
 
 [packages]
 flask = "*"
 flask-login = "*"
 flask-migrate = "*"
-flask-wtf = "*"
 flask-bootstrap = "*"
-python-dotenv = "*"
-pymongo = {extras = ["srv"], version = "*"}
+email-validator = "*"
+flask-wtf = "*"
 flask-mongoengine = "*"
 
 [requires]
