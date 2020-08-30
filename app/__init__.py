@@ -14,7 +14,6 @@ class Message:
     class UserRegistration:
         ERROR_PASSWORD_MATCH = "Las contraseñas deben coincidir."
         ERROR_EMAIL_IN_USE = "La dirección de correo ya ha sido registrada."
-        
         ACCEPT_TERMS = "He leído y acepto los términos y condiciones."
 
 db = MongoEngine()
