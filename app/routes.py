@@ -39,9 +39,9 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         if User.get_user(form.email.data) is not None:
-            print("[DEBUG]: User with email {} already registered.".format(user.email))
-            flash(Message.UserRegistration.ERROR_IN_USE)
-            return redirect(url_for("login"))
+            print("[DEBUG]: User with email {} already registered.".format(form.email.data))
+            flash(Message.UserRegistration.ERROR_EMAIL_IN_USE)
+            return redirect(url_for("register"))
 
         new_user = User.create_new_user(email=form.email.data, 
                             first_name=form.first_name.data, 
