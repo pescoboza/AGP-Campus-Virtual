@@ -13,10 +13,9 @@ flask = "*"
 flask-login = "*"
 flask-migrate = "*"
 flask-bootstrap = "*"
-pymongo = {extras = ["srv"], version = "*"}
-flask-mongoengine = "*"
 email-validator = "*"
 flask-wtf = "*"
+flask-mongoengine = "*"
 
 [requires]
 python_version = "3.8"
