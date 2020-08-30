@@ -16,6 +16,7 @@ flask-bootstrap = "*"
 python-dotenv = "*"
 pymongo = {extras = ["srv"], version = "*"}
 flask-mongoengine = "*"
+email-validator = "*"
 
 [requires]
 python_version = "3.8"
