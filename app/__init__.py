@@ -6,6 +6,10 @@ from flask_bootstrap import Bootstrap
 
 from config import DevConfig
 
+class Messages:
+    FLASH_LOGOUT_USER = "Ha cerrado sesión correctamente."
+
+
 db = MongoEngine()
 migrate = Migrate()
 login = LoginManager()

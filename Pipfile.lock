@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "109699124d711fc48cfd618ef959711ec57b1004bb785efb6c29b105567bf939"
+            "sha256": "6604f8dca8bebf35bdfc85f4f60ff797fec04ed42aed06b1dc173230b5d206c2"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -94,6 +94,9 @@
             "version": "==2.4.4"
         },
         "flask-wtf": {
+            "extras": [
+                "email_validator"
+            ],
             "hashes": [
                 "sha256:57b3faf6fe5d6168bda0c36b0df1d05770f8e205e18332d0376ddb954d17aef2",
                 "sha256:d417e3a0008b5ba583da1763e4db0f55a1269d9dd91dcc3eb3c026d3c5dbd720"
