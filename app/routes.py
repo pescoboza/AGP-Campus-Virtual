@@ -1,7 +1,7 @@
 from flask import flash, redirect, render_template, url_for
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, logout_user, login_required
 
-from app import app
+from app import app, Messages
 from app.forms import LoginForm
 from app.models import User
 
@@ -9,7 +9,7 @@ from app.models import User
 @app.route("/")
 @app.route("/index")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", user=current_user)
 
 
 # TODO: Add user registration.
@@ -34,3 +34,10 @@ def login():
         return redirect("/index")
     
     return render_template("login.html", title="Iniciar sesión", form=form)
+
+@login_required
+@app.route("/logout")
+def logout():
+    logout_user()
+    flash(Messages.FLASH_LOGOUT_USER)
+    return redirect("/index")
