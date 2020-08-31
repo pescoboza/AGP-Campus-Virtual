@@ -27,7 +27,6 @@ class RegisterForm(FlaskForm):
     _special_characters_raw = R"""!#$%&()*+-/:;<=>?@[\]^{|}~"""
     _special_characters = tuple(_special_characters_raw)
     
-    # TODO: Change password validation to a more maintable version that allows specific messages.
     def validate_password(self, field):
         """
             Password constraints:
@@ -36,9 +35,7 @@ class RegisterForm(FlaskForm):
             - At least one lower case letter
             - At least one special symbol (list between double quotes): "!#$%&()*+-/:;<=>?@[\]^{|}~"
             - Length between 6 and 64 characters long
-        """
-        
-
+        """ 
         password = field.data
         validation = True
         
