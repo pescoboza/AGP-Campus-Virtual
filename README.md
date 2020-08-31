@@ -8,9 +8,9 @@ pip install pipenv
 
 Install virtual environment packages:
 ```
-pipenv install
+pipenv install --dev
 ```
-\
+
 ## Regular run
 Enter virtual environment shell:
 ```
@@ -27,7 +27,7 @@ flask run
 Full example:
 ```
 pip install pipenv
-pipenv install
+pipenv install --dev
 pipenv shell
 flask run
 ```
