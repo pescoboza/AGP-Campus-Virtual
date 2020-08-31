@@ -9,13 +9,13 @@ data_required = InputRequired(Message.UserRegistration.ERROR_REQUIRED_FIELD)
 
 
 class LoginForm(FlaskForm):
-    email = StringField("Correo", validators=[data_required, Email(M)])
+    email = StringField("Correo", validators=[data_required, Email(Message.UserRegistration.ERROR_INVALID_EMAIL)])
     password = PasswordField("Contraseña", validators=[data_required])
     remember_me = BooleanField("Recuérdame")
     submit = SubmitField("Iniciar sesión")
 
 class RegisterForm(FlaskForm):
-    email = StringField("Correo", validators=[data_required])
+    email = StringField("Correo", validators=[data_required, Email(Message.UserRegistration.ERROR_INVALID_EMAIL)])
     first_name = StringField("Nombre", validators=[data_required])
     last_name = StringField("Apellidos", validators=[data_required])
     password = PasswordField("Contraseña", validators=[data_required, EqualTo("confirm_password", message=Message.UserRegistration.ERROR_PASSWORD_MATCH)])
@@ -72,6 +72,4 @@ class RegisterForm(FlaskForm):
             validation = False
             raise ValidationError(Message.UserRegistration.ERROR_PASSWORD_AT_LEAST_ONE_SPECIAL_CHARACTER.format(RegisterForm._special_characters_raw))
 
-        return validation
-        
-        
+        return validation        

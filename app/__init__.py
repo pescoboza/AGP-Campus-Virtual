@@ -10,6 +10,7 @@ class Message:
     class Flash:
         LOGOUT_USER = "Ha cerrado sesión correctamente."
         NEW_USER = "Bienvenido {first_name}."
+        INVALID_CREDENTIALS = "Correo o contraseña inválidos."
 
     class UserRegistration:
         ERROR_REQUIRED_FIELD = "Este campo es obligatorio."
@@ -25,6 +26,7 @@ class Message:
         ERROR_PASSWORD_AT_LEAST_ONE_SPECIAL_CHARACTER = "La contraseña debe contener al menos un caracter especial: {}."
         
         ACCEPT_TERMS = "He leído y acepto los términos y condiciones."
+
 
 db = MongoEngine()
 migrate = Migrate()
