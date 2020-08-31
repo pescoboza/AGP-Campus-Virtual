@@ -22,10 +22,12 @@ def login():
 
         if user is None:
             print("[DEBUG]: User not found: {}".format(form.email.data))
+            flash(Message.Flash.INVALID_CREDENTIALS)
             return redirect(url_for("login"))
         
         if not user.check_password(form.password.data):
             print("[DEBUG]: Invalid user credentials: {} {}".format(form.email.data, form.password.data))
+            flash(Message.Flash.INVALID_CREDENTIALS)
             return redirect(url_for("login"))
 
         if login_user(user, remember=form.remember_me.data):

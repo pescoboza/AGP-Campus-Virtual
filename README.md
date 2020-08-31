@@ -64,4 +64,5 @@ touch .vscode/settings.json
 ```
 
 ## TODO
-- Add proper user registration field validation.
+- Add email integration.
+- Add password recovery and change.
