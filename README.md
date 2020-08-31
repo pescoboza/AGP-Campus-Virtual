@@ -1,6 +1,6 @@
 # AGP Campus Virtal
 
-## Running
+## Running for the first time
 Install pipenv:
 ```
 pip install pipenv
@@ -10,39 +10,25 @@ Install virtual environment packages:
 ```
 pipenv install
 ```
-
+\
+## Regular run
 Enter virtual environment shell:
 ```
 pipenv shell
 ```
 
 \
-Set the Flask application environment variable:
-```
-set FLASK_APP=run.py
-```
-Set the Flask evnironment to development:
-```
-set FLASK_ENV=development
-```
-
-\
-Run web app (from inside the virtual environment):
+Call the flask command to run the app (from inside the virtual environment):
 ```
 flask run
 ```
-or
-```
-python run.py
-```
+
 \
 Full example:
 ```
 pip install pipenv
 pipenv install
 pipenv shell
-set FLASK_APP=run.py
-set FLASK_ENV=development
 flask run
 ```
 

@@ -2,6 +2,7 @@ from flask import Flask
 from flask_mongoengine import MongoEngine
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 
 from config import DevConfig
@@ -31,6 +32,7 @@ class Msg:
 db = MongoEngine()
 migrate = Migrate()
 login = LoginManager()
+mail = Mail()
 bootstrap = Bootstrap()
 
 def create_app(config):
@@ -40,6 +42,7 @@ def create_app(config):
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
+    mail.init_app(app)
     bootstrap.init_app(app)
 
     return app
@@ -49,3 +52,6 @@ app = create_app(DevConfig)
 
 # Keep this import below the app instantiation
 from app import routes, models
+
+if __name__=="__main__":
+    app.run()
