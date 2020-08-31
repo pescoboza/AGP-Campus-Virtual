@@ -63,3 +63,11 @@ class DevConfig(Config):
     MAIL_USERNAME  = os.environ.get("DEBUG_MAIL_USERNAME")
     MAIL_DEFAULT_SENDER = os.environ.get("DEBUG_MAIL_DEFAULT_SENDER")
     MAIL_PASSWORD = os.environ.get("DEBUG_MAIL_PASSWORD")
+
+
+config = {
+    "development": DevConfig,
+    "production": Config,
+    "testing": DevConfig,
+    "default": DevConfig
+}

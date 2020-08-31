@@ -5,8 +5,6 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 
-from config import DevConfig
-
 class Msg:
     class Flash:
         LOGOUT_USER = "Ha cerrado sesión correctamente."
@@ -45,13 +43,7 @@ def create_app(config):
     mail.init_app(app)
     bootstrap.init_app(app)
 
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+
     return app
-
-# NOTE: Remember to change configuration for production.
-app = create_app(DevConfig)
-
-# Keep this import below the app instantiation
-from app import routes, models
-
-if __name__=="__main__":
-    app.run()

@@ -1,18 +1,19 @@
 from flask import flash, redirect, render_template, url_for
 from flask_login import current_user, login_user, logout_user, login_required
 
-from app import app, Msg
-from app.forms import LoginForm, RegisterForm
-from app.models import User
+from app import Msg
+from . import main
+from .forms import LoginForm, RegisterForm
+from ..models import User
 
 
-@app.route("/")
-@app.route("/index")
+@main.route("/")
+@main.route("/index")
 def index():
     return render_template("index.html")
 
 
-@app.route("/login",methods=["GET", "POST"])
+@main.route("/login",methods=["GET", "POST"])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -35,7 +36,7 @@ def login():
     
     return render_template("login.html", title="Iniciar sesión", form=form)
 
-@app.route("/register", methods=["GET", "POST"])
+@main.route("/register", methods=["GET", "POST"])
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
@@ -56,7 +57,7 @@ def register():
     return render_template("register.html", title="Registrarse", form=form)
 
 @login_required
-@app.route("/logout")
+@main.route("/logout")
 def logout():
     logout_user()
     flash(Msg.Flash.LOGOUT_USER)
