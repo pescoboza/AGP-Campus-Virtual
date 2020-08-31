@@ -19,7 +19,7 @@ class RegisterForm(FlaskForm):
     first_name = StringField("Nombre", validators=[data_required])
     last_name = StringField("Apellidos", validators=[data_required])
     password = PasswordField("Contraseña", validators=[data_required, EqualTo("confirm_password", message=Msg.UserRegistration.ERROR_PASSWORD_MATCH)])
-    confirm_password = PasswordField("Repetir contraseña", validators=[data_required])
+    confirm_password = PasswordField("Confirmar contraseña", validators=[data_required])
 
     accept_terms_and_conditions = BooleanField(Msg.UserRegistration.ACCEPT_TERMS, validators=[InputRequired(message=Msg.UserRegistration.ERROR_ACCEPT_TERMS)])
     submit = SubmitField("Registrarse")
@@ -69,4 +69,28 @@ class RegisterForm(FlaskForm):
             validation = False
             raise ValidationError(Msg.UserRegistration.ERROR_PASSWORD_AT_LEAST_ONE_SPECIAL_CHARACTER.format(RegisterForm._special_characters_raw))
 
-        return validation        
+        return validation
+
+
+# See https://github.com/miguelgrinberg/flasky/blob/8g/app/auth/forms.py
+
+# Form for changing a new password when the old one is known.
+class ChangePassword(FlaskForm):
+    old_password = PasswordField("Antigua contraseña", validators=[data_required])
+    password = PasswordField("Contraseña", validators=[data_required, EqualTo("confirm_password", message=Msg.UserRegistration.ERROR_PASSWORD_MATCH)])
+    confirm_password = PasswordField("Confirmar contraseña", validators=[data_required])
+
+    submit = SubmitField("Modficar contraseña")
+
+# Form to request email to reset password.
+class PasswordResetRequest(FlaskForm):
+    email = StringField("Correo", validators=[data_required, Email(Msg.UserRegistration.ERROR_INVALID_EMAIL)])
+
+    submit = SubmitField("Enviar")
+
+# Form to change password from lost passwrod email request.
+class PasswordReset(FlaskForm):
+    password = PasswordField("Nueva ontraseña", validators=[data_required, EqualTo("confirm_password", message=Msg.UserRegistration.ERROR_PASSWORD_MATCH)])
+    confirm_password = PasswordField("Confirmar contraseña", validators=[data_required])
+
+    submit = SubmitField("Reestablecer contraseña")
