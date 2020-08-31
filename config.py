@@ -5,12 +5,12 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 # Helper to take python boolean value from environment variables.
 def get_bool_env_var(varname):
-    value = os.environ.get(varname)
+    value = os.environ.get(varname).lower()
     if value is None:
         return None
-    if value == "true":
+    if value in ("true", '1', "on"):
         return True
-    if value == "false":
+    if value in ("false", '0', "off"):
         return False
     raise AttributeError("Could not parse environment variable {} as boolean.".format(varname))
 
