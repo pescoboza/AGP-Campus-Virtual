@@ -1,5 +1,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask import current_app
 from flask_login import UserMixin
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 from app import db, login
 
@@ -34,6 +36,11 @@ class User(UserMixin, db.Document):
     # Print function
     def __repr__(self):
         return "<User email:{}>".format(self.email)
+
+    # TODO: Test recovery tokens.
+    def generate_recovery_token(self, expiration=3600):
+        serializer = Serializer(current_app.config["SECRET_KEY"], expiration)
+        return serializer.dumps({"confirm":self._id}).decode("utf-8")
 
 
 @login.user_loader
