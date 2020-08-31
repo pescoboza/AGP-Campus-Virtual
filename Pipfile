@@ -17,6 +17,7 @@ email-validator = "*"
 flask-wtf = "*"
 flask-mongoengine = "*"
 flask-mail = "*"
+itsdangerous = "*"
 
 [requires]
 python_version = "3.8"
