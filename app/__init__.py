@@ -6,7 +6,7 @@ from flask_bootstrap import Bootstrap
 
 from config import DevConfig
 
-class Message:
+class Msg:
     class Flash:
         LOGOUT_USER = "Ha cerrado sesión correctamente."
         NEW_USER = "Bienvenido {first_name}."

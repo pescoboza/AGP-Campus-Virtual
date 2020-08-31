@@ -1,7 +1,7 @@
 from flask import flash, redirect, render_template, url_for
 from flask_login import current_user, login_user, logout_user, login_required
 
-from app import app, Message
+from app import app, Msg
 from app.forms import LoginForm, RegisterForm
 from app.models import User
 
@@ -21,12 +21,12 @@ def login():
 
         if user is None:
             print("[DEBUG]: User not found: {}".format(form.email.data))
-            flash(Message.Flash.INVALID_CREDENTIALS)
+            flash(Msg.Flash.INVALID_CREDENTIALS)
             return redirect(url_for("login"))
         
         if not user.check_password(form.password.data):
             print("[DEBUG]: Invalid user credentials: {} {}".format(form.email.data, form.password.data))
-            flash(Message.Flash.INVALID_CREDENTIALS)
+            flash(Msg.Flash.INVALID_CREDENTIALS)
             return redirect(url_for("login"))
 
         if login_user(user, remember=form.remember_me.data):
@@ -41,7 +41,7 @@ def register():
     if form.validate_on_submit():
         if User.get_user(form.email.data) is not None:
             print("[DEBUG]: User with email {} already registered.".format(form.email.data))
-            flash(Message.UserRegistration.ERROR_EMAIL_IN_USE)
+            flash(Msg.UserRegistration.ERROR_EMAIL_IN_USE)
             return redirect(url_for("register"))
 
         new_user = User.create_new_user(email=form.email.data, 
@@ -50,7 +50,7 @@ def register():
                             password=form.password.data)
         new_user.save()
         login_user(new_user, remember=False)
-        flash(Message.Flash.NEW_USER.format(first_name=new_user.first_name))
+        flash(Msg.Flash.NEW_USER.format(first_name=new_user.first_name))
         return redirect(url_for("index"))
     
     return render_template("register.html", title="Registrarse", form=form)
@@ -59,5 +59,5 @@ def register():
 @app.route("/logout")
 def logout():
     logout_user()
-    flash(Message.Flash.LOGOUT_USER)
+    flash(Msg.Flash.LOGOUT_USER)
     return redirect("/index")

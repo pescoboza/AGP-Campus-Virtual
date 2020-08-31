@@ -6,7 +6,6 @@ from app import db, login
 db_str_len = 64
 db_hash_len = 128
 
-# TODO: Figure out if one can use flask_login UserMixin with flask_mongoengine document model
 class User(UserMixin, db.Document):
     meta = {"collection":"user"}
 
