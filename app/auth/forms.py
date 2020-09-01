@@ -74,7 +74,7 @@ class RegisterForm(FlaskForm):
 # See https://github.com/miguelgrinberg/flasky/blob/8g/app/auth/forms.py
 
 # Form for changing a new password when the old one is known.
-class ChangePassword(FlaskForm):
+class ChangePasswordForm(FlaskForm):
     old_password = PasswordField("Antigua contraseña", validators=[data_required])
     password = PasswordField("Contraseña", validators=[data_required, EqualTo("confirm_password", message=Msg.UserRegistration.ERROR_PASSWORD_MATCH)])
     confirm_password = PasswordField("Confirmar contraseña", validators=[data_required])
@@ -82,13 +82,13 @@ class ChangePassword(FlaskForm):
     submit = SubmitField("Modficar contraseña")
 
 # Form to request email to reset password.
-class PasswordResetRequest(FlaskForm):
+class PasswordResetRequestForm(FlaskForm):
     email = StringField("Correo", validators=[data_required, Email(Msg.UserRegistration.ERROR_INVALID_EMAIL)])
 
     submit = SubmitField("Enviar")
 
 # Form to change password from lost passwrod email request.
-class PasswordReset(FlaskForm):
+class PasswordResetForm(FlaskForm):
     password = PasswordField("Nueva ontraseña", validators=[data_required, EqualTo("confirm_password", message=Msg.UserRegistration.ERROR_PASSWORD_MATCH)])
     confirm_password = PasswordField("Confirmar contraseña", validators=[data_required])
 

@@ -1,10 +1,10 @@
 from flask import flash, redirect, render_template, url_for
-from flask_login import current_user, login_user, logout_user, login_required
+from flask_login import current_user, login_user, logout_user, login_required, fresh_login_required
 
 from app import Msg
 from . import auth
-from .forms import LoginForm, RegisterForm
-from ..models import User
+from .forms import LoginForm, RegisterForm, ChangePasswordForm
+from ..models import User, generate_password_hash
 
 @auth.route("/login",methods=["GET", "POST"])
 def login():
@@ -55,3 +55,38 @@ def logout():
     logout_user()
     flash(Msg.Flash.LOGOUT_USER)
     return redirect(url_for("main.index"))
+
+
+@fresh_login_required
+@auth.route("/change-password", methods=["GET", "POST"])
+def change_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        # Check the old password
+        if current_user.check_password(form.old_password.data):
+
+            # Check that new password is not the same as the old one
+            if form.old_password.data == form.password.data:
+                flash(Msg.Flash.SAME_AS_OLD_PASSWORD)
+                print("[DEBUG]: User {} tried to change to same password.".format(current_user.email))
+                return redirect(url_for("auth.change_password"))
+
+        else:
+            flash(Msg.Flash.INVALID_OLD_PASSWORD)
+            print("[DEBUG]: Password change request, incorrect old password. User: {}".format(current_user.email))
+            return redirect(url_for("auth.change_password"))
+
+        
+        # Check that the user curently signed in is still on the database
+        user = User.get_user(email=current_user.email)
+        if user is None:
+            print("[DEBUG]: Password change request, user not found: {}".format(current_user.email))
+            return redirect(url_for("error.not_found"))
+
+        # No errors, proceed to commit changes to database
+        user.password_hash = generate_password_hash(form.password.data)
+        user.save()
+        print("[DEBUG]: Password change from user {}.".format(user.email))
+        flash(Msg.Flash.PASSWORD_CHANGE_SUCCESFUL)
+        return redirect(url_for("main.index"))
+    return render_template("auth/change_password.html", form=form)

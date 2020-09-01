@@ -10,6 +10,9 @@ class Msg:
         LOGOUT_USER = "Ha cerrado sesión correctamente."
         NEW_USER = "Bienvenido {first_name}."
         INVALID_CREDENTIALS = "Correo o contraseña inválidos."
+        SAME_AS_OLD_PASSWORD = "Esa contraseña ya ha sido utilizada antes."
+        INVALID_OLD_PASSWORD = "Debe introducir su antigua contraseña correctamente."
+        PASSWORD_CHANGE_SUCCESFUL = "Su contraseña ha sido modificada."
 
     class UserRegistration:
         ERROR_REQUIRED_FIELD = "Este campo es obligatorio."
