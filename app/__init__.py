@@ -14,6 +14,7 @@ class Msg:
         INVALID_OLD_PASSWORD = "Debe introducir su antigua contraseña correctamente."
         PASSWORD_CHANGE_SUCCESFUL = "Su contraseña ha sido modificada."
         LOGIN_REQUIRED = "Inicie sesión para ingresar a esta página."
+        RECOVERY_REQUEST = "Revise su correo."
 
     class UserRegistration:
         ERROR_REQUIRED_FIELD = "Este campo es obligatorio."

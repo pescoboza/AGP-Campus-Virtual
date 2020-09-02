@@ -3,16 +3,14 @@ from flask_login import current_user, login_user, logout_user, login_required, f
 
 from app import Msg
 from . import auth
-from .forms import LoginForm, RegisterForm, ChangePasswordForm
+from .forms import LoginForm, RegisterForm, ChangePasswordForm, ResetPasswordResetForm
 from ..models import User, generate_password_hash
 
 @auth.route("/login",methods=["GET", "POST"])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        # NOTE: Remember to unpack form fields with form.field.data.
         user = User.get_user(email=form.email.data)
-
         if user is None:
             print("[DEBUG]: User not found: {}".format(form.email.data))
             flash(Msg.Flash.INVALID_CREDENTIALS)
@@ -23,8 +21,8 @@ def login():
             flash(Msg.Flash.INVALID_CREDENTIALS)
             return redirect(url_for("auth.login"))
 
-        if login_user(user, remember=form.remember_me.data):
-            print("[DEBUG]: Login from user: {} {}".format(user.email, user.first_name))
+        login_user(user, remember=form.remember_me.data)
+        print("[DEBUG]: Login from user: {} {}".format(user.email, user.first_name))
         return redirect(url_for("main.index"))
     
     return render_template("auth/login.html", title="Iniciar sesión", form=form)
@@ -55,7 +53,6 @@ def logout():
     logout_user()
     flash(Msg.Flash.LOGOUT_USER)
     return redirect(url_for("main.index"))
-
 
 
 @auth.route("/change-password", methods=["GET", "POST"])
@@ -92,3 +89,14 @@ def change_password():
         flash(Msg.Flash.PASSWORD_CHANGE_SUCCESFUL)
         return redirect(url_for("main.index"))
     return render_template("auth/change_password.html", form=form)
+
+@auth.route("recover-password", methods=["GET", "POST"])
+@auth.route("reset", methods=["GET", "POST"])
+def recover_password():
+    form = PasswordResetRequestForm()
+    if form.validate_on_submit():
+        user = User.get_user(email=form.email.data)
+        flash(Msg.Flash.RECOVERY_REQUEST)
+        if user is not None:
+            # Send confirmation email
+            pass

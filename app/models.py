@@ -37,12 +37,24 @@ class User(UserMixin, db.Document):
     def __repr__(self):
         return "<User email:{}>".format(self.email)
 
-    # TODO: Test recovery tokens.
-    def generate_recovery_token(self, expiration=3600):
-        serializer = Serializer(current_app.config["SECRET_KEY"], expiration)
-        return serializer.dumps({"confirm":self._id}).decode("utf-8")
+    def generate_rest_token(self, expiration=3600):
+        s = Serializer(current_app.config["SECRET_KEY"], expiration)
+        return s.dumps({"reset": self.email}).decode("utf-8")
 
-
+    @staticmethod
+    def reset_password(token, new_password):
+        s = Serializer(current_app.config["SECRET_KEY"], expiration)
+        try:
+            data = s.loads(token.encode("utf-8"))
+        except:
+            return False
+        user = User.objects(email=data.get("reset")).first()
+        if user is None:
+            return False
+        user.password_hash = generate_password_hash(new_password)
+        user.save()
+        return True
+    
 @login.user_loader
 def load_user(id):
     return User.objects(id=id).first()
