@@ -1,6 +1,6 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import current_app
-from flask_login import UserMixin
+from flask_login import UserMixin, login_manager
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 from app import db, login

@@ -33,6 +33,7 @@ class Msg:
 db = MongoEngine()
 migrate = Migrate()
 login = LoginManager()
+login.login_view = "auth.login"
 mail = Mail()
 bootstrap = Bootstrap()
 

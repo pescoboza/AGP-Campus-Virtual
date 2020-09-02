@@ -10,7 +10,7 @@ data_required = InputRequired(Msg.UserRegistration.ERROR_REQUIRED_FIELD)
 class LoginForm(FlaskForm):
     email = StringField("Correo", validators=[data_required, Email(Msg.UserRegistration.ERROR_INVALID_EMAIL)])
     password = PasswordField("Contraseña", validators=[data_required])
-    remember_me = BooleanField("Recuérdame")
+    remember_me = BooleanField("Mantener mi sesión iniciada")
     submit = SubmitField("Iniciar sesión")
 
 class RegisterForm(FlaskForm):

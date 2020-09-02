@@ -11,7 +11,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         # NOTE: Remember to unpack form fields with form.field.data.
-        user = User.objects(email=form.email.data).first()
+        user = User.get_user(email=form.email.data)
 
         if user is None:
             print("[DEBUG]: User not found: {}".format(form.email.data))
@@ -49,22 +49,25 @@ def register():
     
     return render_template("auth/register.html", title="Registrarse", form=form)
 
-@login_required
 @auth.route("/logout")
+@login_required
 def logout():
     logout_user()
     flash(Msg.Flash.LOGOUT_USER)
     return redirect(url_for("main.index"))
 
 
-@fresh_login_required
+
 @auth.route("/change-password", methods=["GET", "POST"])
+@fresh_login_required
 def change_password():
+    print("[DEBUG]: User{is_anonymous:{}}".format(current_user.is_anonymous))
     form = ChangePasswordForm()
     if form.validate_on_submit():
+        
         # Check the old password
         if current_user.check_password(form.old_password.data):
-
+        
             # Check that new password is not the same as the old one
             if form.old_password.data == form.password.data:
                 flash(Msg.Flash.SAME_AS_OLD_PASSWORD)
