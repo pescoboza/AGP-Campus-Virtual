@@ -40,6 +40,7 @@ class Config(object):
     MAIL_USERNAME  = os.environ.get("MAIL_USERNAME")
     MAIL_DEFAULT_SENDER = os.environ.get("MAIL_DEFAULT_SENDER")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+    MAIL_SUBJECT_PREFIX = os.environ.get("MAIL_SUBJECT_PREFIX")
     
 # Development configuration
 class DevConfig(Config):
@@ -64,7 +65,7 @@ class DevConfig(Config):
     MAIL_USERNAME  = os.environ.get("DEBUG_MAIL_USERNAME")
     MAIL_DEFAULT_SENDER = os.environ.get("DEBUG_MAIL_DEFAULT_SENDER")
     MAIL_PASSWORD = os.environ.get("DEBUG_MAIL_PASSWORD")
-
+    MAIL_SUBJECT_PREFIX = os.environ.get("DEBUG_MAIL_SUBJECT_PREFIX")
 
 config = {
     "development": DevConfig,
