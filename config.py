@@ -28,7 +28,7 @@ class Config(object):
     }        
 
     # FlaskLogin settings
-    REMEMBER_COOKIE_DURATION = timedelta(minutes=15)
+    REMEMBER_COOKIE_DURATION = timedelta(minutes=5)
 
     # FlaskMail settings
     MAIL_SERVER = os.environ.get("MAIL_SERVER")

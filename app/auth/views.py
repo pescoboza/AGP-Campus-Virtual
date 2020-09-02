@@ -61,7 +61,6 @@ def logout():
 @auth.route("/change-password", methods=["GET", "POST"])
 @fresh_login_required
 def change_password():
-    print("[DEBUG]: User{is_anonymous:{}}".format(current_user.is_anonymous))
     form = ChangePasswordForm()
     if form.validate_on_submit():
         
