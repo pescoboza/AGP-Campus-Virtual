@@ -81,8 +81,6 @@ class ChangePasswordForm(FlaskForm):
 
     submit = SubmitField("Modficar contraseña")
 
-class
-
 # Form to request email to reset password.
 class PasswordResetRequestForm(FlaskForm):
     email = StringField("Correo", validators=[data_required, Email(Msg.UserRegistration.ERROR_INVALID_EMAIL)])

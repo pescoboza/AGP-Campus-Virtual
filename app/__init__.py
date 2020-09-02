@@ -15,6 +15,7 @@ class Msg:
         PASSWORD_CHANGE_SUCCESFUL = "Su contraseña ha sido modificada."
         LOGIN_REQUIRED = "Inicie sesión para ingresar a esta página."
         RECOVERY_REQUEST = "Revise su correo."
+        ALREADY_LOGGED_IN = "Su sesión está activa. Para cambiar de usuario, primero debe cerrar sesión."
 
     class UserRegistration:
         ERROR_REQUIRED_FIELD = "Este campo es obligatorio."

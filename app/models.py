@@ -43,7 +43,7 @@ class User(UserMixin, db.Document):
 
     @staticmethod
     def reset_password(token, new_password):
-        s = Serializer(current_app.config["SECRET_KEY"], expiration)
+        s = Serializer(current_app.config["SECRET_KEY"])
         try:
             data = s.loads(token.encode("utf-8"))
         except:

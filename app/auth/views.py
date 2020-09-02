@@ -1,13 +1,19 @@
-from flask import flash, redirect, render_template, url_for
+from flask import flash, redirect, request, render_template, url_for
 from flask_login import current_user, login_user, logout_user, login_required, fresh_login_required
 
 from app import Msg
 from . import auth
-from .forms import LoginForm, RegisterForm, ChangePasswordForm, ResetPasswordResetForm
+from .forms import LoginForm, RegisterForm, ChangePasswordForm, PasswordResetRequestForm
 from ..models import User, generate_password_hash
 
 @auth.route("/login",methods=["GET", "POST"])
 def login():
+
+    # User is already logged in
+    if not current_user.is_anonymous:
+        flash(Msg.Flash.ALREADY_LOGGED_IN)
+        return redirect(url_for("main.index"))
+
     form = LoginForm()
     if form.validate_on_submit():
         user = User.get_user(email=form.email.data)
@@ -23,7 +29,12 @@ def login():
 
         login_user(user, remember=form.remember_me.data)
         print("[DEBUG]: Login from user: {} {}".format(user.email, user.first_name))
-        return redirect(url_for("main.index"))
+        
+        # Redirect user the page he or she was about to enter, but got asked to verify credentials.
+        next = request.args.get("next")
+        if next is None or not next.startswith('/'):
+            next = url_for("main.index")
+        return redirect(next)
     
     return render_template("auth/login.html", title="Iniciar sesión", form=form)
 
@@ -90,13 +101,13 @@ def change_password():
         return redirect(url_for("main.index"))
     return render_template("auth/change_password.html", form=form)
 
-@auth.route("recover-password", methods=["GET", "POST"])
-@auth.route("reset", methods=["GET", "POST"])
-def recover_password():
-    form = PasswordResetRequestForm()
-    if form.validate_on_submit():
-        user = User.get_user(email=form.email.data)
-        flash(Msg.Flash.RECOVERY_REQUEST)
-        if user is not None:
-            # Send confirmation email
-            pass
+
+
+@auth.route("/reset", methods=["GET", "POST"])
+def password_reset_request():
+    raise "TODO: Implement the view for password reset email request."
+
+
+@auth.route("/reset/<token>", methods=["GET", "POST"])
+def password_reset(token):
+    raise "TODO: Implement the view for password reset."
