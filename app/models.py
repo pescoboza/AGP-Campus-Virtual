@@ -37,7 +37,7 @@ class User(UserMixin, db.Document):
     def __repr__(self):
         return "<User email:{}>".format(self.email)
 
-    def generate_rest_token(self, expiration=3600):
+    def generate_reset_token(self, expiration=3600):
         s = Serializer(current_app.config["SECRET_KEY"], expiration)
         return s.dumps({"reset": self.email}).decode("utf-8")
 

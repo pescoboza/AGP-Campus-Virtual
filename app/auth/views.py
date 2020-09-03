@@ -3,8 +3,9 @@ from flask_login import current_user, login_user, logout_user, login_required, f
 
 from app import Msg
 from . import auth
-from .forms import LoginForm, RegisterForm, ChangePasswordForm, PasswordResetRequestForm
+from .forms import LoginForm, RegisterForm, ChangePasswordForm, PasswordResetRequestForm, PasswordResetForm
 from ..models import User, generate_password_hash
+from ..email import send_email
 
 @auth.route("/login",methods=["GET", "POST"])
 def login():
@@ -59,10 +60,10 @@ def register():
     return render_template("auth/register.html", title="Registrarse", form=form)
 
 @auth.route("/logout")
-@login_required
 def logout():
-    logout_user()
-    flash(Msg.Flash.LOGOUT_USER)
+    if not current_user.is_anonymous:
+        logout_user()
+        flash(Msg.Flash.LOGOUT_USER)
     return redirect(url_for("main.index"))
 
 
@@ -103,11 +104,38 @@ def change_password():
 
 
 
+# View to request a password change, arrived at through "forgot password?"
+# Redirects to index if user is NOT anonymous
 @auth.route("/reset", methods=["GET", "POST"])
 def password_reset_request():
-    raise "TODO: Implement the view for password reset email request."
+    if not current_user.is_anonymous:
+        return redirect(url_for("main.index"))
+
+    form = PasswordResetRequestForm()
+    if form.validate_on_submit():
+
+        user = User.get_user(form.email.data)
+        if user:
+            token = user.generate_reset_token()
+            send_email(user.email, Msg.Mail.RESET_PASSWORD_SUBJECT, "auth/email/reset_password",
+                user=user, token=token)
+        flash(Msg.Flash.PASSWORD_RESET_EMAIL_SENT)
+        return redirect(url_for("auth.login"))
+    return render_template("auth/reset_password.html", form=form)
 
 
+# View to change reset password after token sent to email is validated.
+# Redirects to index if user is NOT anonymous
 @auth.route("/reset/<token>", methods=["GET", "POST"])
 def password_reset(token):
-    raise "TODO: Implement the view for password reset."
+    if not current_user.is_anonymous:
+        return redirect(url_for("main.index"))
+    
+    form = PasswordResetForm()
+    if form.validate_on_submit:
+        if User.reset_password(token, form.password.data):
+            flash(Msg.Flash.PASSWORD_CHANGE_SUCCESFUL)
+            return redirect(url_for("auth.login"))
+        else:
+            return redirect(url_for("main.index"))
+    return render_template("auth/reset_password.html", form=form)

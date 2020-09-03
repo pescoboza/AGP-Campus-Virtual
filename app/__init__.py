@@ -5,6 +5,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 
+# TODO: Move this to a JSON and devise a better structure.
 class Msg:
     class Flash:
         LOGOUT_USER = "Ha cerrado sesión correctamente."
@@ -16,6 +17,10 @@ class Msg:
         LOGIN_REQUIRED = "Inicie sesión para ingresar a esta página."
         RECOVERY_REQUEST = "Revise su correo."
         ALREADY_LOGGED_IN = "Su sesión está activa. Para cambiar de usuario, primero debe cerrar sesión."
+        PASSWORD_RESET_EMAIL_SENT = "Un correo con instrucciones para reestablecer su contraseña ha sidoe enviado a su bandeja de entrada."
+
+    class Mail:
+        RESET_PASSWORD_SUBJECT = "Recuperación de contraseña"
 
     class UserRegistration:
         ERROR_REQUIRED_FIELD = "Este campo es obligatorio."
