@@ -50,5 +50,4 @@ touch .vscode/settings.json
 ```
 
 ## TODO
-- Add email integration.
-- Add password recovery and change.
+- Create blueprint for custom content and tests.
