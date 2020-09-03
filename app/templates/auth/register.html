@@ -7,8 +7,10 @@ Registrarse
 
 {% block page_content %}
 <h1>Registrarse</h1>
-<form action="" method="post" novalidate>
+<div class="col-md-4">
     {{wtf.quick_form(form)}}
-</form>
+    <br>
+    <p><a href="{{url_for('auth.login')}}">¿Ya tiene un usuario?</a></p>
+</div>
 
 {% endblock %}

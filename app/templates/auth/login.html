@@ -7,8 +7,10 @@ Ingresar
 
 {% block page_content %}
 <h1>Iniciar sesión</h1>
-<form action="" method="post" novalidate>
+<div class="col-md-4">
     {{wtf.quick_form(form)}}
-</form>
-
+    <br>
+    <p><a href="{{url_for('auth.password_reset_request')}}">¿Olvidó su contraseña?</a></p>
+    <p><a href="{{url_for('auth.register')}}">¿Usuario nuevo?</a></p>
+</div>
 {% endblock %}
