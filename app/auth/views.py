@@ -1,18 +1,23 @@
-from flask import flash, redirect, render_template, url_for
-from flask_login import current_user, login_user, logout_user, login_required
+from flask import flash, redirect, request, render_template, url_for
+from flask_login import current_user, login_user, logout_user, login_required, fresh_login_required
 
 from app import Msg
 from . import auth
-from .forms import LoginForm, RegisterForm
-from ..models import User
+from .forms import LoginForm, RegisterForm, ChangePasswordForm, PasswordResetRequestForm, PasswordResetForm
+from ..models import User, generate_password_hash
+from ..email import send_email
 
 @auth.route("/login",methods=["GET", "POST"])
 def login():
+
+    # User is already logged in
+    if not current_user.is_anonymous:
+        flash(Msg.Flash.ALREADY_LOGGED_IN)
+        return redirect(url_for("main.index"))
+
     form = LoginForm()
     if form.validate_on_submit():
-        # NOTE: Remember to unpack form fields with form.field.data.
-        user = User.objects(email=form.email.data).first()
-
+        user = User.get_user(email=form.email.data)
         if user is None:
             print("[DEBUG]: User not found: {}".format(form.email.data))
             flash(Msg.Flash.INVALID_CREDENTIALS)
@@ -23,9 +28,14 @@ def login():
             flash(Msg.Flash.INVALID_CREDENTIALS)
             return redirect(url_for("auth.login"))
 
-        if login_user(user, remember=form.remember_me.data):
-            print("[DEBUG]: Login from user: {} {}".format(user.email, user.first_name))
-        return redirect(url_for("main.index"))
+        login_user(user, remember=form.remember_me.data)
+        print("[DEBUG]: Login from user: {} {}".format(user.email, user.first_name))
+        
+        # Redirect user the page he or she was about to enter, but got asked to verify credentials.
+        next = request.args.get("next")
+        if next is None or not next.startswith('/'):
+            next = url_for("main.index")
+        return redirect(next)
     
     return render_template("auth/login.html", title="Iniciar sesión", form=form)
 
@@ -49,9 +59,83 @@ def register():
     
     return render_template("auth/register.html", title="Registrarse", form=form)
 
-@login_required
 @auth.route("/logout")
 def logout():
-    logout_user()
-    flash(Msg.Flash.LOGOUT_USER)
+    if not current_user.is_anonymous:
+        logout_user()
+        flash(Msg.Flash.LOGOUT_USER)
     return redirect(url_for("main.index"))
+
+
+@auth.route("/change-password", methods=["GET", "POST"])
+@fresh_login_required
+def change_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        
+        # Check the old password
+        if current_user.check_password(form.old_password.data):
+        
+            # Check that new password is not the same as the old one
+            if form.old_password.data == form.password.data:
+                flash(Msg.Flash.SAME_AS_OLD_PASSWORD)
+                print("[DEBUG]: User {} tried to change to same password.".format(current_user.email))
+                return redirect(url_for("auth.change_password"))
+
+        else:
+            flash(Msg.Flash.INVALID_OLD_PASSWORD)
+            print("[DEBUG]: Password change request, incorrect old password. User: {}".format(current_user.email))
+            return redirect(url_for("auth.change_password"))
+
+        
+        # Check that the user curently signed in is still on the database
+        user = User.get_user(email=current_user.email)
+        if user is None:
+            print("[DEBUG]: Password change request, user not found: {}".format(current_user.email))
+            return redirect(url_for("error.not_found"))
+
+        # No errors, proceed to commit changes to database
+        user.password_hash = generate_password_hash(form.password.data)
+        user.save()
+        print("[DEBUG]: Password change from user {}.".format(user.email))
+        flash(Msg.Flash.PASSWORD_CHANGE_SUCCESFUL)
+        return redirect(url_for("main.index"))
+    return render_template("auth/change_password.html", form=form)
+
+
+
+# View to request a password change, arrived at through "forgot password?"
+# Redirects to index if user is NOT anonymous
+@auth.route("/reset", methods=["GET", "POST"])
+def password_reset_request():
+    if not current_user.is_anonymous:
+        return redirect(url_for("main.index"))
+
+    form = PasswordResetRequestForm()
+    if form.validate_on_submit():
+
+        user = User.get_user(form.email.data)
+        if user:
+            token = user.generate_reset_token()
+            send_email(user.email, Msg.Mail.RESET_PASSWORD_SUBJECT, "auth/email/reset_password",
+                user=user, token=token)
+        flash(Msg.Flash.PASSWORD_RESET_EMAIL_SENT)
+        return redirect(url_for("auth.login"))
+    return render_template("auth/reset_password.html", form=form)
+
+
+# View to change reset password after token sent to email is validated.
+# Redirects to index if user is NOT anonymous
+@auth.route("/reset/<token>", methods=["GET", "POST"])
+def password_reset(token):
+    if not current_user.is_anonymous:
+        return redirect(url_for("main.index"))
+    
+    form = PasswordResetForm()
+    if form.validate_on_submit:
+        if User.reset_password(token, form.password.data):
+            flash(Msg.Flash.PASSWORD_CHANGE_SUCCESFUL)
+            return redirect(url_for("auth.login"))
+        else:
+            return redirect(url_for("main.index"))
+    return render_template("auth/reset_password.html", form=form)

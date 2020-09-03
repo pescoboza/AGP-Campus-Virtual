@@ -5,18 +5,29 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 
+# TODO: Move this to a JSON and devise a better structure.
 class Msg:
     class Flash:
         LOGOUT_USER = "Ha cerrado sesión correctamente."
         NEW_USER = "Bienvenido {first_name}."
         INVALID_CREDENTIALS = "Correo o contraseña inválidos."
+        SAME_AS_OLD_PASSWORD = "Debe utilizar una contraseña distinta a la anterior."
+        INVALID_OLD_PASSWORD = "Debe introducir su antigua contraseña correctamente."
+        PASSWORD_CHANGE_SUCCESFUL = "Su contraseña ha sido modificada."
+        LOGIN_REQUIRED = "Inicie sesión para ingresar a esta página."
+        RECOVERY_REQUEST = "Revise su correo."
+        ALREADY_LOGGED_IN = "Su sesión está activa. Para cambiar de usuario, primero debe cerrar sesión."
+        PASSWORD_RESET_EMAIL_SENT = "Un correo con instrucciones para reestablecer su contraseña ha sidoe enviado a su bandeja de entrada."
+
+    class Mail:
+        RESET_PASSWORD_SUBJECT = "Recuperación de contraseña"
 
     class UserRegistration:
         ERROR_REQUIRED_FIELD = "Este campo es obligatorio."
         ERROR_PASSWORD_MATCH = "Las contraseñas deben coincidir."
         ERROR_EMAIL_IN_USE = "La dirección de correo ya ha sido registrada."
         ERROR_ACCEPT_TERMS = "Debe aceptar los términos y condiciones para continuar."
-        ERROR_INVALID_EMAIL = "Por favor introduzca una dirección de correo válida."
+        ERROR_INVALID_EMAIL = "Por favor, introduzca una dirección de correo válida."
         
         ERROR_PASSWORD_LENGTH = "La contraseña debe medir entre 8 y 64 caracteres."
         ERROR_PASSWORD_AT_LEAST_ONE_NUMBER = "La contraseña debe conenter al menos un número."
@@ -30,6 +41,8 @@ class Msg:
 db = MongoEngine()
 migrate = Migrate()
 login = LoginManager()
+login.login_view = "auth.login"
+login.login_message = Msg.Flash.LOGIN_REQUIRED
 mail = Mail()
 bootstrap = Bootstrap()
 

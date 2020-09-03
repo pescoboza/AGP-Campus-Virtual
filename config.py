@@ -28,7 +28,7 @@ class Config(object):
     }        
 
     # FlaskLogin settings
-    REMEMBER_COOKIE_DURATION = timedelta(minutes=15)
+    REMEMBER_COOKIE_DURATION = timedelta(minutes=5)
 
     # FlaskMail settings
     MAIL_SERVER = os.environ.get("MAIL_SERVER")
@@ -37,9 +37,11 @@ class Config(object):
     MAIL_USE_SSL = get_bool_env_var("MAIL_USE_SSL")
     MAIL_SUPPRESS_SEND  = get_bool_env_var("MAIL_SUPPRESS_SEND")
     MAIL_ASCII_ATACHMENTS = get_bool_env_var("MAIL_ASCII_ATACHMENTS")
+    MAIL_SENDER = os.environ.get("MAIL_SENDER")
     MAIL_USERNAME  = os.environ.get("MAIL_USERNAME")
     MAIL_DEFAULT_SENDER = os.environ.get("MAIL_DEFAULT_SENDER")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+    MAIL_SUBJECT_PREFIX = os.environ.get("MAIL_SUBJECT_PREFIX")
     
 # Development configuration
 class DevConfig(Config):
@@ -61,10 +63,11 @@ class DevConfig(Config):
     MAIL_USE_SSL = get_bool_env_var("DEBUG_MAIL_USE_SSL")
     MAIL_SUPPRESS_SEND  = get_bool_env_var("DEBUG_MAIL_SUPPRESS_SEND")
     MAIL_ASCII_ATACHMENTS = get_bool_env_var("DEBUG_MAIL_ASCII_ATACHMENTS")
+    MAIL_SENDER = os.environ.get("DEBUG_MAIL_SENDER")
     MAIL_USERNAME  = os.environ.get("DEBUG_MAIL_USERNAME")
     MAIL_DEFAULT_SENDER = os.environ.get("DEBUG_MAIL_DEFAULT_SENDER")
     MAIL_PASSWORD = os.environ.get("DEBUG_MAIL_PASSWORD")
-
+    MAIL_SUBJECT_PREFIX = os.environ.get("DEBUG_MAIL_SUBJECT_PREFIX")
 
 config = {
     "development": DevConfig,
