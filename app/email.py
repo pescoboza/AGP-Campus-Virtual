@@ -6,6 +6,9 @@ from . import mail
 
 def send_async_email(app, msg):
     with app.app_context():
+        # print("[DEBUG]: Sent wiht credentials: username: {}, password: {}".format(
+        #     app.config["MAIL_SENDER"],app.config["MAIL_PASSWORD"]            
+        # ))
         mail.send(msg)
 
 def send_email(to, subject, template_no_ext, **kwargs):

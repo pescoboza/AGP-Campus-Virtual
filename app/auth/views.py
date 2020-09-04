@@ -132,7 +132,7 @@ def password_reset(token):
         return redirect(url_for("main.index"))
     
     form = PasswordResetForm()
-    if form.validate_on_submit:
+    if form.validate_on_submit():
         if User.reset_password(token, form.password.data):
             flash(Msg.Flash.PASSWORD_CHANGE_SUCCESFUL)
             return redirect(url_for("auth.login"))
