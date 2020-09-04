@@ -6,27 +6,8 @@ from app import Msg
 
 data_required = InputRequired(Msg.UserRegistration.ERROR_REQUIRED_FIELD)
 
-
-class LoginForm(FlaskForm):
-    email = StringField("Correo", validators=[data_required, Email(Msg.UserRegistration.ERROR_INVALID_EMAIL)])
-    password = PasswordField("Contraseña", validators=[data_required])
-    remember_me = BooleanField("Mantener mi sesión iniciada")
-    submit = SubmitField("Iniciar sesión")
-
-class RegisterForm(FlaskForm):
-    email = StringField("Correo", validators=[data_required, Email(Msg.UserRegistration.ERROR_INVALID_EMAIL)])
-    first_name = StringField("Nombre", validators=[data_required])
-    last_name = StringField("Apellidos", validators=[data_required])
-    password = PasswordField("Contraseña", validators=[data_required, EqualTo("confirm_password", message=Msg.UserRegistration.ERROR_PASSWORD_MATCH)])
-    confirm_password = PasswordField("Confirmar contraseña", validators=[data_required])
-
-    accept_terms_and_conditions = BooleanField(Msg.UserRegistration.ACCEPT_TERMS, validators=[InputRequired(message=Msg.UserRegistration.ERROR_ACCEPT_TERMS)])
-    submit = SubmitField("Registrarse")
-
-    _special_characters_raw = R"""!#$%&()*+-/:;<=>?@[\]^{|}~"""
-    _special_characters = tuple(_special_characters_raw)
-    
-    def validate_password(self, field):
+# Password validator function for all forms in which a new password is created.
+def validate_password(field):
         """
             Password constraints:
             - At least one number
@@ -71,7 +52,28 @@ class RegisterForm(FlaskForm):
         return validation
 
 
-# See https://github.com/miguelgrinberg/flasky/blob/8g/app/auth/forms.py
+
+class LoginForm(FlaskForm):
+    email = StringField("Correo", validators=[data_required, Email(Msg.UserRegistration.ERROR_INVALID_EMAIL)])
+    password = PasswordField("Contraseña", validators=[data_required])
+    remember_me = BooleanField("Mantener mi sesión iniciada")
+    submit = SubmitField("Iniciar sesión")
+
+class RegisterForm(FlaskForm):
+    email = StringField("Correo", validators=[data_required, Email(Msg.UserRegistration.ERROR_INVALID_EMAIL)])
+    first_name = StringField("Nombre", validators=[data_required])
+    last_name = StringField("Apellidos", validators=[data_required])
+    password = PasswordField("Contraseña", validators=[data_required, EqualTo("confirm_password", message=Msg.UserRegistration.ERROR_PASSWORD_MATCH)])
+    confirm_password = PasswordField("Confirmar contraseña", validators=[data_required])
+
+    accept_terms_and_conditions = BooleanField(Msg.UserRegistration.ACCEPT_TERMS, validators=[InputRequired(message=Msg.UserRegistration.ERROR_ACCEPT_TERMS)])
+    submit = SubmitField("Registrarse")
+
+    _special_characters_raw = R"""!#$%&()*+-/:;<=>?@[\]^{|}~"""
+    _special_characters = tuple(_special_characters_raw)
+    
+    def validate_password(self, field):
+        return validate_password(field)
 
 # Form for changing a new password when the old one is known.
 class ChangePasswordForm(FlaskForm):
@@ -91,5 +93,8 @@ class PasswordResetRequestForm(FlaskForm):
 class PasswordResetForm(FlaskForm):
     password = PasswordField("Nueva ontraseña", validators=[data_required, EqualTo("confirm_password", message=Msg.UserRegistration.ERROR_PASSWORD_MATCH)])
     confirm_password = PasswordField("Confirmar contraseña", validators=[data_required])
-
+    
     submit = SubmitField("Reestablecer contraseña")
+    
+    def validate_password(self, field):
+        return validate_password(field)
