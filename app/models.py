@@ -6,22 +6,40 @@ import mongoengine as me
 
 from app import login
 
-me_str_len = 64
-me_hash_len = 128
+db_str_len = 64
+db_hash_len = 128
 
 ######################################################################
 # User models
 ######################################################################
+# Possible values for User.occupation
+user_occupations = [
+    "maestro",
+    "estudiante",
+    "profesionista",
+    "miembro de ONG",
+    "otro"
+]
+
+# Possible values for User.gender
+user_genders = [
+    "hombre",
+    "mujer",
+    "otro"
+]
 
 class User(UserMixin, me.Document):
     meta = {"collection":"user"}
 
-    email = me.StringField(max_length=me_str_len, required=True)
-    first_name = me.StringField(max_length=me_str_len, required=True)
-    last_name = me.StringField(max_length=me_str_len, required=True)
-    password_hash = me.StringField(max_length=me_hash_len, required=True)
-
-
+    email = me.StringField(max_length=db_str_len, required=True)
+    first_name = me.StringField(max_length=db_str_len, required=True) # Or names
+    paternal_last_name = me.StringField(max_length=db_str_len, required=True)
+    maternal_last_name = me.StringField(max_length=db_str_len, required=True)
+    birth_date = me.DateField(required=True)
+    occupation = me.StringField(required=True)
+    gender = me.StringField(required=True)
+    password_hash = me.StringField(max_length=db_hash_len, required=True)
+    
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
