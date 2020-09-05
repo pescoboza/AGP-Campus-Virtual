@@ -36,8 +36,8 @@ class User(UserMixin, me.Document):
     paternal_last_name = me.StringField(max_length=db_str_len, required=True)
     maternal_last_name = me.StringField(max_length=db_str_len, required=True)
     birth_date = me.DateField(required=True)
-    occupation = me.StringField(required=True)
     gender = me.StringField(required=True)
+    occupation = me.StringField(required=True)
     password_hash = me.StringField(max_length=db_hash_len, required=True)
     
     def set_password(self, password):

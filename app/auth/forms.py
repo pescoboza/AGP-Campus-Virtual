@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import BooleanField, StringField, PasswordField, SubmitField
+from wtforms import BooleanField, DateField, SelectField, StringField, SubmitField, PasswordField
 from wtforms.validators import InputRequired, EqualTo, Length, Email, ValidationError
 
-from app import Msg
+from .. import Msg
+from ..models import user_occupations, user_genders
 
 data_required = InputRequired(Msg.UserRegistration.ERROR_REQUIRED_FIELD)
 
@@ -62,7 +63,12 @@ class LoginForm(FlaskForm):
 class RegisterForm(FlaskForm):
     email = StringField("Correo", validators=[data_required, Email(Msg.UserRegistration.ERROR_INVALID_EMAIL)])
     first_name = StringField("Nombre", validators=[data_required])
-    last_name = StringField("Apellidos", validators=[data_required])
+    paternal_last_name = StringField("Apellido paterno", validators=[data_required])
+    maternal_last_name = StringField("Apellido materno", validators=[data_required])
+    birth_date = DateField("Fecha de nacimiento", validators=[data_required])
+    gender = SelectField("Género", choices=user_genders, validators=[data_required])
+    occupation = SelectField("Ocupación",choices=user_occupations, validators=[data_required])
+
     password = PasswordField("Contraseña", validators=[data_required, EqualTo("confirm_password", message=Msg.UserRegistration.ERROR_PASSWORD_MATCH)])
     confirm_password = PasswordField("Confirmar contraseña", validators=[data_required])
 
