@@ -64,28 +64,29 @@ class User(UserMixin, me.Document):
 def load_user(id):
     return User.objects(id=id).first()
 
-# Modules are the top level course units that need to be completed to get certified.
-class Module(me.Document):
-    meta = {"collection": "course"}
-    
-    id = me.IntField(primary_key=True, unique=True, required=True)
-    name = me.StringField(required=True)
-    tasks = me.ListField(me.StringField()) # List of modules names
-
-
-
 #####################################################################################
 # Courses items
 #####################################################################################
 
-class Task(me.Document):
-    meta = {
-        "collection" : "task",
-        "allow_inheritance": True
-    }
+task_types = [
+    "multiple_choice_quiz"
+]
+
+# Base component of a module.
+class Task(me.EmbeddedDocument):
+    meta = { "allow_inheritance": True }
     
     id = me.IntField(primary_key=True, unique=True, required=True)
     name = me.StringField(required=True)
+    type = me.StringField(required=True)
+
+# Modules are the top level course units that need to be completed to get certified.
+class Module(me.Document):
+    meta = {"collection": "module"}
+    
+    id = me.IntField(primary_key=True, unique=True, required=True)
+    name = me.StringField(required=True)
+    tasks = me.EmbeddedDocumentListField(Task)
 
 # Component of a MultipleChoiceQuiz
 class MultipleChoiceQuestion(me.EmbeddedDocument):
@@ -94,4 +95,4 @@ class MultipleChoiceQuestion(me.EmbeddedDocument):
     correct_answer = me.IntField(required=True) # Index of answer 
 
 class MultipleChoiceQuiz(Task): 
-    questions = me.ListField(me.EmbeddedDocumentField(MultipleChoiceQuestion))
+    questions = me.EmbeddedDocumentListField(MultipleChoiceQuestion)
