@@ -53,8 +53,15 @@ class User(UserMixin, me.Document):
     
     # Creates user without saving it the database.
     @staticmethod
-    def create_new_user(email, first_name, last_name, password):
-        return User(email=email, first_name=first_name, last_name=last_name, password_hash=generate_password_hash(password))
+    def create_new_user(email, first_name, paternal_last_name, maternal_last_name, birth_date, gender, occupation, password):
+        return User(email=email, 
+            first_name=first_name, 
+            paternal_last_name=paternal_last_name, 
+            maternal_last_name=maternal_last_name,
+            birth_date=birth_date,
+            gender=gender,
+            occupation=occupation,
+            password_hash=generate_password_hash(password))
 
     # Print function
     def __repr__(self):
