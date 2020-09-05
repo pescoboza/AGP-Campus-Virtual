@@ -2,19 +2,24 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask import current_app
 from flask_login import UserMixin, login_manager
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+import mongoengine as me
 
-from app import db, login
+from app import login
 
-db_str_len = 64
-db_hash_len = 128
+me_str_len = 64
+me_hash_len = 128
 
-class User(UserMixin, db.Document):
+######################################################################
+# User models
+######################################################################
+
+class User(UserMixin, me.Document):
     meta = {"collection":"user"}
 
-    email = db.StringField(max_length=db_str_len, required=True)
-    first_name = db.StringField(max_length=db_str_len, required=True)
-    last_name = db.StringField(max_length=db_str_len, required=True)
-    password_hash = db.StringField(max_length=db_hash_len, required=True)
+    email = me.StringField(max_length=me_str_len, required=True)
+    first_name = me.StringField(max_length=me_str_len, required=True)
+    last_name = me.StringField(max_length=me_str_len, required=True)
+    password_hash = me.StringField(max_length=me_hash_len, required=True)
 
 
     def set_password(self, password):
@@ -23,7 +28,7 @@ class User(UserMixin, db.Document):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    # Gets user document instance from db. Returns None if it does not exist.
+    # Gets user document instance from me. Returns None if it does not exist.
     @staticmethod
     def get_user(email):
         return User.objects(email=email).first()
@@ -58,3 +63,36 @@ class User(UserMixin, db.Document):
 @login.user_loader
 def load_user(id):
     return User.objects(id=id).first()
+
+#####################################################################################
+# Courses items
+#####################################################################################
+
+task_types = [
+    "multiple_choice_quiz"
+]
+
+# Base component of a module.
+class Task(me.EmbeddedDocument):
+    meta = { "allow_inheritance": True }
+    
+    id = me.IntField(primary_key=True, unique=True, required=True)
+    name = me.StringField(required=True)
+    type = me.StringField(required=True)
+
+# Modules are the top level course units that need to be completed to get certified.
+class Module(me.Document):
+    meta = {"collection": "module"}
+    
+    id = me.IntField(primary_key=True, unique=True, required=True)
+    name = me.StringField(required=True)
+    tasks = me.EmbeddedDocumentListField(Task)
+
+# Component of a MultipleChoiceQuiz
+class MultipleChoiceQuestion(me.EmbeddedDocument):
+    text = me.StringField(required=True)
+    answers = me.ListField(me.StringField(), required=True)
+    correct_answer = me.IntField(required=True) # Index of answer 
+
+class MultipleChoiceQuiz(Task): 
+    questions = me.EmbeddedDocumentListField(MultipleChoiceQuestion)
