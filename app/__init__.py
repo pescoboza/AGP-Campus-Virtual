@@ -62,4 +62,7 @@ def create_app(config):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix="/auth")
 
+    from .courses import courses as courses_blueprint
+    app.register_blueprint(courses_blueprint, url_prefix="/courses")
+
     return app

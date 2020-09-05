@@ -8,6 +8,10 @@ from app import db, login
 db_str_len = 64
 db_hash_len = 128
 
+######################################################################
+# User models
+######################################################################
+
 class User(UserMixin, db.Document):
     meta = {"collection":"user"}
 
@@ -58,3 +62,38 @@ class User(UserMixin, db.Document):
 @login.user_loader
 def load_user(id):
     return User.objects(id=id).first()
+
+# Modules are the top level course units that need to be completed to get certified.
+class Module(db.Document):
+    meta = {"collection": "course"}
+    
+    id = db.IntField(primary_key=True, unique=True, required=True)
+    name = db.StringField(required=True)
+    tasks = db.ListField(db.StringField()) # List of modules names
+
+
+
+
+
+#####################################################################################
+# Courses items
+#####################################################################################
+
+# Tasks are the atomic assignments that are done as part of modules.
+class Task(db.Document):
+    meta = {"collectoin": "task"}
+
+    id = db.IntField(primary_key=True, unique=True, required=True)
+    name = db.StringField(required=True)
+    
+    def get_content():
+        raise NotImplementedError("TODO: Implement virtual function to load content from all tasks.")
+
+class MultipleChoiceQuiz(Task):
+    questions = db.ListField(db.EmbeddedDocumentField(MultipleChoiceQuestion))
+
+
+class MultipleChoiceQuestion(db.Document):
+    text = dg.StringField(required=True)
+    answers = db.ListField(db.StringField(), required=True)
+    correct_answer = db.IntField(required=True)
