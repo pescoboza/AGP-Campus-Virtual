@@ -6,22 +6,42 @@ import mongoengine as me
 
 from app import login
 
-me_str_len = 64
-me_hash_len = 128
+db_str_len = 64
+db_hash_len = 128
 
 ######################################################################
 # User models
 ######################################################################
+# Possible values for User.occupation
+user_occupations = [
+    ("",""),
+    ("maestro","Maestro"),
+    ("estudiante", "Estudiante"),
+    ("profesionista", "Profesionista"),
+    ("miembro_ong", "Miembro de ONG"),
+    ("otro", "Otro")
+]
+
+# Possible values for User.gender
+user_genders = [
+    ("", ""),
+    ("H","Hombre"),
+    ("M","Mujer"),
+    ("O","Otro")
+]
 
 class User(UserMixin, me.Document):
     meta = {"collection":"user"}
 
-    email = me.StringField(max_length=me_str_len, required=True)
-    first_name = me.StringField(max_length=me_str_len, required=True)
-    last_name = me.StringField(max_length=me_str_len, required=True)
-    password_hash = me.StringField(max_length=me_hash_len, required=True)
-
-
+    email = me.StringField(max_length=db_str_len, required=True)
+    first_name = me.StringField(max_length=db_str_len, required=True) # Or names
+    paternal_last_name = me.StringField(max_length=db_str_len, required=True)
+    maternal_last_name = me.StringField(max_length=db_str_len, required=True)
+    birth_date = me.DateField(required=True)
+    gender = me.StringField(required=True)
+    occupation = me.StringField(required=True)
+    password_hash = me.StringField(max_length=db_hash_len, required=True)
+    
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
@@ -35,8 +55,15 @@ class User(UserMixin, me.Document):
     
     # Creates user without saving it the database.
     @staticmethod
-    def create_new_user(email, first_name, last_name, password):
-        return User(email=email, first_name=first_name, last_name=last_name, password_hash=generate_password_hash(password))
+    def create_new_user(email, first_name, paternal_last_name, maternal_last_name, birth_date, gender, occupation, password):
+        return User(email=email, 
+            first_name=first_name, 
+            paternal_last_name=paternal_last_name, 
+            maternal_last_name=maternal_last_name,
+            birth_date=birth_date,
+            gender=gender,
+            occupation=occupation,
+            password_hash=generate_password_hash(password))
 
     # Print function
     def __repr__(self):
