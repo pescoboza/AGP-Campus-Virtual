@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_mongoengine import MongoEngine
 from flask_migrate import Migrate
@@ -65,7 +66,7 @@ def create_app(config):
     from .courses import courses as courses_blueprint
     app.register_blueprint(courses_blueprint, url_prefix="/courses")
 
-    if app.config["FLASK_ENV"] == "testing":
+    if os.environ.get("FLASK_ENV") in ("testing", "development"):
         from .tests import tests as tests_blueprint
         app.register_blueprint(tests_blueprint, url_prefix="/tests")
 
