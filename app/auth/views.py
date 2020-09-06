@@ -49,10 +49,19 @@ def register():
             return redirect(url_for("auth.register"))
 
         new_user = User.create_new_user(email=form.email.data, 
-                            first_name=form.first_name.data, 
-                            last_name=form.last_name.data, 
-                            password=form.password.data)
+            first_name=form.first_name.data, 
+            paternal_last_name=form.paternal_last_name.data, 
+            maternal_last_name=form.maternal_last_name.data,
+            birth_date=form.birth_date.data,
+            gender=form.gender.data,
+            occupation=form.occupation.data,
+            password=form.password.data)
+
+        print("[DEBUG]: New user created. Showing JSON:")
+        print(new_user.to_json())
+        print("[DEBUG]: New user EOF.")
         new_user.save()
+
         login_user(new_user, remember=False)
         flash(Msg.Flash.NEW_USER.format(first_name=new_user.first_name))
         return redirect(url_for("main.index"))
