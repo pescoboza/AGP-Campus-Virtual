@@ -2,9 +2,10 @@
 #########################################################################
 # Test for module model
 #########################################################################
-from app.models import MultipleChoiceQuestion, MultipleChoiceQuiz, Module
 
 def test_module():
+    from app.models import MultipleChoiceQuestion, MultipleChoiceQuiz, Module
+    
     NUM_QUESTIONS_PER_QUIZ = 5
     NUM_QUIZES = 3
 
@@ -29,3 +30,14 @@ def test_module():
     module.save()
     # with open("module_test.json", 'w') as outfile:
     #     outfile.write(module.to_json())
+
+
+
+def render_module():
+    from flask import render_template
+    
+    from app.models import Module
+
+    module  = Module.objects(name="Test Module").first()
+    with open("module_test.json", 'w') as file:
+        file.write(module.to_json())
