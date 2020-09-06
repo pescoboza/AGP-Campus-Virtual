@@ -14,18 +14,20 @@ db_hash_len = 128
 ######################################################################
 # Possible values for User.occupation
 user_occupations = [
-    "maestro",
-    "estudiante",
-    "profesionista",
-    "miembro de ONG",
-    "otro"
+    ("",""),
+    ("maestro","Maestro"),
+    ("estudiante", "Estudiante"),
+    ("profesionista", "Profesionista"),
+    ("miembro_ong", "Miembro de ONG"),
+    ("otro", "Otro")
 ]
 
 # Possible values for User.gender
 user_genders = [
-    "hombre",
-    "mujer",
-    "otro"
+    ("", ""),
+    ("H","Hombre"),
+    ("M","Mujer"),
+    ("O","Otro")
 ]
 
 class User(UserMixin, me.Document):
