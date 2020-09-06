@@ -25,3 +25,21 @@ def module():
         return redirect(url_for("courses.dashboard"))
 
     return render_template("courses/module.html", module=module)
+
+@courses.route("/task")
+@login_required
+def task():
+    module_id = request.args.get("module_id")
+    task_name  = request.args.get("task_id")
+    
+    if module_id is None or task_name is None:
+        return redirect(url_for("courses.dashboard"))
+
+    task = Module.objects(id=module_id)
+    # TODO: Figure out how to extract the embedded document from the module.
+    print(task.to_json())
+    if task is None:
+        return redirect(url_for("courses.dashboard"))
+
+    return render_template("courses/task.html", task=task)
+ 
