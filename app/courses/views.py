@@ -43,11 +43,15 @@ def task():
         task_num >= len(module.tasks):
         return redirect(url_for("courses.dashboard"))
     
-    task = module["tasks"][task_num]
+    task = None
+    try:
+        task = module.tasks[task_num]
+    except IndexError:
+        pass
+
     if task is None:
         return redirect(url_for("courses.dashboard"))
-    with open("f2.json", 'w') as f:
-        f.write(task.to_json())
+    
 
     form = None
     if task._cls == "MultipleChoiceQuiz":

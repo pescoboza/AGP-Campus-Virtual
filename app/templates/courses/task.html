@@ -1,12 +1,9 @@
-{% macro mutliple_choice_question(question_num, text="", options=["Lorem ipsum", "dolor sit", "amet consectetur", "adipisicing elit"], option_tags=['A', 'B', 'C', 'D']) %}
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
-<p>{{text}}</p>
-<ul class="list-group">
-    {% for i in range(len(options)) %}
-    <li class="list-group-item">
-        <!-- TODO: Finish implementation of task template. -->
-
-    </li>
-    {% endfor %}
-</ul>
-{% endmacro %}
+{% block page_content %}
+<h1>TASK</h1>
+{% if form %}
+{{wtf.quick_form(form)}}
+{% endif %}
+{% endblock %}

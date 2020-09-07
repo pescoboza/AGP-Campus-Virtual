@@ -6,7 +6,7 @@ from ..models import MultipleChoiceQuiz, MultipleChoiceQuestion
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 class MultipleChoiceQuestionForm(FlaskForm):
-    answer = RadioField(choices=[])
+    answer = RadioField()
 
     @staticmethod
     def from_mongo_obj(obj, option_tags=ALPHABET):
@@ -15,13 +15,14 @@ class MultipleChoiceQuestionForm(FlaskForm):
         return form
 
 class MultipleChoiceQuizForm(FlaskForm):
-    questions = FieldList(FormField())
+    questions = FieldList(FormField(MultipleChoiceQuestionForm))
 
     submit = SubmitField("Entregar examen")
 
     @staticmethod
     def from_mongo_obj(obj):
-        form = MultipleChoiceQuestionForm()
-        form.questions = [MultipleChoiceQuestionForm.from_mongo_obj(q) for q in obj.questions]
+        form = MultipleChoiceQuizForm()
+        for q in obj.questions:
+            form.questions.append_entry(MultipleChoiceQuestionForm.from_mongo_obj(q))
 
         return form
