@@ -50,4 +50,8 @@ touch .vscode/settings.json
 ```
 
 ## TODO
-- Create blueprint for custom content and tests.
+- Create teplates and macros to represent widgets and forms from database objects.
+- Fix templates.
+- Add exam verification and user grades-
+- Improve database query efficiency.
+- Explore chaching options.
