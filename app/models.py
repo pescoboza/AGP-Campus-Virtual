@@ -119,6 +119,5 @@ class MultipleChoiceQuestion(me.EmbeddedDocument):
     options = me.ListField(me.StringField(), required=True)
     answer = me.IntField(required=True) # Index of answer 
 
-class MultipleChoiceQuiz(Task): 
-
+class MultipleChoiceQuiz(Task):
     questions = me.EmbeddedDocumentListField(MultipleChoiceQuestion)
