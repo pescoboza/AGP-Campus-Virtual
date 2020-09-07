@@ -3,6 +3,7 @@ from flask_login import login_required
 
 from . import courses
 from ..models import Module
+from .forms import MultipleChoiceQuizForm
 
 @courses.route("/")
 def empty():
@@ -30,16 +31,26 @@ def module():
 @login_required
 def task():
     module_id = request.args.get("module_id")
-    task_name  = request.args.get("task_id")
+    task_num  = int(request.args.get("task_num"))
     
-    if module_id is None or task_name is None:
+    if module_id is None or \
+        task_num is None or \
+        task_num < 0:
         return redirect(url_for("courses.dashboard"))
 
-    task = Module.objects(id=module_id)
-    # TODO: Figure out how to extract the embedded document from the module.
-    print(task.to_json())
+    module = Module.objects(id=module_id).first()
+    if module is None or \
+        task_num >= len(module.tasks):
+        return redirect(url_for("courses.dashboard"))
+    
+    task = module["tasks"][task_num]
     if task is None:
         return redirect(url_for("courses.dashboard"))
+    with open("f2.json", 'w') as f:
+        f.write(task.to_json())
 
-    return render_template("courses/task.html", task=task)
- 
+    form = None
+    if task._cls == "MultipleChoiceQuiz":
+        form = MultipleChoiceQuizForm.from_mongo_obj(task)
+
+    return render_template("courses/task.html", form=form)

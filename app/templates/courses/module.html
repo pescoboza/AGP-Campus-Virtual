@@ -5,7 +5,7 @@
 <ul class="list-group">
     {% for task in module.tasks %}
     <li class="list-item">
-        <a href={{url_for("courses.task", module_id=module.id ,task_id=task.name)}}>task.name</a>
+        <a href={{url_for("courses.task", module_id=module.id ,task_num=loop.index0)}}>{{task_num}}. task.name</a>
     </li>
     {% endfor %}
 </ul>
