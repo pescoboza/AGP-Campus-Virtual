@@ -34,7 +34,7 @@ def cancer_cervicouterino(page_name):
 
 
 ########################################################
-# Assignments routes
+# Assignments views
 ########################################################
 @courses.route("/dashboard")
 def dashboard():
