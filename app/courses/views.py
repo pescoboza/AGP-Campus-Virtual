@@ -57,4 +57,6 @@ def task():
     if task._cls == "MultipleChoiceQuiz":
         form = MultipleChoiceQuizForm.from_mongo_obj(task)
 
+    
+
     return render_template("courses/task.html", form=form)
