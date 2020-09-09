@@ -52,6 +52,7 @@ touch .vscode/settings.json
 ## TODO
 - Create teplates and macros to represent widgets and forms from database objects.
 - Fix templates.
-- Add exam verification and user grades-
+- Add exam verification and user grades.
 - Improve database query efficiency.
 - Explore chaching options.
+- Add content to information pages of each cancer type.
