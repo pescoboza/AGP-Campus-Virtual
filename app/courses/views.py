@@ -9,6 +9,33 @@ from .forms import MultipleChoiceQuizForm
 def empty():
     return redirect(url_for("courses.dashboard"))
 
+########################################################
+# Info routes
+########################################################
+@courses.route("/cancer-testicular/<page_name>")
+def cancer_testicular(page_name):
+    return render_template("courses/cancer_testicular/{}.html".format(page_name.replace('-','_')))
+
+@courses.route("/cancer-prostata/<page_name>")
+def cancer_prostata(page_name):
+    return render_template("courses/cancer_prostata/{}.html".format(page_name.replace('-','_')))
+
+@courses.route("/cancer-pulmon/<page_name>")
+def cancer_pulmon(page_name):
+    return render_template("courses/cancer_pulmon/{}.html".format(page_name.replace('-','_')))
+
+@courses.route("/cancer-mama/<page_name>")
+def cancer_mama(page_name):
+    return render_template("courses/cancer_mama/{}.html".format(page_name.replace('-','_')))
+
+@courses.route("/cancer-cervicouterino/<page_name>")
+def cancer_cervicouterino(page_name):
+    return render_template("courses/cancer_cervicouterino/{}.html".format(page_name.replace('-','_')))
+
+
+########################################################
+# Assignments views
+########################################################
 @courses.route("/dashboard")
 def dashboard():
     modules = Module.objects().all()
@@ -16,7 +43,6 @@ def dashboard():
 
 # View for a course module
 @courses.route("/module")
-@login_required
 def module():
     module_id = request.args.get("module_id")
 
