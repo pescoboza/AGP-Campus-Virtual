@@ -1,15 +1,18 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}
-Ingresar
+Tablero de cursos
 {% endblock %}
 
 {% block page_content %}
+<h1>Tablero de cursos</h1>
 <div class="container">
-    <ul name="course-list">
-        {% for course in courses %}
-        <li><a href="{{urlf_for('courses',id=course.id)}}"></a>{{course.name}}</li>
+    <ul class="list-group" name="module-list">
+        {% if not modules %}
+        <h1>Más módulos proximamente...</h1>
+        {% endif %}
+        {% for module in modules %}
+        <li class="list-group-item"><a href={{url_for("courses.module", module_id=module.id)}}>{{module.name}}</a></li>
         {% endfor %}
     </ul>
 </div>

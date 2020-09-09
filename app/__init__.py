@@ -65,4 +65,8 @@ def create_app(config):
     from .courses import courses as courses_blueprint
     app.register_blueprint(courses_blueprint, url_prefix="/courses")
 
+    # if os.environ.get("FLASK_ENV") in ("testing", "development"):
+    #     from .tests import tests as tests_blueprint
+    #     app.register_blueprint(tests_blueprint, url_prefix="/tests")
+
     return app

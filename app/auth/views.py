@@ -16,25 +16,29 @@ def login():
         return redirect(url_for("main.index"))
 
     form = LoginForm()
+
+    
     if form.validate_on_submit():
         user = User.get_user(email=form.email.data)
         if user is None:
             print("[DEBUG]: User not found: {}".format(form.email.data))
             flash(Msg.Flash.INVALID_CREDENTIALS)
             return redirect(url_for("auth.login"))
-        
+    
+        # Redirect user the page he or she was about to enter, but got asked to verify credentials.
+        next = request.args.get("next")
+        if next is None or not next.startswith('/'):
+            next = url_for("main.index")        
+    
         if not user.check_password(form.password.data):
             print("[DEBUG]: Invalid user credentials: {} {}".format(form.email.data, form.password.data))
             flash(Msg.Flash.INVALID_CREDENTIALS)
-            return redirect(url_for("auth.login"))
+            return redirect(url_for("auth.login", next=next))
 
         login_user(user, remember=form.remember_me.data)
         print("[DEBUG]: Login from user: {} {}".format(user.email, user.first_name))
         
-        # Redirect user the page he or she was about to enter, but got asked to verify credentials.
-        next = request.args.get("next")
-        if next is None or not next.startswith('/'):
-            next = url_for("main.index")
+
         return redirect(next)
     
     return render_template("auth/login.html", title="Iniciar sesión", form=form)

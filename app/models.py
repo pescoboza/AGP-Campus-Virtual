@@ -101,25 +101,23 @@ task_types = [
 
 # Base component of a module.
 class Task(me.EmbeddedDocument):
-    meta = { "allow_inheritance": True }
+    meta = {"allow_inheritance": True}
     
-    id = me.IntField(primary_key=True, unique=True, required=True)
     name = me.StringField(required=True)
-    type = me.StringField(required=True)
+
 
 # Modules are the top level course units that need to be completed to get certified.
 class Module(me.Document):
     meta = {"collection": "module"}
     
-    id = me.IntField(primary_key=True, unique=True, required=True)
     name = me.StringField(required=True)
     tasks = me.EmbeddedDocumentListField(Task)
 
 # Component of a MultipleChoiceQuiz
 class MultipleChoiceQuestion(me.EmbeddedDocument):
     text = me.StringField(required=True)
-    answers = me.ListField(me.StringField(), required=True)
-    correct_answer = me.IntField(required=True) # Index of answer 
+    options = me.ListField(me.StringField(), required=True)
+    answer = me.IntField(required=True) # Index of answer 
 
-class MultipleChoiceQuiz(Task): 
+class MultipleChoiceQuiz(Task):
     questions = me.EmbeddedDocumentListField(MultipleChoiceQuestion)
