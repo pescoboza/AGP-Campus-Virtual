@@ -9,6 +9,42 @@ from .forms import MultipleChoiceQuizForm
 def empty():
     return redirect(url_for("courses.dashboard"))
 
+@courses.route("/info/<page_name>")
+@courses.route("/que-es/<page_name>")
+def info(page_name):
+    return render_template("/courses/info/{}.html".format(page_name.replace('-','_')))
+
+@courses.route("/symptoms/<page_name>")
+@courses.route("/sintomas/<page_name>")
+def symptoms(page_name):
+    return render_template("/courses/symptoms/{}.html".format(page_name.replace('-','_')))
+
+@courses.route("/prevention/<page_name>")
+@courses.route("/prevencion/<page_name>")
+def prevention(page_name):
+    return render_template("/courses/prevention/{}.html".format(page_name.replace('-','_')))
+
+@courses.route("/risk-factors/<page_name>")
+@courses.route("/factores-de-riesgo/<page_name>")
+def risk_factors(page_name):
+    return render_template("/courses/risk_factors/{}.html".format(page_name.replace('-','_')))
+
+@courses.route("/autoexamination/<page_name>")
+@courses.route("/autoexaminacion/<page_name>")
+def autoexamination(page_name):
+    return render_template("/courses/autoexamination/{}.html".format(page_name.replace('-','_')))
+
+@courses.route("/institutions/<page_name>")
+@courses.route("/instituciones/<page_name>")
+def institutions(page_name):
+    return render_template("/courses/institutions/{}.html".format(page_name.replace('-','_')))
+
+@courses.route("/games/<page_name>")
+@courses.route("/juegos/<page_name>")
+def games(page_name):
+    return render_template("/courses/games/{}.html".format(page_name.replace('-','_')))
+
+
 @courses.route("/dashboard")
 def dashboard():
     modules = Module.objects().all()
@@ -16,7 +52,6 @@ def dashboard():
 
 # View for a course module
 @courses.route("/module")
-@login_required
 def module():
     module_id = request.args.get("module_id")
 
