@@ -4,22 +4,51 @@ from flask_login import login_required
 from . import courses
 from .forms import MultipleChoiceQuizForm
 
-@courses.route("/cancer-testicular")
-def cancer_testicular(page_name):
-    return render_template("courses/cancer_testicular.html")
+"""
+QUESTION_TOPICS = (
+    "tstc", # Cancer testicular
+    "crvu", # Cancer cervicouterino
+    "plmn", # Cancer en pulmon
+    "psta", # Cancer en prostata
+    "mama", # Cancer de mama
+    "diag"  # Examen diagnostico
+)
+"""
 
-@courses.route("/cancer-prostata")
-def cancer_prostata(page_name):
-    return render_template("courses/cancer_prostata.html")
+@courses.route("/diagnostico", methods=["GET", "POST"])
+@login_required
+def diagnostico():
+    form = MultipleChoiceQuizForm.generate_random_quiz("diag", 10)
+    if form.validate_on_submit():
 
-@courses.route("/cancer-pulmon")
-def cancer_pulmon(page_name):
-    return render_template("courses/cancer_pulmon.html")
+    return render_template("courses/diagnostico.html", form=form)
 
-@courses.route("/cancer-mama")
-def cancer_mama(page_name):
-    return render_template("courses/cancer_mama.html")
+@courses.route("/cancer-testicular", methods=["GET", "POST"])
+@login_required
+def cancer_testicular():
+    form = MultipleChoiceQuizForm.generate_random_quiz("tstc", 3)
+    return render_template("courses/cancer_testicular.html", form=form)
 
-@courses.route("/cancer-cervicouterino")
-def cancer_cervicouterino(page_name):
-    return render_template("courses/cancer_cervicouterino.html")
+@courses.route("/cancer-prostata", methods=["GET", "POST"])
+@login_required
+def cancer_prostata():
+    form = MultipleChoiceQuizForm.generate_random_quiz("psta", 3)
+    return render_template("courses/cancer_prostata.html", form=form)
+
+@courses.route("/cancer-pulmon", methods=["GET", "POST"])
+@login_required
+def cancer_pulmon():
+    form = MultipleChoiceQuizForm.generate_random_quiz("plmn", 3)
+    return render_template("courses/cancer_pulmon.html", form=form)
+
+@courses.route("/cancer-mama", methods=["GET", "POST"])
+@login_required
+def cancer_mama():
+    form = MultipleChoiceQuizForm.generate_random_quiz("mama", 3)
+    return render_template("courses/cancer_mama.html", form=form)
+
+@courses.route("/cancer-cervicouterino", methods=["GET", "POST"])
+@login_required
+def cancer_cervicouterino():
+    form = MultipleChoiceQuizForm.generate_random_quiz("crvu", 3)
+    return render_template("courses/cancer_cervicouterino.html", form=form)

@@ -35,12 +35,14 @@ class MultipleChoiceQuizForm(FlaskForm):
         super().__init__(**kwargs)
         self.questions = question_forms
 
+    def get_score(self):
+        return ( sum([question.is_correct() for question in self.questions]), len(self.questions))
+
     @staticmethod
     def from_mongo_obj(questions_mongo):
         question_forms = \
              [MultipleChoiceQuestionForm.from_mongo_obj(question_mongo) for question_mongo in questions_mongo]
         return MultipleChoiceQuizForm(question_forms=question_forms)
-    
     
     @staticmethod
     def generate_random_quiz(topic, num_questions):

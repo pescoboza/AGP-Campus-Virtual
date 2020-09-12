@@ -101,7 +101,7 @@ QUESTION_TOPICS = (
     "plmn", # Cancer en pulmon
     "psta", # Cancer en prostata
     "mama", # Cancer de mama
-    "diag"  # Examen diagnostic0
+    "diag"  # Examen diagnostico
 )
 
 
