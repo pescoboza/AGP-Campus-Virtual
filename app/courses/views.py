@@ -24,7 +24,7 @@ def quiz_view(quiz_topic, num_questions):
 @courses.route("/diagnostico", methods=["GET", "POST"])
 @login_required
 def diagnostico():
-    num_questions = 10
+    num_questions = 1
     form = MultipleChoiceQuizForm.generate_random_quiz("diag", num_questions)
     score = 0
     if form.validate_on_submit():

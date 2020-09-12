@@ -71,4 +71,3 @@ class MultipleChoiceQuizForm(FlaskForm):
         
         # Convert the question from mongoengine model objects to wtforms.
         return MultipleChoiceQuizForm.from_mongo_obj(questions)
-
