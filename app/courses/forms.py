@@ -9,8 +9,8 @@ ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 class MultipleChoiceQuestionForm(FlaskForm):
     answer = RadioField()
 
-    def __init__(self, question_text, choices, correct_answer, choice_tags=ALPHABET):
-        super().__init__()
+    def __init__(self, question_text, choices, correct_answer, choice_tags=ALPHABET, **kwargs):
+        super().__init__(**kwargs)
         self.answer.choices = [(choice_tags[i], choices[i]) for i in range(len(choices))]
         self.text = question_text
         self.correct_answer = choice_tags[correct_answer]
@@ -19,24 +19,27 @@ class MultipleChoiceQuestionForm(FlaskForm):
         return self.answer.data == self.correct_answer
 
     @staticmethod
-    def from_mongo_obj(obj):
+    def from_mongo_obj(obj, **kwargs):
         return MultipleChoiceQuestionForm(
             question_text=obj.text,
             choices=obj.choices,
-            correct_answer=obj.answer)
+            correct_answer=obj.answer, 
+            **kwargs)
 
 class MultipleChoiceQuizForm(FlaskForm):
-    questions = FieldList(FormField(MultipleChoiceQuestionForm))
+    questions = FieldList(FormField(MultipleChoiceQuestionForm), min_entries=1)
 
     submit = SubmitField("Entregar evaluación")
 
-    @staticmethod
-    def from_mongo_obj(questions):
-        form = MultipleChoiceQuizForm()
-        for q in questions:
-            form.questions.append_entry(MultipleChoiceQuestionForm.from_mongo_obj(q))
+    def __init__(self, question_forms, **kwargs):
+        super().__init__(**kwargs)
+        self.questions = question_forms
 
-        return form
+    @staticmethod
+    def from_mongo_obj(questions_mongo):
+        question_forms = \
+             [MultipleChoiceQuestionForm.from_mongo_obj(question_mongo) for question_mongo in questions_mongo]
+        return MultipleChoiceQuizForm(question_forms=question_forms)
     
     
     @staticmethod
@@ -61,7 +64,5 @@ class MultipleChoiceQuizForm(FlaskForm):
         questions = random.choices(questions, k=num_questions)
         
         # Convert the question from mongoengine model objects to wtforms.
-        questions = [MultipleChoiceQuestionForm.from_mongo_obj(question_mongo) for question_mongo in questions]
-
-        MultipleChoiceQuestionForm
+        return MultipleChoiceQuizForm.from_mongo_obj(questions)
 
