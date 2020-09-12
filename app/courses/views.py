@@ -15,9 +15,12 @@ QUESTION_TOPICS = (
 )
 """
 
+
+
+
 def quiz_view(quiz_topic, num_questions):
     pass
-
+@courses.route("/", methods=["GET", "POST"])
 @courses.route("/diagnostico", methods=["GET", "POST"])
 @login_required
 def diagnostico():

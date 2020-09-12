@@ -33,7 +33,8 @@ class MultipleChoiceQuizForm(FlaskForm):
 
     def __init__(self, question_forms, **kwargs):
         super().__init__(**kwargs)
-        self.questions = question_forms
+        for question_form in question_forms:
+            self.questions.append_entry(question_form)
 
     def get_score(self):
         return  sum([question.is_correct() for question in self.questions])
