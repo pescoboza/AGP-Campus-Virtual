@@ -95,29 +95,48 @@ def load_user(id):
 # Courses items
 #####################################################################################
 
-task_types = [
-    "multiple_choice_quiz"
-]
+QUESTION_TOPICS = (
+    "tstc", # Cancer testicular
+    "crvu", # Cancer cervicouterino
+    "plmn", # Cancer en pulmon
+    "psta", # Cancer en prostata
+    "mama", # Cancer de mama
+    "diag"  # Examen diagnostico
+)
 
-# Base component of a module.
-class Task(me.EmbeddedDocument):
-    meta = {"allow_inheritance": True}
-    
-    name = me.StringField(required=True)
 
 
-# Modules are the top level course units that need to be completed to get certified.
-class Module(me.Document):
-    meta = {"collection": "module"}
-    
-    name = me.StringField(required=True)
-    tasks = me.EmbeddedDocumentListField(Task)
+class MultipleChoiceQuestion(me.Document):
+    meta = {"collection":"question_bank"}
 
-# Component of a MultipleChoiceQuiz
-class MultipleChoiceQuestion(me.EmbeddedDocument):
+    # A question from the bank can appear on different test types. That's why a list is used.
+    topic = me.ListField(me.StringField(max_length=4, choices=QUESTION_TOPICS), required=True)
     text = me.StringField(required=True)
-    options = me.ListField(me.StringField(), required=True)
-    answer = me.IntField(required=True) # Index of answer 
+    choices = me.ListField(me.StringField(), required=True, max_length=26)
+    answer = me.IntField(required=True)
 
-class MultipleChoiceQuiz(Task):
-    questions = me.EmbeddedDocumentListField(MultipleChoiceQuestion)
+    # Document save validation. Makes sure the answer value matches the question choice number.
+    def clean(self):
+        if self.answer < 0 or self.answer > len(self.choices):
+            raise me.errors.ValidationError("Question answer did not match a choice index.")
+
+
+import random
+def mock_question_bank(num_questions):
+    texts = [
+        "What is your name?", 
+        "Who are you?", 
+        "How should I call you?", 
+        "And you are...?", 
+        "Who is it?", 
+        "What do you like being called?", 
+        "May I know your name?"]
+    choices = ["Bob", "Jeff", "Dawn", "Alexander", "Andromeda"]
+    num_choices = len(choices)
+        
+    for _ in range(num_questions):
+        MultipleChoiceQuestion(
+            topic=[random.choice(QUESTION_TOPICS)],
+            text=random.choice(texts),
+            choices=choices,
+            answer=random.randint(0, num_choices-1)).save()
