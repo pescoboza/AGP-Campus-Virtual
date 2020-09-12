@@ -119,3 +119,24 @@ class MultipleChoiceQuestion(me.Document):
     def clean(self):
         if self.answer < 0 or self.answer > len(self.choices):
             raise me.errors.ValidationError("Question answer did not match a choice index.")
+
+
+import random
+def mock_question_bank(num_questions):
+    texts = [
+        "What is your name?", 
+        "Who are you?", 
+        "How should I call you?", 
+        "And you are...?", 
+        "Who is it?", 
+        "What do you like being called?", 
+        "May I know your name?"]
+    choices = ["Bob", "Jeff", "Dawn", "Alexander", "Andromeda"]
+    num_choices = len(choices)
+        
+    for _ in range(num_questions):
+        MultipleChoiceQuestion(
+            topic=[random.choice(QUESTION_TOPICS)],
+            text=random.choice(texts),
+            choices=choices,
+            answer=random.randint(0, num_choices-1)).save()

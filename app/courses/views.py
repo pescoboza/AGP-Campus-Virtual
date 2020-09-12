@@ -2,7 +2,6 @@ from flask import redirect, render_template, url_for, request
 from flask_login import login_required
 
 from . import courses
-from ..models import Module
 from .forms import MultipleChoiceQuizForm
 
 @courses.route("/")

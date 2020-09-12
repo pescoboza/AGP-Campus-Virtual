@@ -2,7 +2,7 @@ from random import shuffle
 from flask_wtf import FlaskForm
 from wtforms import RadioField, FieldList, FormField, SubmitField
 
-from ..models import MultipleChoiceQuiz, MultipleChoiceQuestion, QUESTION_TOPICS
+from ..models import MultipleChoiceQuestion, QUESTION_TOPICS
 
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
