@@ -36,7 +36,10 @@ class MultipleChoiceQuizForm(FlaskForm):
         self.questions = question_forms
 
     def get_score(self):
-        return ( sum([question.is_correct() for question in self.questions]), len(self.questions))
+        return  sum([question.is_correct() for question in self.questions])
+
+    def get_max_score(self):
+        return len(self.questions)
 
     @staticmethod
     def from_mongo_obj(questions_mongo):

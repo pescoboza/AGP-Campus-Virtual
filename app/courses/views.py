@@ -15,13 +15,18 @@ QUESTION_TOPICS = (
 )
 """
 
+def quiz_view(quiz_topic, num_questions):
+    pass
+
 @courses.route("/diagnostico", methods=["GET", "POST"])
 @login_required
 def diagnostico():
-    form = MultipleChoiceQuizForm.generate_random_quiz("diag", 10)
+    num_questions = 10
+    form = MultipleChoiceQuizForm.generate_random_quiz("diag", num_questions)
+    score = 0
     if form.validate_on_submit():
-
-    return render_template("courses/diagnostico.html", form=form)
+        score = form.get_score()
+    return render_template("courses/diagnostico.html", form=form, score=score, max_score=num_questions)
 
 @courses.route("/cancer-testicular", methods=["GET", "POST"])
 @login_required
