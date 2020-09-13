@@ -32,12 +32,12 @@ class MultipleChoiceQuestionForm(FlaskForm):
         return self.answer.data == self.correct_answer
 
     @staticmethod
-    def from_mongo_obj(obj, **kwargs):
-        return MultipleChoiceQuestionForm(
-            question_text=obj.text,
-            choices=obj.choices,
-            correct_answer=obj.answer, 
-            **kwargs)
+    def data_from_mongo(obj, **kwargs):
+        return {
+            "question_text": obj.text,
+            "choices": obj.choices,
+            "correct_answer":obj.answer
+        }
 
 class MultipleChoiceQuizForm(FlaskForm):
     class Meta:
@@ -57,8 +57,7 @@ class MultipleChoiceQuizForm(FlaskForm):
     def from_mongo_obj(questions_mongo):
         form = MultipleChoiceQuizForm()
         for question_mongo in questions_mongo:
-            form.questions.append_entry(
-                MultipleChoiceQuestionForm.from_mongo_obj(question_mongo))
+            form.questions.append_entry(data=MultipleChoiceQuestionForm.data_from_mongo(question_mongo))
         return form
     
     @staticmethod
