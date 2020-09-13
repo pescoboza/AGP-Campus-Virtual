@@ -24,9 +24,12 @@ def diagnostico():
     num_questions = 10
     form = MultipleChoiceQuizForm.generate_random_quiz("diag", num_questions)
     score = 0
-    if form.validate_on_submit():
+    if request.method == "POST":
         score = form.get_score()
-    return render_template("courses/diagnostico.html", form=form, score=score, max_score=num_questions)
+        print("[DEBUG]: Score: {}/{}".format(score, num_questions))
+        return redirect(url_for("courses.diagnostico"))
+    return render_template("courses/quiz.html", form=form, score=score, max_score=num_questions)
+    #return render_template("courses/diagnostico.html", form=form, score=score, max_score=num_questions)
 
 @courses.route("/cancer-testicular", methods=["GET", "POST"])
 @login_required

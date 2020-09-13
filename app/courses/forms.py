@@ -8,7 +8,10 @@ ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 DEFAULT_CHOICES = ["Option 1", "Option 2","Option 3", "Option 4"]
 
 class MultipleChoiceQuestionForm(FlaskForm):
-    answer = RadioField()
+    class Meta:
+        csrf_token = False
+
+    answer = RadioField(label='')
 
     # The default parameters are placeholder values to make possible mock construction
     # during instantiation of MultipleChoiceQuizForm.
@@ -37,8 +40,11 @@ class MultipleChoiceQuestionForm(FlaskForm):
             **kwargs)
 
 class MultipleChoiceQuizForm(FlaskForm):
+    class Meta:
+        csrf_token = False
+        
     questions = FieldList(FormField(MultipleChoiceQuestionForm))
-
+    
     submit = SubmitField("Entregar evaluación")
 
     def get_score(self):
