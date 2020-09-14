@@ -22,28 +22,33 @@
     </div>
 
     <!-- Controls -->
-    <!-- carousel-control -->
-    <a class="left" href="#carousel-quiz" role="button" data-slide="prev">
-        <!-- <span class="glyphicon glyphicon-chevron-left"></span> -->
-        Anterior
-    </a>
-    <!-- carousel-control -->
-    <a class="right" href="#carousel-quiz" role="button" data-slide="next">
-        <!-- <span class="glyphicon glyphicon-chevron-right"></span> -->
-        Siguiente
-    </a>
+    <ul class="pagination">
+        <!-- Left -->
+        <li>
+            <a class="left" href="#carousel-quiz" role="button" data-slide="prev">
+                <!-- <span class="glyphicon glyphicon-chevron-left"></span> -->
+                Anterior
+            </a>
+        </li>
 
-    <!-- Indicators -->
-    <ul>
+        <!-- Indicators -->
         {% for _ in form.questions %}
-        {% if loop.index == 0 %}
-        <li data-target="#carousel-quiz" data-slide-to="{{loop.index}}" class="active"><a
-                href="#question-{{loop.index}}">{{loop.index}}</a></li>
-        {% else %}
-        <li data-target="#carousel-quiz" data-slide-to="{{loop.index}}"><a
-                href="#question-{{loop.index}}">{{loop.index}}</a></li>
-        {% endif %}
+        <li data-target="#carousel-quiz" data-slide-to="{{loop.index}}">
+            <a href="#question-{{loop.index}}">{{loop.index}}</a>
+        </li>
         {% endfor %}
+
+        <!-- Right -->
+        <li>
+            <a class="right" href="#carousel-quiz" role="button" data-slide="next">
+                <!-- <span class="glyphicon glyphicon-chevron-right"></span> -->
+                Siguiente
+            </a>
+        </li>
+    </ul>
+
+    <ul>
+
     </ul>
     </div> <!-- Carousel -->
 
