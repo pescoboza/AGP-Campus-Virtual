@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}
+Campus Virtual AGP
+{% endblock %}
+
+{% block page_content %}
+{% if current_user and not current_user.is_anonymous %}
+<h1>Saludos {{current_user.first_name}}.</h1>
+{% else %}
+<h1>Bienvenidos</h1>
+{% endif %}
+{% endblock %}
