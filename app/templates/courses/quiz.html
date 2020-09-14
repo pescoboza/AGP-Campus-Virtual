@@ -3,7 +3,7 @@
 
 
 {% block page_content %}
-<button data-toggle="collapse" data-target="#collapsible-quiz">Hacer examen</button>
+<button id="button-collapse-quiz" data-toggle="collapse" data-target="#collapsible-quiz">Hacer examen</button>
 <div id="collapsible-quiz" class="collapse">
     <h1>Calificación: {{score}}/{{max_score}}</h1>
     <form action="" method="POST">
@@ -11,11 +11,8 @@
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
-                <div class="item active">
-                    <h2>Tomar examen</h2>
-                </div>
                 {% for question_form in form.questions %}
-                <div class="item">
+                <div class="item {% if loop.index0 == 0 %}active{% endif %}">
                     <p name="question-{{loop.index}}-text">{{question_form.text}}</p>
                     {{question_form.answer}}
                 </div>
@@ -52,4 +49,5 @@
         {{form.submit}}
     </form>
 </div> <!-- Collapsible -->
+<script src="../../static/js/script.js"></script>
 {% endblock %}
