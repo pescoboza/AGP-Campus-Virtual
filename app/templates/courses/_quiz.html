@@ -10,7 +10,7 @@
             <div class="carousel-inner">
                 {% for question_form in form.questions %}
                 <div class="item {% if loop.index0 == 0 %}active{% endif %}">
-                    <p name="question-{{loop.index}}-text">{{question_form.text}}</p>
+                    <p name="question-{{loop.index0}}-text">{{question_form.text}}</p>
                     {{question_form.answer}}
                 </div>
                 {% endfor %}
@@ -28,8 +28,8 @@
 
                 <!-- Indicators -->
                 {% for _ in form.questions %}
-                <li data-target="#carousel-quiz" data-slide-to="{{loop.index}}">
-                    <a href="#question-{{loop.index}}">{{loop.index}}</a>
+                <li data-target="#carousel-quiz" data-slide-to="{{loop.index0}}">
+                    <a href="#question-{{loop.index0}}">{{loop.index}}</a>
                 </li>
                 {% endfor %}
 
