@@ -1,3 +1,4 @@
+from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import current_app
 from flask_login import UserMixin, login_manager
@@ -30,6 +31,34 @@ user_genders = [
     ("O","Otro")
 ]
 
+user_quiz_data = {
+    "tstc": { # Test code
+        "score": [0, 3], # Actual and max score.
+        "is_passed": False, # Whether the user passed the test.
+    },
+    "crvu": {
+        "score": [0, 3],
+        "is_passed": False,
+    },
+    "plmn": {
+        "score": [0, 3],
+        "is_passed": False,
+    },
+    "psta": {
+        "score": [0, 3],
+        "is_passed": False,
+    },
+    "mama": {
+        "score": [0, 3],
+        "is_passed": False,
+    },
+    "diag":{
+        "score": [0, 10],
+        "is_passed": False,
+    }
+}
+
+
 class User(UserMixin, me.Document):
     meta = {"collection":"user"}
 
@@ -41,7 +70,12 @@ class User(UserMixin, me.Document):
     gender = me.StringField(required=True)
     occupation = me.StringField(required=True)
     password_hash = me.StringField(max_length=db_hash_len, required=True)
-    
+    registered_on = me.DateTimeField(required=True)
+
+    quiz_data = me.DictField(data=user_quiz_data)
+    is_certified = me.BooleanField(default=False)
+    certified_on = me.DateTimeField()
+
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
@@ -55,7 +89,7 @@ class User(UserMixin, me.Document):
     
     # Creates user without saving it the database.
     @staticmethod
-    def create_new_user(email, first_name, paternal_last_name, maternal_last_name, birth_date, gender, occupation, password):
+    def create_new_user(email, first_name, paternal_last_name, maternal_last_name, birth_date, gender, occupation, password, registered_on=datetime.now()):
         return User(email=email, 
             first_name=first_name, 
             paternal_last_name=paternal_last_name, 
@@ -63,7 +97,8 @@ class User(UserMixin, me.Document):
             birth_date=birth_date,
             gender=gender,
             occupation=occupation,
-            password_hash=generate_password_hash(password))
+            password_hash=generate_password_hash(password),
+            registered_on=registered_on)
 
     # Print function
     def __repr__(self):
