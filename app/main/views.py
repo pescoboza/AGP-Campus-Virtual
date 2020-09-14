@@ -6,12 +6,12 @@ from . import main
 @main.route("/")
 @main.route("/index")
 def index():
-    return render_template("index.html")
+    return render_template("main/index.html")
 
 @main.route("/contact")
 def contact():
-    return render_template("contact.html")
+    return render_template("main/contact.html")
 
 @main.route("/faq")
 def faq():
-    return render_template("faq.html")
+    return render_template("main/faq.html")
