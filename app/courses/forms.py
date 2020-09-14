@@ -5,12 +5,25 @@ from wtforms import RadioField, FieldList, FormField, SubmitField
 from ..models import MultipleChoiceQuestion, QUESTION_TOPICS
 
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+DEFAULT_CHOICES = ["Option 1", "Option 2","Option 3", "Option 4"]
 
 class MultipleChoiceQuestionForm(FlaskForm):
-    answer = RadioField()
+    class Meta:
+        csrf_token = False
 
-    def __init__(self, question_text, choices, correct_answer, choice_tags=ALPHABET, **kwargs):
+    answer = RadioField(label='')
+
+    # The default parameters are placeholder values to make possible mock construction
+    # during instantiation of MultipleChoiceQuizForm.
+    def __init__(self, question_text="[PLACEHOLDER_TEXT]", choices=DEFAULT_CHOICES, 
+                correct_answer=0, choice_tags=ALPHABET, **kwargs):
         super().__init__(**kwargs)
+        self.initialize(question_text=question_text, 
+                        choices=choices, 
+                        correct_answer=correct_answer,
+                        choice_tags=choice_tags)
+
+    def initialize(self, question_text, choices, correct_answer, choice_tags):
         self.answer.choices = [(choice_tags[i], choices[i]) for i in range(len(choices))]
         self.text = question_text
         self.correct_answer = choice_tags[correct_answer]
@@ -19,22 +32,20 @@ class MultipleChoiceQuestionForm(FlaskForm):
         return self.answer.data == self.correct_answer
 
     @staticmethod
-    def from_mongo_obj(obj, **kwargs):
-        return MultipleChoiceQuestionForm(
-            question_text=obj.text,
-            choices=obj.choices,
-            correct_answer=obj.answer, 
-            **kwargs)
+    def data_from_mongo(obj, **kwargs):
+        return {
+            "question_text": obj.text,
+            "choices": obj.choices,
+            "correct_answer":obj.answer
+        }
 
 class MultipleChoiceQuizForm(FlaskForm):
-    questions = FieldList(FormField(MultipleChoiceQuestionForm), min_entries=1)
-
+    class Meta:
+        csrf_token = False
+        
+    questions = FieldList(FormField(MultipleChoiceQuestionForm))
+    
     submit = SubmitField("Entregar evaluación")
-
-    def __init__(self, question_forms, **kwargs):
-        super().__init__(**kwargs)
-        for question_form in question_forms:
-            self.questions.append_entry(question_form)
 
     def get_score(self):
         return  sum([question.is_correct() for question in self.questions])
@@ -44,9 +55,10 @@ class MultipleChoiceQuizForm(FlaskForm):
 
     @staticmethod
     def from_mongo_obj(questions_mongo):
-        question_forms = \
-             [MultipleChoiceQuestionForm.from_mongo_obj(question_mongo) for question_mongo in questions_mongo]
-        return MultipleChoiceQuizForm(question_forms=question_forms)
+        form = MultipleChoiceQuizForm()
+        for question_mongo in questions_mongo:
+            form.questions.append_entry(data=MultipleChoiceQuestionForm.data_from_mongo(question_mongo))
+        return form
     
     @staticmethod
     def generate_random_quiz(topic, num_questions):
@@ -71,3 +83,4 @@ class MultipleChoiceQuizForm(FlaskForm):
         
         # Convert the question from mongoengine model objects to wtforms.
         return MultipleChoiceQuizForm.from_mongo_obj(questions)
+        #return MultipleChoiceQuizForm()
