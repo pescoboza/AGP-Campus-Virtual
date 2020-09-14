@@ -1,7 +1,8 @@
 from flask import redirect, render_template, url_for, request, flash
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from . import courses
+from ..models import User
 from .forms import MultipleChoiceQuizForm
 
 """
@@ -22,6 +23,17 @@ def quiz_view(template, redirect_to, topic_code, num_questions=10):
         score = form.get_score()
         print("[DEBUG] Score: {}/{}".format(score, num_questions))
         flash("[DEBUG] Calificación: {}/{}".format(score, num_questions))
+        
+        # Update user's grade on the quiz.
+        user = User.objects(email=current_user.email).first()
+        
+        if  num_questions != user.quiz_data[topic_code]["score"][1]:
+            user.quiz_data[topic_code]["score"][0] = score
+            user.quiz_data[topic_code]["score"][1] = num_questions
+        elif score > user.quiz_data[topic_code]["score"][0]:
+            user.quiz_data[topic_code]["score"][0] = score
+
+        user.save()
         return redirect(redirect_to)
     return render_template(template, form=form, score=score, max_score=num_questions)
 
@@ -34,7 +46,7 @@ def quiz():
 @courses.route("/diagnostico", methods=["GET", "POST"])
 @login_required
 def diagnostico():
-    return quiz_view("courses/diagnostico.html", url_for("courses.diagnostico"), "diag", 3)
+    return quiz_view("courses/diagnostico.html", url_for("courses.diagnostico"), "diag", 10)
 
 
 @courses.route("/cancer-testicular", methods=["GET", "POST"])
