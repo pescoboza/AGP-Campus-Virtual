@@ -21,7 +21,7 @@ def login():
     if form.validate_on_submit():
         user = User.get_user(email=form.email.data)
         if user is None:
-            print("[DEBUG]: User not found: {}".format(form.email.data))
+            print("[DEBUG] User not found: {}".format(form.email.data))
             flash(Msg.Flash.INVALID_CREDENTIALS)
             return redirect(url_for("auth.login"))
     
@@ -31,12 +31,12 @@ def login():
             next = url_for("main.index")        
     
         if not user.check_password(form.password.data):
-            print("[DEBUG]: Invalid user credentials: {} {}".format(form.email.data, form.password.data))
+            print("[DEBUG] Invalid user credentials: {} {}".format(form.email.data, form.password.data))
             flash(Msg.Flash.INVALID_CREDENTIALS)
             return redirect(url_for("auth.login", next=next))
 
         login_user(user, remember=form.remember_me.data)
-        print("[DEBUG]: Login from user: {} {}".format(user.email, user.first_name))
+        print("[DEBUG] Login from user: {} {}".format(user.email, user.first_name))
         
 
         return redirect(next)
@@ -48,7 +48,7 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         if User.get_user(form.email.data) is not None:
-            print("[DEBUG]: User with email {} already registered.".format(form.email.data))
+            print("[DEBUG] User with email {} already registered.".format(form.email.data))
             flash(Msg.UserRegistration.ERROR_EMAIL_IN_USE)
             return redirect(url_for("auth.register"))
 
@@ -61,9 +61,9 @@ def register():
             occupation=form.occupation.data,
             password=form.password.data)
 
-        print("[DEBUG]: New user created. Showing JSON:")
+        print("[DEBUG] New user created. Showing JSON:")
         print(new_user.to_json())
-        print("[DEBUG]: New user EOF.")
+        print("[DEBUG] New user EOF.")
         new_user.save()
 
         login_user(new_user, remember=False)
@@ -92,25 +92,25 @@ def change_password():
             # Check that new password is not the same as the old one
             if form.old_password.data == form.password.data:
                 flash(Msg.Flash.SAME_AS_OLD_PASSWORD)
-                print("[DEBUG]: User {} tried to change to same password.".format(current_user.email))
+                print("[DEBUG] User {} tried to change to same password.".format(current_user.email))
                 return redirect(url_for("auth.change_password"))
 
         else:
             flash(Msg.Flash.INVALID_OLD_PASSWORD)
-            print("[DEBUG]: Password change request, incorrect old password. User: {}".format(current_user.email))
+            print("[DEBUG] Password change request, incorrect old password. User: {}".format(current_user.email))
             return redirect(url_for("auth.change_password"))
 
         
         # Check that the user curently signed in is still on the database
         user = User.get_user(email=current_user.email)
         if user is None:
-            print("[DEBUG]: Password change request, user not found: {}".format(current_user.email))
+            print("[DEBUG] Password change request, user not found: {}".format(current_user.email))
             return redirect(url_for("error.not_found"))
 
         # No errors, proceed to commit changes to database
         user.password_hash = generate_password_hash(form.password.data)
         user.save()
-        print("[DEBUG]: Password change from user {}.".format(user.email))
+        print("[DEBUG] Password change from user {}.".format(user.email))
         flash(Msg.Flash.PASSWORD_CHANGE_SUCCESFUL)
         return redirect(url_for("main.index"))
     return render_template("auth/change_password.html", form=form)

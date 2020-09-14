@@ -1,4 +1,4 @@
-from flask import redirect, render_template, url_for, request
+from flask import redirect, render_template, url_for, request, flash
 from flask_login import login_required
 
 from . import courses
@@ -15,21 +15,26 @@ QUESTION_TOPICS = (
 )
 """
 
-def quiz_view(quiz_topic, num_questions):
-    pass
-@courses.route("/", methods=["GET", "POST"])
-@courses.route("/diagnostico", methods=["GET", "POST"])
+@courses.route("/quiz", methods=["GET", "POST"])
 @login_required
-def diagnostico():
+def quiz():
     num_questions = 10
     form = MultipleChoiceQuizForm.generate_random_quiz("diag", num_questions)
     score = 0
     if request.method == "POST":
         score = form.get_score()
-        print("[DEBUG]: Score: {}/{}".format(score, num_questions))
-        return redirect(url_for("courses.diagnostico"))
+        print("[DEBUG] Score: {}/{}".format(score, num_questions))
+        flash("[DEBUG] Calificación: {}/{}".format(score, num_questions))
+        return redirect(url_for("courses.quiz"))
     return render_template("courses/quiz.html", form=form, score=score, max_score=num_questions)
-    #return render_template("courses/diagnostico.html", form=form, score=score, max_score=num_questions)
+
+@courses.route("/", methods=["GET", "POST"])
+@courses.route("/diagnostico", methods=["GET", "POST"])
+@login_required
+def diagnostico():
+    form = MultipleChoiceQuizForm.generate_random_quiz("diag", 3)
+    return render_template("courses/diagnostico.html", form=form)
+
 
 @courses.route("/cancer-testicular", methods=["GET", "POST"])
 @login_required
