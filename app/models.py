@@ -14,7 +14,7 @@ db_hash_len = 128
 # User models
 ######################################################################
 # Possible values for User.occupation
-user_occupations = [
+USER_OCCUPATIONS = [
     ("",""),
     ("maestro","Maestro"),
     ("estudiante", "Estudiante"),
@@ -24,14 +24,25 @@ user_occupations = [
 ]
 
 # Possible values for User.gender
-user_genders = [
+USER_GENDERS = [
     ("", ""),
     ("H","Hombre"),
     ("M","Mujer"),
     ("O","Otro")
 ]
 
-user_quiz_data = {
+QUIZ_CODES = {
+    "tstc":{"is_obligatory": True , "num_questions":3 }, # Cancer testicular
+    "crvu":{"is_obligatory": True , "num_questions":3 }, # Cancer cervicouterino
+    "plmn":{"is_obligatory": True , "num_questions":3 }, # Cancer en pulmon
+    "psta":{"is_obligatory": True , "num_questions":3 }, # Cancer en prostata
+    "mama":{"is_obligatory": True , "num_questions":3 }, # Cancer de mama
+    "diag":{"is_obligatory": False, "num_questions":10} # Examen diagnostico
+}
+
+QUESTION_TOPICS = tuple([*QUIZ_CODES])
+
+USER_QUIZ_DATA = {
     "tstc": { # Test code
         "score": [0, 3], # Actual and max score.
         "is_passed": False, # Whether the user passed the test.
@@ -72,7 +83,7 @@ class User(UserMixin, me.Document):
     password_hash = me.StringField(max_length=db_hash_len, required=True)
     registered_on = me.DateTimeField(required=True)
 
-    quiz_data = me.DictField(data=user_quiz_data)
+    quiz_data = me.DictField()
     is_certified = me.BooleanField(default=False)
     certified_on = me.DateTimeField()
 
@@ -81,6 +92,18 @@ class User(UserMixin, me.Document):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+    # Checks if the user has passed the needed tests to be certified.
+    def can_be_certified(self):
+        for qc in QUIZ_CODES:
+            if QUIZ_CODES[qc]["is_obligatory"] and not self.quiz_data[qc]["is_passed"]:
+                return False
+        return True
+
+    # Gives certification to the user but does not check the tests.
+    def certify(self, certified_on=datetime.now()):
+        self.is_certified = True
+        self.certified_on = certified_on
 
     # Gets user document instance from me. Returns None if it does not exist.
     @staticmethod
@@ -98,7 +121,8 @@ class User(UserMixin, me.Document):
             gender=gender,
             occupation=occupation,
             password_hash=generate_password_hash(password),
-            registered_on=registered_on)
+            registered_on=registered_on,
+            quiz_data=USER_QUIZ_DATA)
 
     # Print function
     def __repr__(self):
@@ -129,17 +153,6 @@ def load_user(id):
 #####################################################################################
 # Courses items
 #####################################################################################
-
-QUESTION_TOPICS = (
-    "tstc", # Cancer testicular
-    "crvu", # Cancer cervicouterino
-    "plmn", # Cancer en pulmon
-    "psta", # Cancer en prostata
-    "mama", # Cancer de mama
-    "diag"  # Examen diagnostico
-)
-
-
 
 class MultipleChoiceQuestion(me.Document):
     meta = {"collection":"question_bank"}
