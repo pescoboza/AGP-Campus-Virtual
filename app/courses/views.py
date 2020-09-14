@@ -26,7 +26,7 @@ def quiz():
         print("[DEBUG] Score: {}/{}".format(score, num_questions))
         flash("[DEBUG] Calificación: {}/{}".format(score, num_questions))
         return redirect(url_for("courses.quiz"))
-    return render_template("courses/quiz.html", form=form, score=score, max_score=num_questions)
+    return render_template("courses/test.html", form=form, score=score, max_score=num_questions)
 
 @courses.route("/", methods=["GET", "POST"])
 @courses.route("/diagnostico", methods=["GET", "POST"])

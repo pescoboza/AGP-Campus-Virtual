@@ -1,8 +1,6 @@
-{% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-
-{% block page_content %}
+{% macro quiz(form, score=0, max_score=10) %}
 <button id="button-collapse-quiz" data-toggle="collapse" data-target="#collapsible-quiz">Hacer examen</button>
 <div id="collapsible-quiz" class="collapse">
     <form action="" method="POST">
@@ -49,4 +47,4 @@
     </form>
 </div> <!-- Collapsible -->
 <script src="../../static/js/script.js"></script>
-{% endblock %}
+{% endmacro %}
