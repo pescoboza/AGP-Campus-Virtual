@@ -4,7 +4,7 @@ from wtforms.fields.html5 import DateField
 from wtforms.validators import InputRequired, EqualTo, Length, Email, ValidationError
 
 from .. import Msg
-from ..models import user_occupations, user_genders
+from ..models import USER_OCCUPATIONS, USER_GENDERS
 
 data_required = InputRequired(Msg.UserRegistration.ERROR_REQUIRED_FIELD)
 
@@ -67,8 +67,8 @@ class RegisterForm(FlaskForm):
     paternal_last_name = StringField("Apellido paterno", validators=[data_required])
     maternal_last_name = StringField("Apellido materno", validators=[data_required])
     birth_date = DateField("Fecha de nacimiento", validators=[data_required])
-    gender = SelectField("Género", choices=user_genders, validators=[data_required])
-    occupation = SelectField("Ocupación",choices=user_occupations, validators=[data_required])
+    gender = SelectField("Género", choices=USER_GENDERS, validators=[data_required])
+    occupation = SelectField("Ocupación",choices=USER_OCCUPATIONS, validators=[data_required])
 
     password = PasswordField("Contraseña", validators=[data_required, EqualTo("confirm_password", message=Msg.UserRegistration.ERROR_PASSWORD_MATCH)])
     confirm_password = PasswordField("Confirmar contraseña", validators=[data_required])

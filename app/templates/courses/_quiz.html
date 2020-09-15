@@ -1,8 +1,6 @@
-{% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-
-{% block page_content %}
+{% macro quiz(form, score=0, max_score=10) %}
 <button id="button-collapse-quiz" data-toggle="collapse" data-target="#collapsible-quiz">Hacer examen</button>
 <div id="collapsible-quiz" class="collapse">
     <form action="" method="POST">
@@ -12,7 +10,7 @@
             <div class="carousel-inner">
                 {% for question_form in form.questions %}
                 <div class="item {% if loop.index0 == 0 %}active{% endif %}">
-                    <p name="question-{{loop.index}}-text">{{question_form.text}}</p>
+                    <p name="question-{{loop.index0}}-text">{{question_form.text}}</p>
                     {{question_form.answer}}
                 </div>
                 {% endfor %}
@@ -30,8 +28,8 @@
 
                 <!-- Indicators -->
                 {% for _ in form.questions %}
-                <li data-target="#carousel-quiz" data-slide-to="{{loop.index}}">
-                    <a href="#question-{{loop.index}}">{{loop.index}}</a>
+                <li data-target="#carousel-quiz" data-slide-to="{{loop.index0}}">
+                    <a href="#question-{{loop.index0}}">{{loop.index}}</a>
                 </li>
                 {% endfor %}
 
@@ -49,4 +47,4 @@
     </form>
 </div> <!-- Collapsible -->
 <script src="../../static/js/script.js"></script>
-{% endblock %}
+{% endmacro %}
