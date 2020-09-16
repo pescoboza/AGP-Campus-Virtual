@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% from "courses/_quiz.html" import quiz with context %}
+
+{% block title %}
+Campus Virtual AGP - Intro
+{% endblock %}
+
+{% block page_content %}
+<h1>¿Qué es el cáncer?</h1>
+<p>El cáncer se origina cuando las células crecen sin control. Casi cualquier célula puede convertirse en
+    cáncer y propagarse a otras partes del cuerpo.
+</p>
+
+{{quiz(form, score=0, max_score=10)}}
+
+{% endblock %}
+
