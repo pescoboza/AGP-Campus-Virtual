@@ -51,7 +51,7 @@ def diagnostico():
 
 @courses.route("/cancer-testiculo", methods=["GET", "POST"])
 @login_required
-def cancer_testicular():
+def cancer_testiculo():
     return quiz_view("courses/cancer_testiculo.html", url_for("courses.cancer_testiculo"), "tstc", 3)
 
 @courses.route("/cancer-prostata", methods=["GET", "POST"])
