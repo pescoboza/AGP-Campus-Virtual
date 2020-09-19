@@ -2,7 +2,7 @@
 
 {% block head %}
 {{ super() }}
-
+<link rel="stylesheet" href="../static/style.css">
 {% endblock %}
 
 {% block navbar %}
@@ -20,7 +20,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                {{# <!-- Cancer type links --> #}}
+                {# <!-- Cancer type links --> #}
                 <li><a href={{url_for("courses.diagnostico")}}>Diagnostico</a></li>
                 <li><a href={{url_for("courses.cancer_testicular")}}>Cáncer Testicular</a></li>
                 <li><a href={{url_for("courses.cancer_prostata")}}>Cáncer en Próstata</a></li>
@@ -28,7 +28,7 @@
                 <li><a href={{url_for("courses.cancer_mama")}}>Cáncer de Mama</a></li>
                 <li><a href={{url_for("courses.cancer_cervicouterino")}}>Cáncer Cervicouterino</a></li>
 
-                {{# <!-- User auth links --> #}}
+                {# <!-- User auth links --> #}
                 {% if current_user and not current_user.is_anonymous %}
                 <li><a href={{url_for("main.index")}}>{{current_user.email}}</a></li>
                 <li><a href={{url_for("auth.logout")}}>Salir</a></li>
