@@ -116,6 +116,8 @@ AGP - Cáncer de Mama
 
 <h2><b>Quiz</b></h2><br>
 <div class="imgt">
-    [link Quiz]
+    {% if form and score != None and max_score != None %}
+    {{quiz(form, score, max_score)}}
+    {% endif %}
 </div>
 {% endblock %}

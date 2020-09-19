@@ -75,4 +75,9 @@ AGP - Cáncer de Testículo
 <p>Hospital Infantil del Estado de Sonora
     <br>Calle de la Reforma 355, Ley 57, Hermosillo, Sonora 83100
     <br>Teléfono: 662-289-0600</p>
+
+{% if form and score != None and max_score != None %}
+{{quiz(form, score, max_score)}}
+{% endif %}
+
 {% endblock %}

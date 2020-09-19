@@ -85,7 +85,9 @@ AGP - Cáncer de Pulmón
 </div>
 
 <h1><b>Quiz</b></h1><br>
-<div class="imgt">
-    [link Quiz]
-</div>
+
+{% if form and score != None and max_score != None %}
+{{quiz(form, score, max_score)}}
+{% endif %}
+
 {% endblock %}
