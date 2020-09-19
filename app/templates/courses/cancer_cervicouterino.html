@@ -1,100 +1,103 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Cancer Cervicuterino</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
-</head>
-<body>
-    <h1>
-        Cancer Cervicuterino</h1>
-    <h2>
-        ¿Qué es el cancer cervicuterino?</h2>
-    <p>
-        El cáncer de cervical se origina en las células que se 
-        producen en el cuello uterino, la parte inferior del útero 
-        que conecta con la vagina, se origina a partir del crecimiento 
-        de células gradualmente sin control; este tumor maligno inicia 
-        en el cuello de la matriz, exactamente dentro de la zona de 
-        transformación, esta área está compuesta por dos tipos diferentes 
-        de células: el endocérvix (abertura del cuello uterino, cubierto de 
-        células glandulares) y el exocérvix (parte externa del cuello uterino, 
-        cubierto de células escamosas), la ubicación exacta de la zona cambia 
-        conforme el envejecimiento de la mujer y la cantidad de partos.</p>
-    <h2>Sintomas</h2>
-    <ul>
-        <li>Sangrado anormal después de la relación
-            sexual</li>
-        <li>Aumento del flujo de sangrado vía genital con
-            mal olor entre los periodos de menstruación o
-            después de la menopausia</li>
-        <li>Dolor de cadera</li>
-        <li>Perdida de peso</li>
-    </ul>
-    <h2>Factores de riesgo</h2>
-    <ul>
-        <li>Infección por virus de papiloma humano (VPH)</li></ul>
-            <p>El factor de riesgo más importante del cáncer de cuello uterino 
-            es la infección por el virus del papiloma humano. El VPH es un grupo 
-            de más de 150 virus relacionados. Algunos de ellos causan un tipo de 
-            crecimiento llamado papiloma que se conoce más comúnmente como verruga.</p>
-            <p>La infección por VPH es común, y en la mayoría de las personas 
-            nuestro propio organismo puede eliminar la infección por sí mismo, 
-            algunas veces la infección no desaparece y se torna crónica. 
-            Aunque actualmente no hay cura para la infección de VPH, 
-            existen maneras de tratar las verrugas y el crecimiento celular 
-            anormal que causa el virus. Además, hay vacunas disponibles que 
-            ayudan a prevenir la infección de ciertos tipos de VPH.</p>
-        <ul>
-        <li>Antecedentes sexuales</li></ul>
-            <p>Varios factores relacionados con los antecendentes sexuales pueden aumentar el riesgo 
-                de padecer el cáncer de cuello uterino, por ejemplo, ser sexualmente 
-                activo a una edad temprana (menores de 18 años), tener múltiples 
-                parejas sexuales y tener una pareja que se considera de alto riesgo 
-                (padeciente de infección por VPH).</p>
-        <ul>
-        <li>Tabaquismo</li></ul>
-            <p>Las mujeres que fuman tienen aproximadamente el doble de probabilidades de 
-                padecer cáncer de cuello uterino en comparación con las no fumadoras, 
-                fumar hace que el sistema inmunitario sea menos eficaz en combatir 
-                las infecciones con VPH.</p>
-        <ul>
-        <li>Embarazo</li></ul>
-            <p>Las mujeres que han tenido tres o más embarazos a término tienen un mayor 
-                riesgo de padecer cáncer de cuello uterino, esto puede deberse a la mayor 
-                exposición a la infección por VPH con la actividad sexual; los cambios 
-                hormonales durante el embarazo podría causar que las mujeres sean más 
-                susceptibles al crecimiento tumoral. </p>
-        <ul>
-        <li>Sistema inmunitario debil</li></ul>
-            <p>El sistema inmunitario es importante para destruir las células cancerosas
-                 y retardar su crecimiento y extensión. En las mujeres infectadas con VIH, 
-                 un precáncer de cuello uterino puede transformarse en un cáncer invasivo con mayor rapidez.</p>
-        <ul>
-        <li>Infeccion con clamidia</li></ul>
-            <p>La clamidia es una clase relativamente común de bacteria que puede infectar 
-                el sistema reproductor. Las mujeres infectadas con clamidia a menudo no 
-                presentan síntomas y es posible que no sepan que están infectadas a menos 
-                que se les hagan pruebas durante un examen pélvico. La infección con clamidia 
-                puede causar inflamación de la pelvis que puede conducir a la infertilidad.</p>
-    <h2>¿Cómo detectarlo?</h2>
-    <p>El cáncer cérvico uterino se detecta por medio de la prueba
-        llamada Papanicolaou, esta prueba se detecta por medio de
-        una muestra de células del cuello uterino.</p>
-    <h2>Instituciones para asistir</h2>
-    <p>Agrupacion George Papanicolau A.C Sonora
-        <br>Teléfono: 662-216-4883
-        <br>agphillo@hotmail.com</p>
-    <p>Centro Estatal de Oncología Hermosillo, Sonora
-        <br>Teléfono :662 217 5836</p>
-    <p>Hospital Oncologico del Estado de Sonora
-        <br>Teléfono : 01 (662) 21758-36 y 045 (662) 276-0059</p>
-    <p>Hospital Infantil del Estado de Sonora
-        <br>Calle de la Reforma 355, Ley 57, Hermosillo, Sonora 83100
-        <br>Teléfono Domicilio: 01 662 289 0600
-        </p>
-</body>
+{% extends "base.html" %}
+
+{% block title %}
+AGP - Cáncer Cervicouterino
+{% endblock %}
+
+{% block page_content %}
+<h1>
+    Cancer Cervicuterino</h1>
+<h2>
+    ¿Qué es el cancer cervicuteino?</h2>
+<p>
+    El cáncer de cervical se origina en las células que se
+    producen en el cuello uterino, la parte inferior del útero
+    que conecta con la vagina, se origina a partir del crecimiento
+    de células gradualmente sin control; este tumor maligno inicia
+    en el cuello de la matriz, exactamente dentro de la zona de
+    transformación, esta área está compuesta por dos tipos diferentes
+    de células: el endocérvix (abertura del cuello uterino, cubierto de
+    células glandulares) y el exocérvix (parte externa del cuello uterino,
+    cubierto de células escamosas), la ubicación exacta de la zona cambia
+    conforme el envejecimiento de la mujer y la cantidad de partos.</p>
+<h2>Sintomas</h2>
+<ul>
+    <li>Sangrado anormal después de la relación
+        sexual</li>
+    <li>Aumento del flujo de sangrado vía genital con
+        mal olor entre los periodos de menstruación o
+        después de la menopausia</li>
+    <li>Dolor de cadera</li>
+    <li>Perdida de peso</li>
+</ul>
+<h2>Factores de riesgo</h2>
+<ul>
+    <li>Infección por virus de papiloma humano (VPH)</li>
+</ul>
+<p>El factor de riesgo más importante del cáncer de cuello uterino
+    es la infección por el virus del papiloma humano. El VPH es un grupo
+    de más de 150 virus relacionados. Algunos de ellos causan un tipo de
+    crecimiento llamado papiloma que se conoce más comúnmente como verruga.</p>
+<p>La infección por VPH es común, y en la mayoría de las personas
+    nuestro propio organismo puede eliminar la infección por sí mismo,
+    algunas veces la infección no desaparece y se torna crónica.
+    Aunque actualmente no hay cura para la infección de VPH,
+    existen maneras de tratar las verrugas y el crecimiento celular
+    anormal que causa el virus. Además, hay vacunas disponibles que
+    ayudan a prevenir la infección de ciertos tipos de VPH.</p>
+<ul>
+    <li>Antecedentes sexuales</li>
+</ul>
+<p>Varios factores relacionados con los antecendentes sexuales pueden aumentar el riesgo
+    de padecer el cáncer de cuello uterino, por ejemplo, ser sexualmente
+    activo a una edad temprana (menores de 18 años), tener múltiples
+    parejas sexuales y tener una pareja que se considera de alto riesgo
+    (padeciente de infección por VPH).</p>
+<ul>
+    <li>Tabaquismo</li>
+</ul>
+<p>Las mujeres que fuman tienen aproximadamente el doble de probabilidades de
+    padecer cáncer de cuello uterino en comparación con las no fumadoras,
+    fumar hace que el sistema inmunitario sea menos eficaz en combatir
+    las infecciones con VPH.</p>
+<ul>
+    <li>Embarazo</li>
+</ul>
+<p>Las mujeres que han tenido tres o más embarazos a término tienen un mayor
+    riesgo de padecer cáncer de cuello uterino, esto puede deberse a la mayor
+    exposición a la infección por VPH con la actividad sexual; los cambios
+    hormonales durante el embarazo podría causar que las mujeres sean más
+    susceptibles al crecimiento tumoral. </p>
+<ul>
+    <li>Sistema inmunitario debil</li>
+</ul>
+<p>El sistema inmunitario es importante para destruir las células cancerosas
+    y retardar su crecimiento y extensión. En las mujeres infectadas con VIH,
+    un precáncer de cuello uterino puede transformarse en un cáncer invasivo con mayor rapidez.</p>
+<ul>
+    <li>Infeccion con clamidia</li>
+</ul>
+<p>La clamidia es una clase relativamente común de bacteria que puede infectar
+    el sistema reproductor. Las mujeres infectadas con clamidia a menudo no
+    presentan síntomas y es posible que no sepan que están infectadas a menos
+    que se les hagan pruebas durante un examen pélvico. La infección con clamidia
+    puede causar inflamación de la pelvis que puede conducir a la infertilidad.</p>
+<h2>¿Cómo detectarlo?</h2>
+<p>El cáncer cérvico uterino se detecta por medio de la prueba
+    llamada Papanicolaou, esta prueba se detecta por medio de
+    una muestra de células del cuello uterino.</p>
+<h2>Instrucciones para asistir</h2>
+<p>Agrupacion George Papanicolau A.C Sonora
+    <br>Teléfono: 662-216-4883
+    <br>agphillo@hotmail.com</p>
+<p>Centro Estatal de Oncología Hermosillo, Sonora
+    <br>Teléfono :662 217 5836</p>
+<p>Hospital Oncologico del Estado de Sonora
+    <br>Teléfono : 01 (662) 21758-36 y 045 (662) 276-0059</p>
+<p>Hospital Infantil del Estado de Sonora
+    <br>Calle de la Reforma 355, Ley 57, Hermosillo, Sonora 83100
+    <br>Teléfono Domicilio: 01 662 289 0600
+</p>
+{% endblock %}
+
 </html>
