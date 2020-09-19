@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "courses/_quiz.html" import quiz %}
 
 {% block title %}
 AGP - Diagnostico
@@ -17,9 +18,10 @@ AGP - Diagnostico
 
 <h1><b>Examen Autodiagnóstico</b></h1><br>
 
-<div class="centered-text">
-    [link/examen]
-</div><br>
+{% if form and score != None and max_score != None %}
+{{quiz(form, score, max_score)}}
+{% endif %}
+
 {% endblock %}
 
 </html>
