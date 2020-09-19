@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "courses/_quiz.html" import quiz %}
 
 {% block title %}
 AGP - Cáncer Cervicouterino
@@ -98,6 +99,9 @@ AGP - Cáncer Cervicouterino
     <br>Calle de la Reforma 355, Ley 57, Hermosillo, Sonora 83100
     <br>Teléfono Domicilio: 01 662 289 0600
 </p>
-{% endblock %}
 
-</html>
+{% if form and score != None and max_score != None %}
+{{quiz(form, score, max_score)}}
+{% endif %}
+
+{% endblock %}

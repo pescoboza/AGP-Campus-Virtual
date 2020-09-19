@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "courses/_quiz.html" import quiz %}
 
 {% block title %}
 AGP - Cáncer de Pulmón
@@ -6,7 +7,6 @@ AGP - Cáncer de Pulmón
 
 
 {% block page_content %}
-
 <br>
 
 <div class="imgt">
@@ -85,9 +85,9 @@ AGP - Cáncer de Pulmón
 </div>
 
 <h1><b>Quiz</b></h1><br>
-<div class="imgt">
-    [link Quiz]
-</div>
-{% endblock %}
 
-</html>
+{% if form and score != None and max_score != None %}
+{{quiz(form, score, max_score)}}
+{% endif %}
+
+{% endblock %}

@@ -49,10 +49,10 @@ def diagnostico():
     return quiz_view("courses/diagnostico.html", url_for("courses.diagnostico"), "diag", 10)
 
 
-@courses.route("/cancer-testicular", methods=["GET", "POST"])
+@courses.route("/cancer-testiculo", methods=["GET", "POST"])
 @login_required
-def cancer_testicular():
-    return quiz_view("courses/cancer_testicular.html", url_for("courses.cancer_testicular"), "tstc", 3)
+def cancer_testiculo():
+    return quiz_view("courses/cancer_testiculo.html", url_for("courses.cancer_testiculo"), "tstc", 3)
 
 @courses.route("/cancer-prostata", methods=["GET", "POST"])
 @login_required
