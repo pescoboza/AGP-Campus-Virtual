@@ -19,6 +19,7 @@ QUESTION_TOPICS = (
 def quiz_view(template, redirect_to, topic_code, num_questions=10):
     form = MultipleChoiceQuizForm.generate_random_quiz(topic_code, num_questions)
     score = 0
+    
     if request.method == "POST":
         score = form.get_score()
         print("[DEBUG] Score: {}/{}".format(score, num_questions))
@@ -26,16 +27,27 @@ def quiz_view(template, redirect_to, topic_code, num_questions=10):
         
         # Update user's grade on the quiz.
         user = User.objects(email=current_user.email).first()
-        
+
+        # Check if the user has already passed the exam.
+        already_passed = user.quiz_data[topic_code]["is_passed"]
+
+        # If the questions changed, update both max and actual user score.
         if  num_questions != user.quiz_data[topic_code]["score"][1]:
             user.quiz_data[topic_code]["score"][0] = score
             user.quiz_data[topic_code]["score"][1] = num_questions
+        # The highest grade is saved.    
         elif score > user.quiz_data[topic_code]["score"][0]:
             user.quiz_data[topic_code]["score"][0] = score
 
+            # Changed the is_passed attribute from the user quiz data if needed.
+            if QUIZ_CODES[topic_code]["is_obligatory"] and \
+                score >= QUIZ_CODES[topic_code]["score_to_pass"] and \
+                not already_passed:
+                user.quiz_data[topic_code]["is_passed"] = True
+
         user.save()
         return redirect(redirect_to)
-    return render_template(template, form=form, score=score, max_score=num_questions)
+    return render_template(template, form=form, score=score, max_score=num_questions, already_passed=already_passed)
 
 @courses.route("/quiz", methods=["GET", "POST"])
 @login_required
