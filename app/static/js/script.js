@@ -13,5 +13,5 @@ let flashes = document.getElementsByClassName("aler");
 let num_flashes = flashes.length;
 for (let i = 0; i < num_flashes; i++) {
     flashes[i].addEventListener("click", hideParent);
-    console.log(flashes[i]);
+    //console.log(flashes[i]);
 }
