@@ -32,12 +32,12 @@ USER_GENDERS = [
 ]
 
 QUIZ_CODES = {
-    "tstc":{"is_obligatory": True , "num_questions":3 }, # Cancer testicular
-    "crvu":{"is_obligatory": True , "num_questions":3 }, # Cancer cervicouterino
-    "plmn":{"is_obligatory": True , "num_questions":3 }, # Cancer en pulmon
-    "psta":{"is_obligatory": True , "num_questions":3 }, # Cancer en prostata
-    "mama":{"is_obligatory": True , "num_questions":3 }, # Cancer de mama
-    "diag":{"is_obligatory": False, "num_questions":10} # Examen diagnostico
+    "tstc":{"is_obligatory": True , "num_questions":3,  "score_to_pass": 3, "full_name": "Cancer testicular"},
+    "crvu":{"is_obligatory": True , "num_questions":3,  "score_to_pass": 3, "full_name": "Cancer cervicouterino"},
+    "plmn":{"is_obligatory": True , "num_questions":3,  "score_to_pass": 3, "full_name": "Cancer en pulmon"},
+    "psta":{"is_obligatory": True , "num_questions":3,  "score_to_pass": 3, "full_name": "Cancer en prostata"},
+    "mama":{"is_obligatory": True , "num_questions":3,  "score_to_pass": 3, "full_name": "Cancer de mama"},
+    "diag":{"is_obligatory": False, "num_questions":10, "score_to_pass": 0, "full_name": "Examen diagnostico"}
 }
 
 QUESTION_TOPICS = tuple([*QUIZ_CODES])
