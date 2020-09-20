@@ -147,15 +147,3 @@ class UserProfileForm(FlaskForm):
         "Ocupación", choices=USER_OCCUPATIONS, validators=[data_required])
 
     submit = SubmitField("Modificar perfil")
-
-
-def user_to_dict(user):
-    return {
-        "email": user.email,
-        "first_name": user.first_name,
-        "paternal_last_name": user.paternal_last_name,
-        "maternal_last_name": user.maternal_last_name,
-        "birth_date": user.birth_date,
-        "gender": user.gender,
-        "occupation": user.occupation
-    }

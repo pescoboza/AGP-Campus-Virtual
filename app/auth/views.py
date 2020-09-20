@@ -55,14 +55,16 @@ def register():
             flash(Msg.UserRegistration.ERROR_EMAIL_IN_USE)
             return redirect(url_for("auth.register"))
 
-        new_user = User.create_new_user(email=form.email.data,
-                                        first_name=form.first_name.data,
-                                        paternal_last_name=form.paternal_last_name.data,
-                                        maternal_last_name=form.maternal_last_name.data,
-                                        birth_date=form.birth_date.data,
-                                        gender=form.gender.data,
-                                        occupation=form.occupation.data,
-                                        password=form.password.data)
+        new_user = \
+            User\
+            .create_new_user(email=form.email.data,
+                             first_name=form.first_name.data,
+                             paternal_last_name=form.paternal_last_name.data,
+                             maternal_last_name=form.maternal_last_name.data,
+                             birth_date=form.birth_date.data,
+                             gender=form.gender.data,
+                             occupation=form.occupation.data,
+                             password=form.password.data)
 
         print("[DEBUG] New user created. Showing JSON:")
         print(new_user.to_json())
@@ -162,6 +164,23 @@ def password_reset(token):
 @auth.route("/profile", methods=["GET", "POST"])
 @login_required
 def profile():
-    form = UserProfileForm(data=user_to_dict(current_user))
+    #form = UserProfileForm(data=user_to_dict(current_user))
+    form = UserProfileForm(obj=current_user)
+    if form.validate_on_submit():
+        data = form.data
+        data.pop("submit")
+        data.pop("csrf_token")
 
+        user = User.objects(email=current_user.email).first()
+        is_save = False
+        for key, val in data.items():
+            if val != user[key]:
+                is_save = True
+                user[key] = val
+
+        if is_save:
+            user.save()
+            flash("Su perfil ha sido actualizado.")
+            return redirect(url_for("auth.profile"))
+            
     return render_template("auth/profile.html", form=form)
