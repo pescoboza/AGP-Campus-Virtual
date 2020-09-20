@@ -3,7 +3,7 @@ from flask_login import current_user, login_user, logout_user, login_required, f
 
 from app import Msg
 from . import auth
-from .forms import LoginForm, RegisterForm, ChangePasswordForm, PasswordResetRequestForm, PasswordResetForm
+from .forms import *
 from ..models import User, generate_password_hash
 from ..email import send_email
 
@@ -162,4 +162,6 @@ def password_reset(token):
 @auth.route("/profile", methods=["GET", "POST"])
 @login_required
 def profile():
-    form = None
+    form = UserProfileForm(data=user_to_dict(current_user))
+
+    return render_template("auth/profile.html", form=form)

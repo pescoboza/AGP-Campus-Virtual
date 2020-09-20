@@ -110,19 +110,17 @@ class ChangePasswordForm(FlaskForm):
 
     submit = SubmitField("Modficar contraseña")
 
-# Form to request email to reset password.
-
 
 class PasswordResetRequestForm(FlaskForm):
+    # Form to request email to reset password.
     email = StringField("Correo", validators=[data_required, Email(
         Msg.UserRegistration.ERROR_INVALID_EMAIL)])
 
     submit = SubmitField("Enviar")
 
-# Form to change password from lost passwrod email request.
-
 
 class PasswordResetForm(FlaskForm):
+    # Form to change password from lost password email request.
     password = PasswordField("Nueva ontraseña", validators=[data_required, EqualTo(
         "confirm_password", message=Msg.UserRegistration.ERROR_PASSWORD_MATCH)])
     confirm_password = PasswordField(
@@ -149,3 +147,15 @@ class UserProfileForm(FlaskForm):
         "Ocupación", choices=USER_OCCUPATIONS, validators=[data_required])
 
     submit = SubmitField("Modificar perfil")
+
+
+def user_to_dict(user):
+    return {
+        "email": user.email,
+        "first_name": user.first_name,
+        "paternal_last_name": user.paternal_last_name,
+        "maternal_last_name": user.maternal_last_name,
+        "birth_date": user.birth_date,
+        "gender": user.gender,
+        "occupation": user.occupation
+    }
