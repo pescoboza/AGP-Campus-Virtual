@@ -4,7 +4,7 @@ from flask_login import current_user, login_user, logout_user, login_required, f
 from app import Msg
 from . import auth
 from .forms import *
-from ..models import User, generate_password_hash
+from ..models import User, generate_password_hash, QUIZ_CODES
 from ..email import send_email
 
 
@@ -164,23 +164,38 @@ def password_reset(token):
 @auth.route("/profile", methods=["GET", "POST"])
 @login_required
 def profile():
-    #form = UserProfileForm(data=user_to_dict(current_user))
+    user = User.objects(email=current_user.email).first()
+    if user is None:
+        return redirect(url_for("main.index"))
+
     form = UserProfileForm(obj=current_user)
     if form.validate_on_submit():
         data = form.data
         data.pop("submit")
         data.pop("csrf_token")
 
-        user = User.objects(email=current_user.email).first()
         is_save = False
-        for key, val in data.items():
-            if val != user[key]:
+        for k, v in data.items():
+            if v != user[k]:
                 is_save = True
-                user[key] = val
+                user[k] = v
 
         if is_save:
             user.save()
             flash("Su perfil ha sido actualizado.")
             return redirect(url_for("auth.profile"))
-            
-    return render_template("auth/profile.html", form=form)
+
+    grades = {}
+    for qc in QUIZ_CODES:
+        quiz_name = QUIZ_CODES[qc]["full_name"]
+        score, max_score = user.quiz_data[qc]["score"]  # Unpack list of two items
+        is_passed = user.quiz_data[qc]["is_passed"]
+        is_obligatory = QUIZ_CODES[qc]["is_obligatory"]
+
+        grades[quiz_name] = {
+            "score": score,
+            "max_score": max_score,
+            "is_passed": is_passed,
+            "is_obligatory": is_obligatory}
+
+    return render_template("auth/profile.html", form=form, grades=grades)

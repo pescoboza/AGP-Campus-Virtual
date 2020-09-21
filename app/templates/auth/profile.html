@@ -8,7 +8,13 @@ AGP - Perfil
 {% block page_content %}
 <div class="col-md-4">
     <h1>{{current_user.first_name}}</h1>
-    <h3>Editar perfil</h3>
+    <h2>Editar perfil</h2>
     {{wtf.quick_form(form)}}
 </div>
+
+<ul>
+    {% for quiz_name, info in grades.items() %}
+    <li>{{quiz_name}} : {{info}}</li>
+    {% endfor %}
+</ul>
 {% endblock %}
