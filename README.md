@@ -54,3 +54,4 @@ touch .vscode/settings.json
 - Explore caching options.
 - Add user certification expedition.
 - Add data dashboard.
+- Design user certificate.
