@@ -18,6 +18,7 @@ flask-wtf = "*"
 flask-mongoengine = "*"
 flask-mail = "*"
 itsdangerous = "*"
+pdfkit = "*"
 
 [requires]
 python_version = "3.8"
