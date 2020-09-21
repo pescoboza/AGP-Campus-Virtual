@@ -6,3 +6,9 @@ __pycache__/
 
 # Private environment variables
 .env
+
+# Wkhtmltopdf lib
+wkhtmltopdf/
+
+# Mock pdf files.
+*.pdf
