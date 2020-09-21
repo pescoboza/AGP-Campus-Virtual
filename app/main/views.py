@@ -3,14 +3,17 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 from . import main
 
+
 @main.route("/")
 @main.route("/index")
 def index():
     return render_template("main/index.html")
 
+
 @main.route("/contact")
 def contact():
     return render_template("main/contact.html")
+
 
 @main.route("/faq")
 def faq():

@@ -30,7 +30,7 @@
 
                 {# <!-- User auth links --> #}
                 {% if current_user and not current_user.is_anonymous %}
-                <li><a href={{url_for("main.index")}}>{{current_user.email}}</a></li>
+                <li><a href={{url_for("auth.profile")}}>{{current_user.email}}</a></li>
                 <li><a href={{url_for("auth.logout")}}>Salir</a></li>
                 {% else %}
                 <li><a href={{url_for("auth.login")}}>Ingresar</a></li>
