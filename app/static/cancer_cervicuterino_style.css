@@ -1,0 +1,26 @@
+
+.make-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+a{
+    font-family: 'GlacialIndifferenceRegular';
+    font-weight: normal;
+    font-style: normal;
+}
+h2{
+    font-family: 'GlacialIndifferenceRegular';
+    font-weight: bold;
+    font-style: bold;
+}
+p{
+    font-family: 'GlacialIndifferenceRegular';
+    font-weight: normal;
+    font-style: normal; 
+}
+ul{
+    font-family: 'GlacialIndifferenceRegular';
+    font-weight: normal;
+    font-style: normal;
+}
