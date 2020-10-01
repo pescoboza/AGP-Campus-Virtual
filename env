@@ -1,0 +1,40 @@
+#################################################
+# Database production settings
+#################################################
+MONGO_DBNAME = AGPCampusVirtualDev
+MONGO_URI    = mongodb+srv://admin:fractalchargeimplosion@devcluster.k7j3g.mongodb.net/AGPCampusVirtualDev?retryWrites=true&w=majority
+SECRET_KEY   = std::cout<<"HelloWorld!"<<std::endl;
+
+DEBUG_MONGO_DBNAME = AGPCampusVirtualDev
+DEBUG_MONGO_URI    = mongodb+srv://admin:fractalchargeimplosion@devcluster.k7j3g.mongodb.net/AGPCampusVirtualDev?retryWrites=true&w=majority
+DEBUG_SECRET_KEY   = std::cout<<"HelloWorld!"<<std::endl;
+#################################################
+
+
+#################################################
+# Email settings
+#################################################
+MAIL_SERVER           = smtp.gmail.com
+MAIL_PORT             = 465
+MAIL_USE_TLS          = false
+MAIL_USE_SSL          = true
+MAIL_SUPPRESS_SEND    = false
+MAIL_ASCII_ATACHMENTS = true
+MAIL_SENDER           = pegasus.csn@gmail.com
+MAIL_USERNAME         = pegasus.csn@gmail.com
+MAIL_DEFAULT_SENDER   = pegasus.csn@gmail.com
+MAIL_PASSWORD         = std::cout<<"HelloWorld!"<<std::endl;
+MAIL_SUBJECT_PREFIX   = AGP Campus Virtual
+
+DEBUG_MAIL_SERVER           = smtp.gmail.com
+DEBUG_MAIL_PORT             = 465
+DEBUG_MAIL_USE_TLS          = false
+DEBUG_MAIL_USE_SSL          = true
+DEBUG_MAIL_SUPPRESS_SEND    = false
+DEBUG_MAIL_ASCII_ATACHMENTS = true
+DEBUG_MAIL_SENDER           = pegasus.csn@gmail.com
+DEBUG_MAIL_USERNAME         = pegasus.csn@gmail.com
+DEBUG_MAIL_DEFAULT_SENDER   = pegasus.csn@gmail.com
+DEBUG_MAIL_PASSWORD         = std::cout<<"HelloWorld!"<<std::endl;
+DEBUG_MAIL_SUBJECT_PREFIX   = [DEBUG] AGP Campus Virtual
+#################################################
