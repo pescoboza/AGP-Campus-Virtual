@@ -1,0 +1,40 @@
+p{
+    font-family: 'GlacialIndifferenceRegular';
+    text-align: justify;
+    font-size: larger;
+}
+
+ul{
+    font-family: 'GlacialIndifferenceRegular';
+    text-align: justify;
+    font-size: larger;
+}
+
+.header{
+    width: 1100px;
+    margin: auto;
+    display: flex;
+}
+
+.inst{
+    font-family: 'GlacialIndifferenceRegular';
+    font-size: larger;
+    font-weight: bolder;
+}
+
+h2{
+    font-family: 'GlacialIndifferenceRegular';
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.firstimage{
+    width: 600px;
+    margin: auto;
+    display: flex;
+}
+.secondimage{
+    width: 550px;
+    margin: auto;
+    display: flex;
+}
