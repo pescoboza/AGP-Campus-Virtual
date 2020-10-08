@@ -7,11 +7,17 @@ AGP - Cáncer Cervicouterino
 
 {% block page_content %}
 
-<link rel="stylesheet" href="https://fontlibrary.org/face/glacial-indifference">
 
-<link rel="stylesheet" href="../../static/cancer_cervicuterino_style.css">
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="../../static/cancer_cervicouterino_style.css">
+<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/glacial-indifference" type="text/css"/> 
+{% endblock %}
 
-
+<div class="header">
+    <img src="../../static/img/listoncervicouterino.jpg">
+</div>
+<br>
 <div><a href="#Quees">¿QUÉ ES?</a></div>
 <br>
 <div><a href="#Sintomas">SÍNTOMAS</a></div>
@@ -21,9 +27,13 @@ AGP - Cáncer Cervicouterino
 <div><a href="#deteccion">¿CÓMO DETECTARLO?</a></div>
 <br>
 <div><a href="#instituciones">INSTITUCIONES</a></div>
+<br>
+<div><a href="_quiz.html">QUIZ</a></div>
+<br>
+<div><a href="">ACTIVIDADES</a></div>
 
-<h2 id="Quees">¿QUÉ ES EL CANCER CERVICUTERINO?</h2>
-
+<h2 id="Quees">¿QUÉ ES EL CÁNCER CERVICOUTERINO?</h2>
+<br>
 <p>
     El cáncer de cervical se origina en las células que se
     producen en el cuello uterino, la parte inferior del útero
@@ -37,6 +47,7 @@ AGP - Cáncer Cervicouterino
     conforme el envejecimiento de la mujer y la cantidad de partos.</p>
 
 <h2 id="Sintomas">SÍNTOMAS</h2>
+<br>
 <ul>
     <li>Sangrado anormal después de la relación
         sexual</li>
@@ -46,13 +57,11 @@ AGP - Cáncer Cervicouterino
     <li>Dolor de cadera</li>
     <li>Perdida de peso</li>
 </ul>
-<body>
-<div class="make-center">
-    <img src="../../static/img/cancer-cervicuterino.png" width="600">
+<div class="firstimage">
+    <img src="../../static/img/cancer-cervicuterino.png">
 </div>
-</body>
-
 <h2 id="Risk">FACTORES DE RIESGO</h2>
+<br>
 <ul>
     <li>Infección por virus de papiloma humano (VPH)</li>
 </ul>
@@ -109,21 +118,25 @@ AGP - Cáncer Cervicouterino
 <p>El cáncer cérvico uterino se detecta por medio de la prueba
     llamada Papanicolaou, esta prueba se detecta por medio de
     una muestra de células del cuello uterino.</p>
-    <div class=make-center>
-    <img src="../../static/img/cancer-cervicuterino2.png" width="600">
-    </div>
-    <br /> 
-    <br /> 
-<h2 id="instituciones">Instrucciones para asistir</h2>
-<p>Agrupacion George Papanicolau A.C Sonora
-    <br>Teléfono: 662-216-4883
+
+<div class="secondimage">
+    <img src="../../static/img/cancer-cervicuterino2.png">
+</div>
+    
+<h2 id="instituciones">INSTITUCIONES PARA ASISTIR</h2>
+<br>
+<p class="inst">Agrupación George Papanicolau A.C Sonora</p>
+    <p>Teléfono: 662-216-4883
     <br>agphillo@hotmail.com</p>
-<p>Centro Estatal de Oncología Hermosillo, Sonora
-    <br>Teléfono :662 217 5836</p>
-<p>Hospital Oncologico del Estado de Sonora
-    <br>Teléfono : 01 (662) 21758-36 y 045 (662) 276-0059</p>
-<p>Hospital Infantil del Estado de Sonora
-    <br>Calle de la Reforma 355, Ley 57, Hermosillo, Sonora 83100
+    <br>
+<p class="inst">Centro Estatal de Oncología Hermosillo, Sonora</p>
+    <p>Teléfono :662 217 5836</p>
+    <br>
+<p class="inst">Hospital Oncologico del Estado de Sonora</p>
+    <p>Teléfono : 01 (662) 21758-36 y 045 (662) 276-0059</p>
+    <br>
+<p class="inst">Hospital Infantil del Estado de Sonora</p>
+    <p>Calle de la Reforma 355, Ley 57, Hermosillo, Sonora 83100
     <br>Teléfono Domicilio: 01 662 289 0600
 </p>
 
