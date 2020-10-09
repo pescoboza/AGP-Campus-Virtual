@@ -10,9 +10,26 @@ AGP - Cáncer Cervicouterino
 
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" href="../../static/cancer_cervicouterino_style.css">
 <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/glacial-indifference" type="text/css"/> 
 {% endblock %}
+
+<style>
+    ul{
+        font-weight: bold;
+        font-style: italic;
+    }
+    h1{
+        font-weight: bold;
+    }
+    img{
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .inst{
+        font-weight: bold;
+    }
+</style>
 
 <div class="header">
     <img src="../../static/img/listoncervicouterino.jpg">
@@ -32,8 +49,7 @@ AGP - Cáncer Cervicouterino
 <br>
 <div><a href="">ACTIVIDADES</a></div>
 
-<h2 id="Quees">¿QUÉ ES EL CÁNCER CERVICOUTERINO?</h2>
-<br>
+<h1 id="Quees">¿QUÉ ES EL CÁNCER CERVICOUTERINO?</h2>
 <p>
     El cáncer de cervical se origina en las células que se
     producen en el cuello uterino, la parte inferior del útero
@@ -46,9 +62,8 @@ AGP - Cáncer Cervicouterino
     cubierto de células escamosas), la ubicación exacta de la zona cambia
     conforme el envejecimiento de la mujer y la cantidad de partos.</p>
 
-<h2 id="Sintomas">SÍNTOMAS</h2>
-<br>
-<ul>
+<h1 id="Sintomas">SÍNTOMAS</h2>
+
     <li>Sangrado anormal después de la relación
         sexual</li>
     <li>Aumento del flujo de sangrado vía genital con
@@ -56,12 +71,11 @@ AGP - Cáncer Cervicouterino
         después de la menopausia</li>
     <li>Dolor de cadera</li>
     <li>Perdida de peso</li>
-</ul>
-<div class="firstimage">
-    <img src="../../static/img/cancer-cervicuterino.png">
+
+<div >
+    <img src="../../static/img/cancer-cervicuterino.png" width="600">
 </div>
-<h2 id="Risk">FACTORES DE RIESGO</h2>
-<br>
+<h1 id="Risk">FACTORES DE RIESGO</h2>
 <ul>
     <li>Infección por virus de papiloma humano (VPH)</li>
 </ul>
@@ -92,6 +106,11 @@ AGP - Cáncer Cervicouterino
     fumar hace que el sistema inmunitario sea menos eficaz en combatir
     las infecciones con VPH.</p>
 <ul>
+
+<div>
+    <img src="../../static/img/mujer.png" width="300">
+</div>
+<br>
     <li>Embarazo</li>
 </ul>
 <p>Las mujeres que han tenido tres o más embarazos a término tienen un mayor
@@ -114,17 +133,20 @@ AGP - Cáncer Cervicouterino
     que se les hagan pruebas durante un examen pélvico. La infección con clamidia
     puede causar inflamación de la pelvis que puede conducir a la infertilidad.</p>
 
-<h2 id="deteccion">¿CÓMO DETECTARLO?</h2>
+<div >
+    <img src="../../static/img/imagenbebe.png" width="300">
+</div>
+
+<h1 id="deteccion">¿CÓMO DETECTARLO?</h2>
 <p>El cáncer cérvico uterino se detecta por medio de la prueba
     llamada Papanicolaou, esta prueba se detecta por medio de
     una muestra de células del cuello uterino.</p>
 
-<div class="secondimage">
-    <img src="../../static/img/cancer-cervicuterino2.png">
+<div>
+    <img src="../../static/img/cancer-cervicuterino2.png" width="600">
 </div>
     
-<h2 id="instituciones">INSTITUCIONES PARA ASISTIR</h2>
-<br>
+<h1 id="instituciones">INSTITUCIONES PARA ASISTIR</h2>
 <p class="inst">Agrupación George Papanicolau A.C Sonora</p>
     <p>Teléfono: 662-216-4883
     <br>agphillo@hotmail.com</p>
@@ -139,6 +161,10 @@ AGP - Cáncer Cervicouterino
     <p>Calle de la Reforma 355, Ley 57, Hermosillo, Sonora 83100
     <br>Teléfono Domicilio: 01 662 289 0600
 </p>
+<br>
+<div>
+    <img src="../../static/img/10.png" width="200">
+</div>
 
 {% if form and score != None and max_score != None %}
 {{quiz(form, score, max_score)}}
