@@ -6,10 +6,50 @@ AGP - Cáncer Cervicouterino
 {% endblock %}
 
 {% block page_content %}
-<h1>
-    Cancer Cervicuterino</h1>
-<h2>
-    ¿Qué es el cancer cervicuteino?</h2>
+
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/glacial-indifference" type="text/css"/> 
+{% endblock %}
+
+<style>
+    ul{
+        font-weight: bold;
+        font-style: italic;
+    }
+    h1{
+        font-weight: bold;
+    }
+    img{
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .inst{
+        font-weight: bold;
+    }
+</style>
+
+<div class="header">
+    <img src="../../static/img/listoncervicouterino.jpg">
+</div>
+<br>
+<div><a href="#Quees">¿QUÉ ES?</a></div>
+<br>
+<div><a href="#Sintomas">SÍNTOMAS</a></div>
+<br>
+<div><a href="#Risk">FACTORES DE RIESGO</a></div>
+<br>
+<div><a href="#deteccion">¿CÓMO DETECTARLO?</a></div>
+<br>
+<div><a href="#instituciones">INSTITUCIONES</a></div>
+<br>
+<div><a href="_quiz.html">QUIZ</a></div>
+<br>
+<div><a href="">ACTIVIDADES</a></div>
+
+<h1 id="Quees">¿QUÉ ES EL CÁNCER CERVICOUTERINO?</h2>
 <p>
     El cáncer de cervical se origina en las células que se
     producen en el cuello uterino, la parte inferior del útero
@@ -21,8 +61,9 @@ AGP - Cáncer Cervicouterino
     células glandulares) y el exocérvix (parte externa del cuello uterino,
     cubierto de células escamosas), la ubicación exacta de la zona cambia
     conforme el envejecimiento de la mujer y la cantidad de partos.</p>
-<h2>Sintomas</h2>
-<ul>
+
+<h1 id="Sintomas">SÍNTOMAS</h2>
+
     <li>Sangrado anormal después de la relación
         sexual</li>
     <li>Aumento del flujo de sangrado vía genital con
@@ -30,8 +71,11 @@ AGP - Cáncer Cervicouterino
         después de la menopausia</li>
     <li>Dolor de cadera</li>
     <li>Perdida de peso</li>
-</ul>
-<h2>Factores de riesgo</h2>
+
+<div >
+    <img src="../../static/img/cancer-cervicuterino.png" width="600">
+</div>
+<h1 id="Risk">FACTORES DE RIESGO</h2>
 <ul>
     <li>Infección por virus de papiloma humano (VPH)</li>
 </ul>
@@ -62,6 +106,11 @@ AGP - Cáncer Cervicouterino
     fumar hace que el sistema inmunitario sea menos eficaz en combatir
     las infecciones con VPH.</p>
 <ul>
+
+<div>
+    <img src="../../static/img/mujer.png" width="300">
+</div>
+<br>
     <li>Embarazo</li>
 </ul>
 <p>Las mujeres que han tenido tres o más embarazos a término tienen un mayor
@@ -83,22 +132,39 @@ AGP - Cáncer Cervicouterino
     presentan síntomas y es posible que no sepan que están infectadas a menos
     que se les hagan pruebas durante un examen pélvico. La infección con clamidia
     puede causar inflamación de la pelvis que puede conducir a la infertilidad.</p>
-<h2>¿Cómo detectarlo?</h2>
+
+<div >
+    <img src="../../static/img/imagenbebe.png" width="300">
+</div>
+
+<h1 id="deteccion">¿CÓMO DETECTARLO?</h2>
 <p>El cáncer cérvico uterino se detecta por medio de la prueba
     llamada Papanicolaou, esta prueba se detecta por medio de
     una muestra de células del cuello uterino.</p>
-<h2>Instrucciones para asistir</h2>
-<p>Agrupacion George Papanicolau A.C Sonora
-    <br>Teléfono: 662-216-4883
+
+<div>
+    <img src="../../static/img/cancer-cervicuterino2.png" width="600">
+</div>
+    
+<h1 id="instituciones">INSTITUCIONES PARA ASISTIR</h2>
+<p class="inst">Agrupación George Papanicolau A.C Sonora</p>
+    <p>Teléfono: 662-216-4883
     <br>agphillo@hotmail.com</p>
-<p>Centro Estatal de Oncología Hermosillo, Sonora
-    <br>Teléfono :662 217 5836</p>
-<p>Hospital Oncologico del Estado de Sonora
-    <br>Teléfono : 01 (662) 21758-36 y 045 (662) 276-0059</p>
-<p>Hospital Infantil del Estado de Sonora
-    <br>Calle de la Reforma 355, Ley 57, Hermosillo, Sonora 83100
+    <br>
+<p class="inst">Centro Estatal de Oncología Hermosillo, Sonora</p>
+    <p>Teléfono :662 217 5836</p>
+    <br>
+<p class="inst">Hospital Oncologico del Estado de Sonora</p>
+    <p>Teléfono : 01 (662) 21758-36 y 045 (662) 276-0059</p>
+    <br>
+<p class="inst">Hospital Infantil del Estado de Sonora</p>
+    <p>Calle de la Reforma 355, Ley 57, Hermosillo, Sonora 83100
     <br>Teléfono Domicilio: 01 662 289 0600
 </p>
+<br>
+<div>
+    <img src="../../static/img/10.png" width="200">
+</div>
 
 {% if form and score != None and max_score != None %}
 {{quiz(form, score, max_score)}}
