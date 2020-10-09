@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block page_content %}
+    {% block banner %}{% endblock banner %}
+
     <!-- Index -->
     <div><a href="#que-es">¿QUÉ ES?</a></div>
     <br>
@@ -14,8 +16,10 @@
     <br>
     <div><a href="#actividades">ACTIVIDADES</a></div>
     <br>
+    {% if form and score != None and max_score != None %}
     <div><a href="#evaluacion">EVALUACIÓN</a></div>
     <br>
+    {% endif %}
     
     <!-- Sections -->
     <h2 id ="que-es" class="section-header">¿QUÉ ES?</h2>
@@ -35,8 +39,8 @@
     
     <h2 id="actividades" class="section-header">ACTIVIDADES</h2>
     {% block actividades %}{% endblock actividades %}
-
-    {% if form adn score != None and max_score != None %}
+    
+    {% if form and score != None and max_score != None %}
     <h2 id="evaluacion" class="section-header">EVALUACIÓN</h2>
     {{quiz(form, score, max_score)}}
     {% endif %}
