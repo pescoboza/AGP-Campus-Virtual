@@ -1,55 +1,30 @@
 {% extends "base.html" %}
-{% from "courses/_quiz.html" import quiz %}
+{% from "courses/Evaluacion" import quiz %}
 
 {% block title %}
 AGP - Cáncer Cervicouterino
 {% endblock %}
 
 {% block page_content %}
-
-
-{% block head %}
-{{ super() }}
-<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/glacial-indifference" type="text/css"/> 
-{% endblock %}
-
-<style>
-    ul{
-        font-weight: bold;
-        font-style: italic;
-    }
-    h1{
-        font-weight: bold;
-    }
-    img{
-        display: flex;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .inst{
-        font-weight: bold;
-    }
-</style>
-
 <div class="header">
     <img src="../../static/img/listoncervicouterino.jpg">
 </div>
 <br>
-<div><a href="#Quees">¿QUÉ ES?</a></div>
+<div><a href="#QueEs">¿QUÉ ES?</a></div>
 <br>
 <div><a href="#Sintomas">SÍNTOMAS</a></div>
 <br>
-<div><a href="#Risk">FACTORES DE RIESGO</a></div>
+<div><a href="#FactoresDeRiesgo">FACTORES DE RIESGO</a></div>
 <br>
-<div><a href="#deteccion">¿CÓMO DETECTARLO?</a></div>
+<div><a href="#Deteccion">¿CÓMO DETECTARLO?</a></div>
 <br>
-<div><a href="#instituciones">INSTITUCIONES</a></div>
+<div><a href="#Instituciones">INSTITUCIONES</a></div>
 <br>
-<div><a href="_quiz.html">QUIZ</a></div>
+<div><a href="#Evaluacion">QUIZ</a></div>
 <br>
-<div><a href="">ACTIVIDADES</a></div>
+<div><a href="#Actividades">ACTIVIDADES</a></div>
 
-<h1 id="Quees">¿QUÉ ES EL CÁNCER CERVICOUTERINO?</h2>
+<h1 id="QueEs">¿QUÉ ES EL CÁNCER CERVICOUTERINO?</h2>
 <p>
     El cáncer de cervical se origina en las células que se
     producen en el cuello uterino, la parte inferior del útero
@@ -75,7 +50,7 @@ AGP - Cáncer Cervicouterino
 <div >
     <img src="../../static/img/cancer-cervicuterino.png" width="600">
 </div>
-<h1 id="Risk">FACTORES DE RIESGO</h2>
+<h1 id="FactoresDeRiesgo">FACTORES DE RIESGO</h2>
 <ul>
     <li>Infección por virus de papiloma humano (VPH)</li>
 </ul>
@@ -137,7 +112,7 @@ AGP - Cáncer Cervicouterino
     <img src="../../static/img/imagenbebe.png" width="300">
 </div>
 
-<h1 id="deteccion">¿CÓMO DETECTARLO?</h2>
+<h1 id="Deteccion">¿CÓMO DETECTARLO?</h2>
 <p>El cáncer cérvico uterino se detecta por medio de la prueba
     llamada Papanicolaou, esta prueba se detecta por medio de
     una muestra de células del cuello uterino.</p>
@@ -146,18 +121,18 @@ AGP - Cáncer Cervicouterino
     <img src="../../static/img/cancer-cervicuterino2.png" width="600">
 </div>
     
-<h1 id="instituciones">INSTITUCIONES PARA ASISTIR</h2>
-<p class="inst">Agrupación George Papanicolau A.C Sonora</p>
+<h1 id="Instituciones">INSTITUCIONES PARA ASISTIR</h2>
+<p class="fw-bold">Agrupación George Papanicolau A.C Sonora</p>
     <p>Teléfono: 662-216-4883
     <br>agphillo@hotmail.com</p>
     <br>
-<p class="inst">Centro Estatal de Oncología Hermosillo, Sonora</p>
+<p class="fw-bold">Centro Estatal de Oncología Hermosillo, Sonora</p>
     <p>Teléfono :662 217 5836</p>
     <br>
-<p class="inst">Hospital Oncologico del Estado de Sonora</p>
+<p class="fw-bold">Hospital Oncologico del Estado de Sonora</p>
     <p>Teléfono : 01 (662) 21758-36 y 045 (662) 276-0059</p>
     <br>
-<p class="inst">Hospital Infantil del Estado de Sonora</p>
+<p class="fw-bold">Hospital Infantil del Estado de Sonora</p>
     <p>Calle de la Reforma 355, Ley 57, Hermosillo, Sonora 83100
     <br>Teléfono Domicilio: 01 662 289 0600
 </p>
