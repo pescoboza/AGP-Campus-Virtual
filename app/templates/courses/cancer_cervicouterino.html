@@ -1,14 +1,12 @@
-{% extends "base.html" %}
-{% from "courses/Evaluacion" import quiz %}
+{% extends "courses/courses_base.html" %}
 
 {% block title %}
 AGP - Cáncer Cervicouterino
-{% endblock %}
+{% endblock title %}
 
-{% block page_content %}
-    {% block banner %}
-        <img src="../../static/img/listoncervicouterino.jpg">
-    {% endblock banner %}
+{% block banner %}
+    <img class="img-banner" src="../../static/img/listoncervicouterino.jpg">
+{% endblock banner %}
 <br>
 
 {% block que_es %}
@@ -133,4 +131,3 @@ AGP - Cáncer Cervicouterino
 {% endblock instituciones %}
 
 <!-- Quiz is generated on view -->
-{% endblock page_content %}

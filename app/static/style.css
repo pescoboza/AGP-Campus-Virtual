@@ -23,7 +23,7 @@ ul {
     display: flex;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    /*width: 50%;*/
 }
 
 .fw-bold {
@@ -32,4 +32,8 @@ ul {
 
 .center-text {
     text-align: center;
+}
+
+.img-banner {
+    width: 100%;
 }
