@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+    <!-- Index -->
+    <div><a href="#que-es">¿QUÉ ES?</a></div>
+    <br>
+    <div><a href="#sintomas">SÍNTOMAS</a></div>
+    <br>    
+    <div><a href="#factores-de-riesgo">FACTORES DE RIESGO</a></div>
+    <br>
+    <div><a href="#autoexaminacion">AUTOEXAMINACION</a></div>
+    <br>
+    <div><a href="#instituciones">INSTITUCIONES</a></div>
+    <br>
+    <div><a href="#actividades">ACTIVIDADES</a></div>
+    <br>
+    <div><a href="#evaluacion">EVALUACIÓN</a></div>
+    <br>
+    
+    <!-- Sections -->
+    <h2 id ="que-es" class="section-header">¿QUÉ ES?</h2>
+    {% block que_es %}{% endblock que_es%}
+   
+    <h2 id ="sintomas" class="section-header">SÍNTOMAS</h2>
+    {% block sintomas %}{% endblock sintomas %}
+    
+    <h2 id="factores-de-riesgo" class="section-header">FACTORES DE RIESGO</h2>
+    {% block factores_de_riesgo %}{% endblock factores_de_riesgo %}
+    
+    <h2 id="autoexaminacion" class="section-header">AUTOEXAMINACIÓN</h2>
+    {% block autoexaminacion %}{% endblock autoexaminacion %}
+    
+    <h2 id="instituciones" class="section-header">INSTITUCIONES</h2>
+    {% block instituciones %}{% endblock instituciones %}
+    
+    <h2 id="actividades" class="section-header">ACTIVIDADES</h2>
+    {% block actividades %}{% endblock actividades %}
+
+    {% if form adn score != None and max_score != None %}
+    <h2 id="evaluacion" class="section-header">EVALUACIÓN</h2>
+    {{quiz(form, score, max_score)}}
+    {% endif %}
+    
+
+{% enblock page_content%}
