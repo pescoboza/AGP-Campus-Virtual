@@ -1,44 +1,21 @@
-{% extends "base.html" %}
-{% from "courses/_quiz.html" import quiz %}
+{% extends "courses/courses_base.html" %}
 
 {% block title %}
 AGP - Cáncer de Mama
 {% endblock %}
 
-{% block page_content %}
-<link rel="stylesheet" href="https://fontlibrary.org/face/glacial-indifference">
+{% block banner %}
+    <img class="img-banner" src="../../static/img/Imagen_titulo_cancer_mama.JPG">
+{% endblock banner %}
 
-<link rel="stylesheet" href="../../static/cancer_mama_style.css">
-
-<div class="make-center">
-    <img src="../../static/img/Imagen_titulo_cancer_mama.JPG" alt="[Imagen titulo de cancer de mama]" width="100%">
-</div>
-<br>
-<div><a href="#Que es">¿QUÉ ES?</a></div>
-<br>
-<div><a href="#Sintomas">SÍNTOMAS</a></div>
-<br>
-<div><a href="#Factores de riesgo">FACTORES DE RIESGO</a></div>
-<br>
-<div><a href="#Autoexaminacion">AUTOEXAMINACION</a></div>
-<br>
-<div><a href="#Instituciones">INSTITUCIONES</a></div>
-<br>
-<div><a href="#Actividades">ACTIVIDADES</a></div>
-<br>
-
-<h2 id="Que es">¿QUÉ ES EL CANCER DE MAMA?</h2>
-
+{% block que_es %}
 <p>[Descripcion del cancer de mama primera parte]</p>
-<div class="make-center">
-    <img src="" alt="[Mujeres de papel]" width="600">
-</div>
+<img class="center" src="" alt="[Mujeres de papel]" width="600">
 <p>[Descripcion del cancer de mama segunda parte]</p>
-<div class="make-center">
-    <img src="../../static/img/Celulas_cancerigenas_en_el_seno.PNG" alt="[Celulas cancerijenas en el seno]" width="600">
-</div>
+<img class="center" src="../../static/img/Celulas_cancerigenas_en_el_seno.PNG" alt="[Celulas cancerijenas en el seno]" width="600">
+{% endblock que_es %}
 
-<h2 id="Sintomas">SÍNTOMAS</h2>
+{% block sintomas %}
 <p>[Sintomas primer parrafo]</p>
 <p>[Sintomas segundo parrafo]</p>
 <ul>
@@ -47,36 +24,50 @@ AGP - Cáncer de Mama
     <li>Cualquier cambio en la forma o el tama~no de la mama, asi como dolor.</li>
     <li>Irritaci'on, enrojecimiento, secreci'on, sangrado, hundimiento.</li>
 </ul>
-<div class="make-center">
-    <img src="" alt="[Sintomas en seno]" width="600">
-</div>
+<img class="center" src="" alt="[Sintomas en seno]" width="600">
+{% endblock sintomas %}
 
-<h2 id="Factores de riesgo">FACTORES DE RIESGO</h2>
+{% block factores_de_riesgo %}
 <p>[Descripcion de factores de riesgo]</p>
-<ul>
-    <li><b><i>Antecedentes familiares de c'ancer de mama.</i></b>[Descripcion mas detallada]</li>
-</ul>
-<ul>
-    <li><b><i>El hacerse mayor.</i></b>[Descripcion mas detallada]</li>
-</ul>
-<ul>
-    <li><b><i>Mamas densas.</i></b>[Descripcion mas detallada]</li>
-</ul>
-<ul>
-    <li><b><i>Tratamientos previos de radioterapia.</i></b>[Descripcion mas detallada]</li>
-</ul>
-<ul>
-    <li><b><i>Historial reproductivo.</i></b>[Descripcion mas detallada]</li>
-</ul>
-<ul>
-    <li><b><i>Mutaciones gen'eticas.</i></b>[Descripcion mas detallada]</li>
-</ul>
-
-<h2 id="Autoexaminacion">AUTOEXAMINACI'ON</h2>
-<div class="make-center">
-    <img src="" alt="[Comic de autoexaminacion]" width="600">
+<div class="list-title-parag">
+    <ul>
+        <li>
+            <h3>Antecedentes familiares de cáncer de mama</h3><br>
+            <p>[Descripcion mas detallada]</p><br>
+        </li>
+        <li>
+            <h3>El hacerse mayor</h3><br>
+            <p>[Descripcion mas detallada]</p><br>
+        </li>
+        <li>
+            <h3>Mamas densas</h3><br>
+            <p>[Descripcion mas detallada]</p><br>
+        </li>
+        <li>
+            <h3>Tratamientos previos de radioterapia</h3><br>
+            <p>[Descripcion mas detallada]</p><br>
+        </li>   
+        <li>
+            <h3>Historial reproductivo</h3><br>
+            <p>[Descripcion mas detallada]</p><br>
+        </li>
+        <li>
+        <h3>Mutaciones gen'eticas.</h3><br>
+        <p>[Descripcion mas detallada]</p><br>
+        </li>
+    </ul>
 </div>
 
+    
+    
+</ul>
+{% endblock factores_de_riesgo %}
+
+{% block autoexaminacion %}
+<img class="center" src="" alt="[Comic de autoexaminacion]" width="600">
+{% endblock autoexaminacion %}
+
+{% block instituciones %}
 <h2 id="Instituciones">Instituciones para acudir</h2>
 <p><b>Agrupaci'on George Papaicolau A.C. Sonora</b></p>
 <p>[Informacion de contacto]</p>
@@ -93,19 +84,8 @@ AGP - Cáncer de Mama
 <p>[Informacion de contacto]</p>
 <p>[Informacion de contacto]</p>
 <br>
-<div class="make-center">
-    <img src="" alt="[Logo medico]" width="600">
-</div>
+<img class="center" src="" alt="[Logo medico]" width="600">
+{% endblock instituciones %}
 
-<h2><b>Actividad</b></h2><br>
-<div id = "#Actividades">
-    [Actividad]
-</div>
-
-<h2><b>Quiz</b></h2><br>
-<div ">
-    {% if form and score != None and max_score != None %}
-    {{quiz(form, score, max_score)}}
-    {% endif %}
-</div>
-{% endblock %}
+{% block actividades %}
+{% endblock actividades %}
