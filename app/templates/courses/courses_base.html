@@ -1,26 +1,19 @@
 {% extends "base.html" %}
 {% from "courses/_quiz.html" import quiz %}
 {% from "courses/_article_index.html" import article_index %}
-{% set hrefs = [ 
-    "#que-es",
-    "#sintomas",
-    "#factores-de-riesgo",
-    "#autoexaminacion",
-    "#instituciones",
-    "#actividades",
-    "#evaluacion"] %}
-{% set titles = ["¿QUÉ ES?",
-    "SÍNTOMAS",
-    "FACTORES DE RIESGO",
-    "AUTOEXAMINACION",
-    "INSTITUCIONES",
-    "ACTIVIDADES",
-    "EVALUACIÓN"] %}
+{% set hrefs_titles = [ 
+    ("que-es", "¿QUÉ ES?"), 
+    ("sintomas", "SÍNTOMAS"),
+    ("factores-de-riesgo", "FACTORES DE RIESGO"),
+    ("autoexaminacion", "AUTOEXAMINACION"),
+    ("instituciones", "INSTITUCIONES"),
+    ("actividades", "ACTIVIDADES"),
+    ("evaluacion", "EVALUACIÓN") ] %}
 
 {% block page_content %}
     
     <!-- Index -->
-    {{article_index( hrefs=hrefs, titles=titles)}}
+    {{article_index(hrefs_titles)}}
 
     <!-- Sections -->
     {% block que_es %}

@@ -1,9 +1,9 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% macro article_index(hrefs, titles) %}
+{% macro article_index(href_title_pairs) %}
 <div class="art-index">
-    {% for href in hrefs %}
-    <div class="art-index-item"><a href="{{href}}">{{titles[loop.index0]}}</a></div><br>
+    {% for p in href_title_pairs %}
+    <div class="art-index-item"><a href="{{'#' + p[0]}}">{{p[1]}}</a></div><br>
     {% endfor %}
 </div>
 {% endmacro %}
