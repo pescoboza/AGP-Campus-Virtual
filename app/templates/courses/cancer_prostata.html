@@ -1,13 +1,25 @@
-{% extends "base.html" %}
-{% from "courses/_quiz.html" import quiz %}
+{% extends "courses/courses_base.html" %}
+{% from "courses/_article.html" import section_header %}
+{% set section_headers = {
+    "que-es": "¿QUÉ ES EL CANCER DE PRÓSTATA?", 
+    "sintomas": "SÍNTOMAS",
+    "factores-de-riesgo": "FACTORES DE RIESGO",
+    "prevencion": "PREVENCIÓN",
+    "instituciones": "INSTITUCIONES",
+    "actividades": "ACTIVIDADES",
+    "evaluacion": "EVALUACIÓN" } %}
 
 {% block title %}
 AGP - Cáncer de Próstata
 {% endblock %}
 
+{% block banner %}
 <img class="img-banner" class src="../../static/img/portadapro.JPG">
+{% endblock banner %}
 
-{% block que_es%}
+{% block article %}
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("que-es", section_headers)}}
 <p> Se origina cuando las células de la próstata comienzan a crecer fuera de control.
     La próstata es una glándula que sólo tienen los hombres, que produce parte del líquido del semen.
     La próstata está debajo de la vejiga y delante del recto.
@@ -19,9 +31,9 @@ AGP - Cáncer de Próstata
     Puede ser mucho más grande en hombres de más edad.
 </p>
 <img class="center" src="../../static/img/CancerProstata.PNG" width="600">
-{% endblock que_es %}
 
-{% block sintomas %}
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("sintomas", section_headers)}}
 <p>
     En etapa inicial no causa síntomas. Pero en etapas más avanzadas puede causar síntomas, como:
 </p>
@@ -38,9 +50,10 @@ AGP - Cáncer de Próstata
 </ul>
 <p> Se debe hablar con un médico para asegurarse de la causa de estas señales.</p>
 <img class="center" src="../../static/img/Síntomacprostrata.PNG" width="600">
-{% endblock sintomas %}
 
-{}
+
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("prevencion", section_headers)}}
 <p>Existen algunas medidas que puede tomar para tratar de reducir su riesgo: </p>
 <ul>
     <li>Dieta saludable</li>
@@ -55,12 +68,10 @@ AGP - Cáncer de Próstata
     <img src="../../static/img/Prevencióncprostata.PNG" width="420">
 </div>
 
-{% block actividades %}{% endblock actividades %}
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("actividades", section_headers)}}
 
-<h2 id="Quiz">QUIZ</h2>
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("instituciones", section_headers)}}
 
-    {% if form and score != None and max_score != None %}
-    {{quiz(form, score, max_score)}}
-    {% endif %}
-
-    {% endblock %}
+{% endblock article %}
