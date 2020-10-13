@@ -1,4 +1,13 @@
 {% extends "courses/courses_base.html" %}
+{% from "courses/_article_index.html" import section_header %}
+{% set section_headers = {
+    "que-es": "¿QUÉ ES EL CANCER CERVICOUTERINO?", 
+    "sintomas": "SÍNTOMAS",
+    "factores-de-riesgo": "FACTORES DE RIESGO",
+    "autoexaminacion": "AUTOEXAMINACION",
+    "instituciones": "INSTITUCIONES",
+    "actividades": "ACTIVIDADES",
+    "evaluacion": "EVALUACIÓN" } %}
 
 {% block title %}
 AGP - Cáncer Cervicouterino
@@ -10,7 +19,7 @@ AGP - Cáncer Cervicouterino
 <br>
 
 {% block que_es %}
-<h1 id="QueEs">¿QUÉ ES EL CÁNCER CERVICOUTERINO?</h2>
+{{section_header("que-es", section_headers)}}
 <p> El cáncer de cervical se origina en las células que se
     producen en el cuello uterino, la parte inferior del útero
     que conecta con la vagina, se origina a partir del crecimiento
@@ -21,8 +30,8 @@ AGP - Cáncer Cervicouterino
     células glandulares) y el exocérvix (parte externa del cuello uterino,
     cubierto de células escamosas), la ubicación exacta de la zona cambia
     conforme el envejecimiento de la mujer y la cantidad de partos.</p>
-{% endblock que_es %}
 <br>
+{% endblock que_es %}
 
 {% block sintomas %}
     <ul>

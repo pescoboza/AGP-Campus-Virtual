@@ -1,43 +1,23 @@
 {% extends "base.html" %}
 {% from "courses/_quiz.html" import quiz %}
 {% from "courses/_article_index.html" import article_index, section_header %}
-{% set section_headers = {
-    "que-es": "¿QUÉ ES?", 
-    "sintomas": "SÍNTOMAS",
-    "factores-de-riesgo": "FACTORES DE RIESGO",
-    "autoexaminacion": "AUTOEXAMINACION",
-    "instituciones": "INSTITUCIONES",
-    "actividades": "ACTIVIDADES",
-    "evaluacion": "EVALUACIÓN" } %}
-
+{# Requires dict section_headers #}
 {% block page_content %}
     
     <!-- Index -->
     {{article_index(section_headers)}}
 
     <!-- Sections -->
-    {{section_header("que-es", section_headers)}}
-    {% block que_es %}
-    {% endblock que_es %}
-
-    <h2 id ="sintomas" class="section-header">SÍNTOMAS</h2>
+    {% block que_es %}{% endblock que_es %}
     {% block sintomas %}{% endblock sintomas %}
-
-    <h2 id="factores-de-riesgo" class="section-header">FACTORES DE RIESGO</h2>
     {% block factores_de_riesgo %}{% endblock factores_de_riesgo %}
-
-    <h2 id="autoexaminacion" class="section-header">AUTOEXAMINACIÓN</h2>
     {% block autoexaminacion %}{% endblock autoexaminacion %}
-
-    <h2 id="instituciones" class="section-header">INSTITUCIONES</h2>
     {% block instituciones %}{% endblock instituciones %}
-
-    <h2 id="actividades" class="section-header">ACTIVIDADES</h2>
     {% block actividades %}{% endblock actividades %}
 
     <!-- Quiz -->
     {% if form and score != None and max_score != None %}
-    <h2 id="evaluacion" class="section-header">EVALUACIÓN</h2>
+    {{section_header("evaluacion", section_headers)}
     {{quiz(form, score, max_score)}}
     {% endif %}
 
