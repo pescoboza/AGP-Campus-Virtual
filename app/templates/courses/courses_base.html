@@ -1,23 +1,23 @@
 {% extends "base.html" %}
 {% from "courses/_quiz.html" import quiz %}
-{% from "courses/_article_index.html" import article_index %}
-{% set hrefs_titles = [ 
-    ("que-es", "¿QUÉ ES?"), 
-    ("sintomas", "SÍNTOMAS"),
-    ("factores-de-riesgo", "FACTORES DE RIESGO"),
-    ("autoexaminacion", "AUTOEXAMINACION"),
-    ("instituciones", "INSTITUCIONES"),
-    ("actividades", "ACTIVIDADES"),
-    ("evaluacion", "EVALUACIÓN") ] %}
+{% from "courses/_article_index.html" import article_index, section_header %}
+{% set section_headers = {
+    "que-es": "¿QUÉ ES?", 
+    "sintomas": "SÍNTOMAS",
+    "factores-de-riesgo": "FACTORES DE RIESGO",
+    "autoexaminacion": "AUTOEXAMINACION",
+    "instituciones": "INSTITUCIONES",
+    "actividades": "ACTIVIDADES",
+    "evaluacion": "EVALUACIÓN" } %}
 
 {% block page_content %}
     
     <!-- Index -->
-    {{article_index(hrefs_titles)}}
+    {{article_index(section_headers)}}
 
     <!-- Sections -->
+    {{section_header("que-es", section_headers)}}
     {% block que_es %}
-    <h2 id ="que-es" class="section-header">¿QUÉ ES?</h2>
     {% endblock que_es %}
 
     <h2 id ="sintomas" class="section-header">SÍNTOMAS</h2>

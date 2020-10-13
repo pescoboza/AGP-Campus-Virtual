@@ -1,9 +1,15 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% macro article_index(href_title_pairs) %}
+{% macro article_index(section_headers) %}
 <div class="art-index">
-    {% for p in href_title_pairs %}
-    <div class="art-index-item"><a href="{{'#' + p[0]}}">{{p[1]}}</a></div><br>
+    {% for href, title in section_headers.items() %}
+    <div class="art-index-item"><a href="{{'#' + href}}">{{title}}</a></div><br>
     {% endfor %}
 </div>
+{% endmacro %}
+
+{% macro section_header(href, section_headers) %}
+{% if href in section_headers %}
+<h2 id ="{{href}}" class="section-header">{{section_headers[href]}}</h2>
+{% endif %}
 {% endmacro %}
