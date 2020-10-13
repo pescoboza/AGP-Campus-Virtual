@@ -1,10 +1,10 @@
 {% extends "courses/courses_base.html" %}
-{% from "courses/_article_index.html" import section_header %}
+{% from "courses/_article.html" import section_header %}
 {% set section_headers = {
     "que-es": "¿QUÉ ES EL CANCER CERVICOUTERINO?", 
     "sintomas": "SÍNTOMAS",
     "factores-de-riesgo": "FACTORES DE RIESGO",
-    "autoexaminacion": "AUTOEXAMINACION",
+    "deteccion": "DETECCIÓN",
     "instituciones": "INSTITUCIONES",
     "actividades": "ACTIVIDADES",
     "evaluacion": "EVALUACIÓN" } %}
@@ -18,7 +18,8 @@ AGP - Cáncer Cervicouterino
 {% endblock banner %}
 <br>
 
-{% block que_es %}
+{% block article %}
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
 {{section_header("que-es", section_headers)}}
 <p> El cáncer de cervical se origina en las células que se
     producen en el cuello uterino, la parte inferior del útero
@@ -31,9 +32,9 @@ AGP - Cáncer Cervicouterino
     cubierto de células escamosas), la ubicación exacta de la zona cambia
     conforme el envejecimiento de la mujer y la cantidad de partos.</p>
 <br>
-{% endblock que_es %}
 
-{% block sintomas %}
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("sintomas", section_headers)}}
     <ul>
         <li>Sangrado anormal después de la relación sexual</li>
         <li>Aumento del flujo de sangrado vía genital con mal olor entre los periodos de menstruación o después de la menopausia</li>
@@ -41,11 +42,10 @@ AGP - Cáncer Cervicouterino
         <li>Perdida de peso</li>
     </ul>
     <img class="center" src="../../static/img/cancer-cervicuterino.png" width="600">
-{% endblock sintomas %}
 <br>
 
-{% block factores_de_riesgo %}
-
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("factores-de-riesgo", section_headers)}}
 <div class="list-titles-parag">
     <ul>
         <li>
@@ -122,16 +122,17 @@ AGP - Cáncer Cervicouterino
     </ul>
 </div>
 <img class="center" src="../../static/img/imagenbebe.png" width="300">
-{% endblock factores_de_riesgo %}
 
-{% block deteccion %}
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("deteccion", section_headers)}}
 <p>El cáncer cérvico uterino se detecta por medio de la prueba
     llamada Papanicolaou, esta prueba se detecta por medio de
     una muestra de células del cuello uterino.</p>
     <img class="center" src="../../static/img/cancer-cervicuterino2.png" width="600">
-{% endblock deteccion %}    
 
-{% block instituciones %}
+
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("instituciones", section_headers)}}
 <p class="fw-bold">Agrupación George Papanicolau A.C Sonora</p>
     <p>Teléfono: 662-216-4883
     <br>agphillo@hotmail.com</p>
@@ -150,4 +151,4 @@ AGP - Cáncer Cervicouterino
 <div>
     <img class="center" src="../../static/img/10.png" width="200">
 </div>
-{% endblock instituciones %}
+{% endblock article %}

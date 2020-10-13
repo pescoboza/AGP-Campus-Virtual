@@ -10,6 +10,7 @@
 
 {% macro section_header(href, section_headers) %}
 {% if href in section_headers %}
+<!-- {{href}} -->
 <h2 id ="{{href}}" class="section-header">{{section_headers[href]}}</h2>
 {% endif %}
 {% endmacro %}
