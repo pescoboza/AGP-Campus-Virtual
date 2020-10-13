@@ -1,30 +1,31 @@
 {% extends "base.html" %}
 {% from "courses/_quiz.html" import quiz %}
-
+{% from "courses/_article_index.html" import article_index %}
+{% set hrefs = [ 
+    "#que-es",
+    "#sintomas",
+    "#factores-de-riesgo",
+    "#autoexaminacion",
+    "#instituciones",
+    "#actividades",
+    "#evaluacion"] %}
+{% set titles = ["¿QUÉ ES?",
+    "SÍNTOMAS",
+    "FACTORES DE RIESGO",
+    "AUTOEXAMINACION",
+    "INSTITUCIONES",
+    "ACTIVIDADES",
+    "EVALUACIÓN"] %}
 
 {% block page_content %}
-
+    
     <!-- Index -->
-    <div><a href="#que-es">¿QUÉ ES?</a></div>
-    <br>
-    <div><a href="#sintomas">SÍNTOMAS</a></div>
-    <br>    
-    <div><a href="#factores-de-riesgo">FACTORES DE RIESGO</a></div>
-    <br>
-    <div><a href="#autoexaminacion">AUTOEXAMINACION</a></div>
-    <br>
-    <div><a href="#instituciones">INSTITUCIONES</a></div>
-    <br>
-    <div><a href="#actividades">ACTIVIDADES</a></div>
-    <br>
-    {% if form and score != None and max_score != None %}
-    <div><a href="#evaluacion">EVALUACIÓN</a></div>
-    <br>
-    {% endif %}
+    {{article_index( hrefs=hrefs, titles=titles)}}
 
     <!-- Sections -->
+    {% block que_es %}
     <h2 id ="que-es" class="section-header">¿QUÉ ES?</h2>
-    {% block que_es %}{% endblock que_es %}
+    {% endblock que_es %}
 
     <h2 id ="sintomas" class="section-header">SÍNTOMAS</h2>
     {% block sintomas %}{% endblock sintomas %}

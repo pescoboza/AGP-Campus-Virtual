@@ -5,28 +5,10 @@
 AGP - Cáncer de Próstata
 {% endblock %}
 
-{% block page_content %}
-<body>
-    <div class="make-center">
-        <img src="../../static/img/portadapro.JPG" width="1500">
-    </div>
-</body>
-<link rel="stylesheet" href="https://fontlibrary.org/face/glacial-indifference">
-<link rel="stylesheet" href="../../static/cancer_prostata_style.css">
+<img class="img-banner" class src="../../static/img/portadapro.JPG">
 
-<div><a href="#Quees">¿QUÉ ES?</a></div>
-<br>
-<div><a href="#Sintomas">SÍNTOMAS</a></div>
-<br>
-<div><a href="#Prevencion">PREVENCIÓN</a></div>
-<br>
-<div><a href="#Actividades">ACTIVIDADES</a></div>
-<br>
-<div><a href="#Quiz">QUIZ</a></div>
-
-<h2 id="Quees">¿QUÉ ES EL CANCER DE PROSTATA?</h2>
-<p style="text-align: justify;">
-    Se origina cuando las células de la próstata comienzan a crecer fuera de control.
+{% block que_es%}
+<p> Se origina cuando las células de la próstata comienzan a crecer fuera de control.
     La próstata es una glándula que sólo tienen los hombres, que produce parte del líquido del semen.
     La próstata está debajo de la vejiga y delante del recto.
     Justo detrás de la próstata se encuentran las vesículas seminales,que producen la mayor parte del líquido del semen.
@@ -36,12 +18,10 @@ AGP - Cáncer de Próstata
     En los más jóvenes, es del tamaño aproximado de una nuez.
     Puede ser mucho más grande en hombres de más edad.
 </p>
-<body>
-    <div class="make-center">
-        <img src="../../static/img/CancerProstata.PNG" width="600">
-    </div>
-</body>
-<h2 id="Sintomas">SÍNTOMAS</h2>
+<img class="center" src="../../static/img/CancerProstata.PNG" width="600">
+{% endblock que_es %}
+
+{% block sintomas %}
 <p>
     En etapa inicial no causa síntomas. Pero en etapas más avanzadas puede causar síntomas, como:
 </p>
@@ -57,11 +37,10 @@ AGP - Cáncer de Próstata
         debido a que el cáncer comprime la médula espinal</li>
 </ul>
 <p> Se debe hablar con un médico para asegurarse de la causa de estas señales.</p>
-<div class="make-center">
-        <img src="../../static/img/Síntomacprostrata.PNG" width="600">
-</div>
+<img class="center" src="../../static/img/Síntomacprostrata.PNG" width="600">
+{% endblock sintomas %}
 
-<h2 id="Prevencion">PREVENCIÓN</h2>
+{}
 <p>Existen algunas medidas que puede tomar para tratar de reducir su riesgo: </p>
 <ul>
     <li>Dieta saludable</li>
@@ -75,7 +54,9 @@ AGP - Cáncer de Próstata
 <div class="make-center">
     <img src="../../static/img/Prevencióncprostata.PNG" width="420">
 </div>
-<h2 id="Actividades">ACTIVIDADES</h2>
+
+{% block actividades %}{% endblock actividades %}
+
 <h2 id="Quiz">QUIZ</h2>
 
     {% if form and score != None and max_score != None %}
