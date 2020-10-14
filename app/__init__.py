@@ -1,9 +1,12 @@
+import os
 from flask import Flask
 from flask_mongoengine import MongoEngine
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
+import pdfkit
+
 
 # TODO: Move this to a JSON and devise a better structure.
 class Msg:
@@ -28,13 +31,13 @@ class Msg:
         ERROR_EMAIL_IN_USE = "La dirección de correo ya ha sido registrada."
         ERROR_ACCEPT_TERMS = "Debe aceptar los términos y condiciones para continuar."
         ERROR_INVALID_EMAIL = "Por favor, introduzca una dirección de correo válida."
-        
+
         ERROR_PASSWORD_LENGTH = "La contraseña debe medir entre 8 y 64 caracteres."
         ERROR_PASSWORD_AT_LEAST_ONE_NUMBER = "La contraseña debe conenter al menos un número."
         ERROR_PASSWORD_AT_LEAST_ONE_UPPERCASE = "La contraseña debe conenter al menos una letra mayúscula."
         ERROR_PASSWORD_AT_LEAST_ONE_LOWERCASE = "La contraseña debe conenter al menos una letra minúscula."
         ERROR_PASSWORD_AT_LEAST_ONE_SPECIAL_CHARACTER = "La contraseña debe contener al menos un caracter especial: {}."
-        
+
         ACCEPT_TERMS = "He leído y acepto los términos y condiciones."
 
 
@@ -45,6 +48,9 @@ login.login_view = "auth.login"
 login.login_message = Msg.Flash.LOGIN_REQUIRED
 mail = Mail()
 bootstrap = Bootstrap()
+pdfkit_config = pdfkit.configuration(
+    wkhtmltopdf=os.environ.get("PDFKIT_WKHTMLTOPDF_PATH"))
+
 
 def create_app(config):
     app = Flask(__name__)
@@ -55,6 +61,7 @@ def create_app(config):
     login.init_app(app)
     mail.init_app(app)
     bootstrap.init_app(app)
+    pdfkit_config.wkhtmltopdf = app.config["PDFKIT_WKHTMLTOPDF_PATH"]
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)

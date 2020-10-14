@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% from "courses/_quiz.html" import quiz %}
+{% from "courses/_article.html" import article_index, section_header %}
+{# Requires dict section_headers #}
+{% block page_content %}
+    
+    <!-- Index -->
+    {{article_index(section_headers)}}
+
+    <!-- Article -->
+    {% block article %}{% endblock article %}
+    
+    <!-- Quiz -->
+    {% if form and score != None and max_score != None %}
+    {{section_header("evaluacion", section_headers)}}
+    {{quiz(form, score, max_score)}}
+    {% endif %}
+
+{% endblock page_content %}

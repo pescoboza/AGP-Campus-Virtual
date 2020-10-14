@@ -1,124 +1,98 @@
-{% extends "base.html" %}
-{% from "courses/_quiz.html" import quiz %}
+{% extends "courses/courses_base.html" %}
+{% from "courses/_article.html" import section_header %}
+{% set section_headers = {
+    "que-es": "¿QUÉ ES EL CANCER DE MAMA?", 
+    "sintomas": "SÍNTOMAS",
+    "factores-de-riesgo": "FACTORES DE RIESGO",
+    "autoexaminacion": "AUTOEXAMINACIÓN",
+    "instituciones": "INSTITUCIONES",
+    "actividades": "ACTIVIDADES",
+    "evaluacion": "EVALUACIÓN" } %}
 
 {% block title %}
 AGP - Cáncer de Mama
 {% endblock %}
 
-{% block page_content %}
-<div class="imgt">
-    [Imagen de 8 mujeres rosas en formato icon con una sola de color rojo]
-</div><br>
+{% block banner %}
+    <img class="img-banner" src="../../static/img/Imagen_titulo_cancer_mama.JPG">
+{% endblock banner %}
 
-<h1><b>Lo que debes saber</b></h1>
-<ol>
-    <li>
-        <h2>¿QUÉ ES?</h2>
-    </li>
-    <div>
-        El cáncer de mama es una enfermedad
-        provocada por la multiplicación sin control de
-        las células de la mama, el promedio de que una
-        mujer en estados unidos la posea es del 13% por
-        lo que 1 de cada 8 mujeres es propensa a
-        padecerla.
-    </div><br>
+{% block article %}
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("que-es", section_headers)}}
+<p>[Descripcion del cancer de mama primera parte]</p>
+<img class="center" src="" alt="[Mujeres de papel]" width="600">
+<p>[Descripcion del cancer de mama segunda parte]</p>
+<img class="center" src="../../static/img/Celulas_cancerigenas_en_el_seno.PNG" alt="[Celulas cancerijenas en el seno]" width="600">
 
-    <li>
-        <h2>PRINCIPALES TIPOS</h2>
-    </li>
-    <div></div>
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("sintomas", section_headers)}}
+<p>[Sintomas primer parrafo]</p>
+<p>[Sintomas segundo parrafo]</p>
+<ul>
+    <li>Bultos en la mama o cerca de la axila en el 'area interna del brazo.</li>
+    <li>Hinchaz'on de una parte de la mama o aumento de grosor.</li>
+    <li>Cualquier cambio en la forma o el tama~no de la mama, asi como dolor.</li>
+    <li>Irritaci'on, enrojecimiento, secreci'on, sangrado, hundimiento.</li>
+</ul>
+<img class="center" src="" alt="[Sintomas en seno]" width="600">
+
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("factores-de-riesgo", section_headers)}}
+<p>[Descripcion de factores de riesgo]</p>
+<div class="list-title-parag">
     <ul>
         <li>
-            <h3>Carcinoma ductal infiltrante:</h3>
+            <h3>Antecedentes familiares de cáncer de mama</h3><br>
+            <p>[Descripcion mas detallada]</p><br>
         </li>
-        <div>
-            Las células
-            cancerosas se multiplican fuera de los
-            conductos e invaden otras partes del tejido
-            mamario.
-        </div><br>
         <li>
-            <h3>Carcinoma lobulillar infiltrante:</h3>
+            <h3>El hacerse mayor</h3><br>
+            <p>[Descripcion mas detallada]</p><br>
         </li>
-        <div>
-            Las células
-            cancerosas se diseminan de los lobulillos a los
-            tejidos mamarios cercanos.
-        </div><br>
+        <li>
+            <h3>Mamas densas</h3><br>
+            <p>[Descripcion mas detallada]</p><br>
+        </li>
+        <li>
+            <h3>Tratamientos previos de radioterapia</h3><br>
+            <p>[Descripcion mas detallada]</p><br>
+        </li>   
+        <li>
+            <h3>Historial reproductivo</h3><br>
+            <p>[Descripcion mas detallada]</p><br>
+        </li>
+        <li>
+        <h3>Mutaciones genéticas.</h3><br>
+        <p>[Descripcion mas detallada]</p><br>
+        </li>
     </ul>
-    </div><br>
-
-    <div class="imgt">
-        [Imagen de cancer de mama]
-    </div><br>
-
-    <li>
-        <h2>SINTOMAS Y SIGNOS</h2>
-    </li>
-    <div>
-        Es necesario conocer bien nuestros senos y
-        reconocer como se sienten normalmente, alguno de
-        los síntomas son:
-        <ul>
-            <li>Bultos en la mama</li>
-            <li>Hinchazón de una parte de la mama</li>
-            <li>Cambio en la forma o el tamaño</li>
-            <li>Dolor</li>
-            <li>Irritación, enrojecimiento, secreción, sangrado</li>
-        </ul>
-    </div><br>
-
-    <div class="imgt">
-        [Imagen de seno afectado]
-    </div><br>
-
-    <li>
-        <h2>FACTORES DE RIESGO</h2>
-    </li>
-    <div>
-        Uno de los principales factores de riesgo es
-        como mujer volverse mayor pero cada caso es
-        diferente, algunos de los factores que no varian
-        son:
-        <ul>
-            <li>Antecedentes familiares</li>
-            <li>El hacerse mayor</li>
-            <li>Mamas densas</li>
-            <li>Historial reproductivo</li>
-            <li>Mutaciones genéticas</li>
-        </ul>
-    </div><br>
-
-    <li>
-        <h2>INSTITUCIONES</h2>
-    </li>
-    <div>
-        Por último queremos recordar que existen
-        varias instituciones que están para asistirlos
-        en este proceso tan complicado que es el
-        cáncer:
-        <div><b>Agrupación George Papanicolau A.C. Sonora</b></div>
-        <div>Teléfono Domicilio: 662-216-4883</div>
-        <div>Email Trabajo: agphillo@hotmail.com</div><br>
-        <div><b>Grupo RETO Hermosillo, A.C</b></div>
-        <div>Vía Telefónica:01(662)217-58-34 extensión 128</div><br>
-    </div><br>
-
-    <div class="imgt">
-        [Imagen de la institucion]
-    </div><br>
-</ol>
-
-<h2><b>Actividad</b></h2><br>
-<div class="imgt">
-    [Actividad]
 </div>
 
-<h2><b>Quiz</b></h2><br>
-<div class="imgt">
-    {% if form and score != None and max_score != None %}
-    {{quiz(form, score, max_score)}}
-    {% endif %}
-</div>
-{% endblock %}
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("autoexaminacion", section_headers)}}
+<img class="center" src="" alt="[Comic de autoexaminacion]" width="600">
+
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("instituciones", section_headers)}}
+<p><b>Agrupación George Papaicolau A.C. Sonora</b></p>
+<p>[Informacion de contacto]</p>
+<p>[Informacion de contacto]</p>
+<br>
+
+<p><b>Grupo RETO Hermosillo, A.C.</b></p>
+<p>[Informacion de contacto]</p>
+<p>[Informacion de contacto]</p>
+<br>
+
+<p><b>Hospital Oncologico del Estado de Sonora</b></p>
+<p>[Informacion de contacto]</p>
+<p>[Informacion de contacto]</p>
+<p>[Informacion de contacto]</p>
+<br>
+<img class="center" src="" alt="[Logo medico]" width="600">
+
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("actividades", section_headers)}}
+
+{% endblock article %}
