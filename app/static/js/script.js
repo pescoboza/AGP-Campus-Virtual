@@ -9,7 +9,7 @@ function hideParent(e) {
 }
 
 // Hide flashed messages when clicking on cross.
-let flashes = document.getElementsByClassName("aler");
+let flashes = document.getElementsByClassName("close");
 let num_flashes = flashes.length;
 for (let i = 0; i < num_flashes; i++) {
     flashes[i].addEventListener("click", hideParent);
