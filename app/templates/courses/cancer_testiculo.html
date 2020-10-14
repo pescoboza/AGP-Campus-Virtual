@@ -1,38 +1,32 @@
-{% extends "base.html" %}
-{% from "courses/_quiz.html" import quiz %}
+{% extends "courses/courses_base.html" %}
+{% from "courses/_article.html" import section_header %}
+{% set section_headers = {
+    "que-es": "¿QUÉ ES EL CANCER TESTICULAR?", 
+    "sintomas": "SÍNTOMAS",
+    "autoexaminacion": "AUTOEXAMINACIÓN",
+    "instituciones": "INSTITUCIONES",
+    "actividades": "ACTIVIDADES",
+    "evaluacion": "EVALUACIÓN" } %}
 
 {% block title %}
 AGP - Cáncer de Testículo
 {% endblock %}
 
-{% block page_content %}
-<link rel="stylesheet" href="https://fontlibrary.org/face/glacial-indifference">
-<link rel="stylesheet" href="../../static/cancer_testiculo_style.css">
+{% block banner %}
+<img class="img-banner" src="../../static/img/listontesticular.jpg">
+{% endblock banner %}
 
-<div class="make-center">
-    <img src="../../static/img/listontesticular.jpg" width="1330">
-</div>
-
-<div><a href="#Quees">¿QUÉ ES?</a></div>
-<br>
-<div><a href="#Sintomas">SÍNTOMAS</a></div>
-<br>
-<div><a href="#Prevencion">PREVENCIÓN</a></div>
-<br>
-<div><a href="#Actividades">ACTIVIDADES</a></div>
-<br>
-<div><a href="#Quiz">QUIZ</a></div>
-
-<h2 id='Quees'>¿QUÉ ES EL CÁNCER TESTICULAR</h2>
-
+{% block article %}
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("que-es", section_headers)}}
 <p>Se origina en los testículos. Los testículos tienen dos funciones principales: Producen hormonas masculinas, como la testosterona.
     Producen espermatozoides, necesarios para fertilizar la célula sexual femenina, y comenzar un embarazo. Los testículos están
     compuestos de muchos tipos de células. Es importante saber el tipo de célula en el que se originó el cáncer y qué tipo de cáncer
     es, porque se tratan de maneras diferentes.
 </p>
 
-<h2 id='Sintomas'>Síntomas</h2>
-
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("sintomas", section_headers)}}
 <p>El síntoma más común es un bulto o inflamación en algún testículo. Pueden ser tan pequeños como un chícharo. Normalmente
     causan molestias pero no dolor.</p>
 
@@ -45,11 +39,10 @@ AGP - Cáncer de Testículo
     <li>Acumulación de líquido en el testículo</li>
 </ul>
 
-    <div class="make-center">
-        <img src="../../static/img/ctesticulosintomas.PNG" width="900">
-    </div>
+<img src="../../static/img/ctesticulosintomas.PNG" width="900">
 
-<h2 id='Prevencion'>PREVENCIÓN</h2>
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("autoexaminacion", section_headers)}}
 <p>En la actualidad no es posible evitar la mayoría de los casos de esta enfermedad. Pero los expertos recomiendan corregir la
     criptorquidia (falta de descenso de uno o ambos testículos)
     en los niños.</p>
@@ -65,16 +58,13 @@ AGP - Cáncer de Testículo
     <li>Revisa el epidídimo, situado en la parte superior
         y posterior de cada testículo. Puede que lo sientas más desigual al tacto, o con
         más bultos, que el testículo.
-        <body>
-            <div class="make-center">
-                <img src="../../static/img/ctesticuloprevencion1.png" width="500">
-            </div>
-        </body></li>
+    
+    <img class="center" src="../../static/img/ctesticuloprevencion1.png" width="500">
+    </li>
     <li>Palpa el tubo denominado “conducto deferente” que sale del epidídimo y se asemeja a un espagueti (Debe sentirse como un
         cordón suave). <br>
         <br>
-
-        <div class="make-center">
+        <div class="center">
             <img src="../../static/img/ctesticuloprevencion2.PNG" width="350">
             <img src="../../static/img/ctesticuloprevencion3.PNG" width="350">
         </div></li>
@@ -84,13 +74,11 @@ AGP - Cáncer de Testículo
         detectar cuando haya anormalidades.</li>
 </ol>
 
-<h2 id='Actividades'>ACTIVIDADES</h2>
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("instituciones", section_headers)}}
+
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("actividades", section_headers)}}
 <p>LINK PARA ACTIVIDADES</p>
-<h2 id='Quiz'>QUIZ</h2>
-<p>LINK PARA QUIZ</p>
 
-{% if form and score != None and max_score != None %}
-{{quiz(form, score, max_score)}}
-{% endif %}
-
-{% endblock %}
+{% endblock article %}
