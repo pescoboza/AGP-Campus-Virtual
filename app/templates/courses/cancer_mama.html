@@ -1,4 +1,13 @@
 {% extends "courses/courses_base.html" %}
+{% from "courses/_article.html" import section_header %}
+{% set section_headers = {
+    "que-es": "¿QUÉ ES EL CANCER DE MAMA?", 
+    "sintomas": "SÍNTOMAS",
+    "factores-de-riesgo": "FACTORES DE RIESGO",
+    "autoexaminacion": "AUTOEXAMINACIÓN",
+    "instituciones": "INSTITUCIONES",
+    "actividades": "ACTIVIDADES",
+    "evaluacion": "EVALUACIÓN" } %}
 
 {% block title %}
 AGP - Cáncer de Mama
@@ -8,14 +17,16 @@ AGP - Cáncer de Mama
     <img class="img-banner" src="../../static/img/Imagen_titulo_cancer_mama.JPG">
 {% endblock banner %}
 
-{% block que_es %}
+{% block article %}
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("que-es", section_headers)}}
 <p>[Descripcion del cancer de mama primera parte]</p>
 <img class="center" src="" alt="[Mujeres de papel]" width="600">
 <p>[Descripcion del cancer de mama segunda parte]</p>
 <img class="center" src="../../static/img/Celulas_cancerigenas_en_el_seno.PNG" alt="[Celulas cancerijenas en el seno]" width="600">
-{% endblock que_es %}
 
-{% block sintomas %}
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("sintomas", section_headers)}}
 <p>[Sintomas primer parrafo]</p>
 <p>[Sintomas segundo parrafo]</p>
 <ul>
@@ -25,9 +36,9 @@ AGP - Cáncer de Mama
     <li>Irritaci'on, enrojecimiento, secreci'on, sangrado, hundimiento.</li>
 </ul>
 <img class="center" src="" alt="[Sintomas en seno]" width="600">
-{% endblock sintomas %}
 
-{% block factores_de_riesgo %}
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("factores-de-riesgo", section_headers)}}
 <p>[Descripcion de factores de riesgo]</p>
 <div class="list-title-parag">
     <ul>
@@ -58,18 +69,13 @@ AGP - Cáncer de Mama
     </ul>
 </div>
 
-    
-    
-</ul>
-{% endblock factores_de_riesgo %}
-
-{% block autoexaminacion %}
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("autoexaminacion", section_headers)}}
 <img class="center" src="" alt="[Comic de autoexaminacion]" width="600">
-{% endblock autoexaminacion %}
 
-{% block instituciones %}
-<h2 id="Instituciones">Instituciones para acudir</h2>
-<p><b>Agrupaci'on George Papaicolau A.C. Sonora</b></p>
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("instituciones", section_headers)}}
+<p><b>Agrupación George Papaicolau A.C. Sonora</b></p>
 <p>[Informacion de contacto]</p>
 <p>[Informacion de contacto]</p>
 <br>
@@ -85,7 +91,8 @@ AGP - Cáncer de Mama
 <p>[Informacion de contacto]</p>
 <br>
 <img class="center" src="" alt="[Logo medico]" width="600">
-{% endblock instituciones %}
 
-{% block actividades %}
-{% endblock actividades %}
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("actividades", section_headers)}}
+
+{% endblock article %}
