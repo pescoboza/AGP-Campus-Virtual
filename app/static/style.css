@@ -1,3 +1,7 @@
+:root {
+    --primary-color: rgb(50, 100, 10);
+}
+
 * {
     font-family: "GlacialIndifferenceRegular";
     font-weight: normal;
@@ -36,4 +40,9 @@ ul {
 
 .img-banner {
     width: 100%;
+}
+
+
+#quiz-box {
+    padding-bottom: 3cm;
 }
