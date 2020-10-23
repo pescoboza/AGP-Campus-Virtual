@@ -4,7 +4,8 @@
 }
 
 :root {
-    --primary-color: rgb(50, 100, 10);
+    --primary: #67C5D2;
+    --detail-font: #FC8476;
 }
 
 * {
@@ -46,6 +47,15 @@ ul {
     width: 100%;
 }
 
+/*TODO: Figure out how to change navbar color. 
+Hint selector spefificity.*/
+#navbar.navbar.navbar-inverse {
+    background-color: var(--primary);
+}
+
+#navbar.navbar.navbar-inverse nav {
+    color: #000;
+}
 
 #page-content {
     min-height: 500px;
