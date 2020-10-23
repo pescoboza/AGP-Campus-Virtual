@@ -1,3 +1,8 @@
+@font-face {
+    font-family: GlacialIndifferenceRegular;
+    src: url(fonts/GlacialIndifference-Regular.otf);
+}
+
 :root {
     --primary-color: rgb(50, 100, 10);
 }
