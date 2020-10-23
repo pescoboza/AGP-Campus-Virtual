@@ -51,7 +51,7 @@ AGP Campus Virtual
 
 
 {% block content %}
-<div class="container">
+<div id="page-content" class="container">
     <!-- Flashed messages -->
     {% for message in get_flashed_messages() %}
     <div class="aler alert-warning">
@@ -61,9 +61,8 @@ AGP Campus Virtual
     {% endfor %}
     {% block banner %}{% endblock banner %}
     {% block page_content %}{% endblock page_content %}
-    {% include "_footer.html" %}
 </div>
-
+{% include "_footer.html" %}
 {% endblock content %}
 
 

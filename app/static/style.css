@@ -22,7 +22,6 @@ ul {
     font-style: italic;
 }
 
-
 .center {
     display: flex;
     margin-left: auto;
@@ -42,6 +41,10 @@ ul {
     width: 100%;
 }
 
+
+#page-content {
+    min-height: 500px;
+}
 
 #quiz-box {
     padding-bottom: 3cm;
