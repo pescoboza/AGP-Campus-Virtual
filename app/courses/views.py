@@ -16,7 +16,6 @@ QUESTION_TOPICS = (
 )
 """
 
-
 def quiz_view(template, redirect_to, topic_code, num_questions=10):
     flash("[DEBUG] Quiz: {}".format(QUIZ_CODES[topic_code]["full_name"]))
     form = MultipleChoiceQuizForm.generate_random_quiz(

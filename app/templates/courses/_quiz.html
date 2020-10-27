@@ -1,49 +1,51 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% macro quiz(form, score=0, max_score=10) %}
-<button id="button-collapse-quiz" data-toggle="collapse" data-target="#collapsible-quiz">Hacer examen</button>
-<div id="collapsible-quiz" class="collapse">
-    <form action="" method="POST">
-        <div id="carousel-quiz" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">
+<div id="quiz-box" class="container">
+    <button id="button-collapse-quiz" data-toggle="collapse" data-target="#collapsible-quiz">Hacer examen</button>
+    <div id="collapsible-quiz" class="collapse">
+        <form action="" method="POST">
+            <div id="carousel-quiz" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">
 
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                {% for question_form in form.questions %}
-                <div class="item {% if loop.index0 == 0 %}active{% endif %}">
-                    <p name="question-{{loop.index0}}-text">{{question_form.text}}</p>
-                    {{question_form.answer}}
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    {% for question_form in form.questions %}
+                    <div class="item {% if loop.index0 == 0 %}active{% endif %}">
+                        <p name="question-{{loop.index0}}-text">{{question_form.text}}</p>
+                        {{question_form.answer}}
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
 
-            <!-- Controls -->
-            <ul class="pagination">
-                <!-- Left -->
-                <li>
-                    <a class="left" href="#carousel-quiz" role="button" data-slide="prev">
-                        <!-- <span class="glyphicon glyphicon-chevron-left"></span> -->
-                        Anterior
-                    </a>
-                </li>
+                <!-- Controls -->
+                <ul class="pagination">
+                    <!-- Left -->
+                    <li>
+                        <a class="left" href="#carousel-quiz" role="button" data-slide="prev">
+                            <!-- <span class="glyphicon glyphicon-chevron-left"></span> -->
+                            Anterior
+                        </a>
+                    </li>
 
-                <!-- Indicators -->
-                {% for _ in form.questions %}
-                <li data-target="#carousel-quiz" data-slide-to="{{loop.index0}}">
-                    <a href="#question-{{loop.index0}}">{{loop.index}}</a>
-                </li>
-                {% endfor %}
+                    <!-- Indicators -->
+                    {% for _ in form.questions %}
+                    <li data-target="#carousel-quiz" data-slide-to="{{loop.index0}}">
+                        <a href="#question-{{loop.index0}}">{{loop.index}}</a>
+                    </li>
+                    {% endfor %}
 
-                <!-- Right -->
-                <li>
-                    <a class="right" href="#carousel-quiz" role="button" data-slide="next">
-                        <!-- <span class="glyphicon glyphicon-chevron-right"></span> -->
-                        Siguiente
-                    </a>
-                </li>
-            </ul>
+                    <!-- Right -->
+                    <li>
+                        <a class="right" href="#carousel-quiz" role="button" data-slide="next">
+                            <!-- <span class="glyphicon glyphicon-chevron-right"></span> -->
+                            Siguiente
+                        </a>
+                    </li>
+                </ul>
 
-        </div> <!-- Carousel -->
-        {{form.submit}}
-    </form>
-</div> <!-- Collapsible -->
+            </div> <!-- Carousel -->
+            {{form.submit}}
+        </form>
+    </div> <!-- Collapsible -->
+</div>
 {% endmacro %}

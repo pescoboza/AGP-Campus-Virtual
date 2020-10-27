@@ -12,3 +12,5 @@ wkhtmltopdf/
 
 # Mock pdf files.
 *.pdf
+
+questions/
