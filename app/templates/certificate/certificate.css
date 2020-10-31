@@ -2,7 +2,62 @@
     size: A4;
     margin: 0;
 }
-
+@font-face {
+    font-family: 'GlacialIndifferenceRegular';
+    src: url(../../static/fonts/GlacialIndifference-Regular.ttf);
+    font-style: normal;
+    font-weight: normal;
+}
+@font-face{
+    font-family: 'GlacialIndifferenceBold';
+    src: url(../../static/fonts/GlacialIndifference-Bold.ttf);
+    font-style: normal;
+    font-weight: normal;
+}
 body {
     background-color: gold;
 }
+.contenedor {
+    position: relative;
+    text-align: center;
+}
+.nombre {
+    position: absolute;
+    top: 63%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60px;
+    font-family: GlacialIndifferenceBold;
+}
+.texto-superior {
+    position: absolute;
+    font-size: 40px;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: GlacialIndifferenceBold;
+}
+.letra-a {
+    position: absolute;
+    font-size: 28px;
+    top: 52%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: GlacialIndifferenceRegular;
+}
+.texto-inferior {
+    position: absolute;
+    font-size: 22px;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: GlacialIndifferenceRegular;
+}
+.fecha {
+    position: absolute;
+    font-size: 18px;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: GlacialIndifferenceRegular;
+    }
