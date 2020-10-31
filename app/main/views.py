@@ -100,7 +100,7 @@ def test_certificate(name):
 
     # Generate pdf payload using pdfkit
     pdf = pdfkit.from_string(
-        input=rendered, output_path=False, configuration=pdfkit_config,
+        input=rendered, output_path="out.pdf", configuration=pdfkit_config,
         options={
             "enable-local-file-access": None,
             "disable-smart-shrinking": None

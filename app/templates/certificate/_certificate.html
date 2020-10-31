@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <!-- PDFKit Page Settings -->
     <meta name="pdfkit-page-size" content="Letter">
     <meta name="pdfkit-orientation" content="Landscape">
     <meta name="pdfkit-encoding" content="UTF-8">
@@ -8,6 +9,7 @@
     <meta name="pdfkit-margin-bottom" content="0cm">
     <meta name="pdfkit-margin-left" content="0cm">
     <meta name="pdfkit-margin-right" content="0cm">
+
     <title>{% if title %}{{title}}{% else %}Certificado Virtual{% endif %}</title>
     <style>
         @font-face {
@@ -76,6 +78,11 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-family: GlacialIndifferenceRegular;
+        }
+
+        .cert-bg {
+            width: "215.9mm";
+            height: "279.4mm";
         }
     </style>
 </head>
