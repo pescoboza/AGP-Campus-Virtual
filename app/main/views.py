@@ -59,13 +59,10 @@ COURSE_CERT = {
     }
 }
 
-CERT_PDF_CONFIG = {
-    "page-size": "A4",
-    "encoding": "utf8",
-    "margin-top": "0cm",
-    "margin-bottom": "0cm",
-    "margin-left": "0cm",
-    "margin-right": "0cm"
+CERT_PDF_OPTIONS = {
+
+
+    "enable-local-file-access": None
 }
 
 
@@ -106,7 +103,7 @@ def test_certificate(name):
 
     # Generate pdf payload using pdfkit
     pdf = pdfkit.from_string(
-        rendered, False, css="app/static/css/certificate.css", configuration=pdfkit_config)
+        rendered, False, css="app/static/css/certificate.css", configuration=pdfkit_config, options=CERT_PDF_OPTIONS)
 
     # Set up the pdf response headers for a pdf file instead of regular html
     response = make_response(pdf)

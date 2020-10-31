@@ -1,15 +1,22 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../../static/css/certificate.css">
+    <meta name="pdfkit-page-size" content="Letter">
+    <meta name="pdfkit-orientation" content="Landscape">
+    <meta name="pdfkit-encoding" content="UTF-8">
+    <meta name="pdfkit-margin-top" content="0cm">
+    <meta name="pdfkit-margin-bottom" content="0cm">
+    <meta name="pdfkit-margin-left" content="0cm">
+    <meta name="pdfkit-margin-right" content="0cm">
+
+    <!-- <link rel="stylesheet" type="text/css" href="../../static/css/certificate.css"> -->
     <title>{% if title %}{{title}}{% else %}Certificado Virtual{% endif %}</title>
 </head>
 
 <body>
     <div class="contenedor">
-        <img src="../../static/img/{% if background %}{{background}}{% else %}certificate_cervicouterino.png{% endif %}"
-            width="50%">
+        <!-- <img class="cert-bg"
+            src="../../static/img/{% if background %}{{background}}{% else %}certificate_cervicouterino.png{% endif %}"> -->
         <div class="nombre">{% if name %}{{name}}{% else %}PEPITO PÉREZ{% endif %}</div>
         <div class="texto-superior">CONSTANCIA</div>
         <div class="letra-a">A</div>
