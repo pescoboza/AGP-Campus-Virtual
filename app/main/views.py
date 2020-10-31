@@ -38,23 +38,23 @@ def certificate():
 
 COURSE_CERT = {
     "cancer-cerviouterino": {
-        "cert_bg_img": "../../static/img/certificate_cervicouterino.png",
+        "cert_bg_img": "certificate_cervicouterino.png",
         "cert_course_name": "Cáncer Cervicouterino"
     },
     "cancer-mama": {
-        "cert_bg_img": "../../static/img/certificate_mama.png",
+        "cert_bg_img": "certificate_mama.png",
         "cert_course_name": "Cáncer de Mama"
     },
     "cancer-testiculo": {
-        "cert_bg_img": "../../static/img/certificate_testicular.png",
+        "cert_bg_img": "certificate_testicular.png",
         "cert_course_name": "Cáncer de Testículo"
     },
     "cancer-prostata": {
-        "cert_bg_img": "../../static/img/certificate_prostata.png",
+        "cert_bg_img": "certificate_prostata.png",
         "cert_course_name": "Cáncer de Próstata"
     },
     "cancer-pulmon": {
-        "cert_bg_img": "../../static/img/certificate_pulmon.png",
+        "cert_bg_img": "certificate_pulmon.png",
         "cert_course_name": "Cáncer de Pulmón"
     }
 }
@@ -97,7 +97,7 @@ def test_certificate(name):
                                name=cert_name,
                                date=cert_date,
                                course_name=cert_course_name,
-                               background=cert_bg_img).encode("utf-8")
+                               background=cert_bg_img)
 
     print(rendered)
 
