@@ -1,4 +1,3 @@
-
 import os
 import datetime
 from .. import pdfkit_config
@@ -60,11 +59,6 @@ COURSE_CERT = {
     }
 }
 
-CERT_PDF_OPTIONS = {
-    "enable-local-file-access": None,
-    "disable-smart-shrinking": None
-}
-
 
 @main.route("/test-certificate/<name>")
 @login_required
@@ -106,7 +100,12 @@ def test_certificate(name):
 
     # Generate pdf payload using pdfkit
     pdf = pdfkit.from_string(
-        rendered, False, configuration=pdfkit_config, options=CERT_PDF_OPTIONS)
+        input=rendered, output_path=False, configuration=pdfkit_config,
+        options={
+            "enable-local-file-access": None,
+            "disable-smart-shrinking": None
+        }
+    )
 
     # Set up the pdf response headers for a pdf file instead of regular html
     response = make_response(pdf)
