@@ -8,17 +8,85 @@
     <meta name="pdfkit-margin-bottom" content="0cm">
     <meta name="pdfkit-margin-left" content="0cm">
     <meta name="pdfkit-margin-right" content="0cm">
-
-    <!-- <link rel="stylesheet" type="text/css" href="../../static/css/certificate.css"> -->
     <title>{% if title %}{{title}}{% else %}Certificado Virtual{% endif %}</title>
+    <style>
+        @font-face {
+            font-family: 'GlacialIndifferenceRegular';
+            src: url({{font_path}}GlacialIndifference-Regular.ttf);
+            font-style: normal;
+            font-weight: normal;
+        }
+
+        @font-face {
+            font-family: 'GlacialIndifferenceBold';
+            src: url({{font_path}}GlacialIndifference-Bold.ttf);
+            font-style: normal;
+            font-weight: normal;
+        }
+
+        body {
+            background-color: gold;
+        }
+
+        .contenedor {
+            position: relative;
+            text-align: center;
+        }
+
+        .nombre {
+            position: absolute;
+            top: 63%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 30px;
+            font-family: GlacialIndifferenceBold;
+        }
+
+        .texto-superior {
+            position: absolute;
+            font-size: 40px;
+            top: 42%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: GlacialIndifferenceBold;
+        }
+
+        .letra-a {
+            position: absolute;
+            font-size: 28px;
+            top: 52%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: GlacialIndifferenceRegular;
+        }
+
+        .texto-inferior {
+            position: absolute;
+            font-size: 22px;
+            top: 75%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: GlacialIndifferenceRegular;
+        }
+
+        .fecha {
+            position: absolute;
+            font-size: 18px;
+            top: 85%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: GlacialIndifferenceRegular;
+        }
+    </style>
 </head>
 
 <body>
     <div class="contenedor">
-        <!-- <img class="cert-bg"
-            src="../../static/img/{% if background %}{{background}}{% else %}certificate_cervicouterino.png{% endif %}"> -->
-        <div class="nombre">{% if name %}{{name}}{% else %}PEPITO PÉREZ{% endif %}</div>
-        <div class="texto-superior">CONSTANCIA</div>
+        {% if background %}
+        <img class="cert-bg" src="{{background}}">
+        {% endif %}
+        <div class=" nombre">{% if name %}{{name}}{% else %}PEPITO PÉREZ{% endif %}</div>
+        <div class=" texto-superior">CONSTANCIA</div>
         <div class="letra-a">A</div>
         <div class="texto-inferior">Por haber acreditado el programa preventivo
             de:<br>{% if course_name %}"{{course_name}}"{% else %}"Cancer de Uñas"{% endif %}</div>

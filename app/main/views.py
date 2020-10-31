@@ -1,4 +1,5 @@
 
+import os
 import datetime
 from .. import pdfkit_config
 import pdfkit
@@ -60,9 +61,8 @@ COURSE_CERT = {
 }
 
 CERT_PDF_OPTIONS = {
-
-
-    "enable-local-file-access": None
+    "enable-local-file-access": None,
+    "disable-smart-shrinking": None
 }
 
 
@@ -77,7 +77,10 @@ def test_certificate(name):
     # Shorthand for current_user
     cu = current_user
 
-    # Get the certificate data: title, user name, date, course, and background image
+    # Current working dir to set abs path for pdfkit html resources
+    cwd = os.getcwd()
+
+    # Get the certificate data: title, user name, date, course, background image and font path
     cert_title = "Certificado Campus Virtual - {} {} {}".format(
         cu.first_name, cu.paternal_last_name, cu.maternal_last_name)
     cert_name = (
@@ -86,7 +89,9 @@ def test_certificate(name):
     cert_date = "{}/{}/{}".format(cert_date.day,
                                   cert_date.month, cert_date.year)
     cert_course_name = COURSE_CERT[name]["cert_course_name"]
-    cert_bg_img = COURSE_CERT[name]["cert_bg_img"]
+    cert_bg_img = os.path.join(
+        cwd, "app/static/img", COURSE_CERT[name]["cert_bg_img"])
+    cert_font_path = os.path.join(cwd, "app/static/css/fonts/")
 
     # The Jinja rendered string to pass to pdf generator in UTF 8
     rendered = render_template("certificate/_certificate.html",
@@ -94,16 +99,14 @@ def test_certificate(name):
                                name=cert_name,
                                date=cert_date,
                                course_name=cert_course_name,
-                               background=cert_bg_img)
+                               background=cert_bg_img,
+                               font_path=cert_font_path)
 
     print(rendered)
 
-    with open("out.html", 'w', encoding="utf-8") as ofile:
-        ofile.write(rendered)
-
     # Generate pdf payload using pdfkit
     pdf = pdfkit.from_string(
-        rendered, False, css="app/static/css/certificate.css", configuration=pdfkit_config, options=CERT_PDF_OPTIONS)
+        rendered, False, configuration=pdfkit_config, options=CERT_PDF_OPTIONS)
 
     # Set up the pdf response headers for a pdf file instead of regular html
     response = make_response(pdf)

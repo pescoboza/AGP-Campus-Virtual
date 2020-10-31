@@ -1,13 +1,13 @@
 @font-face {
     font-family: 'GlacialIndifferenceRegular';
-    src: url(../../static/fonts/GlacialIndifference-Regular.ttf);
+    src: url({{font_path}}GlacialIndifference-Regular.ttf);
     font-style: normal;
     font-weight: normal;
 }
 
 @font-face {
     font-family: 'GlacialIndifferenceBold';
-    src: url(../../static/fonts/GlacialIndifference-Bold.ttf);
+    src: url({{font_path}}GlacialIndifference-Bold.ttf);
     font-style: normal;
     font-weight: normal;
 }
