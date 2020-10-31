@@ -1,11 +1,22 @@
-<link rel="stylesheet" type="text/css" href="../../static/css/certificate.css">
-<div class="contenedor">
-    <img src="../../static/img/{% if background %}{{background}}{% else %}certificate_cervicouterino.png{% endif %}"
-        width="50%">
-    <div class="nombre">{% if name %}{{name}}{% else %}PEPITO PÉREZ{% endif %}</div>
-    <div class="texto-superior">CONSTANCIA</div>
-    <div class="letra-a">A</div>
-    <div class="texto-inferior">Por haber acreditado el programa preventivo
-        de:<br>{% if course_name %}"{{course_name}}"{% else %}"Cancer de Uñas"{% endif %}</div>
-    <div class="fecha">{% if date %}{{date}}{% else %}30/febrero/2025{% endif %}</div>
-</div>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../static/css/certificate.css">
+    <title>{% if title %}{{title}}{% else %}Certificado Virtual{% endif %}</title>
+</head>
+
+<body>
+    <div class="contenedor">
+        <img src="../../static/img/{% if background %}{{background}}{% else %}certificate_cervicouterino.png{% endif %}"
+            width="50%">
+        <div class="nombre">{% if name %}{{name}}{% else %}PEPITO PÉREZ{% endif %}</div>
+        <div class="texto-superior">CONSTANCIA</div>
+        <div class="letra-a">A</div>
+        <div class="texto-inferior">Por haber acreditado el programa preventivo
+            de:<br>{% if course_name %}"{{course_name}}"{% else %}"Cancer de Uñas"{% endif %}</div>
+        <div class="fecha">{% if date %}{{date}}{% else %}30/febrero/2025{% endif %}</div>
+    </div>
+</body>
+
+</html>

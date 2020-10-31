@@ -59,6 +59,15 @@ COURSE_CERT = {
     }
 }
 
+CERT_PDF_CONFIG = {
+    "page-size": "A4",
+    "encoding": "utf8",
+    "margin-top": "0cm",
+    "margin-bottom": "0cm",
+    "margin-left": "0cm",
+    "margin-right": "0cm"
+}
+
 
 @main.route("/test-certificate/<name>")
 @login_required
@@ -71,28 +80,41 @@ def test_certificate(name):
     # Shorthand for current_user
     cu = current_user
 
-    # Get the certificate data: name, date, course, and background image
+    # Get the certificate data: title, user name, date, course, and background image
+    cert_title = "Certificado Campus Virtual - {} {} {}".format(
+        cu.first_name, cu.paternal_last_name, cu.maternal_last_name)
     cert_name = (
         cu.first_name + ' ' + cu.paternal_last_name + ' ' + cu.maternal_last_name).upper()
     cert_date = datetime.date.today()
-    cert_date = "{}/{}/{}".format(today.day, today.month, today.year)
+    cert_date = "{}/{}/{}".format(cert_date.day,
+                                  cert_date.month, cert_date.year)
     cert_course_name = COURSE_CERT[name]["cert_course_name"]
     cert_bg_img = COURSE_CERT[name]["cert_bg_img"]
 
+    # The Jinja rendered string to pass to pdf generator in UTF 8
     rendered = render_template("certificate/_certificate.html",
+                               title=cert_title,
                                name=cert_name,
                                date=cert_date,
                                course_name=cert_course_name,
-                               background=cert_bg_img)
+                               background=cert_bg_img).encode("utf-8")
 
+    print(rendered)
+
+    with open("out.html", 'w', encoding="utf-8") as ofile:
+        ofile.write(rendered)
+
+    # Generate pdf payload using pdfkit
     pdf = pdfkit.from_string(
-        rendered, False, css="app/templates/certificate/certificate.css", configuration=pdfkit_config)
+        rendered, False, css="app/static/css/certificate.css", configuration=pdfkit_config)
 
+    # Set up the pdf response headers for a pdf file instead of regular html
     response = make_response(pdf)
     response.headers["Content-Type"] = "application/pdf"
-    response.headers["Content-Disposition"] = "inline; filename=Certificado Campus Virtual - {} {} {}.pdf". format(
-        cu.first_name, cu.paternal_last_name, cu.maternal_last_name)
+    response.headers["Content-Disposition"] = "inline; filename={}.pdf". format(
+        cert_title)
 
+    # Return the pdf response to the view
     return response
 
 
