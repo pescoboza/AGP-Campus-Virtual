@@ -13,27 +13,31 @@
     <title>{% if title %}{{title}}{% else %}Certificado Virtual{% endif %}</title>
     <style>
         @font-face {
-            font-family: 'GlacialIndifferenceRegular';
-            src: url({{font_path}}GlacialIndifference-Regular.otf);
+            font-family: "GlacialIndifferenceRegular";
+            src: url("{{font_path}}GlacialIndifference-Regular.otf");
             font-style: normal;
             font-weight: normal;
         }
 
         @font-face {
-            font-family: 'GlacialIndifferenceBold';
-            src: url({{font_path}}GlacialIndifference-Bold.otf);
+            font-family: "GlacialIndifferenceBold";
+            src: url("{{font_path}}GlacialIndifference-Bold.otf");
             font-style: normal;
             font-weight: normal;
         }
+
 
         body {
             background-color: gold;
         }
 
+
         .contenedor {
             position: relative;
             text-align: center;
+            /*font-family: GlacialIndifferenceRegular;*/
         }
+
 
         .nombre {
             position: absolute;
@@ -44,6 +48,7 @@
             font-family: GlacialIndifferenceBold;
         }
 
+
         .texto-superior {
             position: absolute;
             font-size: 40px;
@@ -53,14 +58,16 @@
             font-family: GlacialIndifferenceBold;
         }
 
+
         .letra-a {
             position: absolute;
             font-size: 28px;
             top: 52%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-family: GlacialIndifferenceRegular;
+            /*font-family: GlacialIndifferenceRegular;*/
         }
+
 
         .texto-inferior {
             position: absolute;
@@ -68,8 +75,9 @@
             top: 75%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-family: GlacialIndifferenceRegular;
+            /*font-family: GlacialIndifferenceRegular;*/
         }
+
 
         .fecha {
             position: absolute;
@@ -77,12 +85,13 @@
             top: 85%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-family: GlacialIndifferenceRegular;
+            /*font-family: GlacialIndifferenceRegular;*/
         }
 
+
         .cert-bg {
-            width: "215.9mm";
-            height: "279.4mm";
+            width: 11in;
+            height: 8.5in;
         }
     </style>
 </head>

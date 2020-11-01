@@ -84,10 +84,11 @@ def test_certificate(name):
                                   cert_date.month, cert_date.year)
     cert_course_name = COURSE_CERT[name]["cert_course_name"]
     cert_bg_img = os.path.join(
-        cwd, "app/static/img", COURSE_CERT[name]["cert_bg_img"])
-    cert_font_path = os.path.join(cwd, "app/static/css/fonts/")
+        cwd, "app/static/img", COURSE_CERT[name]["cert_bg_img"]).replace('\\', '/')
+    cert_font_path = os.path.join(
+        cwd, "app/static/css/fonts/").replace('\\', '/')
 
-    # The Jinja rendered string to pass to pdf generator in UTF 8
+    # The Jinja rendered string to pass to pdf generator
     rendered = render_template("certificate/_certificate.html",
                                title=cert_title,
                                name=cert_name,
@@ -96,11 +97,9 @@ def test_certificate(name):
                                background=cert_bg_img,
                                font_path=cert_font_path)
 
-    print(rendered)
-
     # Generate pdf payload using pdfkit
     pdf = pdfkit.from_string(
-        input=rendered, output_path="out.pdf", configuration=pdfkit_config,
+        input=rendered, output_path=False, configuration=pdfkit_config,
         options={
             "enable-local-file-access": None,
             "disable-smart-shrinking": None
@@ -114,6 +113,7 @@ def test_certificate(name):
         cert_title)
 
     # Return the pdf response to the view
+    print(rendered)
     return response
 
 
