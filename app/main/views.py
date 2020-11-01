@@ -20,24 +20,6 @@ def contact():
     return render_template("main/contact.html")
 
 
-# TODO: Remove this mock view.
-# Generate the users pdf certificate.
-@main.route("/mock-certificate")
-@login_required
-def mock_certificate():
-
-    rendered = render_template("certificate/certificate.html")
-    pdf = pdfkit.from_string(
-        rendered, False, css="app/templates/certificate/certificate.css", configuration=pdfkit_config)
-
-    response = make_response(pdf)
-    response.headers["Content-Type"] = "application/pdf"
-    response.headers["Content-Disposition"] = "inline; filename=Certificado Virtual - {} {} {}.pdf".format(
-        current_user.first_name, current_user.paternal_last_name, current_user.maternal_last_name)
-
-    return response
-
-
 COURSE_CERT = {
     "cancer-cerviouterino": {
         "cert_bg_img": "certificate_cervicouterino.png",
@@ -72,8 +54,6 @@ COURSE_CERT = {
 @main.route("/certificate/<name>")
 @login_required
 def certificate(name):
-    print("=============\n\n\n\n\n\n TEST: {}".format(
-        url_for("courses.{}".format(name.replace('-', '_')))))  # TODO: Remove this line
 
     # Validate that a valid url argument for course name was entered
     if name not in COURSE_CERT:
@@ -133,7 +113,4 @@ def certificate(name):
     response.headers["Content-Disposition"] = "inline; filename={}.pdf". format(
         cert_title)
 
-    # Return the pdf response to the view
-    with open("test.html", 'w', encoding="utf-8") as ofile:
-        ofile.write(rendered)
     return response
