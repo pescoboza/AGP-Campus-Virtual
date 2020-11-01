@@ -117,7 +117,6 @@ def test_certificate(name):
         ofile.write(rendered)
     return response
 
-
 # TODO: Remove deprecated view.
 # @main.route("/faq")
 # def faq():

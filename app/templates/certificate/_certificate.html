@@ -12,86 +12,94 @@
 
     <title>{% if title %}{{title}}{% else %}Certificado Virtual{% endif %}</title>
     <style>
-        @font-face {
-            font-family: "GlacialIndifferenceRegular";
-            src: url("file:///{{font_path}}GlacialIndifference-Regular.otf");
-            font-style: normal;
-            font-weight: normal;
-        }
-
-        @font-face {
-            /* font-family: "GlacialIndifferenceBold"; */
-            font-family: "GlacialIndifferenceBold";
-            src: url("file:///{{font_path}}GlacialIndifference-Bold.otf");
-            font-style: normal;
-            font-weight: normal;
-        }
-
-
-        .cert-bg {
+        @viewport {
             width: 11in;
             height: 8.5in;
         }
 
+        @font-face {
+            font-family: "GlacialIndifferenceRegular";
+            src: url("file:///{{font_path}}GlacialIndifference-Regular.otf");
+        }
+
+        @font-face {
+            font-family: "GlacialIndifferenceBold";
+            src: url("file:///{{font_path}}GlacialIndifference-Bold.otf");
+            /* src: url("file:///{{font_path}}christmaseve.ttf"); */
+        }
+
+
+        /* .cert-bg {
+            display: inline;
+            width: 11in;
+            height: 8.5in;
+        } */
 
         body {
-            background-color: gold;
+            background-image: url("file:///{{background}}");
+            /* background-size: 279.4mm 215.9mm; */
+            background-size: 279.9mm 217mm;
+            font-family: GlacialIndifferenceRegular;
         }
 
 
         .contenedor {
-            position: relative;
-            text-align: center;
-            font-family: GlacialIndifferenceRegular;
+            width: 11in;
+            height: 8.4in;
+            position: absolute;
+            left: 0px;
         }
 
+        /* Center elements */
+        .nombre,
+        .texto-superior,
+        .letra-a,
+        .texto-inferior,
+        .fecha {
+            text-align: center;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Apply bold font type */
         .contenedor .nombre,
         .contenedor .texto-superior {
             font-family: GlacialIndifferenceBold;
         }
 
         .nombre {
-            position: absolute;
             top: 63%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+
             font-size: 30px;
         }
 
 
         .texto-superior {
-            position: absolute;
-            font-size: 40px;
             top: 42%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+
+            font-size: 40px;
         }
 
 
         .letra-a {
-            position: absolute;
+            top: 45%;
+
             font-size: 28px;
-            top: 52%;
-            left: 50%;
-            transform: translate(-50%, -50%);
         }
 
 
         .texto-inferior {
-            position: absolute;
+            top: 59%;
+
             font-size: 22px;
-            top: 75%;
-            left: 50%;
-            transform: translate(-50%, -50%);
         }
 
 
         .fecha {
-            position: absolute;
+            top: 63%;
+
             font-size: 18px;
-            top: 85%;
-            left: 50%;
-            transform: translate(-50%, -50%);
         }
     </style>
 </head>
@@ -99,7 +107,7 @@
 <body>
     <div class="contenedor">
         {% if background %}
-        <img class="cert-bg" src="file:///{{background}}">
+        <!-- <img class="cert-bg" src="file:///{{background}}"> -->
         {% endif %}
         <div class="nombre">{% if name %}{{name}}{% else %}PEPITO PÉREZ{% endif %}</div>
         <div class="texto-superior">CONSTANCIA</div>
