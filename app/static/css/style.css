@@ -49,13 +49,13 @@ ul {
 
 /*TODO: Figure out how to change navbar color. 
 Hint selector spefificity.*/
-#navbar.navbar.navbar-inverse {
+/* #navbar.navbar.navbar-inverse {
     background-color: var(--primary);
 }
 
 #navbar.navbar.navbar-inverse nav {
     color: #000;
-}
+} */
 
 #page-content {
     min-height: 500px;
