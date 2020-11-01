@@ -10,19 +10,18 @@
     <meta name="pdfkit-margin-left" content="0cm">
     <meta name="pdfkit-margin-right" content="0cm">
 
-    <title>{% if title %}{{title}}{% else %}Certificado Virtual{% endif %}</title>
+    <title>Certificado Campus Virtual - Pedro Sebastián Escoboza Kick</title>
     <style>
         @font-face {
             font-family: "GlacialIndifferenceRegular";
-            src: url("file:///{{font_path}}GlacialIndifference-Regular.otf");
+            src: url("/app/static/css/fonts/GlacialIndifference-Regular.otf");
             font-style: normal;
             font-weight: normal;
         }
 
         @font-face {
-            /* font-family: "GlacialIndifferenceBold"; */
             font-family: "GlacialIndifferenceBold";
-            src: url("file:///{{font_path}}GlacialIndifference-Bold.otf");
+            src: url("/app/static/css/fonts/GlacialIndifference-Bold.otf");
             font-style: normal;
             font-weight: normal;
         }
@@ -49,6 +48,7 @@
         .contenedor .texto-superior {
             font-family: GlacialIndifferenceBold;
         }
+
 
         .nombre {
             position: absolute;
@@ -98,15 +98,15 @@
 
 <body>
     <div class="contenedor">
-        {% if background %}
-        <img class="cert-bg" src="file:///{{background}}">
-        {% endif %}
-        <div class="nombre">{% if name %}{{name}}{% else %}PEPITO PÉREZ{% endif %}</div>
+
+        <img class="cert-bg" src="/app/static/img/certificate_prostata.png">
+
+        <div class="nombre">PEDRO SEBASTIÁN ESCOBOZA KICK</div>
         <div class="texto-superior">CONSTANCIA</div>
         <div class="letra-a">A</div>
         <div class="texto-inferior">Por haber acreditado el programa preventivo
-            de:<br>{% if course_name %}"{{course_name}}"{% else %}"Cancer de Uñas"{% endif %}</div>
-        <div class="fecha">{% if date %}{{date}}{% else %}30/febrero/2025{% endif %}</div>
+            de:<br>"Cáncer de Próstata"</div>
+        <div class="fecha">31/10/2020</div>
     </div>
 </body>
 

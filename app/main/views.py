@@ -113,7 +113,8 @@ def test_certificate(name):
         cert_title)
 
     # Return the pdf response to the view
-    print(rendered)
+    with open("test.html", 'w', encoding="utf-8") as ofile:
+        ofile.write(rendered)
     return response
 
 
