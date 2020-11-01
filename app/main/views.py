@@ -6,6 +6,7 @@ from flask import flash, redirect, render_template, url_for, make_response
 from flask_login import current_user, login_user, logout_user, login_required
 
 from . import main
+from ..models import User
 
 
 @main.route("/")
@@ -19,10 +20,11 @@ def contact():
     return render_template("main/contact.html")
 
 
-# Generate the users pdf certofocate.
-@main.route("/certificate")
+# TODO: Remove this mock view.
+# Generate the users pdf certificate.
+@main.route("/mock-certificate")
 @login_required
-def certificate():
+def mock_certificate():
 
     rendered = render_template("certificate/certificate.html")
     pdf = pdfkit.from_string(
@@ -39,30 +41,39 @@ def certificate():
 COURSE_CERT = {
     "cancer-cerviouterino": {
         "cert_bg_img": "certificate_cervicouterino.png",
-        "cert_course_name": "Cáncer Cervicouterino"
+        "cert_course_name": "Cáncer Cervicouterino",
+        "quiz_code": "crvu"
     },
     "cancer-mama": {
         "cert_bg_img": "certificate_mama.png",
-        "cert_course_name": "Cáncer de Mama"
+        "cert_course_name": "Cáncer de Mama",
+        "quiz_code": "mama"
+
     },
     "cancer-testiculo": {
         "cert_bg_img": "certificate_testicular.png",
-        "cert_course_name": "Cáncer de Testículo"
+        "cert_course_name": "Cáncer de Testículo",
+        "quiz_code": "tstc"
     },
     "cancer-prostata": {
         "cert_bg_img": "certificate_prostata.png",
-        "cert_course_name": "Cáncer de Próstata"
+        "cert_course_name": "Cáncer de Próstata",
+        "quiz_code": "psta"
+
     },
     "cancer-pulmon": {
         "cert_bg_img": "certificate_pulmon.png",
-        "cert_course_name": "Cáncer de Pulmón"
+        "cert_course_name": "Cáncer de Pulmón",
+        "quiz_code": "plmn"
     }
 }
 
 
-@main.route("/test-certificate/<name>")
+@main.route("/certificate/<name>")
 @login_required
-def test_certificate(name):
+def certificate(name):
+    print("=============\n\n\n\n\n\n TEST: {}".format(
+        url_for("courses.{}".format(name.replace('-', '_')))))  # TODO: Remove this line
 
     # Validate that a valid url argument for course name was entered
     if name not in COURSE_CERT:
@@ -70,6 +81,16 @@ def test_certificate(name):
 
     # Shorthand for current_user
     cu = current_user
+
+    # Fetch the current user from the database
+    user = User.objects(email=cu.email).first()
+    if user == None:
+        return redirect(url_for("main.index"))
+
+    # Check if user has completed the quiz
+    if not user.has_passed_quiz(COURSE_CERT[name]["quiz_code"]):
+        flash("Debe completar la evaluación para obtener su certificado.")
+        return redirect(url_for("courses.{}".format(name.replace('-', '_'))))
 
     # Current working dir to set abs path for pdfkit html resources
     cwd = os.getcwd()
@@ -116,8 +137,3 @@ def test_certificate(name):
     with open("test.html", 'w', encoding="utf-8") as ofile:
         ofile.write(rendered)
     return response
-
-# TODO: Remove deprecated view.
-# @main.route("/faq")
-# def faq():
-#     return render_template("main/faq.html")

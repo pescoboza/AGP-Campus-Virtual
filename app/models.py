@@ -96,6 +96,13 @@ class User(UserMixin, me.Document):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    # Tells if the user has completed succesfully the spefied quiz given a code
+    # Returns None if invalid quiz code
+    def has_passed_quiz(self, quiz_code):
+        if quiz_code not in QUIZ_CODES:
+            return None
+        return self.quiz_data[quiz_code]["is_passed"]
+
     # Checks if the user has passed the needed tests to be certified.
     def can_be_certified(self):
         for qc in QUIZ_CODES:
