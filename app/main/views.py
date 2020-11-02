@@ -121,9 +121,7 @@ def certificate(name):
 @main.route("/data")
 @login_required
 def data():
-    """
-    Admin data view.
-    """
+    """Admin data view."""
 
     # Fetch and validate user
     user = User.objects(email=current_user.email).first()
@@ -137,9 +135,7 @@ def data():
 @main.route("/download-report")
 @login_required
 def download_report():
-    """
-    Generates csv reports from user data.
-    """
+    """Generates csv reports from user data."""
 
     # Fetch and validate user
     user = User.objects(email=current_user.email).first()
@@ -148,20 +144,35 @@ def download_report():
         return redirect(url_for("main.index"))
 
     # CSV lines formatting
-    header = "gender, occupation, registered_on, birth_date\n"
-    line_template = "{g}, {o}, {r}, {b}\n"
-    temp_filename = "report_tmp{}.csv".format(
-        str(time.time()).replace('.', ''))  # Dynamic file linked to time
+    header = "gender, occupation, registered_on, birth_date, tstc_is_passed, tstc_passed_on, crvu_is_passed, crvu_passed_on, plmn_is_passed, plmn_passed_on, psta_is_passed, psta_passed_on, mama_is_passed, mama_passed_on, diag_is_passed, diag_passed_on\n"
+    line_template =  \
+        "{gender}, {occupation}, {registered_on}, {birth_date}, {tstc_is_passed}, {tstc_passed_on}, {crvu_is_passed}, {crvu_passed_on}, {plmn_is_passed}, {plmn_passed_on}, {psta_is_passed}, {psta_passed_on}, {mama_is_passed}, {mama_passed_on}, {diag_is_passed}, {diag_passed_on}\n"
 
-    # Generate temporary CSV file
-    with open(temp_filename, 'w', encoding="utf-8") as ofile:
+    # Dynamic filename linked to time
+    temp_filename = "report_tmp{}.csv".format(
+        str(time.time()).replace('.', ''))
+
+   # Generate temporary CSV file
+   with open(temp_filename, 'w', encoding="utf-8") as ofile:
         ofile.write(header)
         for user in User.objects:
             line = line_template.format(
-                g=user.gender,
-                o=user.occupation,
-                r=user.registered_on,
-                b=user.birth_date)
+                gender=user.gender
+                occupation=user.occupation
+                registered_on=user.registered_on
+                birth_date=user.birth_date
+                tstc_is_passed=int(user.quiz_data["tstc"]["is_passed"])
+                tstc_passed_on=user.quiz_data["tstc"]["passed_on"]
+                crvu_is_passed=int(user.quiz_data["crvu"]["is_passed"])
+                crvu_passed_on=user.quiz_data["crvu"]["passed_on"]
+                plmn_is_passed=int(user.quiz_data["plmn"]["is_passed"])
+                plmn_passed_on=user.quiz_data["plmn"]["passed_on"]
+                psta_is_passed=int(user.quiz_data["psta"]["is_passed"])
+                psta_passed_on=user.quiz_data["psta"]["passed_on"]
+                mama_is_passed=int(user.quiz_data["mama"]["is_passed"])
+                mama_passed_on=user.quiz_data["mama"]["passed_on"]
+                diag_is_passed=int(user.quiz_data["diag"]["is_passed"])
+                diag_passed_on=user.quiz_data["diag"]["passed_on"])
             ofile.write(line)
 
     # Read temporary file in to bitstream and delete it
