@@ -71,16 +71,16 @@ USER_QUIZ_DATA = {
     }
 }
 
-# User permissions in ascending order
-USER_PERMS = {
-    "certification": 0,  # Can also receive certificates
-    "data": 1,  # Has access to data dashboard and report generation
-    "admin": 2  # Full set of permissions
-}
-
 
 class User(UserMixin, me.Document):
     meta = {"collection": "user"}
+
+    # User permissions in ascending order
+    USER_PERMS = {
+        "certification": 0,  # Can also receive certificates
+        "data": 1,  # Has access to data dashboard and report generation
+        "admin": 2  # Full set of permissions
+    }
 
     email = me.StringField(max_length=db_str_len, required=True)
     first_name = me.StringField(
@@ -96,7 +96,7 @@ class User(UserMixin, me.Document):
     quiz_data = me.DictField()
     is_certified = me.BooleanField(default=False)
     certified_on = me.DateTimeField()
-    perm_level = me.IntField(default=USER_PERMS["certification"])
+    perm_level = me.IntField(default=User.USER_PERMS["certification"])
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -107,13 +107,12 @@ class User(UserMixin, me.Document):
     # Changes the user's permissions given the matchin permission label string
     # Has no effect if no matching tag is provided
     def update_permissions(self, perm_tag):
-        if perm_tag in USER_PERMS:
-            self.perm_level = USER_PERMS[perm_tag]
-
-
+        if perm_tag in User.USER_PERMS:
+            self.perm_level = User.USER_PERMS[perm_tag]
 
     # Tells if the user has completed succesfully the spefied quiz given a code
     # Returns None if invalid quiz code
+
     def has_passed_quiz(self, quiz_code):
         if quiz_code not in QUIZ_CODES:
             return None
