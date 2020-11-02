@@ -96,7 +96,7 @@ class User(UserMixin, me.Document):
     quiz_data = me.DictField()
     is_certified = me.BooleanField(default=False)
     certified_on = me.DateTimeField()
-    perm_level = me.IntField(default=User.USER_PERMS["certification"])
+    perm_level = me.IntField(default=USER_PERMS["certification"])
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

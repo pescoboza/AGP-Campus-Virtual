@@ -116,8 +116,26 @@ def certificate(name):
     return response
 
 
-@main.route("report")
+@main.route("/report")
 @login_required
 def generate_report():
+
+    # Fetch and validate user
     user = User.objects(email=current_user.email).first()
-    if user is None or user.perm_level < User.USER_PERMS["data"]
+    if user is None or user.has_perm("data"):
+        flash("Debe contar con los permisos necesarios para acceder a esta página.")
+        return redirect(url_for("main.index"))
+
+    header = "gender, occupation, registered_on, birth_date\n"
+    line_template = "{g}, {o}, {r}, {b}\n"
+    with open("report.csv", 'w', encoding="utf-8") as ofile:
+        ofile.write(header)
+        for user in User.objects:
+            line = line_template.format(
+                g=user.gender,
+                o=user.occupation,
+                r=user.registered_on,
+                b=user.birth_date)
+            ofile.write(line)
+
+    return "<h1>See the files</h1>"
