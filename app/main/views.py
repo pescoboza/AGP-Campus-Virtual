@@ -152,26 +152,26 @@ def download_report():
     temp_filename = "report_tmp{}.csv".format(
         str(time.time()).replace('.', ''))
 
-   # Generate temporary CSV file
-   with open(temp_filename, 'w', encoding="utf-8") as ofile:
+    # Generate temporary CSV file
+    with open(temp_filename, 'w', encoding="utf-8") as ofile:
         ofile.write(header)
         for user in User.objects:
             line = line_template.format(
-                gender=user.gender
-                occupation=user.occupation
-                registered_on=user.registered_on
-                birth_date=user.birth_date
-                tstc_is_passed=int(user.quiz_data["tstc"]["is_passed"])
-                tstc_passed_on=user.quiz_data["tstc"]["passed_on"]
-                crvu_is_passed=int(user.quiz_data["crvu"]["is_passed"])
-                crvu_passed_on=user.quiz_data["crvu"]["passed_on"]
-                plmn_is_passed=int(user.quiz_data["plmn"]["is_passed"])
-                plmn_passed_on=user.quiz_data["plmn"]["passed_on"]
-                psta_is_passed=int(user.quiz_data["psta"]["is_passed"])
-                psta_passed_on=user.quiz_data["psta"]["passed_on"]
-                mama_is_passed=int(user.quiz_data["mama"]["is_passed"])
-                mama_passed_on=user.quiz_data["mama"]["passed_on"]
-                diag_is_passed=int(user.quiz_data["diag"]["is_passed"])
+                gender=user.gender,
+                occupation=user.occupation,
+                registered_on=user.registered_on,
+                birth_date=user.birth_date,
+                tstc_is_passed=int(user.quiz_data["tstc"]["is_passed"]),
+                tstc_passed_on=user.quiz_data["tstc"]["passed_on"],
+                crvu_is_passed=int(user.quiz_data["crvu"]["is_passed"]),
+                crvu_passed_on=user.quiz_data["crvu"]["passed_on"],
+                plmn_is_passed=int(user.quiz_data["plmn"]["is_passed"]),
+                plmn_passed_on=user.quiz_data["plmn"]["passed_on"],
+                psta_is_passed=int(user.quiz_data["psta"]["is_passed"]),
+                psta_passed_on=user.quiz_data["psta"]["passed_on"],
+                mama_is_passed=int(user.quiz_data["mama"]["is_passed"]),
+                mama_passed_on=user.quiz_data["mama"]["passed_on"],
+                diag_is_passed=int(user.quiz_data["diag"]["is_passed"]),
                 diag_passed_on=user.quiz_data["diag"]["passed_on"])
             ofile.write(line)
 
