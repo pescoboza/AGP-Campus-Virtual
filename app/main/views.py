@@ -114,3 +114,10 @@ def certificate(name):
         cert_title)
 
     return response
+
+
+@main.route("report")
+@login_required
+def generate_report():
+    user = User.objects(email=current_user.email).first()
+    if user is None or user.perm_level < User.USER_PERMS["data"]

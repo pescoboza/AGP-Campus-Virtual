@@ -104,16 +104,29 @@ class User(UserMixin, me.Document):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-    # Changes the user's permissions given the matchin permission label string
-    # Has no effect if no matching tag is provided
-    def update_permissions(self, perm_tag):
+    def has_perm(self, perm_tag):
+        """
+        Returns wether of not the user has at least the specified permission level
+        identified by the given permission level tag.
+        Returns None if the tag is invalid.
+        """
+        if perm_tag not in User.USER_PERMS:
+            return None
+        return self.perm_level >= User.USER_PERMS[perm_tag]
+
+    def update_perm(self, perm_tag):
+        """
+        Changes the user's permissions given the matchin permission label string
+        Has no effect if no matching tag is provided
+        """
         if perm_tag in User.USER_PERMS:
             self.perm_level = User.USER_PERMS[perm_tag]
 
-    # Tells if the user has completed succesfully the spefied quiz given a code
-    # Returns None if invalid quiz code
-
     def has_passed_quiz(self, quiz_code):
+        """
+        Tells if the user has completed succesfully the spefied quiz given a code
+        Returns None if invalid quiz code
+        """
         if quiz_code not in QUIZ_CODES:
             return None
         return self.quiz_data[quiz_code]["is_passed"]
