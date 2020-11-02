@@ -48,26 +48,32 @@ USER_QUIZ_DATA = {
     "tstc": {  # Test code
         "score": [0, 3],  # Actual and max score.
         "is_passed": False,  # Whether the user passed the test.
+        "passed_on": ""  # Datetime timestamp
     },
     "crvu": {
         "score": [0, 3],
         "is_passed": False,
+        "passed_on": ""
     },
     "plmn": {
         "score": [0, 3],
         "is_passed": False,
+        "passed_on": ""
     },
     "psta": {
         "score": [0, 3],
         "is_passed": False,
+        "passed_on": ""
     },
     "mama": {
         "score": [0, 3],
         "is_passed": False,
+        "passed_on": ""
     },
     "diag": {
         "score": [0, 10],
         "is_passed": False,
+        "passed_on": ""
     }
 }
 
@@ -105,31 +111,36 @@ class User(UserMixin, me.Document):
         return check_password_hash(self.password_hash, password)
 
     def has_perm(self, perm_tag):
-        """
-        Returns wether of not the user has at least the specified permission level
+        """Returns wether of not the user has at least the specified permission level
         identified by the given permission level tag.
-        Returns None if the tag is invalid.
-        """
+        Returns None if the tag is invalid."""
         if perm_tag not in User.USER_PERMS:
             return None
         return self.perm_level >= User.USER_PERMS[perm_tag]
 
     def update_perm(self, perm_tag):
-        """
-        Changes the user's permissions given the matchin permission label string
-        Has no effect if no matching tag is provided
-        """
+        """Changes the user's permissions given the matchin permission label string
+        Has no effect if no matching tag is provided"""
         if perm_tag in User.USER_PERMS:
             self.perm_level = User.USER_PERMS[perm_tag]
 
     def has_passed_quiz(self, quiz_code):
-        """
-        Tells if the user has completed succesfully the spefied quiz given a code
-        Returns None if invalid quiz code
-        """
+        """Tells if the user has completed succesfully the spefied quiz given a code
+        Returns None if invalid quiz code"""
         if quiz_code not in QUIZ_CODES:
             return None
         return self.quiz_data[quiz_code]["is_passed"]
+
+    def set_passed_quiz(self, quiz_code, is_passed=True, date=None):
+        """Takes a quiz code and updates the user's passing status and datetime.
+        Fail silently if given an invalid quiz code."""
+        if quiz_code in QUIZ_CODES:
+            quiz_field = self.quiz_data[quiz_code]
+            quiz_field["is_passed"] = is_passed
+            if is_passed:
+                quiz_field["passed_on"] = date or datetime.now()
+            else:
+                quiz_field["passed_on"] = ""
 
     # Checks if the user has passed the needed tests to be certified.
     def can_be_certified(self):
