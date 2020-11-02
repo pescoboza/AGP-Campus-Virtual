@@ -126,7 +126,7 @@ def data():
 
     # Fetch and validate user
     user = User.objects(email=current_user.email).first()
-    if user is None or user.has_perm("data"):
+    if user is None or not user.has_perm("data"):
         flash("Debe contar con los permisos necesarios para acceder a esta página.")
         return redirect(url_for("main.index"))
 
@@ -142,7 +142,7 @@ def download_report():
 
     # Fetch and validate user
     user = User.objects(email=current_user.email).first()
-    if user is None or user.has_perm("data"):
+    if user is None or not user.has_perm("data"):
         flash("Debe contar con los permisos necesarios para acceder a esta página.")
         return redirect(url_for("main.index"))
 
