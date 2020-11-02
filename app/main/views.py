@@ -119,6 +119,7 @@ def certificate(name):
 
 
 @main.route("/data")
+@login_required
 def data():
     """
     Admin data view.
