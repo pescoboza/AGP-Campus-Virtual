@@ -184,3 +184,17 @@ def download_report():
 
     flash("El reporte ha sido enviado.")
     return send_file(file_data, mimetype="application/csv", as_attachment=True, attachment_filename="user_report.csv")
+
+
+@main.route("/data-dashboard")
+@login_required
+def data_dashboard():
+    """Displays data dashboard"""
+
+    # Fetch and validate user
+    user = User.objects(email=current_user.email).first()
+    if user is None or not user.has_perm("data"):
+        flash("Debe contar con los permisos necesarios para acceder a esta página.")
+        return redirect(url_for("main.index"))
+
+    return render_template("data/data_dashboard.html")
