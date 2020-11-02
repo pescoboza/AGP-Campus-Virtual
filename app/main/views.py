@@ -1,8 +1,10 @@
 import os
+import io
+import time
 import datetime
 from .. import pdfkit_config
 import pdfkit
-from flask import flash, redirect, render_template, url_for, make_response
+from flask import flash, redirect, render_template, url_for, make_response, send_file, after_this_request
 from flask_login import current_user, login_user, logout_user, login_required
 
 from . import main
@@ -116,9 +118,11 @@ def certificate(name):
     return response
 
 
-@main.route("/report")
-@login_required
-def generate_report():
+@main.route("/data")
+def data():
+    """
+    Admin data view.
+    """
 
     # Fetch and validate user
     user = User.objects(email=current_user.email).first()
@@ -126,9 +130,30 @@ def generate_report():
         flash("Debe contar con los permisos necesarios para acceder a esta página.")
         return redirect(url_for("main.index"))
 
+    return render_template("/main/data.html")
+
+
+@main.route("/download-report")
+@login_required
+def download_report():
+    """
+    Generates csv reports from user data.
+    """
+
+    # Fetch and validate user
+    user = User.objects(email=current_user.email).first()
+    if user is None or user.has_perm("data"):
+        flash("Debe contar con los permisos necesarios para acceder a esta página.")
+        return redirect(url_for("main.index"))
+
+    # CSV lines formatting
     header = "gender, occupation, registered_on, birth_date\n"
     line_template = "{g}, {o}, {r}, {b}\n"
-    with open("report.csv", 'w', encoding="utf-8") as ofile:
+    temp_filename = "report_tmp{}.csv".format(
+        str(time.time()).replace('.', ''))  # Dynamic file linked to time
+
+    # Generate temporary CSV file
+    with open(temp_filename, 'w', encoding="utf-8") as ofile:
         ofile.write(header)
         for user in User.objects:
             line = line_template.format(
@@ -138,4 +163,12 @@ def generate_report():
                 b=user.birth_date)
             ofile.write(line)
 
-    return "<h1>See the files</h1>"
+    # Read temporary file in to bitstream and delete it
+    file_data = io.BytesIO()
+    with open(temp_filename, "rb") as ifstream:
+        file_data.write(ifstream.read())
+    file_data.seek(0)
+    os.remove(temp_filename)
+
+    flash("El reporte ha sido enviado.")
+    return send_file(file_data, mimetype="application/csv", as_attachment=True, attachment_filename="user_report.csv")
