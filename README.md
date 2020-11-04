@@ -1,5 +1,15 @@
 # AGP Campus Virtal
 
+
+## TODO
+- Finish the footer: replace mock content. (Yes, YOU reading this can do this...)
+- Fix PDFKit issue: not able to load fonts from the same subset.
+- Add data dashboard integration: MongoDB to embedded tableau.
+    - Add CSV/Excel report generator.
+    - Admin users.
+    - Automation: generate CSV report and update tableau public.
+
+
 ## Running for the first time
 Install pipenv:
 ```
@@ -48,10 +58,3 @@ touch .vscode/settings.json
     }
 }
 ```
-
-## TODO
-- Improve database query efficiency.
-- Explore caching options.
-- Add user certification expedition.
-- Add data dashboard.
-- Design user certificate.

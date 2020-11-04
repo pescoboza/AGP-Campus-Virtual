@@ -2,7 +2,7 @@
 {% from "courses/_quiz.html" import quiz %}
 
 {% block title %}
-AGP - Diagnostico
+AGP - Diagnóstico
 {% endblock %}
 
 {% block page_content %}
@@ -12,11 +12,14 @@ AGP - Diagnostico
     y propagarse a otras partes del cuerpo.
 </div><br>
 
-<div class="centered-text">
-    [+ info en general e imagen]
-</div><br>
+<h2><b>Ejemplo de crucigramas</b></h2><br>
 
-<h1><b>Examen Autodiagnóstico</b></h1><br>
+<div>
+    <iframe src="https://www.crucigrama-online.com/userembed/crucigrama-de-ejemplo" width="800" height="600">
+    </iframe>
+</div>
+
+<h2><b>Examen Autodiagnóstico</b></h2><br>
 
 {% if form and score != None and max_score != None %}
 {{quiz(form, score, max_score)}}

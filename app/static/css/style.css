@@ -1,0 +1,66 @@
+@font-face {
+    font-family: GlacialIndifferenceRegular;
+    src: url(fonts/GlacialIndifference-Regular.otf);
+}
+
+:root {
+    --primary: #67C5D2;
+    --detail-font: #FC8476;
+}
+
+* {
+    font-family: "GlacialIndifferenceRegular";
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+h2 {
+    font-weight: bold;
+    font-style: bold;
+}
+
+ul {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.center {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    /*width: 50%;*/
+}
+
+.fw-bold {
+    font-weight: bold;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.img-banner {
+    width: 100%;
+}
+
+/*TODO: Figure out how to change navbar color. 
+Hint selector spefificity.*/
+/* #navbar.navbar.navbar-inverse {
+    background-color: var(--primary);
+}
+
+#navbar.navbar.navbar-inverse nav {
+    color: #000;
+} */
+
+#page-content {
+    min-height: 500px;
+}
+
+#quiz-box {
+    padding-bottom: 3cm;
+}
