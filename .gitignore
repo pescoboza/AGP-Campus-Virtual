@@ -13,4 +13,8 @@ wkhtmltopdf/
 # Mock pdf files.
 *.pdf
 
+# Data csv reports
+*.csv
+
+# Question JSON sources
 questions/
