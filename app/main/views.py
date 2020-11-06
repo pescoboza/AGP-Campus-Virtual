@@ -175,18 +175,29 @@ def download_report():
     }
 
     # Generate temporary CSV file
-    with open(temp_filename, 'w', encoding="utf-8") as ofile:
-        ofile.write(header)
-        for user in User.objects:
-            line = line_template.format(**line_fmt)
-            ofile.write(line)
+    try:
+        with open(temp_filename, 'w', encoding="utf-8") as ofile:
+            ofile.write(header)
+            for user in User.objects:
+                line = line_template.format(**line_fmt)
+                ofile.write(line)
 
-    # Read temporary file in to bitstream and delete it
-    file_data = io.BytesIO()
-    with open(temp_filename, "rb") as ifstream:
-        file_data.write(ifstream.read())
-    file_data.seek(0)
-    os.remove(temp_filename)
+        # Read temporary file in to bitstream and delete it
+        file_data = io.BytesIO()
+        with open(temp_filename, "rb") as ifstream:
+            file_data.write(ifstream.read())
+        file_data.seek(0)
+
+        raise Exception("Kaputt")
+    except Exception as e:
+        print("[ERROR] {}".format(e))
+
+    else:
+        print("[INFO] Generated user report for user with email {}".format(
+            current_user.email))
+    
+    finally:
+        os.remove(temp_filename)
 
     # flash("El reporte ha sido enviado.")
     return send_file(file_data, mimetype="application/csv", as_attachment=True, attachment_filename="user_report.csv")
