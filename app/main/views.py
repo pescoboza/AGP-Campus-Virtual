@@ -1,8 +1,10 @@
 import os
+import io
+import time
 import datetime
 from .. import pdfkit_config
 import pdfkit
-from flask import flash, redirect, render_template, url_for, make_response
+from flask import flash, redirect, render_template, url_for, make_response, send_file, after_this_request
 from flask_login import current_user, login_user, logout_user, login_required
 
 from . import main
@@ -114,3 +116,102 @@ def certificate(name):
         cert_title)
 
     return response
+
+
+@main.route("/data")
+@login_required
+def data():
+    """Admin data view."""
+
+    # Fetch and validate user
+    user = User.objects(email=current_user.email).first()
+    if user is None or not user.has_perm("data"):
+        flash("Debe contar con los permisos necesarios para acceder a esta página.")
+        return redirect(url_for("main.index"))
+
+    return render_template("/main/data.html")
+
+
+@main.route("/download-report")
+@login_required
+def download_report():
+    """Generates csv reports from user data and downloads it for the user."""
+
+    # Fetch and validate user
+    user = User.objects(email=current_user.email).first()
+    if user is None or not user.has_perm("data"):
+        flash("Debe contar con los permisos necesarios para acceder a esta página.")
+        return redirect(url_for("main.index"))
+
+    # CSV lines formatting
+    header = "gender, occupation, registered_on, birth_date, tstc_is_passed, tstc_passed_on, crvu_is_passed, crvu_passed_on, plmn_is_passed, plmn_passed_on, psta_is_passed, psta_passed_on, mama_is_passed, mama_passed_on, diag_is_passed, diag_passed_on\n"
+    line_template =  \
+        "{gender}, {occupation}, {registered_on}, {birth_date}, {tstc_is_passed}, {tstc_passed_on}, {crvu_is_passed}, {crvu_passed_on}, {plmn_is_passed}, {plmn_passed_on}, {psta_is_passed}, {psta_passed_on}, {mama_is_passed}, {mama_passed_on}, {diag_is_passed}, {diag_passed_on}\n"
+
+    # Dynamic filename linked to time
+    temp_filename = "report_tmp{}.csv".format(
+        str(time.time()).replace('.', ''))
+
+    # Build dictionary to format string for csv line
+    line_fmt = {
+        "gender": user.gender,
+        "occupation": user.occupation,
+        "registered_on": user.registered_on,
+        "birth_date": user.birth_date,
+
+        "tstc_is_passed": int(user.quiz_data["tstc"]["is_passed"]),
+        "crvu_is_passed": int(user.quiz_data["crvu"]["is_passed"]),
+        "plmn_is_passed": int(user.quiz_data["plmn"]["is_passed"]),
+        "psta_is_passed": int(user.quiz_data["psta"]["is_passed"]),
+        "mama_is_passed": int(user.quiz_data["mama"]["is_passed"]),
+        "diag_is_passed": int(user.quiz_data["diag"]["is_passed"]),
+
+        "tstc_passed_on": user.quiz_data["tstc"]["passed_on"],
+        "crvu_passed_on": user.quiz_data["crvu"]["passed_on"],
+        "plmn_passed_on": user.quiz_data["plmn"]["passed_on"],
+        "psta_passed_on": user.quiz_data["psta"]["passed_on"],
+        "mama_passed_on": user.quiz_data["mama"]["passed_on"],
+        "diag_passed_on": user.quiz_data["diag"]["passed_on"]
+    }
+
+    # Generate temporary CSV file
+    try:
+        with open(temp_filename, 'w', encoding="utf-8") as ofile:
+            ofile.write(header)
+            for user in User.objects:
+                line = line_template.format(**line_fmt)
+                ofile.write(line)
+
+        # Read temporary file in to bitstream and delete it
+        file_data = io.BytesIO()
+        with open(temp_filename, "rb") as ifstream:
+            file_data.write(ifstream.read())
+        file_data.seek(0)
+
+        raise Exception("Kaputt")
+    except Exception as e:
+        print("[ERROR] {}".format(e))
+
+    else:
+        print("[INFO] Generated user report for user with email {}".format(
+            current_user.email))
+    
+    finally:
+        os.remove(temp_filename)
+
+    # flash("El reporte ha sido enviado.")
+    return send_file(file_data, mimetype="application/csv", as_attachment=True, attachment_filename="user_report.csv")
+
+
+@main.route("/data-dashboard")
+@login_required
+def data_dashboard():
+    """Displays data dashboard."""
+
+    # Fetch and validate user
+    user = User.objects(email=current_user.email).first()
+    if user is None or not user.has_perm("data"):
+        flash("Debe contar con los permisos necesarios para acceder a esta página.")
+        return redirect(url_for("main.index"))
+
+    return render_template("data/data_dashboard.html")
