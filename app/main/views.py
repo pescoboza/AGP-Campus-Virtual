@@ -135,7 +135,7 @@ def data():
 @main.route("/download-report")
 @login_required
 def download_report():
-    """Generates csv reports from user data."""
+    """Generates csv reports from user data and downloads it for the user."""
 
     # Fetch and validate user
     user = User.objects(email=current_user.email).first()
@@ -152,44 +152,61 @@ def download_report():
     temp_filename = "report_tmp{}.csv".format(
         str(time.time()).replace('.', ''))
 
+    # Build dictionary to format string for csv line
+    line_fmt = {
+        "gender": user.gender,
+        "occupation": user.occupation,
+        "registered_on": user.registered_on,
+        "birth_date": user.birth_date,
+
+        "tstc_is_passed": int(user.quiz_data["tstc"]["is_passed"]),
+        "crvu_is_passed": int(user.quiz_data["crvu"]["is_passed"]),
+        "plmn_is_passed": int(user.quiz_data["plmn"]["is_passed"]),
+        "psta_is_passed": int(user.quiz_data["psta"]["is_passed"]),
+        "mama_is_passed": int(user.quiz_data["mama"]["is_passed"]),
+        "diag_is_passed": int(user.quiz_data["diag"]["is_passed"]),
+
+        "tstc_passed_on": user.quiz_data["tstc"]["passed_on"],
+        "crvu_passed_on": user.quiz_data["crvu"]["passed_on"],
+        "plmn_passed_on": user.quiz_data["plmn"]["passed_on"],
+        "psta_passed_on": user.quiz_data["psta"]["passed_on"],
+        "mama_passed_on": user.quiz_data["mama"]["passed_on"],
+        "diag_passed_on": user.quiz_data["diag"]["passed_on"]
+    }
+
     # Generate temporary CSV file
-    with open(temp_filename, 'w', encoding="utf-8") as ofile:
-        ofile.write(header)
-        for user in User.objects:
-            line = line_template.format(
-                gender=user.gender,
-                occupation=user.occupation,
-                registered_on=user.registered_on,
-                birth_date=user.birth_date,
-                tstc_is_passed=int(user.quiz_data["tstc"]["is_passed"]),
-                tstc_passed_on=user.quiz_data["tstc"]["passed_on"],
-                crvu_is_passed=int(user.quiz_data["crvu"]["is_passed"]),
-                crvu_passed_on=user.quiz_data["crvu"]["passed_on"],
-                plmn_is_passed=int(user.quiz_data["plmn"]["is_passed"]),
-                plmn_passed_on=user.quiz_data["plmn"]["passed_on"],
-                psta_is_passed=int(user.quiz_data["psta"]["is_passed"]),
-                psta_passed_on=user.quiz_data["psta"]["passed_on"],
-                mama_is_passed=int(user.quiz_data["mama"]["is_passed"]),
-                mama_passed_on=user.quiz_data["mama"]["passed_on"],
-                diag_is_passed=int(user.quiz_data["diag"]["is_passed"]),
-                diag_passed_on=user.quiz_data["diag"]["passed_on"])
-            ofile.write(line)
+    try:
+        with open(temp_filename, 'w', encoding="utf-8") as ofile:
+            ofile.write(header)
+            for user in User.objects:
+                line = line_template.format(**line_fmt)
+                ofile.write(line)
 
-    # Read temporary file in to bitstream and delete it
-    file_data = io.BytesIO()
-    with open(temp_filename, "rb") as ifstream:
-        file_data.write(ifstream.read())
-    file_data.seek(0)
-    os.remove(temp_filename)
+        # Read temporary file in to bitstream and delete it
+        file_data = io.BytesIO()
+        with open(temp_filename, "rb") as ifstream:
+            file_data.write(ifstream.read())
+        file_data.seek(0)
 
-    flash("El reporte ha sido enviado.")
+        raise Exception("Kaputt")
+    except Exception as e:
+        print("[ERROR] {}".format(e))
+
+    else:
+        print("[INFO] Generated user report for user with email {}".format(
+            current_user.email))
+    
+    finally:
+        os.remove(temp_filename)
+
+    # flash("El reporte ha sido enviado.")
     return send_file(file_data, mimetype="application/csv", as_attachment=True, attachment_filename="user_report.csv")
 
 
 @main.route("/data-dashboard")
 @login_required
 def data_dashboard():
-    """Displays data dashboard"""
+    """Displays data dashboard."""
 
     # Fetch and validate user
     user = User.objects(email=current_user.email).first()

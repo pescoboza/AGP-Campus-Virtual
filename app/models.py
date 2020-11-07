@@ -79,7 +79,7 @@ USER_QUIZ_DATA = {
 
 
 class User(UserMixin, me.Document):
-    meta = {"collection": "user"}
+    meta = {"collection": "test_user"}
 
     # User permissions in ascending order
     USER_PERMS = {
