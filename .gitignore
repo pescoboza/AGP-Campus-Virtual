@@ -8,7 +8,7 @@ __pycache__/
 .env
 
 # Wkhtmltopdf lib
-wkhtmltopdf/
+wkhtmltopdf/*
 
 # Mock pdf files.
 *.pdf
@@ -18,3 +18,9 @@ wkhtmltopdf/
 
 # Question JSON sources
 questions/
+
+# Temporary files
+temp/*
+
+# Secret files
+secret/*
