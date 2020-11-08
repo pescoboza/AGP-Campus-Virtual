@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
+from flask_apscheduler import APScheduler
 import pdfkit
 
 
@@ -48,6 +49,7 @@ login.login_view = "auth.login"
 login.login_message = Msg.Flash.LOGIN_REQUIRED
 mail = Mail()
 bootstrap = Bootstrap()
+scheduler = APScheduler()
 pdfkit_config = pdfkit.configuration(
     wkhtmltopdf=os.environ.get("PDFKIT_WKHTMLTOPDF_PATH"))
 
@@ -61,6 +63,8 @@ def create_app(config):
     login.init_app(app)
     mail.init_app(app)
     bootstrap.init_app(app)
+    scheduler.init_app(app)
+    scheduler.start()
     pdfkit_config.wkhtmltopdf = app.config["PDFKIT_WKHTMLTOPDF_PATH"]
 
     from .main import main as main_blueprint
