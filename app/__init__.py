@@ -6,15 +6,11 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from flask_apscheduler import APScheduler
-from google_drive import google_drive_init
 import pdfkit
-
-from .tasks import TASKS
-
-# TODO: Move this to a JSON and devise a better structure.
 
 
 class Msg:
+    # TODO: Move this to a JSON and devise a better structure.
     class Flash:
         LOGOUT_USER = "Ha cerrado sesión correctamente."
         NEW_USER = "Bienvenido {first_name}."
@@ -53,11 +49,15 @@ login.login_view = "auth.login"
 login.login_message = Msg.Flash.LOGIN_REQUIRED
 mail = Mail()
 bootstrap = Bootstrap()
-drive = google_drive_init()
 pdfkit_config = pdfkit.configuration(
     wkhtmltopdf=os.getenv("PDFKIT_WKHTMLTOPDF_PATH"))
 
+# Intialize google drive service
+from .google_drive import google_drive_init
+drive = google_drive_init()
+
 # Register all shecuder tasks
+from .tasks import TASKS
 scheduler = APScheduler()
 for task in TASKS.values():
     scheduler.add_job(**task)

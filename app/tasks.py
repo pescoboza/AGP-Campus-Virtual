@@ -6,7 +6,7 @@ from .google_drive import update_google_sheets_report
 
 TASKS = {
     "update_google_sheets_report": {
-        "func": update_google_sheets_report,
+        "func": lambda : update_google_sheets_report(drive),
         "trigger": "interval",
         "hours": 24,
         "name": "update_google_sheets_report",

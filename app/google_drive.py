@@ -5,8 +5,7 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
-from main.views import generate_user_report
-
+from .user_report import generate_user_report
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = [
@@ -134,7 +133,7 @@ def upload_csv_as_google_sheets(drive, src_filename, upload_filename, parent_fol
                 src_filename, upload_filename, result["mimeType"]), file=log)
 
 
-def update_google_sheets_report(drive, src_basename, upload_filename, parent_folder=None, log=sys.stdout):
+def update_google_sheets_report(drive,  upload_filename="user_report", src_basename="auto_user_report", parent_folder="AGP-Campus-Virtual", log=sys.stdout):
     """Scheudlable task function to update the Google Sheets user report on the cloud.
 
     :param drive: Google Drive service object
