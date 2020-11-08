@@ -10,6 +10,30 @@
     - Automation: generate CSV report and update tableau public.
 
 
+## Folder structure
+```
+.
+├── app          : Main application folder
+│    ├── auth        : Authenthication blueprint
+│    ├── courses     : Course article blueprint
+│    ├── main        : Main blueprint
+│    ├── static      : Static page files
+│    ├── templates   : Jinja templates (ordered by blueprint folders)
+│    ├── scheduler   : Schedodule init
+│    ├── email.py    : Email service
+│    └── models.py   : Database models
+├── temp         : Temporary files
+├── .gitignore   : Ignored files and extensions
+├── .flaskenv    : Flask environment variables
+├── .env         : Secret environtment variables
+├── Pipfile      : Pipenv dependiencies
+├── Pipfile.lock : Pipenv dependencies lock
+├── README.md    : This file
+└── web_app.py   : Run file
+
+
+```
+
 ## Running for the first time
 Install pipenv:
 ```
