@@ -149,7 +149,7 @@ def download_report():
         "{gender}, {occupation}, {registered_on}, {birth_date}, {tstc_is_passed}, {tstc_passed_on}, {crvu_is_passed}, {crvu_passed_on}, {plmn_is_passed}, {plmn_passed_on}, {psta_is_passed}, {psta_passed_on}, {mama_is_passed}, {mama_passed_on}, {diag_is_passed}, {diag_passed_on}\n"
 
     # Dynamic filename linked to time
-    temp_filename = "report_tmp{}.csv".format(
+    temp_filename = "temp/report_tmp{}.csv".format(
         str(time.time()).replace('.', ''))
 
     # Build dictionary to format string for csv line
@@ -195,7 +195,7 @@ def download_report():
     else:
         print("[INFO] Generated user report for user with email {}".format(
             current_user.email))
-    
+
     finally:
         os.remove(temp_filename)
 
