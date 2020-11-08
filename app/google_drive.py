@@ -92,7 +92,7 @@ def upload_csv_as_google_sheets(drive, src_filename, upload_filename, parent_fol
 
             # Log the result
             if log != None:
-                print("[GOOGLE DRIVE] Created folder with id: {}".format(
+                print("[GOOGLE DRIVE] Created folder {} with id: {}".format(parent_folder,
                     folder.get("id", "[ERROR]")), file=log)
 
     # CSV file query
