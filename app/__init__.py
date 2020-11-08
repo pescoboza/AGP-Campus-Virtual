@@ -8,8 +8,11 @@ from flask_bootstrap import Bootstrap
 from flask_apscheduler import APScheduler
 import pdfkit
 
+from .tasks import TASKS
 
 # TODO: Move this to a JSON and devise a better structure.
+
+
 class Msg:
     class Flash:
         LOGOUT_USER = "Ha cerrado sesión correctamente."
@@ -49,9 +52,13 @@ login.login_view = "auth.login"
 login.login_message = Msg.Flash.LOGIN_REQUIRED
 mail = Mail()
 bootstrap = Bootstrap()
-scheduler = APScheduler()
 pdfkit_config = pdfkit.configuration(
-    wkhtmltopdf=os.environ.get("PDFKIT_WKHTMLTOPDF_PATH"))
+    wkhtmltopdf=os.getenv("PDFKIT_WKHTMLTOPDF_PATH"))
+
+# Register all shecuder tasks
+scheduler = APScheduler()
+for task in TASKS.values():
+    scheduler.add_job(**task)
 
 
 def create_app(config):
@@ -63,10 +70,9 @@ def create_app(config):
     login.init_app(app)
     mail.init_app(app)
     bootstrap.init_app(app)
-    scheduler.init_app(app)
-    scheduler.start()
     pdfkit_config.wkhtmltopdf = app.config["PDFKIT_WKHTMLTOPDF_PATH"]
 
+    # Register all blueprints
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
@@ -75,9 +81,10 @@ def create_app(config):
 
     from .courses import courses as courses_blueprint
     app.register_blueprint(courses_blueprint, url_prefix="/courses")
+    ####
 
-    # if os.environ.get("FLASK_ENV") in ("testing", "development"):
-    #     from .tests import tests as tests_blueprint
-    #     app.register_blueprint(tests_blueprint, url_prefix="/tests")
+    # Start the app scheduler
+    scheduler.init_app(app)
+    scheduler.start()
 
     return app
