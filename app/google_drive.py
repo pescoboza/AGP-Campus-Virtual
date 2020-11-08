@@ -5,6 +5,8 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
+from main.views import generate_user_report
+
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = [
@@ -132,10 +134,27 @@ def upload_csv_as_google_sheets(drive, src_filename, upload_filename, parent_fol
                 src_filename, upload_filename, result["mimeType"]), file=log)
 
 
-if __name__ == "__main__":
-    upload_csv_as_google_sheets(
-        src_filename="test.csv",
-        upload_filename="test_csv",
-        parent_folder="PythonTests",
-        log=sys.stdout
-    )
+def update_google_sheets_report(drive, src_basename, upload_filename, parent_folder=None, log=sys.stdout):
+    """Scheudlable task function to update the Google Sheets user report on the cloud.
+
+    :param drive: Google Drive service object
+    :param str src_basename: Basename of the temporary file generated for user report
+    :param str upload_filename: Name of the uploaded google sheets file
+    :param str parent_folder: Name of the parent directory to place the google sheets document on the cloud
+    :param log: Writeable console output stream or file 
+    """
+    try:
+        user_report_filename = generate_user_report(src_basename)
+
+        upload_csv_as_google_sheets(
+            drive=drive,
+            src_filename=user_report_filename,
+            upload_filename=upload_filename,
+            parent_folder=parent_folder,
+            log=log
+        )
+    except Exception as e:
+        print("[ERROR] {}".format(e), file=sys.stderr)
+
+    finally:
+        os.remove(user_report_filename)
