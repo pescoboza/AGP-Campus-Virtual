@@ -19,6 +19,7 @@ flask-mongoengine = "*"
 flask-mail = "*"
 itsdangerous = "*"
 pdfkit = "*"
+flask-apscheduler = "*"
 
 [requires]
 python_version = "3.8"
