@@ -142,18 +142,23 @@ def update_google_sheets_report(drive,  upload_filename="user_report", src_basen
     :param str parent_folder: Name of the parent directory to place the google sheets document on the cloud
     :param log: Writeable console output stream or file 
     """
+    user_report_filename = None
     try:
         user_report_filename = generate_user_report(src_basename)
 
         upload_csv_as_google_sheets(
             drive=drive,
             src_filename=user_report_filename,
-            upload_filename=upload_filename,
+            upload_filename=upload_filename, 
             parent_folder=parent_folder,
             log=log
         )
     except Exception as e:
         print("[ERROR] {}".format(e), file=sys.stderr)
+        raise e
 
     finally:
-        os.remove(user_report_filename)
+        try:
+            os.remove(user_report_filename)
+        except TypeError as e:
+            e

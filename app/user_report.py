@@ -11,7 +11,12 @@ def years_since(begin, end=datetime.now(tz=timezone.utc)):
     """Helper function to get the integer number of years since a timestamp."""
     return int((end - begin).days / 365.25)
 
-
+def date_to_datetime(date):
+    return datetime(
+        year=date.year,
+        month=date.month,
+        day=date.day
+    )
 
 
 # CSV lines formatting
@@ -27,9 +32,8 @@ def format_user(user, now):
     :param datetime now: UTC aware datetime object for now
     :param user: User model object
     """
-
-    dob = datetime.strptime(user.birth_date ,now)
-    age = years_since(dob, now)
+    dob_datetime = date_to_datetime(user.birth_date).replace(tzinfo=timezone.utc)
+    age = years_since(dob_datetime, now)
 
     return REPORT_LINE_TEMPLATE.format(
         gender=user.gender,
@@ -63,13 +67,14 @@ def generate_user_report(filename_base):
     # Dynamic filename linked to time
     out_filename = "temp/{}{}.csv".format(filename_base,
                                           str(time.time()).replace('.', ''))
+    utc_aware_now = datetime.now(tz=timezone.utc)
 
     # Generate temporary CSV file
     try:
         with open(out_filename, 'w', encoding="utf-8") as ofile:
             ofile.write(REPORT_HEADER)
             for user in User.objects:
-                line = format_user(user)
+                line = format_user(user, utc_aware_now)
                 ofile.write(line)
 
     except Exception as e:
