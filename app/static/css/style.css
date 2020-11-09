@@ -64,3 +64,88 @@ Hint selector spefificity.*/
 #quiz-box {
     padding-bottom: 3cm;
 }
+
+/*Footer style*/
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+footer {
+    background: rgba(255,213,126,0.7);
+    width: 100%;
+    height: 330px;
+}
+.container-footer-all{
+    width: 100%;
+    margin: auto;
+    max-width: 1920px;
+}
+.container-body{
+    display: flex;
+}
+#apg-logo{
+    max-height: 280px;
+    margin-top: 5%;
+    margin-left: 10%;
+}
+.second-column{
+    margin-top: 2%;
+    margin-left: 10%;
+}
+.second-column h1{
+    font-size: 30px;
+    color: #FC8476;
+    margin-left: 0%;
+}
+.second-column label{
+    font-size: 20px;
+    position: absolute;
+    font-weight: lighter;
+}
+.second-column img{
+    max-height: 54px;
+    padding-right: 10px;
+}
+.third-column{
+    margin-top: 2%;
+    margin-left: 20%;
+}
+.third-column h1{
+    font-size: 30px;
+    color: #FC8476;
+    margin-left: 0%;
+}
+.third-column label{
+    font-size: 20px;
+    position: absolute;
+    font-weight: lighter;
+
+}
+.third-column img{
+    max-height: 40px;
+    padding-right: 10px;
+}
+.row{
+    display: flex;
+    margin-top: 10px;
+}
+.row img{
+    width: 40px;
+    padding-right: 10px;
+}
+.forth-column{
+    margin-top: 2%;
+    margin-left: 20%;
+}
+.forth-column h1{
+    font-size: 30px;
+    color: #FC8476;
+    margin-left: 0%;
+}
+.forth-column label{
+    font-size: 20px;
+    font-weight: lighter;
+}
+.copyright{
+    left: 50%;
+    text-align: center;
+    font-size: 18px;
+}
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
