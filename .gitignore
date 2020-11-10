@@ -20,7 +20,7 @@ wkhtmltopdf/*
 questions/
 
 # Temporary files
-temp/*
+#temp/*
 
 # Secret files
 secret/*
