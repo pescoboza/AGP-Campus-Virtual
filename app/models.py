@@ -256,3 +256,32 @@ def qjson(filename):
 #             text=random.choice(texts),
 #             choices=choices,
 #             answer=random.randint(0, num_choices-1)).save()
+
+import json
+import sys
+def upload_questions_from_JSON(filename, log=sys.stdout):
+    """
+    Parses questions from a JSON file in the correct file and creates 
+    database files for each of them using the model class 
+    MultipleChoiceQuestion.
+
+    :param str filename: Input filename of json
+    :param log: Output log file
+    """
+    try:
+        questions = []
+        with open(filename, 'r', encoding="utf-8") as file:
+            questions = json.loads(file.read())
+
+        for q in questions:
+            MultipleChoiceQuestion(**q).save()
+            
+    
+    except Exception as e:
+        print("[ERROR] {}".format(e))
+    
+    else:
+        print("[QUESTION UPLOADER] Succesfully uploaded questions to database from file {}.".format(filename), file=log)
+        
+    
+
