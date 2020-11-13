@@ -1,5 +1,6 @@
 {% extends "bootstrap/base.html" %}
-
+<!--Hay comentarios extras agregados en los cambios realizados cuales son
+    la navbar main y la navbar ul. -A-->
 
 {% block title %}
 AGP Campus Virtual
@@ -14,7 +15,9 @@ AGP Campus Virtual
 {% block navbar %}
 <a href={{url_for("main.index")}}><img src="../../static/img/AGP-Nombre.png" width="250"></a>
 
-<div id="navbar" class="navbar navbar-inverse" role="navigation">
+<!--Cambie la clase a uno navbar-custom ya que este si deja poder hacer
+diseños diferentes a la nav -A-->
+<div id="navbar" class="navbar navbar-custom" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -25,7 +28,9 @@ AGP Campus Virtual
             </button>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+            <!--Cambie el tipo de navbar a center donde se centraliza el
+                texto de los links y aparte se pudo customizar. -A -->
+            <ul class="nav navbar-nav navbar-center">
                 {# <!-- Cancer type links --> #}
                 <li><a href={{url_for("courses.diagnostico")}}>Diagnostico</a></li>
                 <li><a href={{url_for("courses.cancer_testiculo")}}>Cáncer Testicular</a></li>
