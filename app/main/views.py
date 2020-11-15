@@ -4,7 +4,7 @@ import time
 import datetime
 from .. import pdfkit_config
 import pdfkit
-from flask import flash, redirect, render_template, url_for, make_response, send_file, after_this_request
+from flask import flash, request, redirect, render_template, url_for, make_response, send_file, after_this_request
 from flask_login import current_user, login_user, logout_user, login_required
 
 from . import main
@@ -170,15 +170,40 @@ def download_report():
     return send_file(file_data, mimetype="application/csv", as_attachment=True, attachment_filename="user_report.csv")
 
 
+
+
 @main.route("/data-dashboard")
 @login_required
 def data_dashboard():
     """Displays data dashboard."""
 
-    # Fetch and validate user
+    # Fetch and validate user for admin rights
     user = User.objects(email=current_user.email).first()
     if user is None or not user.has_perm("data"):
         flash("Debe contar con los permisos necesarios para acceder a esta página.")
         return redirect(url_for("main.index"))
 
     return render_template("data/data_dashboard.html")
+
+@main.route("/update-questions", methods=["POST"])
+@login_required
+def update_questions():
+    """Send POST request with JSON file of quiz questions to update the quetion bank."""
+
+    # Fetch and validate user for admin rights
+    user = User.objects(email=current_user.email).first()
+    if user is None or not user.has_perm("data"):
+        flash("Debe contar con los permisos necesarios para acceder a esta página.")
+        return redirect(url_for("main.index"))
+
+    # Get the uploaded file from the request header and validate
+    uploaded_file = request.file["file"]
+    if uploaded_file.filename != None:
+        upload_path = "/temp/upload{}_{}".format(time.time(), uploaded_file.filename)
+
+    # TODO: Finish here
+        
+
+    
+
+    
