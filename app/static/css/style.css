@@ -149,3 +149,9 @@ footer {
     font-size: 18px;
 }
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    width: 35%;
+    margin: auto;
+}
