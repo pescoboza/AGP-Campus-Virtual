@@ -9,6 +9,7 @@
 - Add activities to all article pages. One page per person - To assign, ETA 15/11/2020.
 - Add information to Diagnostico page - To assign, ETA 15/11/2020
 - Remove debug flashes and messages - Pedro
+- Write template for email. - To assign, ETA 15/11/2020
 
 #### Minor
 - Set Google Drive account and Tebleau connection - Pedro
