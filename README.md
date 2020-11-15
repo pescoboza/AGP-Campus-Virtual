@@ -1,13 +1,22 @@
 # AGP Campus Virtal
 
 
-## TODO
-- Finish the footer: replace mock content. (Yes, YOU reading this can do this...)
+## TODO LAST SPRINT
+### Major
+- Finish landing page - Javier
+- Fix footer outspill bug - Juan
+- Fix navbar merge conflict - Alex
+- Add activities to all article pages. One page per person - To assign, ETA 15/11/2020.
+- Add information to Diagnostico page - To assign, ETA 15/11/2020
+- Remove debug flashes and messages - Pedro
+
+#### Minor
+- Set Google Drive account and Tebleau connection - Pedro
+- Translate page routes
+- Improve usability
+- Improve responsiveness
 - Fix PDFKit issue: not able to load fonts from the same subset.
-- Add data dashboard integration: MongoDB to embedded tableau.
-    - Add CSV/Excel report generator.
-    - Admin users.
-    - Automation: generate CSV report and update tableau public.
+
 
 
 ## Folder structure
