@@ -231,15 +231,7 @@ def update_questions():
 
             return "<h1>Success!</h1>"
         
-    return'''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-    '''
+    return render_template("main/update_questions.html", header="Actualizar preguntas")
     
 
     # TODO: Finish here

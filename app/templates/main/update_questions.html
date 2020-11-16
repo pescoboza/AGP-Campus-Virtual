@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% from "_upload_file.html" import upload_file %}
+
+{% block page_content %}
+{{ upload_file(submit_btn_text="Actualizar preguntas") }}
+{% endblock page_content %}
