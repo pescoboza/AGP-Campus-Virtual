@@ -1,6 +1,8 @@
+import os
 from datetime import datetime, timezone
 import time
 
+from config import current_config
 from .models import User
 
 
@@ -65,13 +67,13 @@ def generate_user_report(filename_base):
     """
 
     # Dynamic filename linked to time
-    out_filename = "temp/{}{}.csv".format(filename_base,
-                                          str(time.time()).replace('.', ''))
+    out_filename = "{}{}.csv".format(filename_base, str(time.time()).replace('.', ''))
+    out_path = os.path.join(current_config.TEMP_FOLDER, out_filename)
     utc_aware_now = datetime.now(tz=timezone.utc)
 
     # Generate temporary CSV file
     try:
-        with open(out_filename, 'w', encoding="utf-8") as ofile:
+        with open(out_path, 'w', encoding="utf-8") as ofile:
             ofile.write(REPORT_HEADER)
             for user in User.objects:
                 line = format_user(user, utc_aware_now)
@@ -81,4 +83,4 @@ def generate_user_report(filename_base):
         print("[ERROR] {}".format(e))
         raise e
 
-    return out_filename
+    return out_path

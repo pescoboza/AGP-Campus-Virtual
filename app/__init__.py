@@ -103,6 +103,6 @@ def create_app(config):
                 print("[ERROR] Could not create dir '{}'.".format(folder_name))
 
             else:
-                print("[INFO] Created dir {}".format(folder_name))
+                print("[INFO] Created dir '{}'".format(folder_name))
 
     return app

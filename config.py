@@ -98,3 +98,5 @@ config = {
     "testing": DevConfig,
     "default": DevConfig
 }
+
+current_config = config.get(os.getenv("FLASK_ENV"), config["development"])

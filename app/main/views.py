@@ -170,8 +170,6 @@ def download_report():
     return send_file(file_data, mimetype="application/csv", as_attachment=True, attachment_filename="user_report.csv")
 
 
-
-
 @main.route("/data-dashboard")
 @login_required
 def data_dashboard():
@@ -185,7 +183,8 @@ def data_dashboard():
 
     return render_template("data/data_dashboard.html")
 
-@main.route("/update-questions", methods=["POST"])
+
+@main.route("/update-questions", methods=["GET", "POST"])
 @login_required
 def update_questions():
     """Send POST request with JSON file of quiz questions to update the quetion bank."""
@@ -197,13 +196,13 @@ def update_questions():
         return redirect(url_for("main.index"))
 
     # Get the uploaded file from the request header and validate
-    uploaded_file = request.file["file"]
-    if uploaded_file.filename != None:
-        upload_path = "/temp/upload{}_{}".format(time.time(), uploaded_file.filename)
+    uploaded_file = request.file["file"] 
+    
+    save_filename = "{}_upload{}_{}".format(
+        user.email,
+        str(time.time()).replace('.', ''),
+        uploaded_file.filename or "questions.json")
+
+    
 
     # TODO: Finish here
-        
-
-    
-
-    
