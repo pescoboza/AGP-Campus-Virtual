@@ -1,6 +1,7 @@
 import os
 import io
 import time
+from threading import Thread
 import datetime
 from .. import pdfkit_config
 import pdfkit
@@ -9,7 +10,7 @@ from flask import current_app, flash, request, redirect, render_template, url_fo
 from flask_login import current_user, login_user, logout_user, login_required
 
 from . import main
-from ..models import User
+from ..models import User, upload_questions_from_JSON
 from ..user_report import generate_user_report
 
 
@@ -190,8 +191,8 @@ def update_questions():
         return redirect(url_for("main.index"))
 
     
+    # Get the uploaded file from the request header and validate
     if request.method == "POST":
-        # Get the uploaded file from the request header and validate
 
         # If no filename, redirect to current and flash the error
         if "file" not in request.files:
@@ -216,12 +217,27 @@ def update_questions():
 
             # Save the file
             uploaded_file.save(save_filename)
+            try:
+                # TODO: Figure out how to multithread this
+                # worker = Thread(target=upload_questions_from_JSON, args=(save_filename))
+                # worker.start()
+                upload_questions_from_JSON(save_filename)
+            
+            except Exception as e:
+                print("[ERROR] {}".format(e))
+                flash("Ocurrió un error inesperado.")
 
-            flash("El banco de preguntas ha sido actualizado.")
+            else:
+                flash("El banco de preguntas ha sido actualizado.")    
+
+            finally: 
+                try:
+                    os.remove(save_filename)
+                except Exception:
+                    pass
+
             return redirect(request.url)
     
     code_body = render_template("formato_preguntas.jsonc")
     return render_template("main/update_questions.html", code_body=code_body)
     
-
-    # TODO: Finish here

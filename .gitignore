@@ -21,6 +21,7 @@ questions/
 
 # Temporary files
 temp/*
+uploads/*
 
 # Secret files
 secret/*
