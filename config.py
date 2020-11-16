@@ -54,6 +54,8 @@ class Config(object):
     TEMP_FOLDER = os.getenv("TEMP_FOLDER")
     SECRET_FOLDER = os.getenv("SECRET_FOLDER")
 
+    # Limit post requests to 1 MB
+    MAX_CONTENT_LENGTH = 1024 * 1024
 
 # Development configuration
 class DevConfig(Config):

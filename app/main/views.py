@@ -184,7 +184,7 @@ def data_dashboard():
     return render_template("data/data_dashboard.html")
 
 
-@main.route("/update-questions", methods=["GET", "POST"])
+@main.route("/update-questions", methods=["POST"])
 @login_required
 def update_questions():
     """Send POST request with JSON file of quiz questions to update the quetion bank."""
