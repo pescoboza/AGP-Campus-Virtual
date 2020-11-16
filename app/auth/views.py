@@ -3,6 +3,7 @@ from flask_login import current_user, login_user, logout_user, login_required, f
 
 from app import Msg
 from . import auth
+from ..main import main # For user profile page
 from .forms import *
 from ..models import User, generate_password_hash, QUIZ_CODES
 from ..email import send_email

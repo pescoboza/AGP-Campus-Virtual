@@ -120,18 +120,19 @@ def certificate(name):
     return response
 
 
-@main.route("/data")
+@main.route("/data-dashboard")
 @login_required
-def data():
-    """Admin data view."""
+def data_dashboard():
+    """Displays data dashboard. Needs data or admin user role."""
 
-    # Fetch and validate user
+    # Fetch and validate user for admin rights
     user = User.objects(email=current_user.email).first()
     if user is None or not user.has_perm("data"):
         flash("Debe contar con los permisos necesarios para acceder a esta página.")
         return redirect(url_for("main.index"))
 
-    return render_template("/main/data.html")
+    return render_template("main/data_dashboard.html")
+
 
 
 @main.route("/download-report")
@@ -171,18 +172,6 @@ def download_report():
     return send_file(file_data, mimetype="application/csv", as_attachment=True, attachment_filename="user_report.csv")
 
 
-@main.route("/data-dashboard")
-@login_required
-def data_dashboard():
-    """Displays data dashboard."""
-
-    # Fetch and validate user for admin rights
-    user = User.objects(email=current_user.email).first()
-    if user is None or not user.has_perm("data"):
-        flash("Debe contar con los permisos necesarios para acceder a esta página.")
-        return redirect(url_for("main.index"))
-
-    return render_template("data/data_dashboard.html")
 
 
 def has_json_ext(filename):
