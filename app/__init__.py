@@ -89,4 +89,20 @@ def create_app(config):
     scheduler.init_app(app)
     scheduler.start()
 
+
+    # Create folders in config if they do not exist
+    for folder_name in [
+        app.config["UPLOAD_FOLDER"], 
+        app.config["TEMP_FOLDER"], 
+        app.config["SECRET_FOLDER"]]:
+        if not os.path.exists(folder_name):
+            try:
+                os.makedirs(folder_name)
+            except Exception as e:
+                print("[ERROR] {}".format(e))
+                print("[ERROR] Could not create dir '{}'.".format(folder_name))
+
+            else:
+                print("[INFO] Created dir '{}'".format(folder_name))
+
     return app
