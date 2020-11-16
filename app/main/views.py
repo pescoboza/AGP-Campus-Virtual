@@ -4,6 +4,7 @@ import time
 import datetime
 from .. import pdfkit_config
 import pdfkit
+from werkzeug import secure_filename
 from flask import flash, request, redirect, render_template, url_for, make_response, send_file, after_this_request
 from flask_login import current_user, login_user, logout_user, login_required
 
@@ -184,6 +185,10 @@ def data_dashboard():
     return render_template("data/data_dashboard.html")
 
 
+def has_json_ext(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() == "json"
+
 @main.route("/update-questions", methods=["POST"])
 @login_required
 def update_questions():
@@ -195,14 +200,37 @@ def update_questions():
         flash("Debe contar con los permisos necesarios para acceder a esta página.")
         return redirect(url_for("main.index"))
 
-    # Get the uploaded file from the request header and validate
-    uploaded_file = request.file["file"] 
     
-    save_filename = "{}_upload{}_{}".format(
-        user.email,
-        str(time.time()).replace('.', ''),
-        uploaded_file.filename or "questions.json")
+    if request.method == "POST":
+        # Get the uploaded file from the request header and validate
+        uploaded_file = request.file["file"] 
 
+        # If no filename, redirect to current and flash the error
+        if uploaded_file.filename == '':
+            flash("Ningún archivo seleccionado.")
+            return redirect(request.url)
+        
+        # Validat the file and filename
+        if uploaded_file and has_json_ext(uploaded_file.filename):
+            save_filename = "{}_upload{}_{}".format(
+                user.email,
+                str(time.time()).replace('.', ''),
+                uploaded_file.filename)
+            
+            save_filename = secure_filename(save_filename)
+            uploaded_file.save(save_filename)
+
+            return redirect(url_for("uploaded_file"), filename=save_filename)
+        
+    return'''
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form method=post enctype=multipart/form-data>
+      <input type=file name=file>
+      <input type=submit value=Upload>
+    </form>
+    '''
     
 
     # TODO: Finish here
