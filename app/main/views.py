@@ -1,6 +1,7 @@
 import os
 import io
 import time
+from threading import Thread
 import datetime
 from .. import pdfkit_config
 import pdfkit
@@ -9,7 +10,7 @@ from flask import current_app, flash, request, redirect, render_template, url_fo
 from flask_login import current_user, login_user, logout_user, login_required
 
 from . import main
-from ..models import User
+from ..models import User, upload_questions_from_JSON
 from ..user_report import generate_user_report
 
 
@@ -120,18 +121,19 @@ def certificate(name):
     return response
 
 
-@main.route("/data")
+@main.route("/data-dashboard")
 @login_required
-def data():
-    """Admin data view."""
+def data_dashboard():
+    """Displays data dashboard. Needs data or admin user role."""
 
-    # Fetch and validate user
+    # Fetch and validate user for admin rights
     user = User.objects(email=current_user.email).first()
     if user is None or not user.has_perm("data"):
         flash("Debe contar con los permisos necesarios para acceder a esta página.")
         return redirect(url_for("main.index"))
 
-    return render_template("/main/data.html")
+    return render_template("main/data_dashboard.html")
+
 
 
 @main.route("/download-report")
@@ -171,18 +173,6 @@ def download_report():
     return send_file(file_data, mimetype="application/csv", as_attachment=True, attachment_filename="user_report.csv")
 
 
-@main.route("/data-dashboard")
-@login_required
-def data_dashboard():
-    """Displays data dashboard."""
-
-    # Fetch and validate user for admin rights
-    user = User.objects(email=current_user.email).first()
-    if user is None or not user.has_perm("data"):
-        flash("Debe contar con los permisos necesarios para acceder a esta página.")
-        return redirect(url_for("main.index"))
-
-    return render_template("data/data_dashboard.html")
 
 
 def has_json_ext(filename):
@@ -201,8 +191,8 @@ def update_questions():
         return redirect(url_for("main.index"))
 
     
+    # Get the uploaded file from the request header and validate
     if request.method == "POST":
-        # Get the uploaded file from the request header and validate
 
         # If no filename, redirect to current and flash the error
         if "file" not in request.files:
@@ -227,19 +217,27 @@ def update_questions():
 
             # Save the file
             uploaded_file.save(save_filename)
+            try:
+                # TODO: Figure out how to multithread this
+                # worker = Thread(target=upload_questions_from_JSON, args=(save_filename))
+                # worker.start()
+                upload_questions_from_JSON(save_filename)
             
+            except Exception as e:
+                print("[ERROR] {}".format(e))
+                flash("Ocurrió un error inesperado.")
 
-            return "<h1>Success!</h1>"
-        
-    return'''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-    '''
+            else:
+                flash("El banco de preguntas ha sido actualizado.")    
+
+            finally: 
+                try:
+                    os.remove(save_filename)
+                except Exception:
+                    pass
+
+            return redirect(request.url)
     
-
-    # TODO: Finish here
+    code_body = render_template("formato_preguntas.jsonc")
+    return render_template("main/update_questions.html", code_body=code_body)
+    

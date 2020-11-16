@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% from "_upload_file.html" import upload_file %}
+
+{% block page_content %}
+<h1>Actualizar preguntas desde archivo JSON</h1>
+<p> 
+Para agregar nuevas preguntas a la base de datos, subir un archivo de extension .json con el siguiente formato:
+</p>
+<pre style="font-size: 9pt;">
+{{code_body}}
+</pre>
+{{ upload_file(upload_file_text="Seleccionar archivo", submit_text="Acutalizar preguntas") }}
+
+<!-- <form method="POST" action="" enctype="multipart/form-data">
+    <p><input type="file" name="file"></p>
+    <p><input type="submit" value="Submit"></p>
+</form> -->
+<br>
+{% endblock page_content %}
