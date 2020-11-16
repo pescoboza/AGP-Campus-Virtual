@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}
 AGP - Perfil
@@ -17,4 +16,9 @@ AGP - Perfil
     <li>{{quiz_name}} : {{info}}</li>
     {% endfor %}
 </ul>
+
+{% if is_admin == True %}
+    <h1>Opciones de Administrador</h1>
+    <a href="{{url_for('main.data_dashboard')}}">DATOS</a>
+{% endif %}
 {% endblock %}

@@ -164,10 +164,16 @@ def password_reset(token):
 @auth.route("/profile", methods=["GET", "POST"])
 @login_required
 def profile():
+
+    # Get the user
     user = User.objects(email=current_user.email).first()
     if user is None:
         return redirect(url_for("main.index"))
 
+    # Check if it's admin to include special options
+    is_admin = user.has_perm("admin")
+
+    # Create user data form
     form = UserProfileForm(obj=current_user)
     if form.validate_on_submit():
         data = form.data
@@ -198,4 +204,4 @@ def profile():
             "is_passed": is_passed,
             "is_obligatory": is_obligatory}
 
-    return render_template("auth/profile.html", form=form, grades=grades)
+    return render_template("auth/profile.html", form=form, grades=grades, is_admin=is_admin)
