@@ -6,17 +6,24 @@
 - Finish landing page - Javier
 - Fix footer outspill bug - Juan
 - Fix navbar merge conflict - Alex
-- Add activities to all article pages. One page per person - To assign, ETA 15/11/2020.
-- Add information to Diagnostico page - To assign, ETA 15/11/2020
+- Add activities to all article pages. One page per person
+    - plmn: Alex
+    - psta: Cesar
+    - crvu: Juan
+    - diag: Paulina
+    - mama: Javier
+    - tstc: Ivan
 - Remove debug flashes and messages - Pedro
-- Write template for email. - To assign, ETA 15/11/2020
+- Write template for email. - Javier
 
 #### Minor
-- Set Google Drive account and Tebleau connection - Pedro
-- Translate page routes
-- Improve usability
-- Improve responsiveness
-- Fix PDFKit issue: not able to load fonts from the same subset.
+- Set Google Drive account and Tableau connection - Pedro
+- Finish question upload formulary - Pedro
+- Translate page routes - Pedro
+- Improve usability - PENDING
+- Improve responsiveness - PENDING
+- Fix PDFKit issue: not able to load fonts from the same subset. - non-critical
+- Change recuperation email sender.
 
 
 
