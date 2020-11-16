@@ -1,0 +1,298 @@
+[{
+    "topic": ["plmn"],
+    "text": "¿Qué enfermedad consiste en la reproducción acelerada de las células que revisten los bronquios?",
+    "choices": ["Cáncer de mama", "Diabetes", "Leucemia", "Cáncer de pulmón"],
+    "answer": 3
+
+}, {
+    "topic": ["plmn"],
+    "text": "¿Cuáles son algunos síntomas del cáncer de pulmón?",
+    "choices": ["Hemoptisis, disnea y dolor torácico", "Bultos, mamas densas e hinchazón", "Fatiga, fiebre y pérdida de peso", "Tos, perdida del olfato, y náuseas"],
+    "answer": 0
+
+}, {
+    "topic": ["plmn"],
+    "text": "¿Cuál de estos síntomas del cáncer pulmonar consiste en la expulsión de sangre por los bronquios y pulmones?",
+    "choices": ["Síndrome de Horner", "Hempotisis", "Mamas densas", "Colesterol"],
+    "answer": 1
+
+}, {
+    "topic": ["plmn"],
+    "text": "¿Cuál es una manera de prevenir el cáncer de pulmón?",
+    "choices": ["Fumar", "Consumir sustancias carcinógenas", "Pruebas de radón", "Angioplastia"],
+    "answer": 2
+}, {
+    "topic": ["plmn"],
+    "text": "¿Qué síntoma del cáncer pulmonar afecta las estructuras nerviosas en la parte mas alta del tórax?",
+    "choices": ["Síndrome de Carson", "Síndrome de Horner", "Síndrome de Maxwell", "Aneurisma"],
+    "answer": 1
+
+}, {
+    "topic": ["plmn"],
+    "text": "¿Qué porcentaje de los casos por cáncer pulmonar están relacionados con el tabaco?",
+    "choices": ["55%", "70%", "85%", "100%"],
+    "answer": 2
+}, {
+    "topic": ["plmn"],
+    "text": "¿ Cuántos casos de fallecimiento por cáncer de pulmón se registran anualmente en México?",
+    "choices": ["5,000", "8,000", "15,000", "25,000"],
+    "answer": 1
+}, {
+    "topic": ["plmn"],
+    "text": "¿Cómo se presentan los síntomas del cáncer de pulmón?",
+    "choices": ["Son tardios", "Son rápidos", "No tiene síntomas", "No sé"],
+    "answer": 0
+
+}, {
+    "topic": ["mama"],
+    "text": "¿Es una enfermedad provocada por la multiplicación sin control de las células de la mama, en áreas como los conductos, lobulillos o el tejido conectivo?",
+    "choices": ["Cáncer cervicouterino ", "Cancer pulmonar", "Cáncer de mama", "Signo zodiacal"],
+    "answer": 2
+
+}, {
+    "topic": ["mama"],
+    "text": "¿cuáles son los dos tipos de cáncer de mama mas comunes?",
+    "choices": ["Microcítico y no microcítico", "Seminomas y no seminomas", "Endocérvix y exocérvix", "Carcinoma lobulillar infiltrante y carcinoma ductal infiltrante"],
+    "answer": 3
+
+}, {
+    "topic": ["mama"],
+    "text": "¿Cuáles de estos síntomas no están relacionados con el cáncer de mama?",
+    "choices": ["Disnea, disfonía, disfagia", "Bultos cerca de la axila en el área interna del brazo", "Hinchazón de una parte de la mama o aumento del grosor", "Irritación, enrojecimiento, secreción, sangrado, hundimiento"],
+    "answer": 0
+
+}, {
+    "topic": ["mama"],
+    "text": "¿Antecedentes familiares de cáncer de mama, el hacerse mayor, historial reproductivo y mutaciones genéticas son algunos ejemplos de?",
+    "choices": ["Síntomas e indicadores", "Factores de riesgo", "Instituciones", "Autoexaminaciónes"],
+    "answer": 1
+}, {
+    "topic": ["mama"],
+    "text": "¿Es una sencilla técnica que consiste en la autoexaminación de los senos para la detección precoz del cáncer?",
+    "choices": ["Auscultación (escuchar los sonidos)", "Apercusión (producir sonidos, generalmente dando golpes suaves en áreas específicas del cuerpo)", "Autoexploración mamaria", "No hay forma de anticiparse a este cáncer"],
+    "answer": 1
+
+}, {
+    "topic": ["mama"],
+    "text": "Cuáles son algunas de las instituciones en la lucha contra el cáncer de mama",
+    "choices": ["Agrupación George Papanicolau A.C. y Grupo RETO Hermosillo, A.C", "Hospital Oncologico del Estado de Sonora", "Hospital Infantil del Estado de Sonora", "Hospital General del Estado Dr. Ernesto Ramos Bours"],
+    "answer": 0
+
+}, {
+    "topic": ["mama"],
+    "text": "¿Tener las mamas densas puede dificultar la detección del cáncer en una mamografía al tener más tejido conjuntivo y adiposo?",
+    "choices": ["Verdadero", "Falso"],
+    "answer": 0
+
+}, {
+    "topic": ["mama"],
+    "text": "¿Cual es el estimado de casos nuevos de cáncer de mama que existen por año?",
+    "choices": ["0.5 millones", "2.35 millones", "1.24 millones", "1.67 millones"],
+    "answer": 0
+
+}, {
+    "topic": ["tstc"],
+    "text": "¿Qué es el cáncer de testículo?",
+    "choices": ["Es un cáncer que se origina en el glande del pene", "Se refiere a todos los cánceres que puede padecer un hombre", "Se refiere a la reproducción acelerada de las células en el testículo", "Se refiere a todos los cánceres que aparecen en la zona de la ingle del hombre"],
+    "answer": 2
+
+}, {
+    "topic": ["tstc"],
+    "text": "¿Cuáles de los siguientes son síntomas del cáncer de testículo?",
+    "choices": ["Cambio en la textura o aspecto de uno o ambos testículos, sensación de pesadez en el escroto y acumulación de líquido en el testículo", "Tos, dificultad para tragar alimentos o líquidos y dificultad para respirar", "Fatiga, fiebre y pérdida de peso", "Dolor torácico, ronchas en la piel y comezón en los muslos"],
+    "answer": 0
+
+}, {
+    "topic": ["tstc"],
+    "text": "¿Cuál es el síntoma más común del cáncer de testículo?",
+    "choices": ["Dolor en la zona del pubis", "Un bulto o inflamación en algún testículo que normalmente causan molestias pero no dolo", "Dolor al orinar", "Acumulación de líquido en el escroto"],
+    "answer": 1
+
+}, {
+    "topic": ["tstc"],
+    "text": "¿Que es lo que se debe de hacer siempre que se vean múltiples señales de cáncer de testículo?",
+    "choices": ["Dejarlo pasar, y si se agravan los síntomas es señal de cáncer de testículo", "Consumir sustancias carcinógenas", "Automedicarse con información que consulte en el mismo momento", "Acudir con un médico para asegurarse de que se trata de cáncer de testículo y mantener la calma, podría no ser cáncer pero más vale prevenir"],
+    "answer": 3
+}, {
+    "topic": ["tstc"],
+    "text": "¿Cuál de las siguientes es una excelente manera de anticiparse al cáncer de testículo?",
+    "choices": ["Dejar de fumar", "Autoexaminarse cada cierto tiempo", "Limpiar dos veces la zona de los testículos al bañarse", "No hay forma de anticiparse a este cáncer"],
+    "answer": 1
+
+}, {
+    "topic": ["tstc"],
+    "text": "Marca cuál de los siguientes es un paso para autoexaminarse para el cáncer de testículo:",
+    "choices": ["Observa tus testículos en un espejo. Busca bultos o inflamación", "Palpar las zonas del fémur", "Mueve el testículo suavemente entre el pulgar y los dedos. Observa si te sientes diferente que antes", "Buscar y revisar el epidídimo", "Palpar únicamente las zonas que te causan dolor del pubis", "Realiza varios masajes al pene", "Palpar el tubo denominado “conducto deferente” que sale del epidídimo", "Cuando terminas la autoexaminación es señal de buena salud. No hay necesidad de volverla a realizar tiempo después"],
+    "answer": 0
+
+}, {
+    "topic": ["tstc"],
+    "text": "¿Cuál es el rango de edad al que mas comunmente afecta el cáncer de testículo?",
+    "choices": ["0-15", "15-35", "35-55", "55 en adelante"],
+    "answer": 2
+
+}, {
+    "topic": ["tstc"],
+    "text": "¿Aproximadamente cuantos hombres padecerá de cáncer testicular?",
+    "choices": ["1 de cada 10", "1 de cada 50", "1 de cada 100", "1 de cada 250"],
+    "answer": 3
+
+}, {
+    "topic": ["crvu"],
+    "text": "Enfermedad que genera un crecimiento de células gradualmente sin control, desarrollando un tumor maligno en el cuello de la matriz",
+    "choices": ["Cáncer cervicouterino", "Cáncer de colon", "Cáncer de mama", "Cáncer de corazón"],
+    "answer": 0
+
+}, {
+    "topic": ["crvu"],
+    "text": "Método que se utiliza para detectar el cáncer cervicouterino de forma temprana",
+    "choices": ["Estudio por imágenes", "Gammagrafía", "Papanicolaou", "Hemmograma"],
+    "answer": 2
+
+}, {
+    "topic": ["crvu"],
+    "text": "Edad con mayor índice de diagnóstico de Cáncer Cervicouterino",
+    "choices": ["15 a 20 años", "35 a 44 años", "40 a 55 años", "60 años o más"],
+    "answer": 1
+
+}, {
+    "topic": ["crvu"],
+    "text": "El factor de riesgo más importante del cáncer de cuello uterino, siendo un grupo de más de 150 virus relacionados",
+    "choices": ["Clamidia", "Antecedentes sexuales", "Tabaquismo", "VPH"],
+    "answer": 3
+
+}, {
+    "topic": ["crvu"],
+    "text": "Enfermedad de transimisión sexual común que a menudo no presenta síntomas. Es un factor de riesgo de cáncer cervicouterino",
+    "choices": ["VPH", "Sistema inmunitario débil", "Clamidia", "Embarazos"],
+    "answer": 2
+
+}, {
+    "topic": ["crvu"],
+    "text": "¿Cuáles de las siguientes NO es un síntoma de cáncer cervicouterino?",
+    "choices": ["Sangrado anormal", "Clamidia", "Aumento de flujo de sangrado durante la menstruación", "Pérdida de peso"],
+    "answer": 1
+
+}, {
+    "topic": ["crvu"],
+    "text": "Adicción que aumenta al doble las probabilidades de padecer cáncer de cuello uterino",
+    "choices": ["Tabaquismo", "VPH", "Clamidia", "Sistema inmunitario débil"],
+    "answer": 0
+
+}, {
+    "topic": ["crvu"],
+    "text": "Crecimiento causado por algunos virus dentro del grupo de VPH. Es comúnmente conocido como verruga",
+    "choices": ["Tumor", "Polipos", "Espinilla", "Papiloma"],
+    "answer": 3
+
+}, {
+    "topic": ["psta"],
+    "text": "¿Dónde se encuentra la próstata?",
+    "choices": ["En el páncreas", "En el cerebro", "En el sistema nervioso", "Delante del recto"],
+    "answer": 4
+
+}, {
+    "topic": ["psta"],
+    "text": "¿Cuál de las siguientes funciones tiene la próstata?",
+    "choices": ["Segrega insulina", "Regula el proceso hormonal", "Ayuda en el proceso digestivo", "Produce parte del sémen"],
+    "answer": 4
+
+}, {
+    "topic": ["psta"],
+    "text": "¿Cuál de los siguientes síntomas corresponden al cáncer de próstata?",
+    "choices": ["Problemas al orinar, o necesidad de orinar con más frecuencia.", "Sangre en la orina o el semen", "Dificultad para lograr una erección", "Dolor en las caderas, la espalda, las costillas", "Debilidad de las piernas o los pies, o pérdida del control de la vejiga", "Todas las anteriores"],
+    "answer": 6
+
+}, {
+    "topic": ["psta"],
+    "text": "¿Cuál de las siguientes medidas pueden tomarse para prevenir el cáncer de próstata?",
+    "choices": ["Una alimentación saludable con una variedad colorida de frutas y verduras, granos integrales.", "Tener un limite de consumo de carnes rojas y procesadas, bebidas endulzadas y alimentos procesados.", "Mantener un peso saludable", "Hacer ejercicio regularmente", "Checarse con un médico regularmente", "Todas las anteriores"],
+    "answer": 6
+
+}, {
+    "topic": ["psta"],
+    "text": "¿De qué tamaño es la próstata en hombres jóvenes?",
+    "choices": ["Del tamaño de un cacahuate", "Del tamaño de un garbanzo", "Del tamaño de una nuez", "Del tamaño de una fresa"],
+    "answer": 3
+
+}, {
+    "topic": ["psta"],
+    "text": "¿A qué edad es aconsejable hacerse el “examen de la próstata”?",
+    "choices": ["30", "40", "50", "20"],
+    "answer": 2
+}, {
+    "topic": ["psta"],
+    "text": "La próstata solo la tienen...",
+    "choices": ["Hombres", "Mujeres", "Hombres y mujeres"],
+    "answer": 1
+}, {
+    "topic": ["psta"],
+    "text": "La próstata es...",
+    "choices": ["Un órgano", "Un cartílago", "Un hueso", "Una glándula"],
+    "answer": 4
+}, {
+    "topic": ["psta"],
+    "text": "La próstata es...",
+    "choices": ["Un órgano", "Un cartílago", "Un hueso", "Una glándula"],
+    "answer": 4
+}, {
+    "topic": ["diag"],
+    "text": "¿Qué es el cáncer de testículo?",
+    "choices": ["Es un cáncer que se origina en los testículos.", "Es un cáncer que se origina en el glande del pene.", "Se refiere a todos los cánceres que puede padecer un hombre.", "Se refiere a todos los cánceres que aparecen en la zona de la ingle del hombre."],
+    "answer": 1
+}, {
+    "topic": ["diag"],
+    "text": "¿Cuáles de los siguientes son síntomas del cáncer de testículo?",
+    "choices": ["Cambio en la textura o aspecto de uno o ambos testículos, Sensación de pesadez en el escroto, Acumulación de líquido en el testículo ", "Tos, Dificultad para tragar alimentos o líquidos, Dificultad para respirar", "Dolor torácico, ronchas en la piel, comezón en los muslos"],
+    "answer": 1
+}, {
+    "topic": ["diag"],
+    "text": "Siempre que se vean múltiples señales de cáncer de testículo se debe hacer lo siguiente:",
+    "choices": ["Acudir con un médico para asegurarse de que se trata de cáncer de testículo y mantener la calma, podría no ser cáncer pero más vale prevenir.", "Dejarlo pasar, y si se agravan los síntomas es señal de cáncer de testículo.", "Automedicarse con información que consulte en el mismo momento.", "Hablar con un familiar y preguntar por remedios"],
+    "answer": 1
+}, {
+    "topic": ["diag"],
+    "text": "¿Qué tan común es este cáncer en hombres de México?",
+    "choices": ["Es uno de los 5 tipos más comunes", "No es nada común", "Es uno de los 20 tipos más comunes", "Es el más común"],
+    "answer": 1
+}, {
+    "topic": ["diag"],
+    "text": "¿Dónde comienza el cáncer de pulmón?",
+    "choices": ["Pulmones", "Bronquios", "Esofago", "Estómago"],
+    "answer": 1
+}, {
+    "topic": ["diag"],
+    "text": "Es el cáncer que más muertes causó en 2018 en hombres",
+    "choices": ["Próstata", "Pulmón", "Testiculo", "Colón"],
+    "answer": 2
+}, {
+    "topic": ["diag"],
+    "text": "Es una acción que previene el cáncer de pulmón",
+    "choices": ["Bañarse Diario", "Lavarse los dientes", "No fumar", "Hacer gárgaras"],
+    "answer": 3
+}, {
+    "topic": ["diag"],
+    "text": "¿Cuáles de los siguientes son síntomas de cáncer de pulmón?",
+    "choices": ["Cambio en la textura o aspecto de uno o ambos testículos.", "Dolor en la ingle o en la zona inferior del abdomen.", "Sensación de pesadez en el muslo", "Hemoptisis (Expulsión de sangre de los pulmones o bronquios)"],
+    "answer": 4
+}, {
+    "topic": ["diag"],
+    "text": "¿Dónde se encuentra la próstata?",
+    "choices": ["En el páncreas", "En el cerebro", "En el sistema nervioso", "Delante del recto"],
+    "answer": 4
+}, {
+    "topic": ["diag"],
+    "text": "¿Cuál de las siguientes funciones tiene la próstata?",
+    "choices": ["Segrega insulina", "Regula el proceso hormonal", "Ayuda en el proceso digestivo", "Produce parte del sémen"],
+    "answer": 4
+}, {
+    "topic": ["diag"],
+    "text": "¿Cuál de las siguientes medidas pueden tomarse para prevenir el cáncer de próstata?",
+    "choices": ["Una alimentación saludable con una variedad colorida de frutas y verduras, granos integrales.", "Salar la comida y tomar abundante agua", "Hacer ejercicio de pesas", "Tomar terapia psicométrica"],
+    "answer": 1
+}, {
+    "topic": ["diag"],
+    "text": "¿A qué edad es aconsejable hacerse el “examen de la próstata”?",
+    "choices": ["30", "40", "50", "20"],
+    "answer": 2
+}]

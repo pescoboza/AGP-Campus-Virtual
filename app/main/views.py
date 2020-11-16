@@ -4,8 +4,8 @@ import time
 import datetime
 from .. import pdfkit_config
 import pdfkit
-from werkzeug import secure_filename
-from flask import flash, request, redirect, render_template, url_for, make_response, send_file, after_this_request
+from werkzeug.utils import secure_filename
+from flask import current_app, flash, request, redirect, render_template, url_for, make_response, send_file, after_this_request
 from flask_login import current_user, login_user, logout_user, login_required
 
 from . import main
@@ -189,7 +189,7 @@ def has_json_ext(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() == "json"
 
-@main.route("/update-questions", methods=["POST"])
+@main.route("/update-questions", methods=["GET", "POST"])
 @login_required
 def update_questions():
     """Send POST request with JSON file of quiz questions to update the quetion bank."""
@@ -203,24 +203,33 @@ def update_questions():
     
     if request.method == "POST":
         # Get the uploaded file from the request header and validate
-        uploaded_file = request.file["file"] 
 
         # If no filename, redirect to current and flash the error
-        if uploaded_file.filename == '':
+        if "file" not in request.files:
             flash("Ningún archivo seleccionado.")
             return redirect(request.url)
         
         # Validat the file and filename
+        uploaded_file = request.files["file"]
         if uploaded_file and has_json_ext(uploaded_file.filename):
+            
+            # Save filename with dymamiccally generated name
             save_filename = "{}_upload{}_{}".format(
                 user.email,
                 str(time.time()).replace('.', ''),
                 uploaded_file.filename)
             
+            # Secure the filename
             save_filename = secure_filename(save_filename)
-            uploaded_file.save(save_filename)
+            
+            # Add full path to file for uploads directory
+            save_filename = os.path.join(current_app.config["UPLOAD_FOLDER"], save_filename)
 
-            return redirect(url_for("uploaded_file"), filename=save_filename)
+            # Save the file
+            uploaded_file.save(save_filename)
+            
+
+            return "<h1>Success!</h1>"
         
     return'''
     <!doctype html>
