@@ -218,6 +218,7 @@ def update_questions():
             uploaded_file.save(save_filename)
 
             flash("El banco de preguntas ha sido actualizado.")
+            return redirect(request.url)
     
     code_body = render_template("formato_preguntas.jsonc")
     return render_template("main/update_questions.html", code_body=code_body)

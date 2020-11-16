@@ -12,19 +12,19 @@ AGP - Perfil
     <h2>Editar perfil</h2>
     {{wtf.quick_form(form)}}
 </div>
-
+{# 
 <ul>
     {% for quiz_name, info in grades.items() %}
     <li>{{quiz_name}} : {{info}}</li>
     {% endfor %}
 </ul>
-
+#}
 {% if is_admin == True %}
 <hr>
 <h1>Opciones de Administrador</h1>
-{{button_link( btn_text="Tablero de datos",               href=url_for("main.data_dashboard")     )}}
-{{button_link( btn_text="Descargar reporte de usuarios",  href='#',                               )}}
-{{upload_file( btn_text="Actualizar preguntas",           action=url_for("main.update_questions") )}}
+{{button_link( btn_text="Tablero de datos",               href=url_for("main.data_dashboard")   )}}
+{{button_link( btn_text="Descargar reporte de usuarios",  href='#',                             )}}
+{{button_link( btn_text="Actualizar preguntas",           href=url_for("main.update_questions")  )}}
 {% endif %}
 
 {% endblock %}
