@@ -1,6 +1,6 @@
-{% macro upload_file( submit_btn_text="Subir archivo", name="file", id="file") %}
+{% macro upload_file( btn_text="Subir archivo", action="", name="file", id="file") %}
 <form action="POST" action="" enctype="multipart/form-data">
-    <label for="{{id}}" class="btn btn-primary  btn-outlined">{{submit_btn_text}}</label>
+    <label for="{{id}}" class="btn btn-primary  btn-outlined">{{btn_text}}</label>
     <input type="file" id="{{id}}" name="{{name}}" style="display: none">
 </form>
 {% endmacro %}

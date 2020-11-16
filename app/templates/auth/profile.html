@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% from "_button_link.html" import button_link %}
+{% from "_upload_file.html" import upload_file %}
 
 {% block title %}
 AGP - Perfil
@@ -18,7 +20,11 @@ AGP - Perfil
 </ul>
 
 {% if is_admin == True %}
-    <h1>Opciones de Administrador</h1>
-    <a href="{{url_for('main.data_dashboard')}}">DATOS</a>
+<hr>
+<h1>Opciones de Administrador</h1>
+{{button_link( btn_text="Tablero de datos",               href=url_for("main.data_dashboard")     )}}
+{{button_link( btn_text="Descargar reporte de usuarios",  href='#',                               )}}
+{{upload_file( btn_text="Actualizar preguntas",           action=url_for("main.update_questions") )}}
 {% endif %}
+
 {% endblock %}

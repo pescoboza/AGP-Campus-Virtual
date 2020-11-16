@@ -216,11 +216,11 @@ def update_questions():
 
             # Save the file
             uploaded_file.save(save_filename)
-            
 
-            return "<h1>Success!</h1>"
-        
-    return render_template("main/update_questions.html", header="Actualizar preguntas")
+            flash("El banco de preguntas ha sido actualizado.")
+    
+    code_body = render_template("formato_preguntas.jsonc")
+    return render_template("main/update_questions.html", code_body=code_body)
     
 
     # TODO: Finish here

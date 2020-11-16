@@ -2,5 +2,14 @@
 {% from "_upload_file.html" import upload_file %}
 
 {% block page_content %}
-{{ upload_file(submit_btn_text="Actualizar preguntas") }}
+<h1>Actualizar preguntas desde archivo JSON</h1>
+<p> 
+Para agregar nuevas preguntas a la base de datos, subir un archivo de extension .json con el siguiente formato:
+</p>
+
+<pre>
+{{code_body}}
+</pre>
+
+{{ upload_file(btn_text="Actualizar preguntas") }}
 {% endblock page_content %}
