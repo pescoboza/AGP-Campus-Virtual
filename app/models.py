@@ -1,3 +1,4 @@
+import sys
 import json
 import random
 from datetime import datetime
@@ -34,12 +35,12 @@ USER_GENDERS = [
 ]
 
 QUIZ_CODES = {
-    "tstc": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cancer testicular"},
-    "crvu": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cancer cervicouterino"},
-    "plmn": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cancer en pulmon"},
-    "psta": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cancer en prostata"},
-    "mama": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cancer de mama"},
-    "diag": {"is_obligatory": False, "num_questions": 10, "score_to_pass": 0, "full_name": "Examen diagnostico"}
+    "tstc": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cancer testicular",     "certificate_url": "cancer-testiculo"},
+    "crvu": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cancer cervicouterino", "certificate_url": "cancer-cervicouterino"},
+    "plmn": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cancer en pulmón",      "certificate_url": "cancer-pulmon"},
+    "psta": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cancer en próstata",    "certificate_url": "cancer-prostata"},
+    "mama": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cancer de mama",        "certificate_url": "cancer-mama"},
+    "diag": {"is_obligatory": False, "num_questions": 10, "score_to_pass": 0, "full_name": "Examen diagnóstico",   "certificate_url": None}
 }
 
 QUESTION_TOPICS = tuple([*QUIZ_CODES])
@@ -257,8 +258,7 @@ def qjson(filename):
 #             choices=choices,
 #             answer=random.randint(0, num_choices-1)).save()
 
-import json
-import sys
+
 def upload_questions_from_JSON(filename, log=sys.stdout):
     """
     Parses questions from a JSON file in the correct file and creates 
@@ -275,13 +275,10 @@ def upload_questions_from_JSON(filename, log=sys.stdout):
 
         for q in questions:
             MultipleChoiceQuestion(**q).save()
-            
-    
+
     except Exception as e:
         print("[ERROR] {}".format(e))
-    
-    else:
-        print("[QUESTION UPLOADER] Succesfully uploaded questions to database from file {}.".format(filename), file=log)
-        
-    
 
+    else:
+        print("[QUESTION UPLOADER] Succesfully uploaded questions to database from file {}.".format(
+            filename), file=log)

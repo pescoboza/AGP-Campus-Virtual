@@ -192,17 +192,22 @@ def profile():
             flash("Su perfil ha sido actualizado.")
             return redirect(url_for("auth.profile"))
 
-    grades = {}
+    quiz_info = {}
     for qc in QUIZ_CODES:
+        if qc == "diag":
+            continue
         quiz_name = QUIZ_CODES[qc]["full_name"]
         score, max_score = user.quiz_data[qc]["score"]  # Unpack list of two items
         is_passed = user.quiz_data[qc]["is_passed"]
         is_obligatory = QUIZ_CODES[qc]["is_obligatory"]
+        certificate_url = url_for("main.certificate", name=QUIZ_CODES[qc]["certificate_url"])
 
-        grades[quiz_name] = {
+        quiz_info[quiz_name] = {
             "score": score,
             "max_score": max_score,
             "is_passed": is_passed,
-            "is_obligatory": is_obligatory}
+            "is_obligatory": is_obligatory,
+            "certificate_url": certificate_url
+        }
 
-    return render_template("auth/profile.html", form=form, grades=grades, is_admin=is_admin)
+    return render_template("auth/profile.html", form=form, quiz_info=quiz_info, is_admin=is_admin)
