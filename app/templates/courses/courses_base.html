@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% from "courses/_quiz.html" import quiz %}
 {% from "courses/_article.html" import article_index, section_header %}
+{% from "_button_link.html" import button_link %}
 {# Requires dict section_headers #}
 {% block page_content %}
     
@@ -10,9 +11,21 @@
     <!-- Article -->
     {% block article %}{% endblock article %}
     
+    
+
     <!-- Quiz -->
     {% if form and score != None and max_score != None %}
     {{section_header("evaluacion", section_headers)}}
+    <!-- Download certificate -->
+    {% if already_passed == True and certificate_endpoint %}
+    {{button_link(
+        href=url_for("main.certificate", name=certificate_endpoint),
+        btn_text="Descargar certificado",
+        target="_blank",
+        width="25%")}}
+        <br>
+        <br>
+    {% endif %}
     {{quiz(form, score, max_score)}}
     {% endif %}
 
