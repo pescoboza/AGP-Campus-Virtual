@@ -16,23 +16,27 @@ AGP - Perfil
 </div>
 {# 
 <ul>
-    {% for quiz_name, info in grades.items() %}
+    {% for quiz_name, info in quiz_info.items() %}
     <li>{{quiz_name}} : {{info}}</li>
     {% endfor %}
 </ul>
 #}
 <div class="col-md-6">
     <hr>
-    <h1>Mis evaluaciones</h1>
+    <h1>Mis certificados</h1>
     <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action active">
-            Cras justo odio
+
+        {% for quiz_name, info in quiz_info.items() %}
+
+        {% if info.get("is_passed", False) and info.get("certificate_url", False)%}
+        <a href="{{info['certificate_url']}}" target="_blank" class="list-group-item list-group-item-action active">
+            {{quiz_name}}
         </a>
-        <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-        <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-        <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-        <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1"
-            aria-disabled="true">Vestibulum at eros</a>
+        {% else %}
+        <div class="list-group-item list-group-item-action disabled" tabindex="-1"
+            aria-disabled="true">{{quiz_name}}</div>
+        {% endif %}
+        {% endfor %}
     </div>
 </div>
 

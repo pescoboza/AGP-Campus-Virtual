@@ -26,7 +26,7 @@ def contact():
 
 
 COURSE_CERT = {
-    "cancer-cerviouterino": {
+    "cancer-cervicouterino": {
         "cert_bg_img": "certificate_cervicouterino.png",
         "cert_course_name": "Cáncer Cervicouterino",
         "quiz_code": "crvu"
