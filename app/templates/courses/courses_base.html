@@ -18,15 +18,16 @@
     {{section_header("evaluacion", section_headers)}}
     <!-- Download certificate -->
     {% if already_passed == True and certificate_endpoint %}
-    {{button_link(
-        href=url_for("main.certificate", name=certificate_endpoint),
-        btn_text="Descargar certificado",
-        target="_blank",
-        width="25%")}}
-        <br>
-        <br>
+    {{
+        button_link(
+            href=url_for("main.certificate", name=certificate_endpoint),
+            btn_text="Descargar certificado",
+            target="_blank",
+            extra_classes="width23"
+        )
+    }}
     {% endif %}
-    {{quiz(form, score, max_score)}}
+    {{quiz(form, score, max_score, extra_btn_classes="width23")}}
     {% endif %}
 
 {% endblock page_content %}

@@ -18,7 +18,7 @@ QUESTION_TOPICS = (
 
 
 def quiz_view(template, redirect_to, topic_code, num_questions=10, certificate_endpoint=None):
-    flash("[DEBUG] Quiz: {}".format(QUIZ_CODES[topic_code]["full_name"]))
+    # flash("[DEBUG] Quiz: {}".format(QUIZ_CODES[topic_code]["full_name"]))
     form = MultipleChoiceQuizForm.generate_random_quiz(
         topic_code, num_questions)
     score = 0
@@ -28,12 +28,12 @@ def quiz_view(template, redirect_to, topic_code, num_questions=10, certificate_e
 
     # Check if the user has already passed the exam.
     already_passed = user.quiz_data[topic_code]["is_passed"]
-    flash("[DEBUG] Already passed quiz: {}".format(already_passed))
+    # flash("[DEBUG] Already passed quiz: {}".format(already_passed))
 
     if request.method == "POST":
         score = form.get_score()
         print("[DEBUG] Score: {}/{}".format(score, num_questions))
-        flash("[DEBUG] Calificación: {}/{}".format(score, num_questions))
+        # flash("[DEBUG] Calificación: {}/{}".format(score, num_questions))
 
         # If the questions changed, update both max and actual user score.
         if num_questions != user.quiz_data[topic_code]["score"][1]:
@@ -63,7 +63,7 @@ def quiz_view(template, redirect_to, topic_code, num_questions=10, certificate_e
 @courses.route("/diagnostico", methods=["GET", "POST"])
 @login_required
 def diagnostico():
-    return quiz_view("courses/diagnostico.html", url_for("courses.diagnostico"), "diag", 10, certificate_endpoint="diagnostico")
+    return quiz_view("courses/diagnostico.html", url_for("courses.diagnostico"), "diag", 10, certificate_endpoint=None)
 
 
 @courses.route("/cancer-testiculo", methods=["GET", "POST"])

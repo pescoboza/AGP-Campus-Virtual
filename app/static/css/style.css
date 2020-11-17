@@ -69,6 +69,15 @@ Hint selector spefificity.*/
     padding-bottom: 3cm;
 }
 
+.my-btn {
+    margin: 8px 8px 5px 5px;
+}
+
+.width23{
+    width: 23%;
+}
+
+
 /*Footer style*/
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 footer {
