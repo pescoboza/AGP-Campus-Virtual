@@ -1,8 +1,8 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% macro quiz(form, score=0, max_score=10) %}
+{% macro quiz(form, score=0, max_score=10, extra_btn_classes="") %}
 <div id="quiz-box" >
-    <button id="button-collapse-quiz" class="btn btn-primary btn-outlined" data-toggle="collapse" data-target="#collapsible-quiz" style="width: 25%;">Hacer examen</button>
+    <button id="button-collapse-quiz" class="btn btn-primary btn-outlined my-btn {% if extra_btn_classes %}{{extra_btn_classes}}{% endif %}" data-toggle="collapse" data-target="#collapsible-quiz">Hacer examen</button>
     <br>
     <br>
     <div id="collapsible-quiz" class="collapse">
