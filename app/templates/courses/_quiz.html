@@ -1,8 +1,10 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% macro quiz(form, score=0, max_score=10) %}
-<div id="quiz-box" class="container">
-    <button id="button-collapse-quiz" data-toggle="collapse" data-target="#collapsible-quiz">Hacer examen</button>
+<div id="quiz-box" >
+    <button id="button-collapse-quiz" class="btn btn-primary btn-outlined" data-toggle="collapse" data-target="#collapsible-quiz" style="width: 25%;">Hacer examen</button>
+    <br>
+    <br>
     <div id="collapsible-quiz" class="collapse">
         <form action="" method="POST">
             <div id="carousel-quiz" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">

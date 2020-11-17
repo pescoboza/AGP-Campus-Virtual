@@ -1,5 +1,5 @@
-{% macro button_link(href="#", btn_text="Acceder") %}
-<a href="{{href}}"> 
-    <button class="btn btn-primary btn-outlined">{{btn_text}}</button>
+{% macro button_link(href="#", btn_text="Acceder", target="_self", width=None) %}
+<a href="{{href}}" target="{{target}}"> 
+    <button class="btn btn-primary btn-outlined" {% if width %}style="width:{{width}};"{% endif %}>{{btn_text}}</button>
 </a>
 {% endmacro %}
