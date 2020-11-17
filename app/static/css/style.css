@@ -47,15 +47,6 @@ ul {
     width: 100%;
 }
 
-/*TODO: Figure out how to change navbar color. 
-Hint selector spefificity.*/
-/* #navbar.navbar.navbar-inverse {
-    background-color: var(--primary);
-}
-
-#navbar.navbar.navbar-inverse nav {
-    color: #000;
-} */
 
 #page-content {
     min-height: 500px;
@@ -63,6 +54,29 @@ Hint selector spefificity.*/
 
 #quiz-box {
     padding-bottom: 3cm;
+}
+
+/*1.- Hice un nuevo navbar que es custom en vez de primary 
+para poder hacer los diseños queridos -A*/
+#navbar.navbar.navbar-custom{
+    background-color: #67C5D2;
+}
+
+/*2.- Navbar nuevo que centra el texto y aparte este de aqui 
+es donde puedes cambiar y diseñar el texto del navbar -A*/
+.nav.navbar-nav.navbar-center li a {
+    color: #181818;
+    font-weight: bold;
+}
+
+/*3.- Navbar mobile con el icon bar visible -A*/
+.navbar-toggle, .icon-bar{
+    border:1px solid #181818;
+}
+
+/*4.- Para centralizar imagenes que son más de una en una linea -A*/
+.imgcenter{
+    text-align: center;
 }
 
 /*Footer style*/
