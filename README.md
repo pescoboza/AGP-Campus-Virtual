@@ -1,4 +1,4 @@
-# AGP Campus Virtal
+# AGP Campus Virtual
 
 
 ## TODO LAST SPRINT

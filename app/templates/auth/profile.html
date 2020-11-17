@@ -1,20 +1,54 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+{% from "_button_link.html" import button_link %}
+{% from "_upload_file.html" import upload_file %}
 
 {% block title %}
 AGP - Perfil
 {% endblock %}
 
+
 {% block page_content %}
-<div class="col-md-4">
-    <h1>{{current_user.first_name}}</h1>
-    <h2>Editar perfil</h2>
+<h1>{{current_user.first_name}}</h1>
+<div class="col-md-6">
+    <hr>
+    <h1>Editar perfil</h1>
     {{wtf.quick_form(form)}}
 </div>
-
+{# 
 <ul>
-    {% for quiz_name, info in grades.items() %}
+    {% for quiz_name, info in quiz_info.items() %}
     <li>{{quiz_name}} : {{info}}</li>
     {% endfor %}
 </ul>
+#}
+<div class="col-md-6">
+    <hr>
+    <h1>Mis certificados</h1>
+    <div class="list-group">
+
+        {% for quiz_name, info in quiz_info.items() %}
+
+        {% if info.get("is_passed", False) and info.get("certificate_url", False)%}
+        <a href="{{info['certificate_url']}}" target="_blank" class="list-group-item list-group-item-action active">
+            {{quiz_name}}
+        </a>
+        {% else %}
+        <div class="list-group-item list-group-item-action disabled" tabindex="-1"
+            aria-disabled="true">{{quiz_name}}</div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+
+{% if is_admin == True %}
+<div class="col-md-6">
+    <hr>
+    <h1>Opciones de Administrador</h1>
+    {{button_link( btn_text="Tablero de datos",               href=url_for("main.data_dashboard")   )}}
+    {{button_link( btn_text="Descargar reporte de usuarios",  href='#',                             )}}
+    {{button_link( btn_text="Actualizar preguntas",           href=url_for("main.update_questions")  )}}
+</div>
+
+{% endif %}
 {% endblock %}

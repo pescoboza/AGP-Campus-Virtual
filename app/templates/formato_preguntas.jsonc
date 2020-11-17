@@ -1,0 +1,50 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//  topic: Lista con codigos de tema. Puede tener uno o más temas de las siguientes opciones:
+//      - tstc: Cáncer testicular
+//      - crvu: Cáncer cervicouterino
+//      - plmn: Cáncer en pulmón
+//      - psta: Cáncer en próstata
+//      - mama: Cáncer de mama
+//      - diag: Examen diagnóstico
+//  text: Texto de la pregunta.
+//  choices: Lista de opciones de respuesta.
+//  answer: Número de índice de respuesta correcta de lista choices.
+//
+// Notas:
+// - Para crear una lista, encerrar en corchetes ( [] ).
+// - Los índices para lista están basados en 0: 0 = primera, 1 = segunda ...
+// - El atributo answer debe ser un índice válido de las lista en choices.
+// - El archivo debe ser de extensión .json y no tener comentarios (texto después de '//').
+//////////////////////////////////////////////////////////////////////////////////////////////////
+// Ejemplo
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+// El archivo es una lista de preguntas, por lo que comienza y termina en corchetes ( [] ).
+[
+  // Pregunta 1:
+  // Cada pregunta comienza y termina con llaves ( {} ).
+  {
+    "topic": ["diag"], // Tema del examen en que aparece
+    "text": "¿Cómo te llamas?", // Texto de la pregunta
+    "choices": ["Alan", "Benito", "Carlos", "Dora"], // Opciones de respuesta
+    "answer": 0 // Índice de la respuesta correcta, debe ser única, (posición 0: "Alan")
+  }, // Las preguntas se separan con comas.
+
+  // Pregunta 2:
+  {
+    // La pregunta 2 tiene más de un tópico: diag y tstc, por lo que
+    // puede aparecer en más de un examen.
+    "topic": ["diag", "tstc"],
+    "text": "¿Cuál es tu nombre?",
+    "choices": ["Alan", "Benito", "Carlos", "Dora"],
+    "answer": 1
+  },
+
+  // Pregunta 3:
+  {
+    "topic": ["plmn"],
+    "text": "¿Quién eres?",
+    "choices": ["Alan", "Benito", "Carlos", "Dora"],
+    "answer": 2
+  }
+]
