@@ -148,7 +148,11 @@ footer {
     font-size: 18px;
 }
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-
+#carouselContainer{
+    margin: 0px;
+    padding-left: 0px;
+    padding-right: 30px;
+}
 .carousel-inner > .item > img,
 .carousel-inner > .item > a > img {
     width: 35%;
