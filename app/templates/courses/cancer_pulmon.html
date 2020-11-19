@@ -1,30 +1,36 @@
-{% extends "base.html" %}
-{% from "courses/_quiz.html" import quiz %}
+{% extends "courses/courses_base.html" %}
+{% from "courses/_article.html" import section_header %}
+{% set section_headers = {
+    "que-es": "¿QUÉ ES EL CANCER DE PULMÓN?", 
+    "sintomas": "SÍNTOMAS",
+    "factores-de-riesgo": "FACTORES DE RIESGO",
+    "prevencion": "PREVENCIÓN",
+    "instituciones": "INSTITUCIONES",
+    "actividades": "ACTIVIDADES",
+    "evaluacion": "EVALUACIÓN" } %}
 
 {% block title %}
 AGP - Cáncer de Pulmón
 {% endblock %}
 
 
-{% block page_content %}
-<br>
+{% block banner %}
+<img class="img-banner" src="../../static/img/titulo_pulmon.JPG" >
+{% endblock banner %}
 
-<div class="imgt">
-    [Pedir imagen de Cancer de Pulmon]
-</div><br>
-
-<h1><b>¿Qué es el Cáncer de Pulmón?</b></h1>
-<div>
+{% block article %}
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("que-es", section_headers)}}
+<p>
     Se origina en los pulmones. Normalmente, comienza en la reproducción acelerada de las células que revisten los
     bronquios
     y otras partes del pulmón, como los bronquiolos o los alvéolos.
-</div><br>
+</p>
 
-<div class="imgt">
-    [Agregar video o ilustración referente como intro]
-</div><br>
+<img class="center" src="../../static/img/cancer_pulmon.png" width="650">
 
-<h1><b>Síntomas</b></h1>
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("sintomas", section_headers)}}
 <div>Los síntomas son tardías, y por eso el cáncer de pulmón se diagnostica en etapas avanzadas. Los síntomas
     dependen de la
     localización y extensión del tumor en el pulmón. Los más frecuentes son los siguientes:
@@ -43,12 +49,10 @@ AGP - Cáncer de Pulmón
     </ul>
 </div>
 
-<div class="imgt">
-    [Pedir imagen de ojos]
-</div><br>
+<img class="center" src="../../static/img/ojos_pulmon.png" width="450">
 
-<h1><b>Prevención</b></h1>
-<br>
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("prevencion", section_headers)}}
 <div>
     Existen algunas medidas que puede tomar para tratar de reducir su riesgo:
     <ul><br>
@@ -59,11 +63,10 @@ AGP - Cáncer de Pulmón
     </ul>
 </div>
 
-<div class="imgt">
-    [Imagen de cigarro]
-</div><br>
-
-<h1><b>Instituciones para acudir</b></h1><br>
+<img class="center" src="../../static/img/nofumar_pulmon.png" width="350">
+    
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("instituciones", section_headers)}}
 <div><b>Hospita General del Estado</b></div>
 <div>Dr. Ernesto Ramos Bours</div>
 <div>Blvd. Luis Encinas J. S/N, San Benito, 83000</div>
@@ -75,19 +78,10 @@ AGP - Cáncer de Pulmón
 <div>Reforma Final esq. Río Magdalena. Fraccionamiento Vado del Río. c.p. 83280</div>
 <div>(662) 21758-36 Y (662) 276-0059</div><br>
 
-<div class="imgt">
-    [Imagen de Hospital]
-</div>
+<img class="center" src="../../static/img/hospital_pulmon.png" width="350">
+    
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("actividades", section_headers)}}
 
-<h1><b>Actividad</b></h1><br>
-<div class="imgt">
-    [Actividad]
-</div>
 
-<h1><b>Quiz</b></h1><br>
-
-{% if form and score != None and max_score != None %}
-{{quiz(form, score, max_score)}}
-{% endif %}
-
-{% endblock %}
+{% endblock article %}

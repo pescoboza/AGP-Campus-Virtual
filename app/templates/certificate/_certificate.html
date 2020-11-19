@@ -1,0 +1,115 @@
+<html>
+
+<head>
+    <!-- PDFKit Page Settings -->
+    <meta name="pdfkit-page-size" content="Letter">
+    <meta name="pdfkit-orientation" content="Landscape">
+    <meta name="pdfkit-encoding" content="UTF-8">
+    <meta name="pdfkit-margin-top" content="0cm">
+    <meta name="pdfkit-margin-bottom" content="0cm">
+    <meta name="pdfkit-margin-left" content="0cm">
+    <meta name="pdfkit-margin-right" content="0cm">
+
+    <title>{% if title %}{{title}}{% else %}Certificado Virtual{% endif %}</title>
+    <style>
+        @viewport {
+            width: 11in;
+            height: 8.5in;
+        }
+
+        @font-face {
+            font-family: "GlacialIndifferenceRegular";
+            src: url("file:///{{font_path}}GlacialIndifference-Regular.otf");
+        }
+
+        @font-face {
+            font-family: "GlacialIndifferenceBold";
+            src: url("file:///{{font_path}}GlacialIndifference-Bold.otf");
+            /* src: url("file:///{{font_path}}christmaseve.ttf"); */
+        }
+
+
+        body {
+            background-image: url("file:///{{background}}");
+            /* background-size: 279.4mm 215.9mm; */
+            background-size: 279.9mm 217mm;
+            font-family: GlacialIndifferenceRegular;
+        }
+
+
+        .contenedor {
+            width: 11in;
+            height: 8.4in;
+            position: absolute;
+            left: 0px;
+        }
+
+        /* Center elements */
+        .nombre,
+        .texto-superior,
+        .letra-a,
+        .texto-inferior,
+        .fecha {
+            text-align: center;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Apply bold font type */
+        .contenedor .nombre,
+        .contenedor .texto-superior {
+            font-family: GlacialIndifferenceBold;
+        }
+
+        .nombre {
+            top: 63%;
+
+            font-size: 30px;
+        }
+
+
+        .texto-superior {
+            top: 42%;
+
+            font-size: 40px;
+        }
+
+
+        .letra-a {
+            top: 45%;
+
+            font-size: 28px;
+        }
+
+
+        .texto-inferior {
+            top: 59%;
+
+            font-size: 22px;
+        }
+
+
+        .fecha {
+            top: 63%;
+
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contenedor">
+        {% if background %}
+        <!-- <img class="cert-bg" src="file:///{{background}}"> -->
+        {% endif %}
+        <div class="nombre">{% if name %}{{name}}{% else %}PEPITO PÉREZ{% endif %}</div>
+        <div class="texto-superior">CONSTANCIA</div>
+        <div class="letra-a">A</div>
+        <div class="texto-inferior">Por haber acreditado el programa preventivo
+            de:<br>{% if course_name %}"{{course_name}}"{% else %}"Cancer de Uñas"{% endif %}</div>
+        <div class="fecha">{% if date %}{{date}}{% else %}30/febrero/2025{% endif %}</div>
+    </div>
+</body>
+
+</html>

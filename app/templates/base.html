@@ -1,14 +1,20 @@
 {% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+AGP Campus Virtual
+{% endblock title %}
 
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" href="../static/style.css">
+{#<!-- <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/glacial-indifference" /> -->#}
+<link rel="stylesheet" href="../static/css/style.css">
 {% endblock %}
 
 {% block navbar %}
 <a href={{url_for("main.index")}}><img src="../../static/img/AGP-Nombre.png" width="250"></a>
 
-<div class="navbar navbar-inverse" role="navigation">
+<div id="navbar" class="navbar navbar-custom" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -19,9 +25,9 @@
             </button>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navbar-center">
                 {# <!-- Cancer type links --> #}
-                <li><a href={{url_for("courses.diagnostico")}}>Diagnostico</a></li>
+                <li><a href={{url_for("courses.diagnostico")}}>Inicio</a></li>
                 <li><a href={{url_for("courses.cancer_testiculo")}}>Cáncer Testicular</a></li>
                 <li><a href={{url_for("courses.cancer_prostata")}}>Cáncer en Próstata</a></li>
                 <li><a href={{url_for("courses.cancer_pulmon")}}>Cáncer en Pulmón</a></li>
@@ -41,22 +47,32 @@
         </div>
     </div>
 </div>
-{% endblock %}
+{% endblock navbar %}
+
 
 {% block content %}
-<div class="container">
+<div id="page-content" class="container">
+    <!-- Flashed messages -->
     {% for message in get_flashed_messages() %}
     <div class="aler alert-warning">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{message}}
     </div>
     {% endfor %}
-
-    {% block page_content %}
-    {% endblock %}
-
+    {% block banner %}{% endblock banner %}
+    {% block page_content %}{% endblock page_content %}
 </div>
+{% include "_footer.html" %}
+{% endblock content %}
+
+
+{% block scripts %}
+{{super()}}
 <script src="../static/js/script.js"></script>
-{% endblock %}
+
+{#<!-- TODO: Remove the reload cachced files script from production release. -->#}
+<script src="../static/js/reloadCachedCSS.js"></script>
+<script type="text/javascript">var topButton = "sleek/circle-blue";</script><script type="text/javascript" src="//backtotopbutton.com/script/toTop.js"></script>
+{% endblock scripts %}
 
 </html>
