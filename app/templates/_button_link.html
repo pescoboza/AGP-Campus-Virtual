@@ -1,0 +1,5 @@
+{% macro button_link(href="#", btn_text="Acceder", target="_self", extra_classes=Nonw) %}
+<a href="{{href}}" target="{{target}}"> 
+    <button class="btn btn-primary btn-outlined my-btn{% if extra_classes %} {{extra_classes}}{% endif %}">{{btn_text}}</button>
+</a>
+{% endmacro %}

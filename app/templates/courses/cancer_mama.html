@@ -1,124 +1,146 @@
-{% extends "base.html" %}
-{% from "courses/_quiz.html" import quiz %}
+{% extends "courses/courses_base.html" %}
+{% from "courses/_article.html" import section_header %}
+{% set section_headers = {
+    "que-es": "¿QUÉ ES EL CANCER DE MAMA?", 
+    "sintomas": "SÍNTOMAS",
+    "factores-de-riesgo": "FACTORES DE RIESGO",
+    "autoexaminacion": "AUTOEXAMINACIÓN",
+    "instituciones": "INSTITUCIONES",
+    "actividades": "ACTIVIDADES",
+    "evaluacion": "EVALUACIÓN" } %}
 
 {% block title %}
 AGP - Cáncer de Mama
 {% endblock %}
 
-{% block page_content %}
-<div class="imgt">
-    [Imagen de 8 mujeres rosas en formato icon con una sola de color rojo]
-</div><br>
+{% block banner %}
+    <img class="img-banner" src="../../static/img/Imagen_titulo_cancer_mama.JPG">
+{% endblock banner %}
 
-<h1><b>Lo que debes saber</b></h1>
-<ol>
-    <li>
-        <h2>¿QUÉ ES?</h2>
-    </li>
-    <div>
-        El cáncer de mama es una enfermedad
-        provocada por la multiplicación sin control de
-        las células de la mama, el promedio de que una
-        mujer en estados unidos la posea es del 13% por
-        lo que 1 de cada 8 mujeres es propensa a
-        padecerla.
-    </div><br>
+{% block article %}
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("que-es", section_headers)}}
+<p>El cáncer de mama es una enfermedad provocada por la multiplicación sin control de las células de la mama, 
+    comenzando en diferentes áreas de la mama como los conductos, lobulillos o el tejido conectivo, 
+    lo que resulta en diferentes tipos de cáncer dependiendo de las células que se vuelvan cancerosas. 
+    El tejido conectivo es lo que sostiene las parte de la mama y se encuentra a su alrededor dentro de 
+    la mama se encuentran los conductos que transportan la leche hasta el pezón y los lobulillos son las glándulas productoras de leche donde generalmente 
+    comienza el cáncer. El cáncer puede hacer metástasis que se refiere a que se ha extendido a diferentes partes del 
+    cuerpo al viajar por los vasos sanguíneos o linfáticos.
+</p>
+<img class="center" src="../../static/img/mujeres_de_papel.png" alt="[Mujeres de papel]" width="600">
+<p>Los dos tipos más comunes de cáncer son carcinoma lobulillar infiltrante y carcinoma ductal infiltrante, 
+    en el lobulillar infiltrante el cáncer se puede extender de los lobulillos a los tejidos mamarios, 
+    de igual forma se puede extender a otras partes. En el carcinoma 
+    ductal infiltrante las células se multiplican por fuera de los conductos para después invadir el tejido mamario, estas células cancerosas pueden formar metástasis.</p>
+<img class="center" src="../../static/img/Celulas_cancerigenas_en_el_seno.PNG" alt="[Celulas cancerijenas en el seno]" width="600">
 
-    <li>
-        <h2>PRINCIPALES TIPOS</h2>
-    </li>
-    <div></div>
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("sintomas", section_headers)}}
+<p>Es muy importante conocer cómo lucen y sienten normalmente los senos propios, 
+    de igual forma hacerse pruebas de detección con regularidad pero incluso así las mamografías 
+    no detectan todos los tipos de cáncer de mama es por esto que es importante detectar los 
+    cambios físicos en los senos y que esté al tanto de los signos y síntomas del cáncer de mama.
+</p>
+<p>Los síntomas o indicadores de cáncer de mama varían entre cada persona, 
+    incluso se han dado casos en los que no se presenta ningún síntoma, 
+    pero algunas señales a las que debe prestar atención son:
+</p>
+<ul>
+    <li>bultos en la mama o cerca de la axila en el área interna del brazo </li>
+    <li>hinchazón de una parte de la mama o aumento del grosor</li>
+    <li>Cualquier cambio en la forma o el tamaño de la mama así como dolor</li>
+    <li>Irritación, enrojecimiento, secreción, sangrado, hundimiento.</li>
+</ul>
+<img class="center" src="../../static/img/sintomas_en_seno.png" alt="[Sintomas en seno]" width="600">
+
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("factores-de-riesgo", section_headers)}}
+<p>Los dos principales factores que aumentan el riesgo de contraer cáncer de mama son ser mujer y hacerse mayor, 
+    de igual forma existen casos que aunque no se poseen los factores sí han llegadoa contraer cáncer de mama, 
+    pero los principales factores de riesgo que no pueden cambiar son los siguientes:
+</p>
+<div class="list-title-parag">
     <ul>
         <li>
-            <h3>Carcinoma ductal infiltrante:</h3>
+            <h3>Antecedentes familiares de cáncer de mama.</h3><br>
+            <p>La probabilidad de que una mujer desarrolle cáncer de mama es mayor si su madre, 
+                hermana o hija (familiares de primer grado) o algún otro familiar de la parte 
+                paterna haya desarrollado cáncer de mama, es el mismo caso con algún pariente del género masculino.
+            </p><br>
         </li>
-        <div>
-            Las células
-            cancerosas se multiplican fuera de los
-            conductos e invaden otras partes del tejido
-            mamario.
-        </div><br>
         <li>
-            <h3>Carcinoma lobulillar infiltrante:</h3>
+            <h3>El hacerse mayor.</h3><br>
+            <p>La mayoría de los casos de cáncer de mama se identifican después de los 50 años.
+            </p><br>
         </li>
-        <div>
-            Las células
-            cancerosas se diseminan de los lobulillos a los
-            tejidos mamarios cercanos.
-        </div><br>
+        <li>
+            <h3>Mamas densas.</h3><br>
+            <p>Tener las mamas densas puede significar un factor de riesgo ya que el tener 
+                más tejido conjuntivo y adiposo puede dificultar la detección del cáncer en una mamografía.
+            </p><br>
+        </li>
+        <li>
+            <h3>Tratamientos previos de radioterapia.</h3><br>
+            <p>Una mujer que haya recibido un tratamiento de radiografía antes de los 30 años.
+            </p><br>
+        </li>   
+        <li>
+            <h3>Historial reproductivo.</h3><br>
+            <p>Haber experimentado un inicio prematuro de la menstruación antes de los 12 años 
+                o que su menopausia comenzó después de los 55 años, 
+                esto debido a que se exponen más tiempo a hormonas aumentando el riego.
+            </p><br>
+        </li>
+        <li>
+        <h3>Mutaciones genéticas.</h3><br>
+        <p>Cambios heredados en los genes BRCA1 y BRCA2 estos genes presentan mayor probabilidad de generar cáncer de mama.
+        </p><br>
+        </li>
     </ul>
-    </div><br>
-
-    <div class="imgt">
-        [Imagen de cancer de mama]
-    </div><br>
-
-    <li>
-        <h2>SINTOMAS Y SIGNOS</h2>
-    </li>
-    <div>
-        Es necesario conocer bien nuestros senos y
-        reconocer como se sienten normalmente, alguno de
-        los síntomas son:
-        <ul>
-            <li>Bultos en la mama</li>
-            <li>Hinchazón de una parte de la mama</li>
-            <li>Cambio en la forma o el tamaño</li>
-            <li>Dolor</li>
-            <li>Irritación, enrojecimiento, secreción, sangrado</li>
-        </ul>
-    </div><br>
-
-    <div class="imgt">
-        [Imagen de seno afectado]
-    </div><br>
-
-    <li>
-        <h2>FACTORES DE RIESGO</h2>
-    </li>
-    <div>
-        Uno de los principales factores de riesgo es
-        como mujer volverse mayor pero cada caso es
-        diferente, algunos de los factores que no varian
-        son:
-        <ul>
-            <li>Antecedentes familiares</li>
-            <li>El hacerse mayor</li>
-            <li>Mamas densas</li>
-            <li>Historial reproductivo</li>
-            <li>Mutaciones genéticas</li>
-        </ul>
-    </div><br>
-
-    <li>
-        <h2>INSTITUCIONES</h2>
-    </li>
-    <div>
-        Por último queremos recordar que existen
-        varias instituciones que están para asistirlos
-        en este proceso tan complicado que es el
-        cáncer:
-        <div><b>Agrupación George Papanicolau A.C. Sonora</b></div>
-        <div>Teléfono Domicilio: 662-216-4883</div>
-        <div>Email Trabajo: agphillo@hotmail.com</div><br>
-        <div><b>Grupo RETO Hermosillo, A.C</b></div>
-        <div>Vía Telefónica:01(662)217-58-34 extensión 128</div><br>
-    </div><br>
-
-    <div class="imgt">
-        [Imagen de la institucion]
-    </div><br>
-</ol>
-
-<h2><b>Actividad</b></h2><br>
-<div class="imgt">
-    [Actividad]
 </div>
 
-<h2><b>Quiz</b></h2><br>
-<div class="imgt">
-    {% if form and score != None and max_score != None %}
-    {{quiz(form, score, max_score)}}
-    {% endif %}
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("autoexaminacion", section_headers)}}
+<img class="center" src="../../static/img/Comic_autoexaminacion.png" alt="[Comic de autoexaminacion]" width="600">
+
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("instituciones", section_headers)}}
+<p><b>Agrupación George Papaicolau A.C. Sonora</b></p>
+<p>Teléfono Domicilio: 662-216-4883</p>
+<p>Email Trabajo: agphillo@hotmail.com</p>
+<br>
+
+<p><b>Grupo RETO Hermosillo, A.C.</b></p>
+<p>Reforma final Sur, esquina Río Magdalena
+    Fraccionamiento Vado del Río</p>
+<p>C.P. 83200</p>
+<p>Hermosillo, Sonora México.</p>
+<br>
+
+<p><b>Hospital Oncologico del Estado de Sonora</b></p>
+<p>Vía Telefónica: 01(662)217-58-34 extensión 128</p>
+<p>por Mail: gruporetohermosilloac@hotmail.com</p>
+<p>https://gruporetohermosilloac.com/index.php?pag=contactanos
+</p>
+<br>
+<img class="center" src="../../static/img/Logo_medico.png" alt="[Logo medico]" width="600">
+
+{# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
+{{section_header("actividades", section_headers)}}
+<br>
+<div class="row">
+    <div class="center">
+        <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <img src="../../static/img/sopaletras.jpg" class="card-img-top" width="250px">
+                <h5 class="card-title" style="font-family: GlacialIndifferenceBold;">Sopa de letras</h5>
+                <p class="card-text">Sopa de letras para conocer algunos de los conceptos más importantes sobre el cancer de mama.</p>
+                <a href=" https://wordwall.net/resource/6831309" class="btn btn-primary">Ir a la Actividad</a>
+            </div>
+        </div>
+        </div>
+    </div>
 </div>
-{% endblock %}
+{% endblock article %}

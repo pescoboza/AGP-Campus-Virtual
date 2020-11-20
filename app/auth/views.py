@@ -3,6 +3,7 @@ from flask_login import current_user, login_user, logout_user, login_required, f
 
 from app import Msg
 from . import auth
+from ..main import main # For user profile page
 from .forms import *
 from ..models import User, generate_password_hash, QUIZ_CODES
 from ..email import send_email
@@ -164,10 +165,16 @@ def password_reset(token):
 @auth.route("/profile", methods=["GET", "POST"])
 @login_required
 def profile():
+
+    # Get the user
     user = User.objects(email=current_user.email).first()
     if user is None:
         return redirect(url_for("main.index"))
 
+    # Check if it's admin to include special options
+    is_admin = user.has_perm("admin")
+
+    # Create user data form
     form = UserProfileForm(obj=current_user)
     if form.validate_on_submit():
         data = form.data
@@ -185,17 +192,22 @@ def profile():
             flash("Su perfil ha sido actualizado.")
             return redirect(url_for("auth.profile"))
 
-    grades = {}
+    quiz_info = {}
     for qc in QUIZ_CODES:
+        if qc == "diag":
+            continue
         quiz_name = QUIZ_CODES[qc]["full_name"]
         score, max_score = user.quiz_data[qc]["score"]  # Unpack list of two items
         is_passed = user.quiz_data[qc]["is_passed"]
         is_obligatory = QUIZ_CODES[qc]["is_obligatory"]
+        certificate_url = url_for("main.certificate", name=QUIZ_CODES[qc]["certificate_url"])
 
-        grades[quiz_name] = {
+        quiz_info[quiz_name] = {
             "score": score,
             "max_score": max_score,
             "is_passed": is_passed,
-            "is_obligatory": is_obligatory}
+            "is_obligatory": is_obligatory,
+            "certificate_url": certificate_url
+        }
 
-    return render_template("auth/profile.html", form=form, grades=grades)
+    return render_template("auth/profile.html", form=form, quiz_info=quiz_info, is_admin=is_admin)
