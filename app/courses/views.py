@@ -56,29 +56,32 @@ def quiz_view(template, redirect_to, topic_code, num_questions=10, certificate_e
 
 # @courses.route("/", methods=["GET", "POST"])
 @courses.route("/diagnostico", methods=["GET", "POST"])
-@login_required
+# @login_required
 def diagnostico():
+    # Diagnostic has 10 questions, a topic code "diag" and no certificate
     num_questions = 10
+    topic_code = "diag"
+    certificate_endpoint = None
 
     # Logged in users get the same treatment as a regular graded quiz
-    if not current_user.is_anomymous:
-        return quiz_view("courses/diagnostico.html", url_for("courses.diagnostico"), "diag", num_questions, certificate_endpoint=None)
+    if not current_user.is_anonymous:
+        return quiz_view("courses/diagnostico.html", url_for("courses.diagnostico"), topic_code, num_questions, certificate_endpoint=certificate_endpoint)
 
     # Temporary quiz data for anonymous users
     score = 0
     form = MultipleChoiceQuizForm.generate_random_quiz(
-        "diagnostico", num_questions)
+        topic_code, num_questions)
 
     if request.method == "POST":
         score = form.get_score()
         print("[DEBUG] Score: {}/{}".format(score, num_questions))
-    
+
     return render_template("/courses/diagnostico.html",
                            form=form,
                            score=score,
                            max_score=num_questions,
                            alredy_passed=False,
-                           certificate_endpoint=None)
+                           certificate_endpoint=certificate_endpoint)
 
 
 @courses.route("/cancer-testiculo", methods=["GET", "POST"])
