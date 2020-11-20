@@ -17,7 +17,7 @@ from ..user_report import generate_user_report
 @main.route("/")
 @main.route("/index")
 def index():
-    return render_template("main/index.html")
+    return redirect(url_for("courses.diagnostico"))
 
 
 @main.route("/contact")

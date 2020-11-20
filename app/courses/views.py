@@ -2,6 +2,7 @@ from flask import redirect, render_template, url_for, request, flash
 from flask_login import login_required, current_user
 
 from . import courses
+from ..main import main
 from ..models import User, QUIZ_CODES
 from .forms import MultipleChoiceQuizForm
 
@@ -53,17 +54,31 @@ def quiz_view(template, redirect_to, topic_code, num_questions=10, certificate_e
     return render_template(template, form=form, score=score, max_score=num_questions, already_passed=already_passed, certificate_endpoint=certificate_endpoint)
 
 
-# @courses.route("/quiz", methods=["GET", "POST"])
-# @login_required
-# def quiz():
-#     return quiz_view("courses/test.html", url_for("courses.quiz"), "diag", 10)
-
-
-@courses.route("/", methods=["GET", "POST"])
+# @courses.route("/", methods=["GET", "POST"])
 @courses.route("/diagnostico", methods=["GET", "POST"])
 @login_required
 def diagnostico():
-    return quiz_view("courses/diagnostico.html", url_for("courses.diagnostico"), "diag", 10, certificate_endpoint=None)
+    num_questions = 10
+
+    # Logged in users get the same treatment as a regular graded quiz
+    if not current_user.is_anomymous:
+        return quiz_view("courses/diagnostico.html", url_for("courses.diagnostico"), "diag", num_questions, certificate_endpoint=None)
+
+    # Temporary quiz data for anonymous users
+    score = 0
+    form = MultipleChoiceQuizForm.generate_random_quiz(
+        "diagnostico", num_questions)
+
+    if request.method == "POST":
+        score = form.get_score()
+        print("[DEBUG] Score: {}/{}".format(score, num_questions))
+    
+    return render_template("/courses/diagnostico.html",
+                           form=form,
+                           score=score,
+                           max_score=num_questions,
+                           alredy_passed=False,
+                           certificate_endpoint=None)
 
 
 @courses.route("/cancer-testiculo", methods=["GET", "POST"])
