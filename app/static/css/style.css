@@ -9,6 +9,7 @@
 }
 :root {
     --primary: #67C5D2;
+    --secondary: #FC8476;
     --detail-font: #FC8476;
 }
 
@@ -66,7 +67,7 @@ ul {
 /*1.- Hice un nuevo navbar que es custom en vez de primary 
 para poder hacer los diseños queridos -A*/
 #navbar.navbar.navbar-custom{
-    background-color: #67C5D2;
+    background-color: var(--primary);
 }
 
 /*2.- Navbar nuevo que centra el texto y aparte este de aqui 
@@ -93,23 +94,6 @@ es donde puedes cambiar y diseñar el texto del navbar -A*/
     width: 23%;
 }
 
-/*1.- Hice un nuevo navbar que es custom en vez de primary 
-para poder hacer los diseños queridos -A*/
-#navbar.navbar.navbar-custom{
-    background-color: #67C5D2;
-}
-
-/*2.- Navbar nuevo que centra el texto y aparte este de aqui 
-es donde puedes cambiar y diseñar el texto del navbar -A*/
-.nav.navbar-nav.navbar-center li a {
-    color: #181818;
-    font-weight: bold;
-}
-
-/*3.- Navbar mobile hecho -A*/
-.navbar-toggle, .icon-bar {
-    border:1px solid #181818;
-}
 
 /*Footer style*/
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
