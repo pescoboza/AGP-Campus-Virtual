@@ -54,6 +54,7 @@ ul {
 
 .img-banner {
     width: 100%;
+    margin-bottom: 80px;
 }
 
 #page-content {
@@ -67,6 +68,7 @@ ul {
 /*1.- Hice un nuevo navbar que es custom en vez de primary 
 para poder hacer los diseños queridos -A*/
 #navbar.navbar.navbar-custom{
+    /* margin-bottom: 0; */
     background-color: var(--primary);
 }
 
