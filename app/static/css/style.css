@@ -33,6 +33,10 @@ ul {
     font-style: italic;
 }
 
+img{
+    display: inline-block;
+}
+
 .center {
     display: flex;
     margin-left: auto;
@@ -87,6 +91,7 @@ es donde puedes cambiar y diseñar el texto del navbar -A*/
 /*4.- Para centralizar imagenes que son más de una en una linea -A*/
 .imgcenter{
     text-align: center;
+    width: 100%;
 }
 .my-btn {
     margin: 8px 8px 5px 5px;
