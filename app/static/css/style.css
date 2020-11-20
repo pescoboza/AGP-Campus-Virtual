@@ -58,14 +58,22 @@ img {
 
 
 
+
 /* Mediq queries for mobile devices */
 @media only screen and (max-width: 786px) {
     img,
-    .img-ls,
-    .img-md,
-    .img-sm {
+    .img-lg {
         width: 100%;
     }
+
+    .img-md {
+        width: 80%;
+    }
+
+    .img-sm {
+        width: 45%;
+    }
+
 }
 
 
