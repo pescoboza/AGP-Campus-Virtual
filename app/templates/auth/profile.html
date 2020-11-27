@@ -46,8 +46,8 @@ AGP - Perfil
     <hr>
     <h1>Opciones de Administrador</h1>
     {{button_link( btn_text="Tablero de datos",               href=url_for("main.data_dashboard")   )}}
-    {{button_link( btn_text="Descargar reporte de usuarios",  href='#',                             )}}
-    {{button_link( btn_text="Actualizar preguntas",           href=url_for("main.update_questions")  )}}
+    {{button_link( btn_text="Descargar reporte de usuarios",  href=url_for("main.download_report")  )}}
+    {{button_link( btn_text="Actualizar preguntas",           href=url_for("main.update_questions") )}}
 </div>
 
 {% endif %}

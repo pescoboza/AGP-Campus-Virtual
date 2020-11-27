@@ -3,10 +3,12 @@
     src: url(fonts/GlacialIndifference-Regular.otf);
 
 }
+
 @font-face {
     font-family: GlacialIndifferenceBold;
     src: url(fonts/GlacialIndifference-Bold.otf);
 }
+
 :root {
     --primary: #67C5D2;
     --secondary: #FC8476;
@@ -33,6 +35,49 @@ ul {
     font-style: italic;
 }
 
+/* Article images */
+img {
+    display: inline-block;
+}
+
+.img-block {
+    display: block;
+}
+
+.img-lg {
+    width: 100%;
+}
+
+.img-md {
+    width: 65%;
+}
+
+.img-sm {
+    width: 25%;
+}
+
+
+
+
+/* Mediq queries for mobile devices */
+@media only screen and (max-width: 786px) {
+    img,
+    .img-lg {
+        width: 100%;
+    }
+
+    .img-md {
+        width: 80%;
+    }
+
+    .img-sm {
+        width: 45%;
+    }
+
+}
+
+
+
 .center {
     display: flex;
     margin-left: auto;
@@ -40,7 +85,7 @@ ul {
     /*width: 50%;*/
 }
 
-.centrar{
+.centrar {
     text-align: center;
 }
 
@@ -54,6 +99,7 @@ ul {
 
 .img-banner {
     width: 100%;
+    margin-bottom: 80px;
 }
 
 #page-content {
@@ -66,7 +112,8 @@ ul {
 
 /*1.- Hice un nuevo navbar que es custom en vez de primary 
 para poder hacer los diseños queridos -A*/
-#navbar.navbar.navbar-custom{
+#navbar.navbar.navbar-custom {
+    /* margin-bottom: 0; */
     background-color: var(--primary);
 }
 
@@ -78,19 +125,22 @@ es donde puedes cambiar y diseñar el texto del navbar -A*/
 }
 
 /*3.- Navbar mobile con el icon bar visible -A*/
-.navbar-toggle, .icon-bar{
-    border:1px solid #181818;
+.navbar-toggle,
+.icon-bar {
+    border: 1px solid #181818;
 }
 
 /*4.- Para centralizar imagenes que son más de una en una linea -A*/
-.imgcenter{
+.imgcenter {
     text-align: center;
+    width: 100%;
 }
+
 .my-btn {
     margin: 8px 8px 5px 5px;
 }
 
-.width23{
+.width23 {
     width: 23%;
 }
 
@@ -99,79 +149,96 @@ es donde puedes cambiar y diseñar el texto del navbar -A*/
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 footer {
     outline-offset: 20px;
-    background: rgba(255,213,126,0.7);
+    background: rgba(255, 213, 126, 0.7);
     width: 100%;
     height: 350px;
 }
-.main-content{
+
+.main-content {
     display: flex;
     padding-top: 15px;
 }
-.first-column img{
+
+.first-column img {
     height: 300px;
     padding-left: 5%;
 }
-.second-column{
+
+.second-column {
     margin-left: 10%;
 }
-.second-column h1{
+
+.second-column h1 {
     font-family: "GlacialIndifferenceBold";
     font-size: 30px;
     text-transform: uppercase;
     color: #FC8476;
 }
-.content img{
+
+.content img {
     height: 50px;
 }
-.third-column{
+
+.third-column {
     margin-left: 7%;
 }
-.third-column h1{
+
+.third-column h1 {
     font-family: "GlacialIndifferenceBold";
     font-size: 30px;
     text-transform: uppercase;
     color: #FC8476;
 }
-.row{
+
+.row {
     display: flex;
 }
-.row label{
+
+.row label {
     padding-left: 10px;
 }
-.forth-column{
+
+.forth-column {
     margin-left: 15%;
 }
-.forth-column h1{
+
+.forth-column h1 {
     font-family: "GlacialIndifferenceBold";
     font-size: 30px;
     text-transform: uppercase;
     color: #FC8476;
 }
-.content{
+
+.content {
     font-size: 25px;
     max-width: 350px;
 }
-.rows{
+
+.rows {
     display: flex;
     margin-top: 20px;
 }
-.rows label{
+
+.rows label {
     margin-top: 10px;
     padding-left: 5px;
 }
-.copyright{
+
+.copyright {
     left: 50%;
     text-align: center;
     font-size: 18px;
 }
+
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-#carouselContainer{
+#carouselContainer {
     margin: 0px;
     padding-left: 0px;
     padding-right: 30px;
 }
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
+
+.carousel-inner>.item>img,
+.carousel-inner>.item>a>img {
     width: 35%;
     margin: auto;
 }

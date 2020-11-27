@@ -80,7 +80,7 @@ USER_QUIZ_DATA = {
 
 
 class User(UserMixin, me.Document):
-    meta = {"collection": "test_user"}
+    meta = {"collection": "user"}
 
     # User permissions in ascending order
     USER_PERMS = {
@@ -207,7 +207,7 @@ def load_user(id):
 
 
 class MultipleChoiceQuestion(me.Document):
-    meta = {"collection": "question_bank"}
+    meta = {"collection": "question"}
 
     # A question from the bank can appear on different test types. That's why a list is used.
     topic = me.ListField(me.StringField(
@@ -223,7 +223,6 @@ class MultipleChoiceQuestion(me.Document):
                 "Question answer did not match a choice index.")
 
 
-# TODO: Upload all questions.
 def qjson(filename):
     """ 
     Parses questions from given JSON file and returns the list. 
