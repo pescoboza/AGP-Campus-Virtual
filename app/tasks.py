@@ -14,26 +14,17 @@ TASKS = {
         
         # Today at 11:00 pm
         "next_run_time": datetime.now().replace(
-            hour=23, minute=0, second=0, microsecond=0)
+            hour=23, minute=59, second=59, microsecond=0)
 
     },
-    #TODO: Comment out the test task for report updationg.
-    "test_google_sheets_report": {
-        "func": lambda : update_google_sheets_report(drive),
-        "trigger": "interval",
-        "minutes": 5,
-        "name": "test_google_sheets_report",
-        "id": "888",        
-        "next_run_time": datetime.now() + timedelta(seconds=10)
-    },
-    # "mock": {
-    #     "func": lambda: print("[MOCK TASK] {} Hello, I am a mock task for testing".format(
-    #         datetime.now().time())),
+    # #TODO: Comment out the test task for report updationg.
+    # "test_google_sheets_report": {
+    #     "func": lambda : update_google_sheets_report(drive),
     #     "trigger": "interval",
-    #     "seconds": 30,
-    #     "name": "mock_task",
-    #     "id": "333",
-    #     # Late 5 min
-    #     "next_run_time": datetime.now() - timedelta(minutes=5)
-    # }
+    #     "minutes": 5,
+    #     "name": "test_google_sheets_report",
+    #     "id": "888",        
+    #     "next_run_time": datetime.now() + timedelta(seconds=10)
+    # },
+
 }
