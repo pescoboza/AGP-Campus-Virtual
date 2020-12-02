@@ -1,3 +1,0 @@
-- Modifique el html
-- Agregue fotos al static
-- Agregue un css

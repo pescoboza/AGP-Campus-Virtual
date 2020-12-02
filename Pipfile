@@ -6,13 +6,11 @@ verify_ssl = true
 [dev-packages]
 pylint = "*"
 autopep8 = "*"
-python-dotenv = "*"
 
 [packages]
 flask = "*"
 flask-login = "*"
 flask-migrate = "*"
-flask-bootstrap = "*"
 email-validator = "*"
 flask-wtf = "*"
 flask-mongoengine = "*"
@@ -23,6 +21,8 @@ flask-apscheduler = "*"
 google-api-python-client = "*"
 google-auth-httplib2 = "*"
 google-auth-oauthlib = "*"
+bootstrap-flask = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.8"

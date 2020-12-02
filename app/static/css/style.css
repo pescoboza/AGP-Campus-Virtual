@@ -57,7 +57,9 @@ img {
 }
 
 
-
+#navLogo {
+    width: 100%;
+}
 
 /* Mediq queries for mobile devices */
 @media only screen and (max-width: 786px) {
