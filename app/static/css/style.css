@@ -35,6 +35,10 @@ ul {
     font-style: italic;
 }
 
+#toTop{
+    bottom: 10% !important;
+}
+
 /* Article images */
 img {
     display: inline-block;
@@ -55,8 +59,6 @@ img {
 .img-sm {
     width: 25%;
 }
-
-
 
 
 /* Mediq queries for mobile devices */
@@ -232,6 +234,11 @@ footer span{
     footer {
         text-align: center;
     }
+}
+
+footer .copyright{
+    margin-top: 30px;
+    margin-bottom: 15px;
 }
 
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
