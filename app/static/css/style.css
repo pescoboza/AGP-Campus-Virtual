@@ -165,10 +165,11 @@ es donde puedes cambiar y diseñar el texto del navbar -A*/
 
 .card .card-body img{
     width: 100%;
+    height: 200px;
+    max-height: 400px;
 }
 
 .card .card-body .btn{
-    
 }
 
 /* @media (max-width:991px)  { 
