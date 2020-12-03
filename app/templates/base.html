@@ -12,12 +12,10 @@ AGP Campus Virtual
 {% endblock %}
 
 {% block navbar %}
-
-
-<div id="navbar" class="navbar navbar-custom" role="navigation">
-    <a class="navbar-brand" href={{url_for("main.index")}}>
-        <img id="navLogo" src="../../static/img/AGP-Nombre.png">
-    </a>
+<a href={{url_for("main.index")}}>
+    <img id="navbarLogo" src="../../static/img/AGP-Nombre.png">
+</a>
+<nav id="navbar" class="navbar navbar-custom" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -27,7 +25,7 @@ AGP Campus Virtual
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <div class="navbar-collapse collapse">
+        <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-center">
                 {# <!-- Cancer type links --> #}
                 <li><a href={{url_for("courses.diagnostico")}}>Inicio</a></li>
@@ -46,10 +44,9 @@ AGP Campus Virtual
                 <li><a href={{url_for("auth.register")}}>Registrarse</a></li>
                 {% endif %}
             </ul>
-
         </div>
     </div>
-</div>
+</nav>
 {% endblock navbar %}
 
 
@@ -76,7 +73,8 @@ AGP Campus Virtual
 
 {#<!-- TODO: Remove the reload cachced files script from production release. -->#}
 <script src="../static/js/reloadCachedCSS.js"></script>
-<script type="text/javascript">var topButton = "sleek/circle-blue";</script><script type="text/javascript" src="//backtotopbutton.com/script/toTop.js"></script>
+<script type="text/javascript">var topButton = "sleek/circle-blue";</script>
+<script type="text/javascript" src="//backtotopbutton.com/script/toTop.js"></script>
 {% endblock scripts %}
 
 </html>

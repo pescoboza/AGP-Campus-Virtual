@@ -35,6 +35,10 @@ ul {
     font-style: italic;
 }
 
+#toTop{
+    bottom: 10% !important;
+}
+
 /* Article images */
 img {
     display: inline-block;
@@ -56,23 +60,17 @@ img {
     width: 25%;
 }
 
-
-#navLogo {
-    width: 100%;
-}
-
 /* Mediq queries for mobile devices */
 @media only screen and (max-width: 786px) {
-    img,
-    .img-lg {
+    img.img-lg {
         width: 100%;
     }
 
-    .img-md {
+    img.img-md {
         width: 80%;
     }
 
-    .img-sm {
+    img.img-sm {
         width: 45%;
     }
 
@@ -112,6 +110,16 @@ img {
     padding-bottom: 3cm;
 }
 
+img#navbarLogo {
+    height: 120px;
+    background-color: white;
+    padding: 15px 15px 15px 15px;
+    border-radius: 3px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 /*1.- Hice un nuevo navbar que es custom en vez de primary 
 para poder hacer los diseños queridos -A*/
 #navbar.navbar.navbar-custom {
@@ -146,90 +154,123 @@ es donde puedes cambiar y diseñar el texto del navbar -A*/
     width: 23%;
 }
 
+/* Article index */
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+.art-index{
+    position: sticky;
+    top: 20px;
+
+    /* background-color: rgba(200, 200, 200, 0.2); */
+}
+
+.art-index .art-index-item a,
+.art-index .art-index-item a:link,
+.art-index .art-index-item a:visited,
+.art-index .art-index-item a:active,
+.art-index .art-index-item a:hover{
+    text-decoration: none;
+}
+
+
+.art-index .art-index-item a{
+    padding: 0;
+    margin: 0;
+    color: rgba(80, 80, 80, 0.5);
+}
+
+.art-index .art-index-item a:hover{
+    font-size: 1.1em;
+    font-family: "GlacialIndifferenceBold";
+    color: rgba(59, 59, 59, 1);
+    
+}
+
+
+
+/* Activity cards */
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+.card{
+    width: 100%;
+    padding: 15px;
+    margin: 5px;
+    background-color: #F3F3F3;
+    border-radius: 5px;
+}
+
+.card .card-body img{
+    width: 100%;
+    height: 200px;
+    max-height: 400px;
+}
+
+.card .card-body .btn{
+}
+
+/* @media (max-width:991px)  { 
+    .card{
+    }
+} */
 
 /*Footer style*/
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 footer {
-    outline-offset: 20px;
-    background: rgba(255, 213, 126, 0.7);
-    width: 100%;
-    height: 350px;
+    text-align: left;
+    background-color:  #FFE1A4;
 }
 
-.main-content {
-    display: flex;
-    padding-top: 15px;
-}
 
-.first-column img {
-    height: 300px;
-    padding-left: 5%;
-}
-
-.second-column {
-    margin-left: 10%;
-}
-
-.second-column h1 {
-    font-family: "GlacialIndifferenceBold";
-    font-size: 30px;
+footer h3{
     text-transform: uppercase;
     color: #FC8476;
 }
 
-.content img {
-    height: 50px;
+footer a:link,
+footer a:visited,
+footer a:hover,
+footer a:active {
+    text-decoration: none;
+    color: #333;
 }
 
-.third-column {
-    margin-left: 7%;
+
+footer a {
+    overflow: hidden;
 }
 
-.third-column h1 {
-    font-family: "GlacialIndifferenceBold";
-    font-size: 30px;
-    text-transform: uppercase;
-    color: #FC8476;
-}
-
-.row {
-    display: flex;
-}
-
-.row label {
-    padding-left: 10px;
-}
-
-.forth-column {
-    margin-left: 15%;
-}
-
-.forth-column h1 {
-    font-family: "GlacialIndifferenceBold";
-    font-size: 30px;
-    text-transform: uppercase;
-    color: #FC8476;
-}
-
-.content {
-    font-size: 25px;
-    max-width: 350px;
-}
-
-.rows {
-    display: flex;
-    margin-top: 20px;
-}
-
-.rows label {
-    margin-top: 10px;
-    padding-left: 5px;
-}
-
-.copyright {
-    left: 50%;
+#footer-branding{
     text-align: center;
-    font-size: 18px;
+    /* background-color: white; */
+}
+
+#footerLogo {
+    margin: 10px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
+    background-color: white;
+    height: 180px;
+    border-radius: 3px;
+}
+
+img.icon {
+    display: inline-block;
+    padding-bottom: 10pt;
+    width: 30px;
+    position: relative;
+    transform: translateY(10%);
+}
+
+footer span{
+    font-size: 2rem;
+}
+
+@media (max-width:991px)  { 
+    footer {
+        text-align: center;
+    }
+}
+
+footer .copyright{
+    margin-top: 30px;
+    margin-bottom: 15px;
 }
 
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/

@@ -3,7 +3,7 @@
 {% macro article_index(section_headers) %}
 <div class="art-index">
     {% for href, title in section_headers.items() %}
-    <div class="art-index-item"><a href="{{'#' + href}}">{{title}}</a></div><br>
+    <div class="art-index-item"><a href="{{'#' + href}}">{{title}}</a></div>
     {% endfor %}
 </div>
 {% endmacro %}
