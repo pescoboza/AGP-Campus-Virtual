@@ -155,6 +155,39 @@ es donde puedes cambiar y diseñar el texto del navbar -A*/
     width: 23%;
 }
 
+/* Article index */
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+.art-index{
+    position: sticky;
+    top: 20px;
+
+    /* background-color: rgba(200, 200, 200, 0.2); */
+}
+
+.art-index .art-index-item a,
+.art-index .art-index-item a:link,
+.art-index .art-index-item a:visited,
+.art-index .art-index-item a:active,
+.art-index .art-index-item a:hover{
+    text-decoration: none;
+}
+
+
+.art-index .art-index-item a{
+    padding: 0;
+    margin: 0;
+    color: rgba(80, 80, 80, 0.5);
+}
+
+.art-index .art-index-item a:hover{
+    font-size: 1.1em;
+    font-family: "GlacialIndifferenceBold";
+    color: rgba(59, 59, 59, 1);
+    
+}
+
+
+
 /* Activity cards */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 .card{
