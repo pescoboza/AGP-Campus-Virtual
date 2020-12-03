@@ -64,32 +64,32 @@ class DevConfig(Config):
 
     SECRET_KEY = os.getenv("DEBUG_SECRET_KEY")
 
-    # FlaskMongoengine settings
-    MONGODB_SETTINGS = {
-        "db": os.getenv("DEBUG_MONGO_DB"),
-        "host": os.getenv("DEBUG_MONGO_URI"),
-    }
+    # # FlaskMongoengine settings
+    # MONGODB_SETTINGS = {
+    #     "db": os.getenv("DEBUG_MONGO_DB"),
+    #     "host": os.getenv("DEBUG_MONGO_URI"),
+    # }
 
-    # FlaskMail settings
-    MAIL_SERVER = os.getenv("DEBUG_MAIL_SERVER")
-    MAIL_PORT = os.getenv("DEBUG_MAIL_PORT")
-    MAIL_USE_TLS = get_bool_env_var("DEBUG_MAIL_USE_TLS")
-    MAIL_USE_SSL = get_bool_env_var("DEBUG_MAIL_USE_SSL")
-    MAIL_SUPPRESS_SEND = get_bool_env_var("DEBUG_MAIL_SUPPRESS_SEND")
-    MAIL_ASCII_ATACHMENTS = get_bool_env_var("DEBUG_MAIL_ASCII_ATACHMENTS")
-    MAIL_SENDER = os.getenv("DEBUG_MAIL_SENDER")
-    MAIL_USERNAME = os.getenv("DEBUG_MAIL_USERNAME")
-    MAIL_DEFAULT_SENDER = os.getenv("DEBUG_MAIL_DEFAULT_SENDER")
-    MAIL_PASSWORD = os.getenv("DEBUG_MAIL_PASSWORD")
-    MAIL_SUBJECT_PREFIX = os.getenv("DEBUG_MAIL_SUBJECT_PREFIX")
+    # # FlaskMail settings
+    # MAIL_SERVER = os.getenv("DEBUG_MAIL_SERVER")
+    # MAIL_PORT = os.getenv("DEBUG_MAIL_PORT")
+    # MAIL_USE_TLS = get_bool_env_var("DEBUG_MAIL_USE_TLS")
+    # MAIL_USE_SSL = get_bool_env_var("DEBUG_MAIL_USE_SSL")
+    # MAIL_SUPPRESS_SEND = get_bool_env_var("DEBUG_MAIL_SUPPRESS_SEND")
+    # MAIL_ASCII_ATACHMENTS = get_bool_env_var("DEBUG_MAIL_ASCII_ATACHMENTS")
+    # MAIL_SENDER = os.getenv("DEBUG_MAIL_SENDER")
+    # MAIL_USERNAME = os.getenv("DEBUG_MAIL_USERNAME")
+    # MAIL_DEFAULT_SENDER = os.getenv("DEBUG_MAIL_DEFAULT_SENDER")
+    # MAIL_PASSWORD = os.getenv("DEBUG_MAIL_PASSWORD")
+    # MAIL_SUBJECT_PREFIX = os.getenv("DEBUG_MAIL_SUBJECT_PREFIX")
 
-    # PDFkit wkhtmltopdf location
-    PDFKIT_WKHTMLTOPDF_PATH = os.getenv("DEBUG_PDFKIT_WKHTMLTOPDF_PATH")
+    # # PDFkit wkhtmltopdf location
+    # PDFKIT_WKHTMLTOPDF_PATH = os.getenv("DEBUG_PDFKIT_WKHTMLTOPDF_PATH")
 
-    # File ipload folder
-    UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER")
-    TEMP_FOLDER = os.getenv("TEMP_FOLDER")
-    SECRET_FOLDER = os.getenv("SECRET_FOLDER")
+    # # File ipload folder
+    # UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER")
+    # TEMP_FOLDER = os.getenv("TEMP_FOLDER")
+    # SECRET_FOLDER = os.getenv("SECRET_FOLDER")
 
 
 

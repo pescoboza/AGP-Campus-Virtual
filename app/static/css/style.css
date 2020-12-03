@@ -61,16 +61,15 @@ img {
 
 /* Mediq queries for mobile devices */
 @media only screen and (max-width: 786px) {
-    img,
-    .img-lg {
+    img.img-lg {
         width: 100%;
     }
 
-    .img-md {
+    img.img-md {
         width: 80%;
     }
 
-    .img-sm {
+    img.img-sm {
         width: 45%;
     }
 
@@ -147,7 +146,7 @@ es donde puedes cambiar y diseñar el texto del navbar -A*/
 
 /*Footer style*/
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-footer {
+/* footer {
     outline-offset: 20px;
     background: rgba(255, 213, 126, 0.7);
     width: 100%;
@@ -228,7 +227,7 @@ footer {
     left: 50%;
     text-align: center;
     font-size: 18px;
-}
+} */
 
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 #carouselContainer {
