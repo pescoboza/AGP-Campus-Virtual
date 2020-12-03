@@ -109,6 +109,16 @@ img {
     padding-bottom: 3cm;
 }
 
+img#navbarLogo {
+    height: 120px;
+    background-color: white;
+    padding: 15px 15px 15px 15px;
+    border-radius: 3px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 /*1.- Hice un nuevo navbar que es custom en vez de primary 
 para poder hacer los diseños queridos -A*/
 #navbar.navbar.navbar-custom {
@@ -143,6 +153,28 @@ es donde puedes cambiar y diseñar el texto del navbar -A*/
     width: 23%;
 }
 
+/* Activity cards */
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+.card{
+    width: 100%;
+    padding: 15px;
+    margin: 5px;
+    background-color: #F3F3F3;
+    border-radius: 5px;
+}
+
+.card .card-body img{
+    width: 100%;
+}
+
+.card .card-body .btn{
+    
+}
+
+/* @media (max-width:991px)  { 
+    .card{
+    }
+} */
 
 /*Footer style*/
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
