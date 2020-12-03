@@ -25,3 +25,5 @@ uploads/*
 
 # Secret files
 secret/*
+
+env/

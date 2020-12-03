@@ -1,5 +1,0 @@
-Cambios:
--Style en cancer_cervicouterino.html
--Imagenes en cancer_cervicouterino.html
--Agregadas las imagenes en la carpeta de static
--Creación de archivo css en static (no utilizado ya que en el html porque no jalaba)

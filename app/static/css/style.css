@@ -60,7 +60,6 @@ img {
     width: 25%;
 }
 
-
 /* Mediq queries for mobile devices */
 @media only screen and (max-width: 786px) {
     img.img-lg {
