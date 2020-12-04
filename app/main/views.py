@@ -20,7 +20,7 @@ def index():
     return redirect(url_for("cursos.diagnostico"))
 
 
-@main.route("/contact")
+@main.route("/contacto")
 def contact():
     return render_template("main/contact.html")
 
