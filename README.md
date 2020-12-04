@@ -33,7 +33,7 @@
 .
 ├── app          : Main application folder
 │    ├── auth        : Authenthication blueprint
-│    ├── courses     : Course article blueprint
+│    ├── cursos     : Course article blueprint
 │    ├── main        : Main blueprint
 │    ├── static      : Static page files
 │    ├── templates   : Jinja templates (ordered by blueprint folders)

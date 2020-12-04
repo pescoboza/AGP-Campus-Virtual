@@ -17,7 +17,7 @@ from ..user_report import generate_user_report
 @main.route("/")
 @main.route("/index")
 def index():
-    return redirect(url_for("courses.diagnostico"))
+    return redirect(url_for("cursos.diagnostico"))
 
 
 @main.route("/contact")
@@ -75,7 +75,7 @@ def certificate(name):
     # Check if user has completed the quiz
     if not user.has_passed_quiz(COURSE_CERT[name]["quiz_code"]):
         flash("Debe completar la evaluación para obtener su certificado.")
-        return redirect(url_for("courses.{}".format(name.replace('-', '_'))))
+        return redirect(url_for("cursos.{}".format(name.replace('-', '_'))))
 
     # Current working dir to set abs path for pdfkit html resources
     cwd = os.getcwd()

@@ -28,12 +28,12 @@ AGP Campus Virtual
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-center">
                 {# <!-- Cancer type links --> #}
-                <li><a href={{url_for("courses.diagnostico")}}>Inicio</a></li>
-                <li><a href={{url_for("courses.cancer_testiculo")}}>Cáncer Testicular</a></li>
-                <li><a href={{url_for("courses.cancer_prostata")}}>Cáncer en Próstata</a></li>
-                <li><a href={{url_for("courses.cancer_pulmon")}}>Cáncer en Pulmón</a></li>
-                <li><a href={{url_for("courses.cancer_mama")}}>Cáncer de Mama</a></li>
-                <li><a href={{url_for("courses.cancer_cervicouterino")}}>Cáncer Cervicouterino</a></li>
+                <li><a href={{url_for("cursos.diagnostico")}}>Inicio</a></li>
+                <li><a href={{url_for("cursos.cancer_testiculo")}}>Cáncer Testicular</a></li>
+                <li><a href={{url_for("cursos.cancer_prostata")}}>Cáncer en Próstata</a></li>
+                <li><a href={{url_for("cursos.cancer_pulmon")}}>Cáncer en Pulmón</a></li>
+                <li><a href={{url_for("cursos.cancer_mama")}}>Cáncer de Mama</a></li>
+                <li><a href={{url_for("cursos.cancer_cervicouterino")}}>Cáncer Cervicouterino</a></li>
 
                 {# <!-- User auth links --> #}
                 {% if current_user and not current_user.is_anonymous %}

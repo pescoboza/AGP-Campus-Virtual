@@ -81,8 +81,8 @@ def create_app(config):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix="/auth")
 
-    from .courses import courses as courses_blueprint
-    app.register_blueprint(courses_blueprint, url_prefix="/courses")
+    from .cursos import cursos as cursos_blueprint
+    app.register_blueprint(cursos_blueprint, url_prefix="/cursos")
     ####
 
     # Start the app scheduler
