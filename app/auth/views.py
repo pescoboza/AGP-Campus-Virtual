@@ -46,15 +46,15 @@ def login():
     return render_template("auth/login.html", title="Iniciar sesión", form=form)
 
 
-@auth.route("/register", methods=["GET", "POST"])
-def register():
+@auth.route("/registrarse", methods=["GET", "POST"])
+def registrarse():
     form = RegisterForm()
     if form.validate_on_submit():
         if User.get_user(form.email.data) is not None:
             print("[DEBUG] User with email {} already registered.".format(
                 form.email.data))
             flash(Msg.UserRegistration.ERROR_EMAIL_IN_USE)
-            return redirect(url_for("auth.register"))
+            return redirect(url_for("auth.registrarse"))
 
         new_user = \
             User\
@@ -76,7 +76,7 @@ def register():
         flash(Msg.Flash.NEW_USER.format(first_name=new_user.first_name))
         return redirect(url_for("main.index"))
 
-    return render_template("auth/register.html", title="Registrarse", form=form)
+    return render_template("auth/registrarse.html", title="Registrarse", form=form)
 
 
 @auth.route("/logout")
