@@ -1,5 +1,5 @@
-{% extends "courses/courses_base.html" %}
-{% from "courses/_article.html" import section_header %}
+{% extends "cursos/cursos_base.html" %}
+{% from "cursos/_article.html" import section_header %}
 {% set section_headers = {
     "que-es": "¿QUÉ ES EL CANCER DE PRÓSTATA?", 
     "sintomas": "SÍNTOMAS",
@@ -10,11 +10,11 @@
     "evaluacion": "EVALUACIÓN" } %}
 
 {% block title %}
-AGP - Cáncer de Próstata
+Cáncer de Próstata
 {% endblock %}
 
 {% block banner %}
-<img class="img-banner" class src="../../static/img/portadapro.JPG">
+<img class="img-banner" class src="/static/img/portadapro.JPG">
 {% endblock banner %}
 
 {% block article %}
@@ -31,7 +31,7 @@ AGP - Cáncer de Próstata
     Puede ser mucho más grande en hombres de más edad.
 </p>
 
-<img class="center img-lg img-block" src="../../static/img/CancerProstata.PNG">
+<img class="center img-lg img-block" src="/static/img/CancerProstata.PNG">
 
 {# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
 {{section_header("sintomas", section_headers)}}
@@ -50,7 +50,7 @@ AGP - Cáncer de Próstata
         debido a que el cáncer comprime la médula espinal</li>
 </ul>
 <p> Se debe hablar con un médico para asegurarse de la causa de estas señales.</p>
-<img class="center img-lg" src="../../static/img/Síntomacprostrata.PNG">
+<img class="center img-lg" src="/static/img/Síntomacprostrata.PNG">
 
 {# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
 {{section_header("factores-de-riesgo", section_headers)}}
@@ -67,7 +67,7 @@ AGP - Cáncer de Próstata
     <li>Hacer ejercicio la mayoría de los días de la semana</li>
     <li>Hablar con un médico sobre tu riesgo</li>
 </ul>
-<img class="center img-md" src="../../static/img/Prevencióncprostata.PNG">
+<img class="center img-md" src="/static/img/Prevencióncprostata.PNG">
 {# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
 {{section_header("actividades", section_headers)}}
 <br>
@@ -75,7 +75,7 @@ AGP - Cáncer de Próstata
     <div class="col-sm-4">
         <div class="card">
             <div class="card-body">
-                <img src="../../static/img/ahorcado.jpeg" class="card-img-top">
+                <img src="/static/img/ahorcado.jpeg" class="card-img-top">
                 <h5 class="card-title" style="font-family: GlacialIndifferenceBold;">Ahorcado</h5>
                 <p class="card-text">Juego del ahorcado de los conceptos<br> más importantes sobre el cancer de
                     próstata.</p>
@@ -86,7 +86,7 @@ AGP - Cáncer de Próstata
     <div class="col-sm-4">
         <div class="card">
             <div class="card-body">
-                <img src="../../static/img/ThumbnailProstata.jpeg" class="card-img-top">
+                <img src="/static/img/ThumbnailProstata.jpeg" class="card-img-top">
                 <h5 class="card-title" style="font-family: GlacialIndifferenceBold;">Es mejor prevenir que lamentar</h5>
                 <p class="card-text">Video informativo acerca del cáncer próstata en primera persona.</p>
                 <a href="https://www.youtube.com/watch?v=_8s0seviLRw" class="btn btn-primary">Ir al video</a>

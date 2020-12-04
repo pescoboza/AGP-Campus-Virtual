@@ -1,7 +1,7 @@
 from flask import redirect, render_template, url_for, request, flash
 from flask_login import login_required, current_user
 
-from . import courses
+from . import cursos
 from ..main import main
 from ..models import User, QUIZ_CODES
 from .forms import MultipleChoiceQuizForm
@@ -54,8 +54,8 @@ def quiz_view(template, redirect_to, topic_code, num_questions=10, certificate_e
     return render_template(template, form=form, score=score, max_score=num_questions, already_passed=already_passed, certificate_endpoint=certificate_endpoint)
 
 
-# @courses.route("/", methods=["GET", "POST"])
-@courses.route("/diagnostico", methods=["GET", "POST"])
+# @cursos.route("/", methods=["GET", "POST"])
+@cursos.route("/diagnostico", methods=["GET", "POST"])
 # @login_required
 def diagnostico():
     # Diagnostic has 10 questions, a topic code "diag" and no certificate
@@ -65,7 +65,7 @@ def diagnostico():
 
     # Logged in users get the same treatment as a regular graded quiz
     if not current_user.is_anonymous:
-        return quiz_view("courses/diagnostico.html", url_for("courses.diagnostico"), topic_code, num_questions, certificate_endpoint=certificate_endpoint)
+        return quiz_view("cursos/diagnostico.html", url_for("cursos.diagnostico"), topic_code, num_questions, certificate_endpoint=certificate_endpoint)
 
     # Temporary quiz data for anonymous users
     score = 0
@@ -76,7 +76,7 @@ def diagnostico():
         score = form.get_score()
         print("[DEBUG] Score: {}/{}".format(score, num_questions))
 
-    return render_template("/courses/diagnostico.html",
+    return render_template("/cursos/diagnostico.html",
                            form=form,
                            score=score,
                            max_score=num_questions,
@@ -84,31 +84,31 @@ def diagnostico():
                            certificate_endpoint=certificate_endpoint)
 
 
-@courses.route("/cancer-testiculo", methods=["GET", "POST"])
+@cursos.route("/cancer-testiculo", methods=["GET", "POST"])
 @login_required
 def cancer_testiculo():
-    return quiz_view("courses/cancer_testiculo.html", url_for("courses.cancer_testiculo"), "tstc", 3, certificate_endpoint="cancer-testiculo")
+    return quiz_view("cursos/cancer_testiculo.html", url_for("cursos.cancer_testiculo"), "tstc", 3, certificate_endpoint="cancer-testiculo")
 
 
-@courses.route("/cancer-prostata", methods=["GET", "POST"])
+@cursos.route("/cancer-prostata", methods=["GET", "POST"])
 @login_required
 def cancer_prostata():
-    return quiz_view("courses/cancer_prostata.html", url_for("courses.cancer_prostata"), "psta", 3, certificate_endpoint="cancer-prostata")
+    return quiz_view("cursos/cancer_prostata.html", url_for("cursos.cancer_prostata"), "psta", 3, certificate_endpoint="cancer-prostata")
 
 
-@courses.route("/cancer-pulmon", methods=["GET", "POST"])
+@cursos.route("/cancer-pulmon", methods=["GET", "POST"])
 @login_required
 def cancer_pulmon():
-    return quiz_view("courses/cancer_pulmon.html", url_for("courses.cancer_pulmon"), "plmn", 3, certificate_endpoint="cancer-pulmon")
+    return quiz_view("cursos/cancer_pulmon.html", url_for("cursos.cancer_pulmon"), "plmn", 3, certificate_endpoint="cancer-pulmon")
 
 
-@courses.route("/cancer-mama", methods=["GET", "POST"])
+@cursos.route("/cancer-mama", methods=["GET", "POST"])
 @login_required
 def cancer_mama():
-    return quiz_view("courses/cancer_mama.html", url_for("courses.cancer_mama"), "mama", 3, certificate_endpoint="cancer-mama")
+    return quiz_view("cursos/cancer_mama.html", url_for("cursos.cancer_mama"), "mama", 3, certificate_endpoint="cancer-mama")
 
 
-@courses.route("/cancer-cervicouterino", methods=["GET", "POST"])
+@cursos.route("/cancer-cervicouterino", methods=["GET", "POST"])
 @login_required
 def cancer_cervicouterino():
-    return quiz_view("courses/cancer_cervicouterino.html", url_for("courses.cancer_cervicouterino"), "crvu", 3, certificate_endpoint="cancer-cervicouterino")
+    return quiz_view("cursos/cancer_cervicouterino.html", url_for("cursos.cancer_cervicouterino"), "crvu", 3, certificate_endpoint="cancer-cervicouterino")

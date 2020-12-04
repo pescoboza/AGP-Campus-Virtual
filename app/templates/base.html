@@ -7,13 +7,14 @@ AGP Campus Virtual
 
 {% block head %}
 {{ super() }}
+<link rel="shortcut icon" type="image/jpg" href="/static/img/AGP-icon.png" />
 {#<!-- <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/glacial-indifference" /> -->#}
-<link rel="stylesheet" href="../static/css/style.css">
+<link rel="stylesheet" href="/static/css/style.css">
 {% endblock %}
 
 {% block navbar %}
 <a href={{url_for("main.index")}}>
-    <img id="navbarLogo" src="../../static/img/AGP-Nombre.png">
+    <img id="navbarLogo" src="/static/img/AGP-Nombre.png">
 </a>
 <nav id="navbar" class="navbar navbar-custom" role="navigation">
     <div class="container">
@@ -28,20 +29,20 @@ AGP Campus Virtual
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-center">
                 {# <!-- Cancer type links --> #}
-                <li><a href={{url_for("courses.diagnostico")}}>Inicio</a></li>
-                <li><a href={{url_for("courses.cancer_testiculo")}}>Cáncer Testicular</a></li>
-                <li><a href={{url_for("courses.cancer_prostata")}}>Cáncer en Próstata</a></li>
-                <li><a href={{url_for("courses.cancer_pulmon")}}>Cáncer en Pulmón</a></li>
-                <li><a href={{url_for("courses.cancer_mama")}}>Cáncer de Mama</a></li>
-                <li><a href={{url_for("courses.cancer_cervicouterino")}}>Cáncer Cervicouterino</a></li>
+                <li><a href={{url_for("cursos.diagnostico")}}>Inicio</a></li>
+                <li><a href={{url_for("cursos.cancer_testiculo")}}>Cáncer Testicular</a></li>
+                <li><a href={{url_for("cursos.cancer_prostata")}}>Cáncer en Próstata</a></li>
+                <li><a href={{url_for("cursos.cancer_pulmon")}}>Cáncer en Pulmón</a></li>
+                <li><a href={{url_for("cursos.cancer_mama")}}>Cáncer de Mama</a></li>
+                <li><a href={{url_for("cursos.cancer_cervicouterino")}}>Cáncer Cervicouterino</a></li>
 
                 {# <!-- User auth links --> #}
                 {% if current_user and not current_user.is_anonymous %}
-                <li><a href={{url_for("auth.profile")}}>{{current_user.email}}</a></li>
-                <li><a href={{url_for("auth.logout")}}>Salir</a></li>
+                <li><a href={{url_for("auth.perfil")}}>Pefil</a></li>
+                <li><a href={{url_for("auth.logout")}}>Cerrar Sesión</a></li>
                 {% else %}
-                <li><a href={{url_for("auth.login")}}>Ingresar</a></li>
-                <li><a href={{url_for("auth.register")}}>Registrarse</a></li>
+                <li><a href={{url_for("auth.login")}}>Iniciar Sesión</a></li>
+                <li><a href={{url_for("auth.registrarse")}}>Registrarse</a></li>
                 {% endif %}
             </ul>
         </div>
@@ -63,16 +64,60 @@ AGP Campus Virtual
     {#{% block banner %}{% endblock banner %}#}
     {% block page_content %}{% endblock page_content %}
 </div>
-{% include "_footer.html" %}
+
+{#<!-- Footer -->#}
+<footer class="container-fluid">
+    <div class="row">
+        <div id="footer-branding" class="col-md-3">
+            <a href="{{url_for('main.index')}}">
+                <img id="footerLogo" src="/static/img/AGP logo PNG.png">
+            </a>
+        </div>
+        <div class="col-md-3">
+            <h3>Dirección</h3>
+            <a href="https://goo.gl/maps/YvmCNgkY3BVpnojC9" target="_blank">
+                <img class="icon" src="/static/img/location-icon.png">
+                <span>Olivares, Luis Encinas, 83138 Hermosillo, Son.</span>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <h3>Teléfono</h3>
+            <a href="tel:6622164883" target="_blank">
+                <img class="icon" src="/static/img/phone-icon.png">
+                <span>662 216 4883</span>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <h3>Redes sociales</h3>
+            <a href="https://www.facebook.com/AGPHermosillo.Oficial/" target="_blank">
+                <img class=" icon" src="/static/img/facebook-logo.png">
+                <span>AGP Hermosillo</span>
+            </a><br>
+            <a href="" target="_blank">
+                <img class="icon" src="/static/img/instagram-logo.png">
+                <span>@agp_hermosillo</span>
+            </a><br>
+            <a href="https://twitter.com/agphilloOFICIAL" target="_blank">
+                <img class="icon" src="/static/img/twitter-logo.png">
+                <span>@agphilloOFICIAL</span>
+            </a><br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-center copyright" >
+            Asociación George Papanicolau A. C. 2020 © Todos los derechos reservados
+        </div>
+    </div>
+</footer>
 {% endblock content %}
 
 
 {% block scripts %}
 {{super()}}
-<script src="../static/js/script.js"></script>
+<script src="/static/js/script.js"></script>
 
 {#<!-- TODO: Remove the reload cachced files script from production release. -->#}
-<script src="../static/js/reloadCachedCSS.js"></script>
+<script src="/static/js/reloadCachedCSS.js"></script>
 <script type="text/javascript">var topButton = "sleek/circle-blue";</script>
 <script type="text/javascript" src="//backtotopbutton.com/script/toTop.js"></script>
 {% endblock scripts %}

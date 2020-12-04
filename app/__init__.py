@@ -21,7 +21,7 @@ class Msg:
         LOGIN_REQUIRED = "Inicie sesión para ingresar a esta página."
         RECOVERY_REQUEST = "Revise su correo."
         ALREADY_LOGGED_IN = "Su sesión está activa. Para cambiar de usuario, primero debe cerrar sesión."
-        PASSWORD_RESET_EMAIL_SENT = "Un correo con instrucciones para reestablecer su contraseña ha sidoe enviado a su bandeja de entrada."
+        PASSWORD_RESET_EMAIL_SENT = "Un correo con instrucciones para reestablecer su contraseña ha sido enviado a su bandeja de entrada."
 
     class Mail:
         RESET_PASSWORD_SUBJECT = "Recuperación de contraseña"
@@ -81,8 +81,8 @@ def create_app(config):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix="/auth")
 
-    from .courses import courses as courses_blueprint
-    app.register_blueprint(courses_blueprint, url_prefix="/courses")
+    from .cursos import cursos as cursos_blueprint
+    app.register_blueprint(cursos_blueprint, url_prefix="/cursos")
     ####
 
     # Start the app scheduler

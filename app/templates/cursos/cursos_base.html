@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% from "courses/_quiz.html" import quiz %}
-{% from "courses/_article.html" import article_index, section_header %}
+{% from "cursos/_quiz.html" import quiz %}
+{% from "cursos/_article.html" import article_index, section_header %}
 {% from "_button_link.html" import button_link %}
 {# Requires dict section_headers #}
 {% block page_content %}
@@ -22,12 +22,11 @@
         button_link(
             href=url_for("main.certificate", name=certificate_endpoint),
             btn_text="Descargar certificado",
-            target="_blank",
-            extra_classes="width23"
+            target="_blank"
         )
     }}
     {% endif %}
-    {{quiz(form, score, max_score, extra_btn_classes="width23")}}
+    {{quiz(form, score, max_score)}}
     {% endif %}
 
 {% endblock page_content %}

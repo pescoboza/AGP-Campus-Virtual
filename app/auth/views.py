@@ -9,7 +9,7 @@ from ..models import User, generate_password_hash, QUIZ_CODES
 from ..email import send_email
 
 
-@auth.route("/login", methods=["GET", "POST"])
+@auth.route("/iniciar-sesion", methods=["GET", "POST"])
 def login():
 
     # User is already logged in
@@ -46,15 +46,15 @@ def login():
     return render_template("auth/login.html", title="Iniciar sesión", form=form)
 
 
-@auth.route("/register", methods=["GET", "POST"])
-def register():
+@auth.route("/registrarse", methods=["GET", "POST"])
+def registrarse():
     form = RegisterForm()
     if form.validate_on_submit():
         if User.get_user(form.email.data) is not None:
             print("[DEBUG] User with email {} already registered.".format(
                 form.email.data))
             flash(Msg.UserRegistration.ERROR_EMAIL_IN_USE)
-            return redirect(url_for("auth.register"))
+            return redirect(url_for("auth.registrarse"))
 
         new_user = \
             User\
@@ -76,10 +76,10 @@ def register():
         flash(Msg.Flash.NEW_USER.format(first_name=new_user.first_name))
         return redirect(url_for("main.index"))
 
-    return render_template("auth/register.html", title="Registrarse", form=form)
+    return render_template("auth/registrarse.html", title="Registrarse", form=form)
 
 
-@auth.route("/logout")
+@auth.route("/cerrar-sesion")
 def logout():
     if not current_user.is_anonymous:
         logout_user()
@@ -87,9 +87,9 @@ def logout():
     return redirect(url_for("main.index"))
 
 
-@auth.route("/change-password", methods=["GET", "POST"])
+@auth.route("/cambiar-contrasena", methods=["GET", "POST"])
 @fresh_login_required
-def change_password():
+def cambiar_contrasena():
     form = ChangePasswordForm()
     if form.validate_on_submit():
 
@@ -101,13 +101,13 @@ def change_password():
                 flash(Msg.Flash.SAME_AS_OLD_PASSWORD)
                 print("[DEBUG] User {} tried to change to same password.".format(
                     current_user.email))
-                return redirect(url_for("auth.change_password"))
+                return redirect(url_for("auth.cambiar_contrasena"))
 
         else:
             flash(Msg.Flash.INVALID_OLD_PASSWORD)
             print("[DEBUG] Password change request, incorrect old password. User: {}".format(
                 current_user.email))
-            return redirect(url_for("auth.change_password"))
+            return redirect(url_for("auth.cambiar_contrasena"))
 
         # Check that the user curently signed in is still on the database
         user = User.get_user(email=current_user.email)
@@ -122,12 +122,12 @@ def change_password():
         print("[DEBUG] Password change from user {}.".format(user.email))
         flash(Msg.Flash.PASSWORD_CHANGE_SUCCESFUL)
         return redirect(url_for("main.index"))
-    return render_template("auth/change_password.html", form=form)
+    return render_template("auth/cambiar_contrasena.html", form=form)
 
 
 # View to request a password change, arrived at through "forgot password?"
 # Redirects to index if user is NOT anonymous
-@auth.route("/reset", methods=["GET", "POST"])
+@auth.route("/reestablecer-contrasena", methods=["GET", "POST"])
 def password_reset_request():
     if not current_user.is_anonymous:
         return redirect(url_for("main.index"))
@@ -147,7 +147,7 @@ def password_reset_request():
 
 # View to change reset password after token sent to email is validated.
 # Redirects to index if user is NOT anonymous
-@auth.route("/reset/<token>", methods=["GET", "POST"])
+@auth.route("/reestablecer-contrasena/<token>", methods=["GET", "POST"])
 def password_reset(token):
     if not current_user.is_anonymous:
         return redirect(url_for("main.index"))
@@ -162,9 +162,9 @@ def password_reset(token):
     return render_template("auth/reset_password.html", form=form)
 
 
-@auth.route("/profile", methods=["GET", "POST"])
+@auth.route("/perfil", methods=["GET", "POST"])
 @login_required
-def profile():
+def perfil():
 
     # Get the user
     user = User.objects(email=current_user.email).first()
@@ -190,7 +190,7 @@ def profile():
         if is_save:
             user.save()
             flash("Su perfil ha sido actualizado.")
-            return redirect(url_for("auth.profile"))
+            return redirect(url_for("auth.perfil"))
 
     quiz_info = {}
     for qc in QUIZ_CODES:
@@ -210,4 +210,4 @@ def profile():
             "certificate_url": certificate_url
         }
 
-    return render_template("auth/profile.html", form=form, quiz_info=quiz_info, is_admin=is_admin)
+    return render_template("auth/perfil.html", form=form, quiz_info=quiz_info, is_admin=is_admin)

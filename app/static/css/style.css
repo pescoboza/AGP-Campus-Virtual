@@ -150,10 +150,6 @@ es donde puedes cambiar y diseñar el texto del navbar -A*/
     margin: 8px 8px 5px 5px;
 }
 
-.width23 {
-    width: 23%;
-}
-
 /* Article index */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 .art-index{
@@ -185,6 +181,16 @@ es donde puedes cambiar y diseñar el texto del navbar -A*/
     
 }
 
+/* @media(hover: hover) and (pointer: fine) {
+    .art-index .art-index-item a{
+        font-size: 1.1em;
+        font-family: "GlacialIndifferenceBold";
+        color: rgba(59, 59, 59, 1);
+        
+    }
+    
+} */
+
 
 
 /* Activity cards */
@@ -214,6 +220,7 @@ es donde puedes cambiar y diseñar el texto del navbar -A*/
 /*Footer style*/
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 footer {
+    margin-top: 80px;
     text-align: left;
     background-color:  #FFE1A4;
 }

@@ -17,10 +17,10 @@ from ..user_report import generate_user_report
 @main.route("/")
 @main.route("/index")
 def index():
-    return redirect(url_for("courses.diagnostico"))
+    return redirect(url_for("cursos.diagnostico"))
 
 
-@main.route("/contact")
+@main.route("/contacto")
 def contact():
     return render_template("main/contact.html")
 
@@ -75,7 +75,7 @@ def certificate(name):
     # Check if user has completed the quiz
     if not user.has_passed_quiz(COURSE_CERT[name]["quiz_code"]):
         flash("Debe completar la evaluación para obtener su certificado.")
-        return redirect(url_for("courses.{}".format(name.replace('-', '_'))))
+        return redirect(url_for("cursos.{}".format(name.replace('-', '_'))))
 
     # Current working dir to set abs path for pdfkit html resources
     cwd = os.getcwd()
@@ -121,7 +121,7 @@ def certificate(name):
     return response
 
 
-@main.route("/data-dashboard")
+@main.route("/tablero-datos")
 @login_required
 def data_dashboard():
     """Displays data dashboard. Needs data or admin user role."""
@@ -136,7 +136,7 @@ def data_dashboard():
 
 
 
-@main.route("/download-report")
+@main.route("/descargar-reporte")
 @login_required
 def download_report():
     """Generates csv reports from user data and downloads it for the user."""

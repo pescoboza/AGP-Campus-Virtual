@@ -1,5 +1,5 @@
-{% extends "courses/courses_base.html" %}
-{% from "courses/_article.html" import section_header %}
+{% extends "cursos/cursos_base.html" %}
+{% from "cursos/_article.html" import section_header %}
 {% set section_headers = {
     "que-es": "¿QUÉ ES EL CANCER TESTICULAR?", 
     "sintomas": "SÍNTOMAS",
@@ -9,11 +9,11 @@
     "evaluacion": "EVALUACIÓN" } %}
 
 {% block title %}
-AGP - Cáncer de Testículo
+Cáncer de Testículo
 {% endblock %}
 
 {% block banner %}
-<img class="img-banner" src="../../static/img/listontesticular.jpg">
+<img class="img-banner" src="/static/img/listontesticular.jpg">
 {% endblock banner %}
 
 {% block article %}
@@ -38,7 +38,7 @@ AGP - Cáncer de Testículo
     <li>Bultos o sensibilidad en las mamas</li>
     <li>Acumulación de líquido en el testículo</li>
 </ul>
-<img src="../../static/img/ctesticulosintomas.PNG" class="center img-lg">
+<img src="/static/img/ctesticulosintomas.PNG" class="center img-lg">
 {# <!-- /////////////////////////////////////////////////////////////////////////// --> #}
 {{section_header("autoexaminacion", section_headers)}}
 <p>En la actualidad no es posible evitar la mayoría de los casos de esta enfermedad. Pero los expertos recomiendan corregir la
@@ -57,14 +57,14 @@ AGP - Cáncer de Testículo
         y posterior de cada testículo. Puede que lo sientas más desigual al tacto, o con
         más bultos, que el testículo.
     
-    <img src="../../static/img/ctesticuloprevencion1.png" class="center img-md img-block">
+    <img src="/static/img/ctesticuloprevencion1.png" class="center img-md img-block">
     </li>
     <li>Palpa el tubo denominado “conducto deferente” que sale del epidídimo y se asemeja a un espagueti (Debe sentirse como un
         cordón suave). <br>
         <br>
         <div class="centrar">
-            <img src="../../static/img/ctesticuloprevencion2.PNG" class="center img-sm" >
-            <img src="../../static/img/ctesticuloprevencion3.PNG" class="center img-sm" >
+            <img src="/static/img/ctesticuloprevencion2.PNG" class="center img-sm" >
+            <img src="/static/img/ctesticuloprevencion3.PNG" class="center img-sm" >
         </div>
     </li>
     <li>Repite el examen en el otro testículo.</li>

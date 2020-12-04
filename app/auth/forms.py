@@ -121,7 +121,7 @@ class PasswordResetRequestForm(FlaskForm):
 
 class PasswordResetForm(FlaskForm):
     # Form to change password from lost password email request.
-    password = PasswordField("Nueva ontraseña", validators=[data_required, EqualTo(
+    password = PasswordField("Nueva contraseña", validators=[data_required, EqualTo(
         "confirm_password", message=Msg.UserRegistration.ERROR_PASSWORD_MATCH)])
     confirm_password = PasswordField(
         "Confirmar contraseña", validators=[data_required])

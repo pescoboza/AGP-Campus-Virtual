@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Ingresar
+Iniciar sesión
 {% endblock %}
 
 {% block page_content %}
@@ -10,6 +10,6 @@ Ingresar
     {{wtf.quick_form(form)}}
     <br>
     <p><a href="{{url_for('auth.password_reset_request')}}">¿Olvidó su contraseña?</a></p>
-    <p><a href="{{url_for('auth.register')}}">¿Usuario nuevo?</a></p>
+    <p><a href="{{url_for('auth.registrarse')}}">¿Usuario nuevo?</a></p>
 </div>
 {% endblock %}
