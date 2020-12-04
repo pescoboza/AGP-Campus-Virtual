@@ -121,7 +121,7 @@ def certificate(name):
     return response
 
 
-@main.route("/data-dashboard")
+@main.route("/tablero-datos")
 @login_required
 def data_dashboard():
     """Displays data dashboard. Needs data or admin user role."""
