@@ -9,7 +9,7 @@ from ..models import User, generate_password_hash, QUIZ_CODES
 from ..email import send_email
 
 
-@auth.route("/login", methods=["GET", "POST"])
+@auth.route("/iniciar-sesion", methods=["GET", "POST"])
 def login():
 
     # User is already logged in

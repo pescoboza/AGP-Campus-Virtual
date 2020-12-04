@@ -136,7 +136,7 @@ def data_dashboard():
 
 
 
-@main.route("/download-report")
+@main.route("/descargar-reporte")
 @login_required
 def download_report():
     """Generates csv reports from user data and downloads it for the user."""
