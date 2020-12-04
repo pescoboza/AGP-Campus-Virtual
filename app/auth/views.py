@@ -127,7 +127,7 @@ def cambiar_contrasena():
 
 # View to request a password change, arrived at through "forgot password?"
 # Redirects to index if user is NOT anonymous
-@auth.route("/reset", methods=["GET", "POST"])
+@auth.route("/reestablecer-contrasena", methods=["GET", "POST"])
 def password_reset_request():
     if not current_user.is_anonymous:
         return redirect(url_for("main.index"))
@@ -147,7 +147,7 @@ def password_reset_request():
 
 # View to change reset password after token sent to email is validated.
 # Redirects to index if user is NOT anonymous
-@auth.route("/reset/<token>", methods=["GET", "POST"])
+@auth.route("/reestablecer-contrasena/<token>", methods=["GET", "POST"])
 def password_reset(token):
     if not current_user.is_anonymous:
         return redirect(url_for("main.index"))
