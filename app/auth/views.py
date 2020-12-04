@@ -162,9 +162,9 @@ def password_reset(token):
     return render_template("auth/reset_password.html", form=form)
 
 
-@auth.route("/profile", methods=["GET", "POST"])
+@auth.route("/perfil", methods=["GET", "POST"])
 @login_required
-def profile():
+def perfil():
 
     # Get the user
     user = User.objects(email=current_user.email).first()
@@ -190,7 +190,7 @@ def profile():
         if is_save:
             user.save()
             flash("Su perfil ha sido actualizado.")
-            return redirect(url_for("auth.profile"))
+            return redirect(url_for("auth.perfil"))
 
     quiz_info = {}
     for qc in QUIZ_CODES:
@@ -210,4 +210,4 @@ def profile():
             "certificate_url": certificate_url
         }
 
-    return render_template("auth/profile.html", form=form, quiz_info=quiz_info, is_admin=is_admin)
+    return render_template("auth/perfil.html", form=form, quiz_info=quiz_info, is_admin=is_admin)
