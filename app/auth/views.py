@@ -79,7 +79,7 @@ def registrarse():
     return render_template("auth/registrarse.html", title="Registrarse", form=form)
 
 
-@auth.route("/logout")
+@auth.route("/cerrar-sesion")
 def logout():
     if not current_user.is_anonymous:
         logout_user()
