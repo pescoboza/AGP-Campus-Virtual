@@ -50,6 +50,7 @@ def quiz_view(template, redirect_to, topic_code, num_questions=10, certificate_e
             user.quiz_data[topic_code]["is_passed"] = True
 
         user.save()
+        flash("Felicidades, ha pasado el examen. Consulte el examen para descargar su certificado.")
         return redirect(redirect_to)
     return render_template(template, form=form, score=score, max_score=num_questions, already_passed=already_passed, certificate_endpoint=certificate_endpoint)
 

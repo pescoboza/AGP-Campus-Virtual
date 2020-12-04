@@ -19,6 +19,7 @@
     font-family: "GlacialIndifferenceRegular";
     font-weight: normal;
     font-style: normal;
+    font-size: 16px; 
 }
 
 h1 {
@@ -252,7 +253,8 @@ footer a {
 #footerLogo {
     margin: 10px 10px 10px 10px;
     padding: 10px 10px 10px 10px;
-    background-color: white;
+    /* background-color: white; */
+    background-color: transparent;
     height: 180px;
     border-radius: 3px;
 }
