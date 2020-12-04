@@ -87,9 +87,9 @@ def logout():
     return redirect(url_for("main.index"))
 
 
-@auth.route("/change-password", methods=["GET", "POST"])
+@auth.route("/cambiar-contrasena", methods=["GET", "POST"])
 @fresh_login_required
-def change_password():
+def cambiar_contrasena():
     form = ChangePasswordForm()
     if form.validate_on_submit():
 
@@ -101,13 +101,13 @@ def change_password():
                 flash(Msg.Flash.SAME_AS_OLD_PASSWORD)
                 print("[DEBUG] User {} tried to change to same password.".format(
                     current_user.email))
-                return redirect(url_for("auth.change_password"))
+                return redirect(url_for("auth.cambiar_contrasena"))
 
         else:
             flash(Msg.Flash.INVALID_OLD_PASSWORD)
             print("[DEBUG] Password change request, incorrect old password. User: {}".format(
                 current_user.email))
-            return redirect(url_for("auth.change_password"))
+            return redirect(url_for("auth.cambiar_contrasena"))
 
         # Check that the user curently signed in is still on the database
         user = User.get_user(email=current_user.email)
@@ -122,7 +122,7 @@ def change_password():
         print("[DEBUG] Password change from user {}.".format(user.email))
         flash(Msg.Flash.PASSWORD_CHANGE_SUCCESFUL)
         return redirect(url_for("main.index"))
-    return render_template("auth/change_password.html", form=form)
+    return render_template("auth/cambiar_contrasena.html", form=form)
 
 
 # View to request a password change, arrived at through "forgot password?"
