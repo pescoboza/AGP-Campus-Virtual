@@ -12,20 +12,10 @@
 :root {
     --primary: #67C5D2;
     --secondary: #FC8476;
+    --tertiary: #FFE1A4;
     --detail-font: #FC8476;
     --text-color: #181818;
 
-}
-
-html{
-    scroll-behavior: smooth;
-}
-
-:target:before {
-    content: "";
-    display: block;
-    height: 100px;
-    margin: -100px 0 0;
 }
 
 
@@ -42,6 +32,20 @@ html{
     font-weight: bold;
     font-style: italic;
 } */
+
+/* Beautified anchors */
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+html{
+    scroll-behavior: smooth;
+}
+
+:target:before {
+    content: "";
+    display: block;
+    height: 80px;
+    margin: -80px 0 0;
+}
 
 /* Article images */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -160,7 +164,7 @@ img {
 
 .img-banner {
     width: 100%;
-    margin-bottom: 80px;
+    margin-bottom: 20px;
 }
 
 
@@ -182,6 +186,8 @@ img#navbarLogo {
 /* Navbar*/
 #navbar.navbar.navbar-custom {
     /* margin-bottom: 0; */
+    /* text-transform: uppercase; */
+    font-size: 0.9em;
     background-color: var(--primary);
 }
 
@@ -213,6 +219,8 @@ img#navbarLogo {
 #article-navbar{
     position:sticky;
     top: 0;
+    z-index: 40;
+    background-color: var(--tertiary);
 }
 .art-index {
     left: 5px;
@@ -269,7 +277,7 @@ img#navbarLogo {
     width: 100%;
     padding: 15px;
     margin: 5px;
-    background-color: #FFE1A4;
+    background-color: var(--tertiary);
     border-radius: 5px;
 }
 
@@ -295,7 +303,7 @@ img#navbarLogo {
 footer {
     margin-top: 80px;
     text-align: left;
-    background-color: #FFE1A4;
+    background-color: var(--tertiary);
 }
 
 

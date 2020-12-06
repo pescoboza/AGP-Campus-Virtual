@@ -4,8 +4,8 @@
 {% from "_button_link.html" import button_link %}
 {# Requires dict section_headers #}
 
-{% block page_content %}
 
+{% block content_navbar %}
 <nav id="article-navbar" class="navbar navbar-custom" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -24,6 +24,11 @@
         </div>
     </div>
 </nav>
+{% endblock content_navbar %}
+
+
+
+{% block page_content %}
 
     <!-- Article -->
     {% block article %}{% endblock article %}
