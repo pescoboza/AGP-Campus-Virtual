@@ -145,6 +145,10 @@ img#navbarLogo {
 }
 
 
+#alerts{
+    position: sticky;
+    top: 0;
+}
 
 
 /* Article index */

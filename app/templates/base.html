@@ -13,6 +13,9 @@ AGP Campus Virtual
 {% endblock %}
 
 {% block navbar %}
+<div id="alerts">
+    {% include "_flash.html" %}
+</div>
 <a href={{url_for("main.index")}}>
     <img id="navbarLogo" src="/static/img/AGP-Nombre.png">
 </a>
@@ -53,8 +56,9 @@ AGP Campus Virtual
 
 {% block content %}
 {% block banner %}{% endblock banner %}
-<div id="alerts"></div>
 <div id="page-content" class="container">
+
+{#
     <!-- Flashed messages -->
     <!-- TODO: Changet this to new flash system -->
     {% for message in get_flashed_messages() %}
@@ -63,7 +67,7 @@ AGP Campus Virtual
         {{message}}
     </div>
     {% endfor %}
-    
+#}  
 
     {#{% block banner %}{% endblock banner %}#}
     {% block page_content %}{% endblock page_content %}
@@ -122,11 +126,15 @@ AGP Campus Virtual
 
 {#<!-- TODO: Remove the reload cachced files script from production release. -->#}
 <script src="/static/js/reloadCachedCSS.js"></script>
-<script type="text/javascript" src="/static/js/flashes.js"></script>
-<script type="text/javascript">getAlerts("{{url_for('main.flashed_messages')}}")</script>
+<!-- <script type="text/javascript" src="/static/js/flashes.js"></script>
+<script type="text/javascript">
+    $(getAlerts("{{url_for('main.flashed_messages')}}"));
+</script> -->
 
-<!-- <script type="text/javascript">var topButton = "sleek/circle-blue";</script>
-<script type="text/javascript" src="//backtotopbutton.com/script/toTop.js"></script> -->
+<!-- 
+<script type="text/javascript">var topButton = "sleek/circle-blue";</script>
+<script type="text/javascript" src="//backtotopbutton.com/script/toTop.js"></script> 
+-->
 
 
 {% endblock scripts %}
