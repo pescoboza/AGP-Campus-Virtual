@@ -132,23 +132,23 @@ AGP Campus Virtual
     const alertsLocalStorageKey = "alerts";
 
 
-    function updateAlertsLocalStorate(tagId = alertsTagId, localStorageKey = alertsLocalStorageKey){
+    function updateAlertsLocalStorage(tagId = alertsTagId, localStorageKey = alertsLocalStorageKey){
         const alerts = document.getElementById(tagId);
         if (alerts === undefined){
             console.log(`[ERROR] Could not find alert widget with id '${tagId}'`)
             return;
         }
-
         localStorage.setItem(localStorageKey, alerts.innerHTML)
     }
 
     // Remove the alert html tag and updated local storage
     function closeAlert(e){ 
         e.target.parentElement.remove;
-        updateAlertsLocalStorate();
+        updateAlertsLocalStorage();
     }
 
-    function loadStoredFlashes(tagId = alertsTagId, localStorageKey = alertsLocalStorageKey){
+    // Updates html for flashes
+    function dispStoredFlashes(tagId = alertsTagId, localStorageKey = alertsLocalStorageKey){
         document.getElementById(tagId).innerHTML = localStorage.getItem(localStorageKey)
     }
 
@@ -156,10 +156,10 @@ AGP Campus Virtual
     function getAlerts(tagId = alertsTagId, localStorageKey = alertsLocalStorageKey) {
         // Get alerts from api
         $.ajax("{{url_for('main.flashed_messages')}}", {
-            type: "get",
+            type: "post",
             success: (flashes) => {
                 // Get the alerts widget from tag id
-                let alertsWidget = document.getElementById(tagId);
+                const alertsWidget = document.getElementById(tagId);
                 
                 // Validate it exists
                 if (alertsWidget === undefined){
@@ -168,10 +168,13 @@ AGP Campus Virtual
                 }
                 
                 // Change the html
-                alertsWidget.innerHTML += flashes;
+                const flashesHTMLStr = localStorage.getItem(alertsLocalStorageKey) + flashes;
 
                 // Save the flashes in the local storage
-                localStorage.setItem(localStorageKey) = flashes;
+                localStorage.setItem(localStorageKey, flashesHTMLStr)
+
+                // Change the html
+                alertsWidget.innerHTML = flashesHTMLStr;
 
                 // Add event listeners to close the objects with click on cross.
                 let closeButtons = document.getElementsByClassName("close");
@@ -184,7 +187,6 @@ AGP Campus Virtual
         })
     }
 
-    setInterval
     getAlerts();
 </script>
 {% endblock scripts %}

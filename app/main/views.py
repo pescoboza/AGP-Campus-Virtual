@@ -243,8 +243,7 @@ def update_questions():
     
 
 
-@main.route("/notificaciones", methods=["GET"])
-@main.route("/flashed-messages", methods=["GET"])
+@main.route("/flashed-messages", methods=["POST"])
 def flashed_messages():
     # TODO: remove this test
     flash("Coconut")
