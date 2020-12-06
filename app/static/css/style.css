@@ -186,7 +186,7 @@ img#navbarLogo {
 /* Navbar*/
 #navbar.navbar.navbar-custom {
     /* margin-bottom: 0; */
-    /* text-transform: uppercase; */
+    text-transform: uppercase;
     font-size: 0.9em;
     background-color: var(--primary);
 }
@@ -221,6 +221,7 @@ img#navbarLogo {
     top: 0;
     z-index: 40;
     background-color: var(--tertiary);
+    text-transform: uppercase;
 }
 .art-index {
     left: 5px;
