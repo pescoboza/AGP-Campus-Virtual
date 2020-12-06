@@ -74,7 +74,8 @@ img {
 }
 
 
-.btn,.btn:hover  {
+.btn,
+.btn:hover {
 
     border: none;
     /* border-radius: 0; */
@@ -86,7 +87,7 @@ img {
     background-color: var(--primary);
 
 
-} 
+}
 
 .btn:hover {
     /* background-color: var(--secondary); */
@@ -98,7 +99,7 @@ img {
 
 
 .list-group-item.list-group-item-action.active,
-.list-group-item.list-group-item-action.active:hover{
+.list-group-item.list-group-item-action.active:hover {
     padding: 12px 12px 12px 12px;
 
     font-size: 14px;
@@ -107,7 +108,8 @@ img {
     background-color: var(--primary);
     border-color: white;
 }
-.list-group-item.list-group-item-action.active:hover{
+
+.list-group-item.list-group-item-action.active:hover {
     background-color: #74dfed;
 }
 
@@ -195,10 +197,14 @@ img#navbarLogo {
 
 /* Article index */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+#article-navbar{
+    position:sticky;
+    top: 0;
+}
 .art-index {
-    position: sticky;
-    top: 20px;
-    z-index: 50;
+    left: 5px;
+    text-align: left;
     /* background-color: rgba(200, 200, 200, 0.2); */
 }
 
@@ -219,10 +225,19 @@ img#navbarLogo {
 
 .art-index .art-index-item a:hover {
     font-size: 1.1em;
-    font-family: "GlacialIndifferenceBold";
+    /* font-family: "GlacialIndifferenceBold"; */
+    font-weight: bold;
     color: rgba(59, 59, 59, 1);
 
 }
+
+@media only screen and (max-width: 786px) {
+    .art-index {
+        top: 10px;
+    }
+
+}
+
 
 /* @media(hover: hover) and (pointer: fine) {
     .art-index .art-index-item a{

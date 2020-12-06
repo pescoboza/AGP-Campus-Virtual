@@ -8,6 +8,12 @@
 </div>
 {% endmacro %}
 
+{% macro article_navbar(section_headers) %}
+    {% for href, title in section_headers.items() %}
+        <li><a href="{{'#'+ href}}">{{title}}</a></li>
+    {% endfor %}
+{% endmacro %}
+
 {% macro section_header(href, section_headers) %}
 {% if href in section_headers %}
 <!-- {{href}} -->
