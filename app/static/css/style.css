@@ -291,6 +291,10 @@ img#navbarLogo {
 
 /* Activity cards */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+.row.row-eq-height.cards .col-sm-4 .card{
+    min-height: 28vw;
+}
+
 .card {
     width: 100%;
     padding: 15px;
@@ -299,8 +303,14 @@ img#navbarLogo {
     border-radius: 5px;
 }
 
+/* .card .btn{
+    position: relative;
+    bottom: 0;
+} */
+
 .card .card-title {
-    font-size: 1.1em;
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 .card .card-text {
