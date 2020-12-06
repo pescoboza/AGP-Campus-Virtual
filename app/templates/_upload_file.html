@@ -1,7 +1,7 @@
 {% macro upload_file( upload_file_text="Subir archivo", submit_text="Enviar", name="file", id="file", action="") %}
 <form method="POST" action="{{action}}" enctype="multipart/form-data">
     <p>
-        <label for="{{id}}" class="btn btn-primary btn-outlined">{{upload_file_text}}</label>
+        <label for="{{id}}" class="btn btn-outlined">{{upload_file_text}}</label>
         <input type="file" id="{{id}}" name="{{name}}" style="display: none">
     </p>
     <p><input type="submit" value="{{submit_text}}"></p>

@@ -91,13 +91,16 @@ img {
 
 
 .btn,
-.btn:hover {
+.btn:hover,
+.btn:active,
+.btn:active:focus {
 
     border: none;
     /* border-radius: 0; */
     padding: 12px 12px 12px 12px;
 
     font-size: 14px;
+    text-transform: uppercase;
     font-weight: bold;
     color: var(--text-color);
     background-color: var(--primary);
@@ -105,12 +108,18 @@ img {
 
 }
 
-.btn:hover {
+.btn:hover,
+.btn:active {
     /* background-color: var(--secondary); */
     /* background-color: #ECB5A3; */
     background-color: #74dfed;
     /* background-color: #EEE; */
     /* filter: brightness(1.1); */
+}
+
+.btn:active:focus{
+    border-radius: 0;
+
 }
 
 
