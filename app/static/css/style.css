@@ -69,6 +69,15 @@ img {
     }
 }
 
+.imgcenter {
+    text-align: center;
+    width: 100%;
+}
+
+.my-btn {
+    margin: 8px 8px 5px 5px;
+}
+
 
 /* Article page text */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -83,7 +92,7 @@ img {
 
 #page-content h1,
 #page-content h2 {
-    font-family: "GlacialIndifferenceBold";
+    font-weight: bold;
 }
 
 
@@ -119,35 +128,24 @@ img#navbarLogo {
     transform: translateX(-50%);
 }
 
-/*1.- Hice un nuevo navbar que es custom en vez de primary 
-para poder hacer los diseños queridos -A*/
+/* Navbar*/
 #navbar.navbar.navbar-custom {
     /* margin-bottom: 0; */
     background-color: var(--primary);
 }
 
-/*2.- Navbar nuevo que centra el texto y aparte este de aqui 
-es donde puedes cambiar y diseñar el texto del navbar -A*/
 .nav.navbar-nav.navbar-center li a {
     color: #181818;
     font-weight: bold;
 }
 
-/*3.- Navbar mobile con el icon bar visible -A*/
 .navbar-toggle,
 .icon-bar {
     border: 1px solid #181818;
 }
 
-/*4.- Para centralizar imagenes que son más de una en una linea -A*/
-.imgcenter {
-    text-align: center;
-    width: 100%;
-}
 
-.my-btn {
-    margin: 8px 8px 5px 5px;
-}
+
 
 /* Article index */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -216,14 +214,8 @@ es donde puedes cambiar y diseñar el texto del navbar -A*/
     max-height: 400px;
 }
 
-.card .card-body .btn {}
+/* .card .card-body .btn {} */
 
-
-
-/* @media (max-width:991px)  { 
-    .card{
-    }
-} */
 
 /*Footer style*/
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
