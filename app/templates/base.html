@@ -122,73 +122,13 @@ AGP Campus Virtual
 
 {#<!-- TODO: Remove the reload cachced files script from production release. -->#}
 <script src="/static/js/reloadCachedCSS.js"></script>
-<script type="text/javascript">var topButton = "sleek/circle-blue";</script>
-<script type="text/javascript" src="//backtotopbutton.com/script/toTop.js"></script>
+<script type="text/javascript" src="/static/js/flashes.js"></script>
+<script type="text/javascript">getAlerts("{{url_for('main.flashed_messages')}}")</script>
+
+<!-- <script type="text/javascript">var topButton = "sleek/circle-blue";</script>
+<script type="text/javascript" src="//backtotopbutton.com/script/toTop.js"></script> -->
 
 
-<script>
-
-    const alertsTagId = "alerts";
-    const alertsLocalStorageKey = "alerts";
-
-
-    function updateAlertsLocalStorage(tagId = alertsTagId, localStorageKey = alertsLocalStorageKey){
-        const alerts = document.getElementById(tagId);
-        if (alerts === undefined){
-            console.log(`[ERROR] Could not find alert widget with id '${tagId}'`)
-            return;
-        }
-        localStorage.setItem(localStorageKey, alerts.innerHTML)
-    }
-
-    // Remove the alert html tag and updated local storage
-    function closeAlert(e){ 
-        e.target.parentElement.remove;
-        updateAlertsLocalStorage();
-    }
-
-    // Updates html for flashes
-    function dispStoredFlashes(tagId = alertsTagId, localStorageKey = alertsLocalStorageKey){
-        document.getElementById(tagId).innerHTML = localStorage.getItem(localStorageKey)
-    }
-
-    // Fetches the alerts from the backend endpoint
-    function getAlerts(tagId = alertsTagId, localStorageKey = alertsLocalStorageKey) {
-        // Get alerts from api
-        $.ajax("{{url_for('main.flashed_messages')}}", {
-            type: "post",
-            success: (flashes) => {
-                // Get the alerts widget from tag id
-                const alertsWidget = document.getElementById(tagId);
-                
-                // Validate it exists
-                if (alertsWidget === undefined){
-                    console.log(`[ERROR] Could not find alert widget with id '${tagId}'`)
-                    return;
-                }
-                
-                // Change the html
-                const flashesHTMLStr = localStorage.getItem(alertsLocalStorageKey) + flashes;
-
-                // Save the flashes in the local storage
-                localStorage.setItem(localStorageKey, flashesHTMLStr)
-
-                // Change the html
-                alertsWidget.innerHTML = flashesHTMLStr;
-
-                // Add event listeners to close the objects with click on cross.
-                let closeButtons = document.getElementsByClassName("close");
-                for(i = 0; i < closeButtons.length; i++){
-                    closeButtons[i].addEventListener("click", closeAlert);
-                }
-            },
-            error: (xhr, status, error) => console.log(`[ERROR] Could not get flashsed messages, xhr: ${xhr}, status: ${status}, error: ${error} `)
-
-        })
-    }
-
-    getAlerts();
-</script>
 {% endblock scripts %}
 
 </html>
