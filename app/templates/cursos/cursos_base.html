@@ -1,32 +1,76 @@
 {% extends "base.html" %}
 {% from "cursos/_quiz.html" import quiz %}
-{% from "cursos/_article.html" import article_index, section_header %}
+{% from "cursos/_article.html" import article_navbar, section_header %}
 {% from "_button_link.html" import button_link %}
 {# Requires dict section_headers #}
+
+
+{% block content_navbar %}
+<nav id="article-navbar" class="navbar navbar-custom" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-center">
+                {# <!-- Article sections --> #}
+                {{article_navbar(section_headers)}}
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock content_navbar %}
+
+
+
 {% block page_content %}
-    
-    <!-- Index -->
-    {{article_index(section_headers)}}
 
     <!-- Article -->
     {% block article %}{% endblock article %}
     
     
-
-    <!-- Quiz -->
+    <!-- Quiz section header -->
     {% if form and score != None and max_score != None %}
-    {{section_header("evaluacion", section_headers)}}
+        {{section_header("evaluacion", section_headers)}}
+    {% endif %}
+    
     <!-- Download certificate -->
     {% if already_passed == True and certificate_endpoint %}
-    {{
-        button_link(
-            href=url_for("main.certificate", name=certificate_endpoint),
-            btn_text="Descargar certificado",
-            target="_blank"
-        )
-    }}
-    {% endif %}
-    {{quiz(form, score, max_score)}}
+        {{
+            button_link(
+                href=url_for("main.certificate", name=certificate_endpoint),
+                btn_text="Descargar certificado",
+                target="_blank"
+            )
+        }}
     {% endif %}
 
+    <!-- Quiz -->
+    {{quiz(form, score, max_score)}}
 {% endblock page_content %}
+
+{#
+{% block scripts %}
+{{super()}}
+<script>
+    const page_content = document.getElementById("page-content");
+    let sidebar = document.getElementById("sidebar");
+
+    window.onscroll = () => {
+        const scrollHeightToSticky = window.pageYOffset + page_content.getBoundingClientRect().top
+
+        if (window.pageYOffset >= scrollHeightToSticky) {
+            sidebar.classList.add("sidebar-sticky");
+        }
+        else {
+            sidebar.classList.remove("sidebar-sticky");
+        }
+    };
+</script>
+{% endblock scripts %}
+#}

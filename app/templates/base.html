@@ -13,11 +13,14 @@ AGP Campus Virtual
 {% endblock %}
 
 {% block navbar %}
+<div id="alerts">
+    {% include "_flash.html" %}
+</div>
 <a href={{url_for("main.index")}}>
     <img id="navbarLogo" src="/static/img/AGP-Nombre.png">
 </a>
 <nav id="navbar" class="navbar navbar-custom" role="navigation">
-    <div class="container">
+    <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -52,16 +55,11 @@ AGP Campus Virtual
 
 
 {% block content %}
+{% block carousel %}{% endblock carousel %}
 {% block banner %}{% endblock banner %}
+{% block content_navbar %}{% endblock content_navbar %}
+    
 <div id="page-content" class="container">
-    <!-- Flashed messages -->
-    {% for message in get_flashed_messages() %}
-    <div class="aler alert-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{message}}
-    </div>
-    {% endfor %}
-    {#{% block banner %}{% endblock banner %}#}
     {% block page_content %}{% endblock page_content %}
 </div>
 
@@ -104,7 +102,7 @@ AGP Campus Virtual
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12 text-center copyright" >
+        <div class="col-sm-12 text-center copyright">
             Asociación George Papanicolau A. C. 2020 © Todos los derechos reservados
         </div>
     </div>
@@ -114,12 +112,21 @@ AGP Campus Virtual
 
 {% block scripts %}
 {{super()}}
-<script src="/static/js/script.js"></script>
+<!-- <script src="/static/js/script.js"></script> -->
 
 {#<!-- TODO: Remove the reload cachced files script from production release. -->#}
 <script src="/static/js/reloadCachedCSS.js"></script>
+<!-- <script type="text/javascript" src="/static/js/flashes.js"></script>
+<script type="text/javascript">
+    $(getAlerts("{{url_for('main.flashed_messages')}}"));
+</script> -->
+
+<!-- 
 <script type="text/javascript">var topButton = "sleek/circle-blue";</script>
-<script type="text/javascript" src="//backtotopbutton.com/script/toTop.js"></script>
+<script type="text/javascript" src="//backtotopbutton.com/script/toTop.js"></script> 
+-->
+
+
 {% endblock scripts %}
 
 </html>

@@ -12,24 +12,39 @@
 :root {
     --primary: #67C5D2;
     --secondary: #FC8476;
+    --tertiary: #FFE1A4;
     --detail-font: #FC8476;
+    --text-color: #181818;
+
 }
+
 
 * {
     font-family: "GlacialIndifferenceRegular";
+    color: var(--text-color);
     font-size: 16px;
     font-weight: normal;
     font-style: normal;
 }
 
 
-ul {
+/* ul {
     font-weight: bold;
     font-style: italic;
+} */
+
+/* Beautified anchors */
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+html{
+    scroll-behavior: smooth;
 }
 
-#toTop {
-    bottom: 10% !important;
+:target:before {
+    content: "";
+    display: block;
+    height: 80px;
+    margin: -80px 0 0;
 }
 
 /* Article images */
@@ -69,6 +84,64 @@ img {
     }
 }
 
+.imgcenter {
+    text-align: center;
+    width: 100%;
+}
+
+
+.btn,
+.btn:hover,
+.btn:active,
+.btn:active:focus {
+
+    border: none;
+    /* border-radius: 0; */
+    padding: 12px 12px 12px 12px;
+
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--text-color);
+    background-color: var(--primary);
+
+
+}
+
+.btn:hover,
+.btn:active {
+    /* background-color: var(--secondary); */
+    /* background-color: #ECB5A3; */
+    background-color: #74dfed;
+    /* background-color: #EEE; */
+    /* filter: brightness(1.1); */
+}
+
+.btn:active:focus{
+    border-radius: 0;
+
+}
+
+
+.list-group-item.list-group-item-action.active,
+.list-group-item.list-group-item-action.active:hover {
+    padding: 12px 12px 12px 12px;
+
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text-color);
+    background-color: var(--primary);
+    border-color: white;
+}
+
+.list-group-item.list-group-item-action.active:hover {
+    background-color: #74dfed;
+}
+
+.my-btn {
+    margin: 8px 8px 5px 5px;
+}
+
 
 /* Article page text */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -83,7 +156,7 @@ img {
 
 #page-content h1,
 #page-content h2 {
-    font-family: "GlacialIndifferenceBold";
+    font-weight: bold;
 }
 
 
@@ -100,7 +173,7 @@ img {
 
 .img-banner {
     width: 100%;
-    margin-bottom: 80px;
+    /* margin-bottom: 20px; */
 }
 
 
@@ -119,42 +192,57 @@ img#navbarLogo {
     transform: translateX(-50%);
 }
 
-/*1.- Hice un nuevo navbar que es custom en vez de primary 
-para poder hacer los diseños queridos -A*/
+/* Navbar*/
 #navbar.navbar.navbar-custom {
     /* margin-bottom: 0; */
+    text-transform: uppercase;
     background-color: var(--primary);
 }
 
-/*2.- Navbar nuevo que centra el texto y aparte este de aqui 
-es donde puedes cambiar y diseñar el texto del navbar -A*/
-.nav.navbar-nav.navbar-center li a {
-    color: #181818;
+#navbar .nav.navbar-nav.navbar-center li a {
+    color: var(--text-color);
     font-weight: bold;
+    /* font-size: 0.9em; */
+
 }
 
-/*3.- Navbar mobile con el icon bar visible -A*/
 .navbar-toggle,
 .icon-bar {
-    border: 1px solid #181818;
+    border: 1px solid var(--text-color);
 }
 
-/*4.- Para centralizar imagenes que son más de una en una linea -A*/
-.imgcenter {
-    text-align: center;
-    width: 100%;
+
+#alerts {
+    position: fixed;
+    top: 0;
+    z-index: 51;
 }
 
-.my-btn {
-    margin: 8px 8px 5px 5px;
+#alerts div {
+    width: 100vw;
 }
+
 
 /* Article index */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+#article-navbar{
+    position:sticky;
+    top: 0;
+    z-index: 40;
+    background-color: var(--tertiary);
+    text-transform: uppercase;
+}
+
+#article-navbar .nav.navbar-nav.navbar-center li a {
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 1em;
+
+}
 .art-index {
-    position: sticky;
-    top: 20px;
-    z-index: 99;
+    left: 5px;
+    text-align: left;
     /* background-color: rgba(200, 200, 200, 0.2); */
 }
 
@@ -175,10 +263,19 @@ es donde puedes cambiar y diseñar el texto del navbar -A*/
 
 .art-index .art-index-item a:hover {
     font-size: 1.1em;
-    font-family: "GlacialIndifferenceBold";
+    /* font-family: "GlacialIndifferenceBold"; */
+    font-weight: bold;
     color: rgba(59, 59, 59, 1);
 
 }
+
+@media only screen and (max-width: 786px) {
+    .art-index {
+        top: 10px;
+    }
+
+}
+
 
 /* @media(hover: hover) and (pointer: fine) {
     .art-index .art-index-item a{
@@ -198,15 +295,15 @@ es donde puedes cambiar y diseñar el texto del navbar -A*/
     width: 100%;
     padding: 15px;
     margin: 5px;
-    background-color: #F3F3F3;
+    background-color: var(--tertiary);
     border-radius: 5px;
 }
 
-.card .card-title{
+.card .card-title {
     font-size: 1.1em;
 }
 
-.card .card-text{
+.card .card-text {
     font-size: 0.9em;
 }
 
@@ -216,21 +313,15 @@ es donde puedes cambiar y diseñar el texto del navbar -A*/
     max-height: 400px;
 }
 
-.card .card-body .btn {}
+/* .card .card-body .btn {} */
 
-
-
-/* @media (max-width:991px)  { 
-    .card{
-    }
-} */
 
 /*Footer style*/
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 footer {
     margin-top: 80px;
     text-align: left;
-    background-color: #FFE1A4;
+    background-color: var(--tertiary);
 }
 
 
@@ -289,15 +380,16 @@ footer .copyright {
     margin-bottom: 15px;
 }
 
+/* Carousel */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 #carouselContainer {
     margin: 0px;
-    padding-left: 0px;
-    padding-right: 30px;
+    padding: 0px;
 }
 
 .carousel-inner>.item>img,
 .carousel-inner>.item>a>img {
-    width: 35%;
+    width: 100vw;
+    height: 41vw;
     margin: auto;
 }
