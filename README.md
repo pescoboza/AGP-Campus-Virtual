@@ -1,27 +1,16 @@
 # AGP Campus Virtual
 
 
-## TODO LAST STAND!!!
+## TODO
 ### Major
-- Change landing page info - Javier
-- Change info pages banners to 100% width - Pedro
-- Fix footer outspill bug - Juan
-- Make footer responsive - Juan
-- Make activity cards responsive-
-- Add activities to all article pages. One page per person
-    - plmn: Alex
-    - psta: Cesar
-    - crvu: Juan
-    - diag: Paulina
-    - mama: Javier
-    - tstc: Ivan
-- Write template for email. - Javier
-
-#### Minor
-- Set Google Drive account and Tableau connection - Pedro
-- Translate page routes - Pedro
-- Change recuperation email sender. Pedro
-
+- Add custom error page handlers
+- Add missing institutions
+- Add missing activities
+- Add terms and conditions
+- Proofread all text and information
+- Proofread all questions
+- Deploy
+- Apply domain name
 
 #### Acceptable issues
 - Fix PDFKit issue: not able to load fonts from the same subset. - non-mission-critical
