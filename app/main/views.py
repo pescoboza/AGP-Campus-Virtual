@@ -240,10 +240,3 @@ def update_questions():
     
     code_body = render_template("formato_preguntas.jsonc")
     return render_template("main/update_questions.html", code_body=code_body)
-    
-
-
-@main.route("/flashed-messages", methods=["POST"])
-def flashed_messages():
-    # TODO: remove this test
-    return render_template("_flash.html")
