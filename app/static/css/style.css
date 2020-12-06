@@ -82,24 +82,38 @@ img {
 
     font-size: 14px;
     font-weight: bold;
-    color: black;
+    color: var(--text-color);
     background-color: var(--primary);
-    background-color: ;
 
 
 } 
 
 .btn:hover {
     /* background-color: var(--secondary); */
-    background-color: #ECB5A3;
-    
+    /* background-color: #ECB5A3; */
+    background-color: #74dfed;
     /* background-color: #EEE; */
     /* filter: brightness(1.1); */
 }
 
-/* .my-btn {
+
+.list-group-item.list-group-item-action.active,
+.list-group-item.list-group-item-action.active:hover{
+    padding: 12px 12px 12px 12px;
+
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text-color);
+    background-color: var(--primary);
+    border-color: white;
+}
+.list-group-item.list-group-item-action.active:hover{
+    background-color: #74dfed;
+}
+
+.my-btn {
     margin: 8px 8px 5px 5px;
-} */
+}
 
 
 /* Article page text */
