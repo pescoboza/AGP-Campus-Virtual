@@ -53,14 +53,18 @@ AGP Campus Virtual
 
 {% block content %}
 {% block banner %}{% endblock banner %}
+<div id="alerts"></div>
 <div id="page-content" class="container">
     <!-- Flashed messages -->
+    <!-- TODO: Changet this to new flash system -->
     {% for message in get_flashed_messages() %}
-    <div class="aler alert-warning">
+    <div class="alert alert-warning">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         {{message}}
     </div>
     {% endfor %}
+    
+
     {#{% block banner %}{% endblock banner %}#}
     {% block page_content %}{% endblock page_content %}
 </div>
@@ -104,7 +108,7 @@ AGP Campus Virtual
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12 text-center copyright" >
+        <div class="col-sm-12 text-center copyright">
             Asociación George Papanicolau A. C. 2020 © Todos los derechos reservados
         </div>
     </div>
@@ -114,12 +118,75 @@ AGP Campus Virtual
 
 {% block scripts %}
 {{super()}}
-<script src="/static/js/script.js"></script>
+<!-- <script src="/static/js/script.js"></script> -->
 
 {#<!-- TODO: Remove the reload cachced files script from production release. -->#}
 <script src="/static/js/reloadCachedCSS.js"></script>
 <script type="text/javascript">var topButton = "sleek/circle-blue";</script>
 <script type="text/javascript" src="//backtotopbutton.com/script/toTop.js"></script>
+
+
+<script>
+
+    const alertsTagId = "alerts";
+    const alertsLocalStorageKey = "alerts";
+
+
+    function updateAlertsLocalStorate(tagId = alertsTagId, localStorageKey = alertsLocalStorageKey){
+        const alerts = document.getElementById(tagId);
+        if (alerts === undefined){
+            console.log(`[ERROR] Could not find alert widget with id '${tagId}'`)
+            return;
+        }
+
+        localStorage.setItem(localStorageKey, alerts.innerHTML)
+    }
+
+    // Remove the alert html tag and updated local storage
+    function closeAlert(e){ 
+        e.target.parentElement.remove;
+        updateAlertsLocalStorate();
+    }
+
+    function loadStoredFlashes(tagId = alertsTagId, localStorageKey = alertsLocalStorageKey){
+        document.getElementById(tagId).innerHTML = localStorage.getItem(localStorageKey)
+    }
+
+    // Fetches the alerts from the backend endpoint
+    function getAlerts(tagId = alertsTagId, localStorageKey = alertsLocalStorageKey) {
+        // Get alerts from api
+        $.ajax("{{url_for('main.flashed_messages')}}", {
+            type: "get",
+            success: (flashes) => {
+                // Get the alerts widget from tag id
+                let alertsWidget = document.getElementById(tagId);
+                
+                // Validate it exists
+                if (alertsWidget === undefined){
+                    console.log(`[ERROR] Could not find alert widget with id '${tagId}'`)
+                    return;
+                }
+                
+                // Change the html
+                alertsWidget.innerHTML += flashes;
+
+                // Save the flashes in the local storage
+                localStorage.setItem(localStorageKey) = flashes;
+
+                // Add event listeners to close the objects with click on cross.
+                let closeButtons = document.getElementsByClassName("close");
+                for(i = 0; i < closeButtons.length; i++){
+                    closeButtons[i].addEventListener("click", closeAlert);
+                }
+            },
+            error: (xhr, status, error) => console.log(`[ERROR] Could not get flashsed messages, xhr: ${xhr}, status: ${status}, error: ${error} `)
+
+        })
+    }
+
+    setInterval
+    getAlerts();
+</script>
 {% endblock scripts %}
 
 </html>

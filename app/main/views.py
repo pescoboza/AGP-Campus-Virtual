@@ -241,3 +241,13 @@ def update_questions():
     code_body = render_template("formato_preguntas.jsonc")
     return render_template("main/update_questions.html", code_body=code_body)
     
+
+
+@main.route("/notificaciones", methods=["GET"])
+@main.route("/flashed-messages", methods=["GET"])
+def flashed_messages():
+    # TODO: remove this test
+    flash("Coconut")
+    flash("Flax")
+    flash("Avocado")
+    return render_template("main/flash.html")
