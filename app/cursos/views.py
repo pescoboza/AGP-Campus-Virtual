@@ -121,7 +121,7 @@ CANCER_NAME_TOPICS = {
     "cancer-cervicouterino": {"code": "crvu", "num_questions": 3},
     "cancer-prostata":       {"code": "psta", "num_questions": 3},
     "cancer-pulmon":         {"code": "plmn", "num_questions": 3},
-    "cancer-testiculo":      {"code": "plmn", "num_questions": 3},
+    "cancer-testiculo":      {"code": "tstc", "num_questions": 3},
     "diagnostico":           {"code": "diag", "num_questions": 3}
 }
 
