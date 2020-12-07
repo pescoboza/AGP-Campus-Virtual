@@ -111,11 +111,39 @@
     const fadeInClass = "fade-in";
     const userEmail = "{{current_user.email}}";
 
+    
 
     const quizContElem = document.getElementById(quizContainerId);
     const quizBtnElem = document.getElementById(quizBtnId);
     const downloadCertBtnElem = document.getElementById(downloadCertBtnId);
 
+
+    function gradeQuiz(correctAnswers, scoreToPass, numQuestions, questionNameStr = "questions-%d-answer"){
+        
+        const form = document.forms["quiz"];
+
+        let score = 0;
+        for (let i = 0; i < numQuizQuestions; ++i){
+            const questionFieldName = questionNameStr.replace("%d", i);
+            const userAnswer = form[questionFieldName].value || null;
+            if (userAnswer === correctAnswers[i]){
+                score++;
+            }
+        }
+
+        if (score >= scoreToPass){
+            passUserQuiz();
+            alert("YOU PASSED!");
+        }else{
+            alert("no pass");
+        }
+
+
+
+        
+
+        return true;
+    }
 
     /**
      * Fetches quiz html for the quiz form.
@@ -124,26 +152,41 @@
      * @param string topic Codename of the quiz topic
      * @param number numQuestions Number of questions for the quiz
      */
-    function renderNewQuiz(quizContElem, quizBtnElem, topic, numQuestions, fadeInClass) {
-        const endpoint = "{{url_for('api.get_quiz_html')}}" + "?topic=" + topic + "&num_questions" + numQuestions;
+    function renderNewQuiz(
+        quizContElem = quizContElement, 
+        quizBtnElem = quizBtnElem, 
+        topic = topic, 
+        numQuestions = numQuizQuestions, 
+        fadeInClass = fadeInClass) {
+        const endpoint = "{{url_for('api.get_quiz_html')}}" + "?topic=" + topic + "&num_questions=" + numQuestions;
         $.ajax(endpoint, {
             type: "post",
-            success: (htmlContent) => {
+            success: ({answers, scoreToPass, htmlForm}) => {
+                // TODO: remove answer log
+                console.log(answers);
                 // Make button disappear
                 quizBtnElem.style.display = "none";
 
                 // Add quiz questions
-                quizContElem.innerHTML += htmlContent;
+                quizContElem.innerHTML += htmlForm;
 
-                // Add fade in to form
-                quizContElem.querySelector("form").classList.add(fadeInClass);
+                
+                quizForm = quizContElem.querySelector("form");
+                quizForm.classList.add(fadeInClass); // Add fade in to form
+                quizForm.onsubmit = () => gradeQuiz(answers, numQuestions, numQuestions); // Add onsubmit validation
+
+
+
+                quizSubmitBtnElem = document.getElementById("submit");
+
+                // quizSubmitBtnElem.onclick = () =>  throw {"TODO WAST";
 
             },
             error: () => console.log("[QUIZ] Error in response from quiz")
         })
     }
 
-    function passUserQuiz(email, topic, downloadCertBtnElem) {
+    function passUserQuiz(email = userEmail, topic = quizTopic, downloadCertBtnElem = downloadCertBtnElem) {
         const endpoint = "{{url_for('api.user_pass_quiz')}}" + "?topic=" + topic + "&email=" + email;
         $.ajax(endpoint, {
             type: "post",
@@ -164,8 +207,6 @@
         const endpoint = "{{url_for('api.get_user_quiz_data')}}" + "?email=" + email;
         return $.ajax(endpoint, { type: "get" });
     }
-
-
 
 
 

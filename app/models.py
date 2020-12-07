@@ -277,7 +277,7 @@ def upload_questions_from_JSON(filename, log=sys.stdout):
 
     except Exception as e:
         print("[ERROR] {}".format(e))
-
+        raise e
     else:
         print("[QUESTION UPLOADER] Succesfully uploaded questions to database from file {}.".format(
             filename), file=log)

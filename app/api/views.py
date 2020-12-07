@@ -1,5 +1,5 @@
 from random import sample, shuffle
-from flask import render_template, make_response, request, jsonify, redirect, url_for
+from flask import render_template, request, make_response, request, jsonify, redirect, url_for
 from flask_login import current_user
 
 from . import api
@@ -78,7 +78,7 @@ def get_quiz_html():
     {
         answers:[0,1,0],
         scoreToPass: 3,
-        html: "<form> ... </form>"
+        htmlForm: "<form> ... </form>"
     }
     """
     # Validate the quiz topic
@@ -93,17 +93,14 @@ def get_quiz_html():
     # Generate the quiz
     form = MultipleChoiceQuizForm.generate_random_quiz(topic=quiz_topic, num_questions=num_questions)
     
-    # Assign the actual number of questions fetched, in case 
-    # it exceeded the number of questions available in the database
-    num_questions = len(form.data)
+    num_questions = len(form.questions)
 
     response = {
-        "answers": [0, 0, 0],
+        "answers":  [q.correct_answer for q in form.questions],
         "scoreToPass": num_questions,
-        "html": render_template("cursos/_quiz.html", form=form, num_questions=num_questions)
+        "htmlForm": render_template("cursos/_quiz.html", form=form, num_questions=num_questions)
     }
 
-    # TODO: Change num_questions to actual value
     return response
 
 
@@ -179,4 +176,8 @@ def get_user_quiz_data():
     return jsonify(user.quiz_data)
     
 
-
+@api.route("/submit-quiz", methods=["POST"])
+def submit_quiz():
+    r = request
+    d = r.form #TOODO: test this
+    return '1'
