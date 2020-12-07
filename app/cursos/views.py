@@ -125,11 +125,11 @@ CANCER_NAME_TOPICS = {
     "diagnostico":           {"code": "diag", "num_questions": 3}
 }
 
-
+@cursos.route("/", methods=["GET"])
 @cursos.route("/diagnostico", methods=["GET"])
-@login_required
+#@login_required
 def diagnostico():
-    return cursos_base("diagostico")
+    return cursos_base("diagnostico")
 
 @cursos.route("/cancer-mama", methods=["GET"])
 @login_required

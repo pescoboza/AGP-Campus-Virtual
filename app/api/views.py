@@ -71,8 +71,16 @@ def generate_quiz():
 
     return  jsonify(questions)
 
-@api.route("/get-quiz-html", methods=["POST"])
+@api.route("/get-quiz-html", methods=["POST", "GET"]) # TODO: Remove GET
 def get_quiz_html():
+    """
+    Gives as response:
+    {
+        answers:[0,1,0],
+        scoreToPass: 3,
+        html: "<form> ... </form>"
+    }
+    """
     # Validate the quiz topic
     quiz_topic = request.args.get("topic", DEFAULT_QUIZ_TOPIC)
     if quiz_topic not in QUESTION_TOPICS:
@@ -89,8 +97,14 @@ def get_quiz_html():
     # it exceeded the number of questions available in the database
     num_questions = len(form.data)
 
+    response = {
+        "answers": [0, 0, 0],
+        "scoreToPass": num_questions,
+        "html": render_template("cursos/_quiz.html", form=form, num_questions=num_questions)
+    }
+
     # TODO: Change num_questions to actual value
-    return render_template("cursos/_quiz.html", form=form, num_questions=num_questions)
+    return response
 
 
 
