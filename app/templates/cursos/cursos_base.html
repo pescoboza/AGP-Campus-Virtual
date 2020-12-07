@@ -51,11 +51,13 @@
             background-color:  #FFE1A4;
         }
 
-        #takeQuizBtn{
-            position: relative;
-            left: 50%;
+        /* .quiz{
+            text-align: center;
+        } */
+        
+        .quiz .quiz-btn{
+            display: flex;
             top: 50%;
-            transform: translate(-50%, -50%);
         }
 
         @keyframes kf-fade-in {
@@ -69,9 +71,9 @@
         }
 
     </style>
-    <div id="quizContainer">
-        <button id="takeQuizBtn" class="btn">Hacer examen</button>
-        <button id="dowloadCertBtn">Descargar certificado</button>
+    <div id="quizContainer" class="quiz">
+        <button id="takeQuizBtn" class="btn quiz-btn">Hacer examen</button>
+        <button id="downloadCertBtn" class="btn quiz-btn">Descargar certificado</button>
     </div>
 
 {# 
@@ -108,7 +110,7 @@
     
     const quizContElem = document.getElementById(quizContainerId);
     const quizBtnElem = document.getElementById(quizBtnId);
-    const downloadCerBtnElem = document.getElementById(downloadCertBtnId);
+    const downloadCertBtnElem = document.getElementById(downloadCertBtnId);
 
     
     /**
@@ -158,12 +160,9 @@
         quizBtnElem.onclick = null;
     }
 
-    // Hide the certificate button
-    downloadCertBtnElem.style.display = "none";
-
-
     // Add url to certificate button
-    downloadCertBtnElem.setAttribute("href", downloadCertificateLink);
+    // downloadCertBtnElem.style.display = "none"; // Hide the certificate button
+    downloadCertBtnElem.onclick = () => window.open(downloadCertificateLink, "_blank");
     downloadCertBtnElem.setAttribute("target", "_blank");
 </script>
 {% endwith %}

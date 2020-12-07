@@ -1,5 +1,5 @@
 from random import sample, shuffle
-from flask import render_template, make_response, request, jsonify, redirect
+from flask import render_template, make_response, request, jsonify, redirect, url_for
 from flask_login import current_user
 
 from . import api
