@@ -46,7 +46,7 @@
         #quizContainer{
             width: 100%;
             height: 50vh;
-            background-color: red;
+            background-color:  #FFE1A4;
         }
 
         #takeQuizBtn{
@@ -55,6 +55,17 @@
             top: 50%;
             transform: translate(-50%, -50%);
         }
+
+        @keyframes kf-fade-in {
+            0% {opacity: 0;}
+            100% {opacity: 1;}
+        }
+
+        .fade-in{
+            animation-name: kf-fade-in;
+            animation-duration: 2s;
+        }
+
     </style>
     <div id="quizContainer">
         <button id="takeQuizBtn" class="btn">Hacer examen</button>
@@ -98,6 +109,8 @@
             success:(htmlContent)=>{
                 quizBtn.style.display = "none";
                 htmlElem.innerHTML += htmlContent;
+                htmlElem.classList.add("fade-in")
+
             },
             error: () => console.log("Kaput!")
         })
