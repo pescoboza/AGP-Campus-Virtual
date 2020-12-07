@@ -54,23 +54,30 @@
     {{quiz(form, score, max_score)}}
 {% endblock page_content %}
 
-{#
 {% block scripts %}
 {{super()}}
+{% with topic = "tstc", num_questions = 5%}
 <script>
-    const page_content = document.getElementById("page-content");
-    let sidebar = document.getElementById("sidebar");
+    $.ajax("{{url_for('api.generate_quiz', topic=topic, num_questions=num_questions)}}",{
+        success:(resp)=>{
+            try {
+                
+                const questions = resp.map((questionString)=> JSON.parse(questionString));
+                showForm(questions);
+                
+            } catch (error) {
+                console.log(error);
+                throw error;
+            }
+            
+        },
+        error: () => console.log("Kaput!")
+    })
 
-    window.onscroll = () => {
-        const scrollHeightToSticky = window.pageYOffset + page_content.getBoundingClientRect().top
-
-        if (window.pageYOffset >= scrollHeightToSticky) {
-            sidebar.classList.add("sidebar-sticky");
-        }
-        else {
-            sidebar.classList.remove("sidebar-sticky");
-        }
-    };
+    function showForm(questions){
+        questions.map((q)=>console.log(q));
+    }
+    
 </script>
+{% endwith %}
 {% endblock scripts %}
-#}
