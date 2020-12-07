@@ -70,7 +70,7 @@ def generate_quiz():
 
     return  jsonify(questions)
 
-@api.route("/get-quiz-html", methods=["GET","POST"])
+@api.route("/get-quiz-html", methods=["POST"])
 def get_quiz_html():
     # Validate the quiz topic
     quiz_topic = request.args.get("topic", DEFAULT_QUIZ_TOPIC)

@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% from "cursos/_quiz.html" import quiz %}
 {% from "cursos/_article.html" import article_navbar, section_header %}
 {% from "_button_link.html" import button_link %}
 {# Requires dict section_headers #}
@@ -39,6 +38,30 @@
         {{section_header("evaluacion", section_headers)}}
     {% endif %}
     
+
+    <!-- Create quiz button -->
+    
+    
+    <style>
+        #quizContainer{
+            width: 100%;
+            height: 50vh;
+            background-color: red;
+        }
+
+        #takeQuizBtn{
+            position: relative;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+    <div id="quizContainer">
+        <button id="takeQuizBtn" class="btn">Hacer examen</button>
+    </div>
+
+{# 
+    <!-- Commented out old quizzes -->
     <!-- Download certificate -->
     {% if already_passed == True and certificate_endpoint %}
         {{
@@ -52,39 +75,52 @@
 
     <!-- Quiz -->
     {{quiz(form, score, max_score)}}
+
+#}
 {% endblock page_content %}
 
 {% block scripts %}
 {{super()}}
 {% with topic = "tstc", num_questions = 5 %}
 <script>
-    const quiz = document.getElementById("quiz-box");
-
-    function buildForm(questions){
-        questions.map((q)=>{
-            
-        });
+    
+    /**
+     * Fetches quiz html for the quiz form.
+     * 
+     * @param HTMLElement htmlElement Container tag for the quiz
+     * @param string topic Codename of the quiz topic
+     * @param number numQuestions Number of questions for the quiz
+     */
+    function renderNewQuiz(htmlElem, topic, numQuestions){
+        const endpoint = "{{url_for('api.get_quiz_html')}}" + "?topic=" + topic + "&num_questions" + numQuestions;
+        $.ajax(endpoint, {
+            type:"post",
+            success:(htmlContent)=>{
+                quizBtn.style.display = "none";
+                htmlElem.innerHTML += htmlContent;
+            },
+            error: () => console.log("Kaput!")
+        })
     }
-    
 
-    $.ajax("{{url_for('api.generate_quiz', topic=topic, num_questions=num_questions)}}",{
-        success:(resp)=>{
-            try {
-                
-                const questions = resp.map((questionString)=> JSON.parse(questionString));
-                showForm(questions);
-                
-            } catch (error) {
-                console.log(error);
-                throw error;
-            }
-            
-        },
-        error: () => console.log("Kaput!")
-    })
+    const quizElem = document.getElementById("quizContainer");
+    const quizBtn = document.getElementById("takeQuizBtn");
 
+    const quizTopic = "{{topic}}";
+    const numQuizQuestions = {{num_questions}};
+
+    // Add event listener on click to fetch new quiz
+    // Only works once
+    quizBtn.onclick = ()=> {
+        renderNewQuiz(quizElem, quizTopic, numQuizQuestions)
+        quizBtn.onclick = null;
+    }
 
     
+
+
+    
+
 </script>
 {% endwith %}
 {% endblock scripts %}
