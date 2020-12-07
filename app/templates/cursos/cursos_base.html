@@ -101,7 +101,6 @@
 
 {% block scripts %}
 {{super()}}
-{% with topic = "tstc", num_questions = 5 %}
 <script>
     const quizTopic = "{{topic}}";
     const numQuizQuestions = {{ num_questions }};
@@ -160,13 +159,15 @@
         });
     }
 
-    
+
     async function fetchUserQuizData(email) {
         const endpoint = "{{url_for('api.get_user_quiz_data')}}" + "?email=" + email;
-        return $.ajax(endpoint, {type: "get"});
+        return $.ajax(endpoint, { type: "get" });
     }
 
-    fetchUserQuizData("rksamaniego@hotmail.com").then((data)=>alert(data));
+
+
+
 
     // Add event listener on click to fetch new quiz
     // Only works once
@@ -175,10 +176,22 @@
         quizBtnElem.onclick = null;
     }
 
-    // Add url to certificate button
-    downloadCertBtnElem.style.display = "none"; // Hide the certificate button
-    downloadCertBtnElem.onclick = () => window.open(downloadCertificateLink, "_blank");
-    downloadCertBtnElem.setAttribute("target", "_blank");
+
+    
+    // If use has passed quiz, display certificate button
+    fetchUserQuizData(userEmail).then((userQuizData) => {
+            console.log(userQuizData);
+            if (userQuizData[quizTopic].is_passed === false) {
+                downloadCertBtnElem.style.display = "none"; // Hide the certificate button
+                return;
+            }
+            
+            // Add url to certificate button and show it
+            downloadCertBtnElem.onclick = () => window.open(downloadCertificateLink, "_blank");
+            downloadCertBtnElem.setAttribute("target", "_blank");
+            downloadCertBtnElem.style.display = "block";
+    });
+
+
 </script>
-{% endwith %}
 {% endblock scripts %}
