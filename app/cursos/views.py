@@ -165,5 +165,5 @@ def cursos_base(cancer_name):
     entry = CANCER_NAME_TOPICS[cancer_name]
     quiz_topic = entry["code"]
     num_questions = entry["num_questions"]
-
-    return render_template("cursos/cursos_base.html", topic=quiz_topic, num_questions=num_questions)
+    template_name = "cursos/" + cancer_name.replace('-','_') + ".html"
+    return render_template(template_name, topic=quiz_topic, num_questions=num_questions)
