@@ -71,6 +71,7 @@
     </style>
     <div id="quizContainer">
         <button id="takeQuizBtn" class="btn">Hacer examen</button>
+        <button id="dowloadCertBtn">Descargar certificado</button>
     </div>
 
 {# 
@@ -96,10 +97,19 @@
 {{super()}}
 {% with topic = "tstc", num_questions = 5 %}
 <script>
-
+    const quizTopic = "{{topic}}";
+    const numQuizQuestions = {{num_questions}};
+    const downloadCertificateLink = "{{url_for('api.redirect_certificate') + '?topic=' + topic}}";
     const quizContainerId = "quizContainer";
     const quizBtnId = "takeQuizBtn";
+    const downloadCertBtnId = "downloadCertBtn";
     const fadeInClass = "fade-in";
+    
+    
+    const quizContElem = document.getElementById(quizContainerId);
+    const quizBtnElem = document.getElementById(quizBtnId);
+    const downloadCerBtnElem = document.getElementById(downloadCertBtnId);
+
     
     /**
      * Fetches quiz html for the quiz form.
@@ -123,22 +133,38 @@
                 quizContElem.querySelector("form").classList.add(fadeInClass);
 
             },
-            error: () => console.log("[QUIZ] Kaput!")
+            error: () => console.log("[QUIZ] Error in response from quiz")
         })
     }
 
-    const quizContElem = document.getElementById(quizContainerId);
-    const quizBtnElem = document.getElementById(quizBtnId);
+    function passUserQuiz(email, topic){
+        const endpoint = "{{url_for('api.user_pass_quiz')}}" + "?topic=" + topic + "&email=" +  email;
+        $.ajax(endpoint, {
+            success:(resp)=>{
+                console.log("[QUIZ] Server says: " + resp);
 
-    const quizTopic = "{{topic}}";
-    const numQuizQuestions = {{num_questions}};
 
+
+            },
+            error: ()=> console.log("[QUIZ] Error in response from pass quiz")
+        });
+    }
+
+    
     // Add event listener on click to fetch new quiz
     // Only works once
     quizBtnElem.onclick = ()=> {
         renderNewQuiz(quizContElem, quizBtnElem, quizTopic, numQuizQuestions, fadeInClass)
         quizBtnElem.onclick = null;
     }
+
+    // Hide the certificate button
+    downloadCertBtnElem.style.display = "none";
+
+
+    // Add url to certificate button
+    downloadCertBtnElem.setAttribute("href", downloadCertificateLink);
+    downloadCertBtnElem.setAttribute("target", "_blank");
 </script>
 {% endwith %}
 {% endblock scripts %}

@@ -1,9 +1,9 @@
 from random import sample, shuffle
-from flask import render_template, make_response, request, jsonify
+from flask import render_template, make_response, request, jsonify, redirect
 from flask_login import current_user
 
 from . import api
-from ..models import MultipleChoiceQuestion, QUESTION_TOPICS, User
+from ..models import MultipleChoiceQuestion, QUESTION_TOPICS, QUIZ_CODES, User
 from ..cursos.forms import MultipleChoiceQuizForm
 
 # Reposnds with HTML for the flashed messages
@@ -93,9 +93,23 @@ def get_quiz_html():
     return render_template("cursos/_quiz.html", form=form, num_questions=num_questions)
 
 
+
+@api.route("/certificado", methods=["GET"])
+def redirect_certificate():
+    """Redirects to the certificate page by taking a topic code request arg."""
+    # Validate the quiz topic
+    quiz_topic = request.args.get("topic", None)
+    if quiz_topic is None or quiz_topic not in QUESTION_TOPICS:
+        return make_response("INVALID_TOPIC", 400) # Quiz topic not found
+
+    certificate_link = QUIZ_CODES[quiz_topic]["certificate_url"]
+    return redirect(url_for("main.certificate", name=certificate_link))
+
+
 @api.route("/user-pass-quiz", methods=["GET", "POST"]) # TODO: Remove GET request
 def user_pass_quiz():
     """Used to make a user pass a quiz"""
+    
     # Validate the quiz topic
     quiz_topic = request.args.get("topic", None)
     if quiz_topic is None or quiz_topic not in QUESTION_TOPICS:
