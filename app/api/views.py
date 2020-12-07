@@ -1,8 +1,9 @@
 from random import sample, shuffle
-from flask import render_template, request, jsonify
+from flask import render_template, make_response, request, jsonify
+from flask_login import current_user
 
 from . import api
-from ..models import MultipleChoiceQuestion, QUESTION_TOPICS
+from ..models import MultipleChoiceQuestion, QUESTION_TOPICS, User
 from ..cursos.forms import MultipleChoiceQuizForm
 
 # Reposnds with HTML for the flashed messages
@@ -89,4 +90,28 @@ def get_quiz_html():
     num_questions = len(form.data)
 
     # TODO: Change num_questions to actual value
-    return render_template("cursos/_quiz.html", form=form, num_questions=num_questions) 
+    return render_template("cursos/_quiz.html", form=form, num_questions=num_questions)
+
+
+@api.route("/user-pass-quiz", methods=["GET", "POST"]) # TODO: Remove GET request
+def user_pass_quiz():
+    """Used to make a user pass a quiz"""
+    # Validate the quiz topic
+    quiz_topic = request.args.get("topic", None)
+    if quiz_topic is None or quiz_topic not in QUESTION_TOPICS:
+        return make_response("INVALID_TOPIC", 400) # Quiz topic not found
+
+    # Validate the email or return error
+    email = request.args.get("email", current_user.email)
+    if email is None:
+        return make_response("INVALID_EMAIL", 400) # Email not found
+    
+    # Validate user or return error
+    user = User.objects(email=email).first()
+    if user is None:
+        return make_response("USER_NOT_FOUND", 404) # User no found
+
+    # Pass the user'z quiz, return success
+    user.set_passed_quiz(quiz_topic, is_passed=True)
+    user.save()
+    return make_response("1", 200)
