@@ -56,8 +56,8 @@ class MultipleChoiceQuizForm(FlaskForm):
     @staticmethod
     def from_mongo_obj(questions_mongo):
         form = MultipleChoiceQuizForm()
-        for question_mongo in questions_mongo:
-            form.questions.append_entry(data=MultipleChoiceQuestionForm.data_from_mongo(question_mongo))
+        for q in questions_mongo:
+            form.questions.append_entry(data=MultipleChoiceQuestionForm.data_from_mongo(q))
         return form
     
     @staticmethod
@@ -71,16 +71,20 @@ class MultipleChoiceQuizForm(FlaskForm):
         if topic not in QUESTION_TOPICS:
             raise ValueError("Invalid quiz topic.")
 
-        # Get all questions that match in topic
-        questions = MultipleChoiceQuestion.objects(topic=topic)
+        # Aggregate all questions that match in topic and count them
+        db_questions = MultipleChoiceQuestion.objects(topic=topic)
+        num_db_questions = db_questions.count()
 
-        # Validate that there are enough questions.
-        if len(questions) < num_questions:
-            raise ValueError("Not enough questions of that topic were found.")
+        # Validate that there are enough questions
+        if num_db_questions < num_questions:
+            num_questions = num_db_questions
         
-        # Choose the questions randomly.
-        questions = random.choices(questions, k=num_questions)
+        # Create index sample
+        sample_indexes = [i for i in range(num_questions)]
+        random.shuffle(sample_indexes)
+        
+        # Fetch the data sample
+        questions = [db_questions[i] for i in sample_indexes]
         
         # Convert the question from mongoengine model objects to wtforms.
         return MultipleChoiceQuizForm.from_mongo_obj(questions)
-        #return MultipleChoiceQuizForm()

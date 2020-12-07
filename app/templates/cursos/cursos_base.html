@@ -56,8 +56,17 @@
 
 {% block scripts %}
 {{super()}}
-{% with topic = "tstc", num_questions = 5%}
+{% with topic = "tstc", num_questions = 5 %}
 <script>
+    const quiz = document.getElementById("quiz-box");
+
+    function buildForm(questions){
+        questions.map((q)=>{
+            
+        });
+    }
+    
+
     $.ajax("{{url_for('api.generate_quiz', topic=topic, num_questions=num_questions)}}",{
         success:(resp)=>{
             try {
@@ -74,9 +83,7 @@
         error: () => console.log("Kaput!")
     })
 
-    function showForm(questions){
-        questions.map((q)=>console.log(q));
-    }
+
     
 </script>
 {% endwith %}

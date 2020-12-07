@@ -3,12 +3,15 @@ from flask import render_template, request, jsonify
 
 from . import api
 from ..models import MultipleChoiceQuestion, QUESTION_TOPICS
+from ..cursos.forms import MultipleChoiceQuizForm
 
 # Reposnds with HTML for the flashed messages
 @api.route("/flashed-messages", methods=["POST"])
 def flashed_messages():
     # TODO: remove this test
     return render_template("_flash.html")
+
+
 """
 QUESTION_TOPICS = (
     "tstc", # Cancer testicular
@@ -66,3 +69,24 @@ def generate_quiz():
         questions.append(db_questions[i].to_json())
 
     return  jsonify(questions)
+
+@api.route("/get-quiz-html", methods=["GET","POST"])
+def get_quiz_html():
+    # Validate the quiz topic
+    quiz_topic = request.args.get("topic", DEFAULT_QUIZ_TOPIC)
+    if quiz_topic not in QUESTION_TOPICS:
+        quiz_topic = DEFAULT_QUIZ_TOPIC
+
+    # Get the number of questions
+    num_questions = request.args.get("num_questions", DEFAULT_NUM_QUESTIONS)
+    num_questions = int(num_questions)
+
+    # Generate the quiz
+    form = MultipleChoiceQuizForm.generate_random_quiz(topic=quiz_topic, num_questions=num_questions)
+    
+    # Assign the actual number of questions fetched, in case 
+    # it exceeded the number of questions available in the database
+    num_questions = len(form.data)
+
+    # TODO: Change num_questions to actual value
+    return render_template("cursos/_quiz.html", form=form, num_questions=num_questions) 
