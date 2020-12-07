@@ -106,7 +106,7 @@ def redirect_certificate():
     return redirect(url_for("main.certificate", name=certificate_link))
 
 
-@api.route("/user-pass-quiz", methods=["GET", "POST"]) # TODO: Remove GET request
+@api.route("/user-pass-quiz", methods=["POST"])
 def user_pass_quiz():
     """Used to make a user pass a quiz"""
     
@@ -129,3 +129,40 @@ def user_pass_quiz():
     user.set_passed_quiz(quiz_topic, is_passed=True)
     user.save()
     return make_response("1", 200)
+
+
+@api.route("/get-user-doc", methods=["GET"])
+def get_user_doc():
+    """GETs user JSON document given an email"""
+    # Validate the email or return error
+    email = request.args.get("email", current_user.email)
+    if email is None:
+        return make_response("INVALID_EMAIL", 400) # Email not found
+    
+    # Validate user or return error
+    user = User.objects(email=email).first()
+    if user is None:
+        return make_response("USER_NOT_FOUND", 404) # User no found
+
+    return user.to_json()
+
+
+
+@api.route("/get-user-quiz-data", methods=["GET"])
+def get_user_quiz_data():
+    """GETs the user's quiz data only"""
+
+    # Validate the email or return error
+    email = request.args.get("email", current_user.email)
+    if email is None:
+        return make_response("INVALID_EMAIL", 400) # Email not found
+    
+    # Validate user or return error
+    user = User.objects(email=email).first()
+    if user is None:
+        return make_response("USER_NOT_FOUND", 404) # User no found
+
+    return jsonify(user.quiz_data)
+    
+
+

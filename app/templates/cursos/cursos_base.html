@@ -106,6 +106,7 @@
     const quizBtnId = "takeQuizBtn";
     const downloadCertBtnId = "downloadCertBtn";
     const fadeInClass = "fade-in";
+    const userEmail = "{{current_user.email}}";
     
     
     const quizContElem = document.getElementById(quizContainerId);
@@ -139,14 +140,16 @@
         })
     }
 
-    function passUserQuiz(email, topic){
+    function passUserQuiz(email, topic, downloadCertBtnElem){
         const endpoint = "{{url_for('api.user_pass_quiz')}}" + "?topic=" + topic + "&email=" +  email;
         $.ajax(endpoint, {
             success:(resp)=>{
                 console.log("[QUIZ] Server says: " + resp);
-
-
-
+                
+                // Unhide the certificate button
+                if (resp === '1'){
+                    downloadCertBtnElem.style.display = "block"; 
+                }
             },
             error: ()=> console.log("[QUIZ] Error in response from pass quiz")
         });
@@ -161,7 +164,7 @@
     }
 
     // Add url to certificate button
-    // downloadCertBtnElem.style.display = "none"; // Hide the certificate button
+    downloadCertBtnElem.style.display = "none"; // Hide the certificate button
     downloadCertBtnElem.onclick = () => window.open(downloadCertificateLink, "_blank");
     downloadCertBtnElem.setAttribute("target", "_blank");
 </script>
