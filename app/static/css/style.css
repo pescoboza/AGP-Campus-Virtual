@@ -197,6 +197,7 @@ a.btn {
 
 
 #topBar a.btn {
+    min-width: 100px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
