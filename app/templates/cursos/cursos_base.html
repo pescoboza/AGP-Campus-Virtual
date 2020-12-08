@@ -104,10 +104,10 @@
 <script>
 
     const QUIZ = {
-        userEmail = "{{current_user.email or 'null'}}",
+        userEmail: "{{current_user.email or 'null'}}",
         topic: "{{topic}}",
         numQuestions: {{ num_questions }},
-        correctAnswers = [],
+        correctAnswers: [],
         dldCertUrl: "{{url_for('api.redirect_certificate') + '?topic=' + topic}}",
         fadeInClass: "fade-in",
         containerId: "quizContainer",
@@ -142,9 +142,9 @@
     QUIZ.getCertBtn = () => document.getElementById(QUIZ.dldCertBtnId);
     QUIZ.getSubmitBtn = () => document.getElementById(QUIZ.submitBtnId);
     QUIZ.getBtn().onclick = () => {
-        renderNewQuiz(QUIZ.topic, QUIZ.numQuestions, QUIZ.containerElem, QUIZ.btnElem, QUIZ.fadeInClass, onClickSubmitBtn);
+        QUIZ.renderNewQuiz();
         QUIZ.hideCertBtn();
-        QUIZ.btnElem.onclick = null;
+        QUIZ.getBtn().onclick = undefined;
     };
     QUIZ.showBtn = () => {
         const btnElem = QUIZ.getBtn();
@@ -169,14 +169,14 @@
         dldCertBtnElem.style.display = "none";
         dldCertBtnElem.onclick = undefined;
     };
-    QUIZ.getSubmitBtn().onclick = () => {
-        const score = QUIZ.calcQuizScore();
+    QUIZ.submitBtnOnClick = () => {
+        const score = QUIZ.calcScore();
 
         if (score >= QUIZ.numQuestions){
             alert("PASS");
         }
         else{
-            alert("no pass"):
+            alert("no pass");
         }
     };
     QUIZ.renderNewQuiz = () => {
@@ -193,13 +193,12 @@
 
             const formElem = QUIZ.getForm();
             formElem.onsubmit = () => false; // Remove page refresh on submit
-            formElem.classList.add(fadeInClass); // Add fade in to form
-
-            QUIZ.getSubmitBtn().onclick = () => onClickSubmitBtn(answers, scoreToPass, numQuestions, formElem);
+            formElem.classList.add(QUIZ.fadeInClass); // Add fade in to form
+            QUIZ.getSubmitBtn().onclick = QUIZ.submitBtnOnClick;
 
 
         };
-        getNewQuiz(topic, numQuestions).then(update);
+        getNewQuiz(QUIZ.topic, QUIZ.numQuestions).then(update);
     };
     
     // Check that the use has passed quiz before or not
