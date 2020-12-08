@@ -166,16 +166,15 @@
     
     
     function onClickSubmitBtn(answers, scoreToPass, numQuestions, formElem){
+        const score = calcQuizScore(answers, numQuestions, formElem);
 
-        if (isQuizPassed(answers, scoreToPass, numQuestions, formElem)){
+        if (score >= scoreToPass){
 
-            alert("PASS");
-
-
+            alert(`PASS ${score}/${scoreToPass}`);
 
         }
         else{
-            alert("no pass");
+            alert(`no pass ${score}/${scoreToPass}`);
 
                 // TODO: Here 
         }
@@ -210,9 +209,8 @@
     }
 
     
-
-    // Tells if the user passes score validation
-    function isQuizPassed(correctAnswers, scoreToPass, numQuestions, formElem, questionNameStr = "questions-%d-answer") {
+    // Gets the user score on the quiz
+    function calcQuizScore(correctAnswers, numQuestions, formElem, questionNameStr = "questions-%d-answer"){
         let score = 0;
         for (let i = 0; i < numQuestions; ++i) {
             const questionFieldName = questionNameStr.replace("%d", i);
@@ -221,7 +219,7 @@
                 score++;
             }
         }
-        return (score >= scoreToPass);
+        return score;
     }
 
     
