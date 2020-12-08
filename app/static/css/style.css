@@ -188,6 +188,7 @@ a.btn {
 
 #topBar {
     position: relative;
+    margin: 0;
 }
 
 #topBar a {
@@ -204,29 +205,35 @@ a.btn {
 
 #profile,
 #register{
-    right: 0;
+    right: 60px;
 }
 
 #login,
 #logout
  {
-    right: 120px;
+    right: 180px;
 }
 
 
 img#navbarLogo {
+    margin-left: 90px;
     height: 120px;
     padding: 15px 15px 15px 15px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
     #topBar a.btn {
         left: 0;
+        transform: translate(0,0);
         bottom: 0;
-        margin: 0;
+        margin-bottom: -1px;
         position: relative;
         width: 100%;
         border-radius: 0;
+    }
+    img#navbarLogo{
+        margin-bottom: 20px;
+        margin-left: 0;
     }
 }
 
@@ -235,7 +242,7 @@ img#navbarLogo {
 /* Navbar*/
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 #navbar.navbar.navbar-custom {
-    /* margin-bottom: 0; */
+    margin-top: 0;
     text-transform: uppercase;
     background-color: var(--primary);
 }
