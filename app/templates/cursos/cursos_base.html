@@ -156,61 +156,46 @@
     }
 
 
+    function renderNewQuiz(topic, numQuestions, quizContainerElem, btnToHideElem, fadeInClass) {
+                
+        const update = ({answers, scoreToPass, htmlForm}) => {
+            
+            console.log(answers);
+            
+            // Make button disappear
+            btnToHideElem.style.display = "none";
 
+            // Add quiz questions
+            quizContainerElem.innerHTML += htmlForm;
 
+            const quizFormElem = quizContElem.querySelector("form"); // Select new form
+            quizFormElem.onsubmit = () => gradeQuiz(answers, scoreToPass, numQuestions); // Add onsubmit validation
+            quizFormElem.classList.add(fadeInClass); // Add fade in to form
+            
+            // Get the sumbit button
+            const quizSubmitBtnElem = quizFormElem["submit"];
+            // quizSubmitBtnElem.onb
 
-    //$.ajax(endpoint, {
-        //     type: "post",
-        //     success: (resp) => {
-        //         console.log("[QUIZ] Server says: " + resp);
+            //quizSubmitBtnElem.onclick = 
 
-        //         // Unhide the certificate button
-        //         if (resp === '1') {
-        //             downloadCertBtnElem.style.display = "block";
-        //         }
-        //     },
-        //     error: () => console.log("[QUIZ] Error in response from pass quiz")
-        // });
+            // quizSubmitBtnElem.onclick = () =>  throw {"TODO WAST";
+            // alert(quizSubmitBtnElem);
+            // TODO: Continue here
 
-
-
-    function renderNewQuiz() {
-        const endpoint = "{{url_for('api.get_quiz_html')}}" + "?topic=" + topic + "&num_questions=" + numQuizQuestions;
-        $.ajax(endpoint, {
-            type: "post",
-            success: ({ answers, scoreToPass, htmlForm }) => {
-                // TODO: remove answer log
-                console.log(answers);
-                // Make button disappear
-                quizBtnElem.style.display = "none";
-
-                // Add quiz questions
-                quizContElem.innerHTML += htmlForm;
-
-
-                quizForm = quizContElem.querySelector("form");
-                quizForm.classList.add(fadeInClass); // Add fade in to form
-                quizForm.onsubmit = () => gradeQuiz(answers, numQuestions, numQuestions); // Add onsubmit validation
-
-
-
-                quizSubmitBtnElem = document.getElementById("submit");
-
-                // quizSubmitBtnElem.onclick = () =>  throw {"TODO WAST";
-
-            },
-            error: () => console.log("[QUIZ] Error in response from quiz")
-        })
+        };
+        getNewQuiz(topic, numQuestions).then(update);
     }
 
+    // Add event listener on click to fetch new quiz
+    // Only works once
+    quizBtnElem.onclick = () => {
+        renderNewQuiz("mama", 10, quizContElem, quizBtnElem, fadeInClass)
+        quizBtnElem.onclick = null;
+    }
 
-
-    
-
-    function gradeQuiz(correctAnswers, scoreToPass, numQuestions, questionNameStr = "questions-%d-answer") {
-
+    // Tells if the user passes score validation
+    function isQuizPassed(correctAnswers, scoreToPass, numQuestions, questionNameStr = "questions-%d-answer") {
         const form = document.forms["quiz"];
-
         let score = 0;
         for (let i = 0; i < numQuizQuestions; ++i) {
             const questionFieldName = questionNameStr.replace("%d", i);
@@ -219,28 +204,19 @@
                 score++;
             }
         }
-
-        score = 500;// TODO: remove this <-------------------------------------- * *"#$"#%*#"%"#%*
-        if (score >= scoreToPass) {
-            passUserQuiz(userEmail, quizTopic, downloadCertBtnElem);
-
-            updateUserQuizState()
-
-
-        } else {
-            // alert("no pass");
-        }
-
-        // Avoid page refresh
-        return false;
+        return (score >= scoreToPass);
     }
 
-    // Add event listener on click to fetch new quiz
-    // Only works once
-    quizBtnElem.onclick = () => {
-        renderNewQuiz(quizContElem, quizBtnElem, quizTopic, numQuizQuestions, fadeInClass)
-        quizBtnElem.onclick = null;
-    }
+
+
+
+
+
+
+
+
+
+
 
     function updateUserQuizState() {
         // If use has passed quiz, display certificate button
