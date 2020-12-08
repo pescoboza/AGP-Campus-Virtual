@@ -12,6 +12,7 @@ AGP Campus Virtual
 <link rel="stylesheet" href="/static/css/style.css">
 {% endblock %}
 
+
 {% block navbar %}
 <div id="alerts">
     {% include "_flash.html" %}
@@ -55,10 +56,11 @@ AGP Campus Virtual
 
 
 {% block content %}
+{% block modal %}{% endblock modal %}
 {% block carousel %}{% endblock carousel %}
 {% block banner %}{% endblock banner %}
 {% block content_navbar %}{% endblock content_navbar %}
-    
+
 <div id="page-content" class="container">
     {% block page_content %}{% endblock page_content %}
 </div>
@@ -112,21 +114,14 @@ AGP Campus Virtual
 
 {% block scripts %}
 {{super()}}
-<!-- <script src="/static/js/script.js"></script> -->
-
 {#<!-- TODO: Remove the reload cachced files script from production release. -->#}
 <script src="/static/js/reloadCachedCSS.js"></script>
-<!-- <script type="text/javascript" src="/static/js/flashes.js"></script>
+<!-- 
+<script type="text/javascript" src="/static/js/flashes.js"></script>
 <script type="text/javascript">
     $(getAlerts("{{url_for('api.flashed_messages')}}"));
-</script> -->
-
-<!-- 
-<script type="text/javascript">var topButton = "sleek/circle-blue";</script>
-<script type="text/javascript" src="//backtotopbutton.com/script/toTop.js"></script> 
+</script> 
 -->
-
-
 {% endblock scripts %}
 
 </html>
