@@ -74,41 +74,22 @@
 {% endblock content_navbar %}
 
 
-
 {% block page_content %}
 
 <!-- Article -->
 {% block article %}{% endblock article %}
 
-
-
-
-
 <!-- Quiz section header -->
 {{section_header("evaluacion", section_headers)}}
 <div id="quizContainer" class="quiz">
     <button id="takeQuizBtn" class="btn quiz-btn">Hacer examen</button>
+    {% if topic and topic != "diag" %}
     <button id="dldCertBtn" class="btn quiz-btn" style="display: none;">Descargar certificado</button>
+    {% endif %}
 </div>
 
-{# 
-    <!-- Commented out old quizzes -->
-    <!-- Download certificate -->
-    {% if already_passed == True and certificate_endpoint %}
-        {{
-            button_link(
-                href=url_for("main.certificate", name=certificate_endpoint),
-                btn_text="Descargar certificado",
-                target="_blank"
-            )
-        }}
-    {% endif %}
-
-    <!-- Quiz -->
-    {{quiz(form, score, max_score)}}
-
-#}
 {% endblock page_content %}
+
 
 {% block scripts %}
 {{super()}}
