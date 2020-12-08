@@ -56,8 +56,18 @@
         } */
 
     .quiz .quiz-btn {
-        display: flex;
-        top: 50%;
+        position: relative;
+        transform: translate(-50%, -50%);
+        left: 50%;
+    }
+    
+    #takeQuizBtn{
+        top: 33%;
+    }
+    
+    #dldCertBtn{
+         bottom: -50%;
+
     }
 
     @keyframes kf-fade-in {
@@ -102,7 +112,6 @@
 {% block scripts %}
 {{super()}}
 <script>
-
     const QUIZ = {
         userEmail: "{{current_user.email or 'null'}}",
         topic: "{{topic}}",
@@ -114,6 +123,7 @@
         btnId: "takeQuizBtn",
         dldCertBtnId: "dldCertBtn",
         submitBtnId: "submit",
+        alreadyPassed: false,
     };
 
     QUIZ.getContainer = () => document.getElementById(QUIZ.containerId);
@@ -141,16 +151,18 @@
     QUIZ.getBtn = () => document.getElementById(QUIZ.btnId);
     QUIZ.getCertBtn = () => document.getElementById(QUIZ.dldCertBtnId);
     QUIZ.getSubmitBtn = () => document.getElementById(QUIZ.submitBtnId);
-    QUIZ.getBtn().onclick = () => {
+    QUIZ.btnOnClick = () => {
         QUIZ.renderNewQuiz();
         QUIZ.hideCertBtn();
         QUIZ.getBtn().onclick = undefined;
     };
     QUIZ.showBtn = () => {
         const btnElem = QUIZ.getBtn();
+        btnElem.onclick = QUIZ.btnOnClick;
         btnElem.classList.add(QUIZ.fadeInClass);
         btnElem.style.display = "block";
     };
+    QUIZ.showBtn();
     QUIZ.hideBtn = () => {
         const btnElem = QUIZ.getBtn();
         btnElem.classList.remove(QUIZ.fadeInClass);
@@ -171,12 +183,19 @@
     };
     QUIZ.submitBtnOnClick = () => {
         const score = QUIZ.calcScore();
-
+        QUIZ.getForm().remove();
+        QUIZ.showBtn();
         if (score >= QUIZ.numQuestions){
-            alert("PASS");
+            
+            QUIZ.showCertBtn();
+            alert("PASS"); // TODO: remove this alert
+            passUserQuiz(QUIZ.userEmail, QUIZ.topic);
         }
         else{
-            alert("no pass");
+            if (QUIZ.alreadyPassed === true){
+                QUIZ.showCertBtn();
+            }
+            alert("no pass"); // TODO: remove this alert
         }
     };
     QUIZ.renderNewQuiz = () => {
@@ -206,6 +225,7 @@
         const isPassed = data[QUIZ.topic].is_passed || false;
 
         if (isPassed) {
+            QUIZ.alreadyPassed = true;
             QUIZ.showCertBtn();
         }
         else {
