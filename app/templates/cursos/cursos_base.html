@@ -117,23 +117,25 @@
     const quizBtnElem = document.getElementById(quizBtnId);
     const downloadCertBtnElem = document.getElementById(downloadCertBtnId);
 
-
-
-
-    /**
-     * Fetches quiz html for the quiz form.
-     * 
-     * @param HTMLElement htmlElement Container tag for the quiz
-     * @param string topic Codename of the quiz topic
-     * @param number numQuestions Number of questions for the quiz
-     */
-    function renderNewQuiz(
-        quizContElem = quizContElement,
-        quizBtnElem = quizBtnElem,
-        topic = topic,
-        numQuestions = numQuizQuestions,
-        fadeInClass = fadeInClass) {
+    // Fetches {answers, scroteToPass, htmlForm} from database
+    function getNewQuiz(topic, numQuestions) {
         const endpoint = "{{url_for('api.get_quiz_html')}}" + "?topic=" + topic + "&num_questions=" + numQuestions;
+        return new Promise(
+            (resolve, reject) => 
+            $.ajax(endpoint, 
+                {
+                    type: "POST",
+                    success: (res) => resolve(res),
+                    error: (err) => reject(err)
+                }
+            )
+        )
+    }
+
+    getNewQuiz("mama", 10).then((q)=>console.log(q));
+
+    function renderNewQuiz() {
+        const endpoint = "{{url_for('api.get_quiz_html')}}" + "?topic=" + topic + "&num_questions=" + numQuizQuestions;
         $.ajax(endpoint, {
             type: "post",
             success: ({ answers, scoreToPass, htmlForm }) => {
@@ -161,8 +163,8 @@
         })
     }
 
-    function passUserQuiz(email = userEmail, topic = quizTopic, downloadCertBtnElem = downloadCertBtnElem) {
-        const endpoint = "{{url_for('api.user_pass_quiz')}}" + "?topic=" + topic + "&email=" + email;
+    function passUserQuiz() {
+        const endpoint = "{{url_for('api.user_pass_quiz')}}" + "?topic=" + quizTopic + "&email=" + userEmail;
         $.ajax(endpoint, {
             type: "post",
             success: (resp) => {
@@ -178,8 +180,8 @@
     }
 
 
-    async function fetchUserQuizData(email) {
-        const endpoint = "{{url_for('api.get_user_quiz_data')}}" + "?email=" + email;
+    async function fetchUserQuizData() {
+        const endpoint = "{{url_for('api.get_user_quiz_data')}}" + "?email=" + userEmail;
         return $.ajax(endpoint, { type: "get" });
     }
 
@@ -196,9 +198,11 @@
             }
         }
 
+        score = 500;// TODO: remove this <-------------------------------------- * *"#$"#%*#"%"#%*
         if (score >= scoreToPass) {
             passUserQuiz(userEmail, quizTopic, downloadCertBtnElem);
-            // alert("YOU PASSED!");
+
+            updateUserQuizState()
 
 
         } else {
@@ -206,7 +210,7 @@
         }
 
         // Avoid page refresh
-        return false; 
+        return false;
     }
 
     // Add event listener on click to fetch new quiz
@@ -216,22 +220,23 @@
         quizBtnElem.onclick = null;
     }
 
+    function updateUserQuizState() {
+        // If use has passed quiz, display certificate button
+        fetchUserQuizData(userEmail).then((userQuizData) => {
+            console.log(userQuizData);
+            if (userQuizData[quizTopic].is_passed === false) {
+                downloadCertBtnElem.style.display = "none"; // Hide the certificate button
+                return;
+            }
 
+            // Add url to certificate button and show it
+            downloadCertBtnElem.onclick = () => window.open(downloadCertificateLink, "_blank");
+            downloadCertBtnElem.setAttribute("target", "_blank");
+            downloadCertBtnElem.style.display = "block";
+        });
+    }
 
-    // If use has passed quiz, display certificate button
-    fetchUserQuizData(userEmail).then((userQuizData) => {
-        console.log(userQuizData);
-        if (userQuizData[quizTopic].is_passed === false) {
-            downloadCertBtnElem.style.display = "none"; // Hide the certificate button
-            return;
-        }
-
-        // Add url to certificate button and show it
-        downloadCertBtnElem.onclick = () => window.open(downloadCertificateLink, "_blank");
-        downloadCertBtnElem.setAttribute("target", "_blank");
-        downloadCertBtnElem.style.display = "block";
-    });
-
+    updateUserQuizState();
 
 </script>
 {% endblock scripts %}
