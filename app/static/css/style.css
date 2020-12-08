@@ -36,7 +36,7 @@
 /* Beautified anchors */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
-html{
+html {
     scroll-behavior: smooth;
 }
 
@@ -90,6 +90,10 @@ img {
 }
 
 
+a.btn {
+    text-decoration: none;
+}
+
 .btn,
 .btn:hover,
 .btn:active,
@@ -117,7 +121,7 @@ img {
     /* filter: brightness(1.1); */
 }
 
-.btn:active:focus{
+.btn:active:focus {
     border-radius: 0;
 
 }
@@ -182,19 +186,63 @@ img {
     padding-bottom: 3cm;
 }
 
-img#navbarLogo {
-    height: 120px;
-    background-color: white;
-    padding: 15px 15px 15px 15px;
-    border-radius: 3px;
+#topBar {
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    margin: 0;
 }
 
+#topBar a {
+    text-decoration: none;
+}
+
+
+#topBar a.btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+#profile,
+#register{
+    right: 60px;
+}
+
+#login,
+#logout
+ {
+    right: 180px;
+}
+
+
+img#navbarLogo {
+    margin-left: 90px;
+    height: 120px;
+    padding: 15px 15px 15px 15px;
+}
+
+@media only screen and (max-width: 768px) {
+    #topBar a.btn {
+        left: 0;
+        transform: translate(0,0);
+        bottom: 0;
+        margin-bottom: -1px;
+        position: relative;
+        width: 100%;
+        border-radius: 0;
+    }
+    img#navbarLogo{
+        margin-bottom: 20px;
+        margin-left: 0;
+    }
+}
+
+
+
 /* Navbar*/
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 #navbar.navbar.navbar-custom {
-    /* margin-bottom: 0; */
+    margin-top: 0;
     text-transform: uppercase;
     background-color: var(--primary);
 }
@@ -226,8 +274,8 @@ img#navbarLogo {
 /* Article index */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
-#article-navbar{
-    position:sticky;
+#article-navbar {
+    position: sticky;
     top: 0;
     z-index: 40;
     background-color: var(--tertiary);
@@ -240,6 +288,7 @@ img#navbarLogo {
     font-size: 1em;
 
 }
+
 .art-index {
     left: 5px;
     text-align: left;
@@ -291,7 +340,7 @@ img#navbarLogo {
 
 /* Activity cards */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-.row.row-eq-height.cards .col-sm-4 .card{
+.row.row-eq-height.cards .col-sm-4 .card {
     min-height: 28vw;
 }
 
