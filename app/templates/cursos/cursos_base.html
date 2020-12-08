@@ -142,6 +142,36 @@
         );
     }
 
+    
+    function passUserQuiz(userEmail, quizTopic) {
+        const endpoint = "{{url_for('api.user_pass_quiz')}}" + "?topic=" + quizTopic + "&email=" + userEmail;
+        return new Promise((resolve, reject) => 
+            $.ajax({
+                url: endpoint, 
+                type: "POST",
+                success: (resp) => resolve(resp),
+                error: (err) => reject(err),
+            })
+        );
+    }
+
+
+
+
+
+    //$.ajax(endpoint, {
+        //     type: "post",
+        //     success: (resp) => {
+        //         console.log("[QUIZ] Server says: " + resp);
+
+        //         // Unhide the certificate button
+        //         if (resp === '1') {
+        //             downloadCertBtnElem.style.display = "block";
+        //         }
+        //     },
+        //     error: () => console.log("[QUIZ] Error in response from pass quiz")
+        // });
+
 
 
     function renderNewQuiz() {
@@ -173,21 +203,6 @@
         })
     }
 
-    function passUserQuiz() {
-        const endpoint = "{{url_for('api.user_pass_quiz')}}" + "?topic=" + quizTopic + "&email=" + userEmail;
-        $.ajax(endpoint, {
-            type: "post",
-            success: (resp) => {
-                console.log("[QUIZ] Server says: " + resp);
-
-                // Unhide the certificate button
-                if (resp === '1') {
-                    downloadCertBtnElem.style.display = "block";
-                }
-            },
-            error: () => console.log("[QUIZ] Error in response from pass quiz")
-        });
-    }
 
 
     
