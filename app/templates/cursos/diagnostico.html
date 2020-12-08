@@ -1,5 +1,11 @@
-{% extends "base.html" %}
-{#{% from "cursos/_quiz.html" import quiz %}#}
+{% extends "cursos/cursos_base.html" %}
+{% from "cursos/_article.html" import section_header %}
+{% set section_headers = {
+    "que-es-agp-campus-virtual": "¿QUÉ AGP CAMPUS VIRTUAL?", 
+    "que-es-el-cancer": "¿QUÉ ES EL CÁNCER?",
+    "diferencia-entre-tipos-de-cancer": "DIFERENCIA ENTRE TIPOS DE CÁNCER",
+    "actividades": "ACTIVIDADES",
+    "examen-autodiagnostico": "EXAMEN AUTODIAGNÓSTICO" } %}
 
 {% block title %}
 Inicio
@@ -72,7 +78,7 @@ Inicio
 {% endblock banner %}
 #}
 
-{% block page_content %}
+{% block article %}
 <br>
 {#
 {% if current_user and not current_user.is_anonymous %}
@@ -84,12 +90,12 @@ Inicio
 
 <br>
 
-<h1>¿Qué es Campus Virtual AGP?</h1>
+{{section_header("que-es-agp-campus-virtual", section_headers)}}
 <p>Es un sitio donde podrás encontrar información que te permita prevenir y detectar oportunamente diferentes tipos de
     cáncer. El objetivo es que a través de varias actividades y presentaciones, puedas tener información científica de
     este padecimiento</p><br>
 
-<h1>¿Qué es el Cáncer?</h1>
+{{section_header("que-es-el-cancer", section_headers)}}
 <div>
     <p>
         El término cáncer se refiere a un gran número de enfermedades que pueden desarrollarse en cualquier parte del
@@ -112,7 +118,7 @@ Inicio
     </p>
 </div><br>
 
-<h1>Diferencia entre tipos de Cáncer</h1>
+{{section_header("diferencia-entre-tipos-de-cancer", section_headers)}}
 <div>
     <p>
         Algunos tipos de cáncer crecen y se propagan rápidamente mientras que otros crecen más lentamente.
@@ -126,7 +132,7 @@ Inicio
     </p>
 </div><br>
 
-<h1>Actividades</h1>
+{{section_header("actividades", section_headers)}}
 <br>
 {# <!-- Row 1 -->#}
 <div class="row row-eq-height cards">
@@ -138,8 +144,8 @@ Inicio
                     cáncer?</h5>
                 <p class="card-text">Crucigrama para conocer algunos de los conceptos más <br>importantes sobre la
                     enfermedad.</p>
-                <a href="https://puzzel.org/es/crossword/play?p=-MGLrgdFEuJx5Q_f-xy6" class="btn"
-                    target="_blank">Ir a la Actividad</a>
+                <a href="https://puzzel.org/es/crossword/play?p=-MGLrgdFEuJx5Q_f-xy6" class="btn" target="_blank">Ir a
+                    la Actividad</a>
             </div>
         </div>
     </div>
@@ -187,26 +193,18 @@ Inicio
         <div class="card">
             <div class="card-body">
                 <img src="/static/img/cuerpo.jpg" class="card-img-top">
-                <h5 class="card-title">¿Que pasa en los
-                    tratamientos?
-                </h5>
+                <h5 class="card-title">¿Que pasa en los tratamientos?</h5>
                 <p class="card-text">Diviertete en este juego mientras aprendes sobre los tratamientos del
                     cancer.
                 </p>
-                <a href="https://www.xplorehealth.eu/es/media/media/help-me-cure-nadias-cancer?page=4"
-                    class="btn" target="_blank">Ir al Juego</a>
+                <a href="https://www.xplorehealth.eu/es/media/media/help-me-cure-nadias-cancer?page=4" class="btn"
+                    target="_blank">Ir al Juego</a>
             </div>
         </div>
     </div>
 </div>
 
-<h2>Examen Autodiagnóstico</h2><br>
+{{section_header("examen-autodiagnostico", section_headers)}}
 
-{#
-<!-- TODO: Figure out this part -->
-{% if form and score != None and max_score != None %}
-{{quiz(form, score, max_score)}}
-{% endif %}
-#}
 
-{% endblock %}
+{% endblock article %}

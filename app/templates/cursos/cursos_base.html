@@ -24,12 +24,12 @@
         transform: translate(-50%, -50%);
         left: 50%;
     }
-    
-    #takeQuizBtn{
+
+    #takeQuizBtn {
         top: 33%;
     }
-    
-    #dldCertBtn{
+
+    #dldCertBtn {
         bottom: -50%;
 
     }
@@ -50,6 +50,25 @@
     }
 </style>
 {% endblock head %}
+
+{% block modal %}
+<div class="modal fade" id="modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="modalTitle" class="modal-title">Resultado de evaluación</h4>
+            </div>
+            <div class="modal-body">
+                <p id="modalText">Felicitaciones por haber pasado el examen. Descargue su certificado en la liga.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock modal %}
 
 
 {% block content_navbar %}
@@ -74,47 +93,39 @@
 {% endblock content_navbar %}
 
 
-
 {% block page_content %}
 
 <!-- Article -->
 {% block article %}{% endblock article %}
 
-
-
-
-
-<!-- Quiz section header -->
+<!-- Quiz -->
 {{section_header("evaluacion", section_headers)}}
 <div id="quizContainer" class="quiz">
     <button id="takeQuizBtn" class="btn quiz-btn">Hacer examen</button>
+    {% if topic and topic != "diag" %}
     <button id="dldCertBtn" class="btn quiz-btn" style="display: none;">Descargar certificado</button>
+    {% endif %}
 </div>
 
-{# 
-    <!-- Commented out old quizzes -->
-    <!-- Download certificate -->
-    {% if already_passed == True and certificate_endpoint %}
-        {{
-            button_link(
-                href=url_for("main.certificate", name=certificate_endpoint),
-                btn_text="Descargar certificado",
-                target="_blank"
-            )
-        }}
-    {% endif %}
-
-    <!-- Quiz -->
-    {{quiz(form, score, max_score)}}
-
-#}
 {% endblock page_content %}
+
 
 {% block scripts %}
 {{super()}}
 <script>
+    const MODAL = {
+        id: "modal",
+        titleId: "modalTitle",
+        textId: "modalText",
+    };
+    MODAL.activate = () => $('#' + MODAL.id).modal();
+    MODAL.setContent = (title, text) => {
+        document.getElementById(MODAL.titleId).innerHTML = title;
+        document.getElementById(MODAL.textId).innerHTML = text;
+    }
+
     const QUIZ = {
-        userEmail: "{{current_user.email or 'null'}}",
+        userEmail: {% if current_user.email %}"{{current_user.email}}"{% else %} {{ "null" }} {% endif %},
         topic: "{{topic}}",
         numQuestions: {{ num_questions }},
         correctAnswers: [],
@@ -125,6 +136,7 @@
         dldCertBtnId: "dldCertBtn",
         submitBtnId: "submit",
         alreadyPassed: false,
+        modal: MODAL,
     };
 
     QUIZ.getContainer = () => document.getElementById(QUIZ.containerId);
@@ -184,20 +196,50 @@
     };
     QUIZ.submitBtnOnClick = () => {
         const score = QUIZ.calcScore();
+        {% if topic == "diag" %}
+        QUIZ.showBtn();
+        QUIZ.getForm().remove();
+        if (score >= QUIZ.numQuestions) {
+            
+            QUIZ.modal.setContent(
+                "Resultado de diagnóstico",
+                "Felicidades, has pasado el examen diagnóstico."
+            );
+            QUIZ.modal.activate();
+        }
+        else {
+            QUIZ.modal.setContent(
+                "Resultado de diagnóstico",
+                "Inténtalo de nuevo, estuviste muy cerca."
+            );
+            QUIZ.modal.activate();
+        }
+
+        {% else %}
         QUIZ.getForm().remove();
         QUIZ.showBtn();
-        if (score >= QUIZ.numQuestions){
-            
+        if (score >= QUIZ.numQuestions) {
+
             QUIZ.showCertBtn();
-            alert("PASS"); // TODO: remove this alert
             passUserQuiz(QUIZ.userEmail, QUIZ.topic);
+
+            QUIZ.modal.setContent(
+                "Resultado de evaluación",
+                "Felicidades, has pasado la evaluación. Descarga tu certificado en el botón."
+            );
+            QUIZ.moda.activate();
         }
-        else{
-            if (QUIZ.alreadyPassed === true){
+        else {
+            if (QUIZ.alreadyPassed === true) {
                 QUIZ.showCertBtn();
             }
-            alert("no pass"); // TODO: remove this alert
+            QUIZ.modal.setContent(
+                "Resultado de evaluación",
+                "Inténtalo de nuevo, estuviste muy cerca."
+            )
+            QUIZ.moda.activate();
         }
+        {% endif %}
     };
     QUIZ.renderNewQuiz = () => {
         const update = ({ answers, scoreToPass, htmlForm }) => {
@@ -220,7 +262,7 @@
         };
         getNewQuiz(QUIZ.topic, QUIZ.numQuestions).then(update);
     };
-    
+
     // Check that the use has passed quiz before or not
     getUserQuizData(QUIZ.userEmail).then((data) => {
         const isPassed = data[QUIZ.topic].is_passed || false;
