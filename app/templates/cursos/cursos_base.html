@@ -106,14 +106,20 @@
     const QUIZ = {
         topic: "{{topic}}",
         numQuestions: {{ num_questions }},
-        downloadCertificateLink: "{{url_for('api.redirect_certificate') + '?topic=' + topic}}",
+        dldCertUrl: "{{url_for('api.redirect_certificate') + '?topic=' + topic}}",
         fadeInClass: "fade-in",
+        containerId: "quizContainer",
         containerElem: document.getElementById("quizContainer"),
+        btnId: "takeQuizBtn",
         btnElem: document.getElementById("takeQuizBtn"),
+        dldCertBtnId: "dldCertBtn",
         dldCertBtnElem: document.getElementById("dldCertBtn"),
     };
 
     const USER_EMAIL = "{{current_user.email}}";
+
+    // Hide certificate button and add link to pdf
+    QUIZ.dldCertBtnElem.style.display = "none";
 
     // Add event listener on click to fetch new quiz
     // Only works once
@@ -161,22 +167,31 @@
         );
     }
 
-    
-    
-    
-    
+
     function onClickSubmitBtn(answers, scoreToPass, numQuestions, formElem){
         const score = calcQuizScore(answers, numQuestions, formElem);
 
-        if (score >= scoreToPass){
+        // TODO: remove debud if
+        if (true || score >= scoreToPass){
+            QUIZ.containerElem.querySelector("form").remove(); // Remove form
+            //alert(`PASS ${score}/${scoreToPass}`); // TODO: Remove alert
 
-            alert(`PASS ${score}/${scoreToPass}`);
-
+            
+            // Make the user pass the quiz and show the button
+            passUserQuiz(USER_EMAIL, QUIZ.topic).then(
+                (res) => {
+                    debugger;
+                    const dldCertBtnElem = document.getElementById(QUIZ.dldCertBtnId);
+                    dldCertBtnElem.classList.add(QUIZ.fadeInClass);
+                    dldCertBtnElem.style.display ="block";
+                    dldCertBtnElem.onclick = () => window.open(QUIZ.dldCertUrl, "_blank");
+                }
+            );
+            
         }
         else{
-            alert(`no pass ${score}/${scoreToPass}`);
+            alert(`no pass ${score}/${scoreToPass}`); // TODO: Remove alert
 
-                // TODO: Here 
         }
     }
 
@@ -243,7 +258,7 @@
     //         }
 
     //         // Add url to certificate button and show it
-    //         dldCertBtnElem.onclick = () => window.open(downloadCertificateLink, "_blank");
+    //         dldCertBtnElem.onclick = () => window.open(dldCertUrl, "_blank");
     //         dldCertBtnElem.setAttribute("target", "_blank");
     //         dldCertBtnElem.style.display = "block";
     //     });
