@@ -194,11 +194,13 @@ a.btn {
     text-decoration: none;
 }
 
+
 #topBar a.btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
 }
+
 
 #profile,
 #register{
@@ -210,6 +212,7 @@ a.btn {
  {
     right: 120px;
 }
+
 
 img#navbarLogo {
     height: 120px;
@@ -224,12 +227,13 @@ img#navbarLogo {
         position: relative;
         width: 100%;
         border-radius: 0;
-
+    }
 }
 
 
 
 /* Navbar*/
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 #navbar.navbar.navbar-custom {
     /* margin-bottom: 0; */
     text-transform: uppercase;
