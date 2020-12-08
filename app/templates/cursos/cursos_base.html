@@ -4,6 +4,54 @@
 {# Requires dict section_headers #}
 
 
+{% block head %}
+{{super()}}
+<style>
+    #quizContainer {
+        width: 100%;
+        height: 50vh;
+        border-radius: 20px;
+        padding: 20px;
+        background-color: #FFE1A4;
+    }
+
+    /* .quiz{
+            text-align: center;
+        } */
+
+    .quiz .quiz-btn {
+        position: relative;
+        transform: translate(-50%, -50%);
+        left: 50%;
+    }
+    
+    #takeQuizBtn{
+        top: 33%;
+    }
+    
+    #dldCertBtn{
+        bottom: -50%;
+
+    }
+
+    @keyframes kf-fade-in {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .fade-in {
+        animation-name: kf-fade-in;
+        animation-duration: 1s;
+    }
+</style>
+{% endblock head %}
+
+
 {% block content_navbar %}
 <nav id="article-navbar" class="navbar navbar-custom" role="navigation">
     <div class="container">
@@ -33,58 +81,11 @@
 {% block article %}{% endblock article %}
 
 
+
+
+
 <!-- Quiz section header -->
-{% if form and score != None and max_score != None %}
 {{section_header("evaluacion", section_headers)}}
-{% endif %}
-
-
-<!-- Create quiz button -->
-
-
-<style>
-    #quizContainer {
-        width: 100%;
-        height: 50vh;
-        border-radius: 20px;
-        padding: 20px;
-        background-color: #FFE1A4;
-    }
-
-    /* .quiz{
-            text-align: center;
-        } */
-
-    .quiz .quiz-btn {
-        position: relative;
-        transform: translate(-50%, -50%);
-        left: 50%;
-    }
-    
-    #takeQuizBtn{
-        top: 33%;
-    }
-    
-    #dldCertBtn{
-         bottom: -50%;
-
-    }
-
-    @keyframes kf-fade-in {
-        0% {
-            opacity: 0;
-        }
-
-        100% {
-            opacity: 1;
-        }
-    }
-
-    .fade-in {
-        animation-name: kf-fade-in;
-        animation-duration: 1s;
-    }
-</style>
 <div id="quizContainer" class="quiz">
     <button id="takeQuizBtn" class="btn quiz-btn">Hacer examen</button>
     <button id="dldCertBtn" class="btn quiz-btn" style="display: none;">Descargar certificado</button>
