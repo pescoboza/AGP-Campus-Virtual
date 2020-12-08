@@ -77,7 +77,7 @@
 </style>
 <div id="quizContainer" class="quiz">
     <button id="takeQuizBtn" class="btn quiz-btn">Hacer examen</button>
-    <button id="dldCertBtn" class="btn quiz-btn">Descargar certificado</button>
+    <button id="dldCertBtn" class="btn quiz-btn" style="display: none;">Descargar certificado</button>
 </div>
 
 {# 
@@ -103,6 +103,11 @@
 {{super()}}
 <script>
 
+    const USER_EMAIL = "{{current_user.email or 'null'}}";
+    if (USER_EMAIL === null){
+        debugger;
+    }
+    
     const QUIZ = {
         topic: "{{topic}}",
         numQuestions: {{ num_questions }},
@@ -115,26 +120,45 @@
         dldCertBtnId: "dldCertBtn",
         dldCertBtnElem: document.getElementById("dldCertBtn"),
     };
-
-    const USER_EMAIL = "{{current_user.email}}";
-
-    let USER_QUIZ_DATA = null
-    getUserQuizData(USER_EMAIL).then((data)=>USER_QUIZ_DATA = data);
-    while (USER_QUIZ_DATA === null){
-        "string";
-    }
+    QUIZ.showCertBtn = () => {
+        const dldCertBtnElem = document.getElementById(QUIZ.dldCertBtnId);
+        dldCertBtnElem.classList.add(QUIZ.fadeInClass);
+        dldCertBtnElem.style.display ="block";
+        dldCertBtnElem.onclick = () => window.open(QUIZ.dldCertUrl, "_blank");
+    };
+    QUIZ.hideCertBtn = () =>{
+        const dldCertBtnElem = document.getElementById(QUIZ.dldCertBtnId);
+        dldCertBtnElem.classList.remove(QUIZ.fadeInClass);
+        dldCertBtnElem.style.display ="none";
+        dldCertBtnElem.onclick = undefined;
+    };
     
-    debugger;
-    // Hide certificate button and add link to pdf
-    QUIZ.dldCertBtnElem.style.display = "none";
-
     // Add event listener on click to fetch new quiz
     // Only works once
-    QUIZ.btnElem.onclick = () => {
+    document.getElementById(QUIZ.btnId).onclick = () => {
         renderNewQuiz(QUIZ.topic, QUIZ.numQuestions, QUIZ.containerElem, QUIZ.btnElem, QUIZ.fadeInClass, onClickSubmitBtn);
         QUIZ.btnElem.onclick = null;
     }
 
+    // Check that the use has passed quiz before or not
+    getUserQuizData(USER_EMAIL).then((data)=>{
+        const isPassed = data[QUIZ.topic].is_passed || false;
+        debugger;
+
+        const dldCertBtnElem = document.getElementById(QUIZ.dldCertBtnElem);
+
+        if (isPassed){
+            QUIZ.showCertBtn();
+        }
+        else{
+            QUIZ.hideCertBtn();
+        }
+    });
+    
+
+    // Hide certificate button and add link to pdf
+
+  
 
     // Fetches {answers, scroteToPass, htmlForm} from database
     function getNewQuiz(topic, numQuestions) {
