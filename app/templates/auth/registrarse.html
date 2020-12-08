@@ -13,3 +13,15 @@ Registrarse
 </div>
 
 {% endblock %}
+
+{% block scripts %}
+<script>
+    // Add link for terms and conditions to pregenerated form
+    const termsAndConditionsUrl = "{{url_for('main.terms_and_conditions')}}";
+    const replaceTerm = "términos y condiciones.";
+    const htmlAnchor = `<a href="${termsAndConditionsUrl}" target="_blank">${replaceTerm}</a>`;
+    
+    const label = document.querySelector(".checkbox label");
+    label.innerHTML = label.innerHTML.replace(replaceTerm, htmlAnchor);
+</script>
+{% endblock scripts %}
