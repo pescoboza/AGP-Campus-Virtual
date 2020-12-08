@@ -155,8 +155,33 @@
         );
     }
 
+    
+    
+    
+    
+    const onClickSubmitBtn = (answers, scoreToPass, numQuestions, formElem) => {
 
-    function renderNewQuiz(topic, numQuestions, quizContainerElem, btnToHideElem, fadeInClass) {
+        if (isQuizPassed(answers, scoreToPass, numQuestions, formElem)){
+
+            alert("PASS");
+
+        }
+        else{
+            alert("no pass");
+
+                // TODO: Here 
+        }
+    };
+
+    // Add event listener on click to fetch new quiz
+    // Only works once
+    quizBtnElem.onclick = () => {
+        renderNewQuiz("mama", 2, quizContElem, quizBtnElem, fadeInClass, onClickSubmitBtn)
+        quizBtnElem.onclick = null;
+    }
+
+
+    function renderNewQuiz(topic, numQuestions, quizContainerElem, btnToHideElem, fadeInClass, onClickSubmitBtn) {
                 
         const update = ({answers, scoreToPass, htmlForm}) => {
             
@@ -169,37 +194,28 @@
             quizContainerElem.innerHTML += htmlForm;
 
             const quizFormElem = quizContElem.querySelector("form"); // Select new form
-            quizFormElem.onsubmit = () => gradeQuiz(answers, scoreToPass, numQuestions); // Add onsubmit validation
+            quizFormElem.onsubmit = () => false; // Remove page refresh on submit
             quizFormElem.classList.add(fadeInClass); // Add fade in to form
             
+
+            
             // Get the sumbit button
-            const quizSubmitBtnElem = quizFormElem["submit"];
-            // quizSubmitBtnElem.onb
+            const quizSubmitBtnElem = quizFormElem.querySelector("input#submit");
+            quizSubmitBtnElem.onclick = () => onClickSubmitBtn(answers, scoreToPass, numQuestions, quizFormElem);
 
-            //quizSubmitBtnElem.onclick = 
-
-            // quizSubmitBtnElem.onclick = () =>  throw {"TODO WAST";
-            // alert(quizSubmitBtnElem);
-            // TODO: Continue here
 
         };
         getNewQuiz(topic, numQuestions).then(update);
     }
 
-    // Add event listener on click to fetch new quiz
-    // Only works once
-    quizBtnElem.onclick = () => {
-        renderNewQuiz("mama", 10, quizContElem, quizBtnElem, fadeInClass)
-        quizBtnElem.onclick = null;
-    }
+    
 
     // Tells if the user passes score validation
-    function isQuizPassed(correctAnswers, scoreToPass, numQuestions, questionNameStr = "questions-%d-answer") {
-        const form = document.forms["quiz"];
+    function isQuizPassed(correctAnswers, scoreToPass, numQuestions, formElem, questionNameStr = "questions-%d-answer") {
         let score = 0;
-        for (let i = 0; i < numQuizQuestions; ++i) {
+        for (let i = 0; i < numQuestions; ++i) {
             const questionFieldName = questionNameStr.replace("%d", i);
-            const userAnswer = form[questionFieldName].value || null;
+            const userAnswer =  formElem[questionFieldName].value || null;
             if (userAnswer === correctAnswers[i]) {
                 score++;
             }
@@ -207,7 +223,7 @@
         return (score >= scoreToPass);
     }
 
-
+    
 
 
 
