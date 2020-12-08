@@ -1,1 +1,17 @@
-<h1>500</h1>
+{% extends "base.html" %}
+
+{% block title %}
+500 - Error interno
+{% endblock title %}
+
+{% block page_content %}
+<div class="error">
+    <h1>500</h1>
+    <h2>Error interno</h2>
+    <p>
+        Ocurrió un error inesperado.<br>
+        Dar click en el botón para regresar al inicio.
+    </p>
+    <a class="btn" href="{{url_for('main.index')}}">Regesar a Inicio</a>
+</div>
+{% endblock page_content %}

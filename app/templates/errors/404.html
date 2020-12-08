@@ -1,1 +1,18 @@
-<h1>404</h1>
+{% extends "base.html" %}
+
+{% block title %}
+400 - No encontrado
+{% endblock title %}
+
+{% block page_content %}
+<div class="error">
+    <h1>404</h1>
+    <h2>No encontado</h2>
+    <p>
+        Dirección no encontrada.<br>
+        Revise que la URL sea correcta.<br>
+        Dar click en el botón para regresar al inicio.
+    </p>
+    <a class="btn" href="{{url_for('main.index')}}">Regesar a Inicio</a>
+</div>
+{% endblock page_content %}
