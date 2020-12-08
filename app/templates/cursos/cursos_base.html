@@ -118,6 +118,13 @@
 
     const USER_EMAIL = "{{current_user.email}}";
 
+    let USER_QUIZ_DATA = null
+    getUserQuizData(USER_EMAIL).then((data)=>USER_QUIZ_DATA = data);
+    while (USER_QUIZ_DATA === null){
+        "string";
+    }
+    
+    debugger;
     // Hide certificate button and add link to pdf
     QUIZ.dldCertBtnElem.style.display = "none";
 
