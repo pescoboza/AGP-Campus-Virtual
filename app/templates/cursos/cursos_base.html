@@ -1,8 +1,55 @@
 {% extends "base.html" %}
-{% from "cursos/_quiz.html" import quiz %}
 {% from "cursos/_article.html" import article_navbar, section_header %}
 {% from "_button_link.html" import button_link %}
 {# Requires dict section_headers #}
+
+
+{% block head %}
+{{super()}}
+<style>
+    #quizContainer {
+        width: 100%;
+        height: 50vh;
+        border-radius: 20px;
+        padding: 20px;
+        background-color: #FFE1A4;
+    }
+
+    /* .quiz{
+            text-align: center;
+        } */
+
+    .quiz .quiz-btn {
+        position: relative;
+        transform: translate(-50%, -50%);
+        left: 50%;
+    }
+    
+    #takeQuizBtn{
+        top: 33%;
+    }
+    
+    #dldCertBtn{
+        bottom: -50%;
+
+    }
+
+    @keyframes kf-fade-in {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .fade-in {
+        animation-name: kf-fade-in;
+        animation-duration: 1s;
+    }
+</style>
+{% endblock head %}
 
 
 {% block content_navbar %}
@@ -30,15 +77,22 @@
 
 {% block page_content %}
 
-    <!-- Article -->
-    {% block article %}{% endblock article %}
-    
-    
-    <!-- Quiz section header -->
-    {% if form and score != None and max_score != None %}
-        {{section_header("evaluacion", section_headers)}}
-    {% endif %}
-    
+<!-- Article -->
+{% block article %}{% endblock article %}
+
+
+
+
+
+<!-- Quiz section header -->
+{{section_header("evaluacion", section_headers)}}
+<div id="quizContainer" class="quiz">
+    <button id="takeQuizBtn" class="btn quiz-btn">Hacer examen</button>
+    <button id="dldCertBtn" class="btn quiz-btn" style="display: none;">Descargar certificado</button>
+</div>
+
+{# 
+    <!-- Commented out old quizzes -->
     <!-- Download certificate -->
     {% if already_passed == True and certificate_endpoint %}
         {{
@@ -52,25 +106,195 @@
 
     <!-- Quiz -->
     {{quiz(form, score, max_score)}}
+
+#}
 {% endblock page_content %}
 
-{#
 {% block scripts %}
 {{super()}}
 <script>
-    const page_content = document.getElementById("page-content");
-    let sidebar = document.getElementById("sidebar");
+    const QUIZ = {
+        userEmail: "{{current_user.email or 'null'}}",
+        topic: "{{topic}}",
+        numQuestions: {{ num_questions }},
+        correctAnswers: [],
+        dldCertUrl: "{{url_for('api.redirect_certificate') + '?topic=' + topic}}",
+        fadeInClass: "fade-in",
+        containerId: "quizContainer",
+        btnId: "takeQuizBtn",
+        dldCertBtnId: "dldCertBtn",
+        submitBtnId: "submit",
+        alreadyPassed: false,
+    };
 
-    window.onscroll = () => {
-        const scrollHeightToSticky = window.pageYOffset + page_content.getBoundingClientRect().top
-
-        if (window.pageYOffset >= scrollHeightToSticky) {
-            sidebar.classList.add("sidebar-sticky");
+    QUIZ.getContainer = () => document.getElementById(QUIZ.containerId);
+    QUIZ.getForm = () => QUIZ.getContainer().querySelector("form");
+    QUIZ.getAnswerData = () => {
+        const questionNameStr = "questions-%d-answer";
+        const form = QUIZ.getForm();
+        const answers = [];
+        for (let i = 0; i < QUIZ.numQuestions; ++i) {
+            const questionFieldName = questionNameStr.replace("%d", i);
+            answers.push(form[questionFieldName].value || null);
         }
-        else {
-            sidebar.classList.remove("sidebar-sticky");
+        return answers;
+    };
+    QUIZ.calcScore = () => {
+        const answers = QUIZ.getAnswerData();
+        let score = 0;
+        QUIZ.correctAnswers.forEach((cans, i) => {
+            if (cans === answers[i]) {
+                score++;
+            }
+        });
+        return score;
+    }
+    QUIZ.getBtn = () => document.getElementById(QUIZ.btnId);
+    QUIZ.getCertBtn = () => document.getElementById(QUIZ.dldCertBtnId);
+    QUIZ.getSubmitBtn = () => document.getElementById(QUIZ.submitBtnId);
+    QUIZ.btnOnClick = () => {
+        QUIZ.renderNewQuiz();
+        QUIZ.hideCertBtn();
+        QUIZ.getBtn().onclick = undefined;
+    };
+    QUIZ.showBtn = () => {
+        const btnElem = QUIZ.getBtn();
+        btnElem.onclick = QUIZ.btnOnClick;
+        btnElem.classList.add(QUIZ.fadeInClass);
+        btnElem.style.display = "block";
+    };
+    QUIZ.showBtn();
+    QUIZ.hideBtn = () => {
+        const btnElem = QUIZ.getBtn();
+        btnElem.classList.remove(QUIZ.fadeInClass);
+        btnElem.style.display = "none";
+        btnElem.onclick = undefined;
+    };
+    QUIZ.showCertBtn = () => {
+        const dldCertBtnElem = QUIZ.getCertBtn();
+        dldCertBtnElem.classList.add(QUIZ.fadeInClass);
+        dldCertBtnElem.style.display = "block";
+        dldCertBtnElem.onclick = () => window.open(QUIZ.dldCertUrl, "_blank");
+    };
+    QUIZ.hideCertBtn = () => {
+        const dldCertBtnElem = QUIZ.getCertBtn();
+        dldCertBtnElem.classList.remove(QUIZ.fadeInClass);
+        dldCertBtnElem.style.display = "none";
+        dldCertBtnElem.onclick = undefined;
+    };
+    QUIZ.submitBtnOnClick = () => {
+        const score = QUIZ.calcScore();
+        QUIZ.getForm().remove();
+        QUIZ.showBtn();
+        if (score >= QUIZ.numQuestions){
+            
+            QUIZ.showCertBtn();
+            alert("PASS"); // TODO: remove this alert
+            passUserQuiz(QUIZ.userEmail, QUIZ.topic);
+        }
+        else{
+            if (QUIZ.alreadyPassed === true){
+                QUIZ.showCertBtn();
+            }
+            alert("no pass"); // TODO: remove this alert
         }
     };
+    QUIZ.renderNewQuiz = () => {
+        const update = ({ answers, scoreToPass, htmlForm }) => {
+            QUIZ.correctAnswers = answers;
+            console.log(answers); // TODO: remove this
+
+            // Make button disappear
+            QUIZ.hideBtn();
+
+            // Add quiz questions
+            const quizContainerElem = QUIZ.getContainer();
+            QUIZ.getContainer().innerHTML += htmlForm;
+
+            const formElem = QUIZ.getForm();
+            formElem.onsubmit = () => false; // Remove page refresh on submit
+            formElem.classList.add(QUIZ.fadeInClass); // Add fade in to form
+            QUIZ.getSubmitBtn().onclick = QUIZ.submitBtnOnClick;
+
+
+        };
+        getNewQuiz(QUIZ.topic, QUIZ.numQuestions).then(update);
+    };
+    
+    // Check that the use has passed quiz before or not
+    getUserQuizData(QUIZ.userEmail).then((data) => {
+        const isPassed = data[QUIZ.topic].is_passed || false;
+
+        if (isPassed) {
+            QUIZ.alreadyPassed = true;
+            QUIZ.showCertBtn();
+        }
+        else {
+            QUIZ.hideCertBtn();
+        }
+    });
+
+    function onClickSubmitBtn(answers, scoreToPass, numQuestions) {
+        const score = calcQuizScore(answers, numQuestions, formElem);
+
+        // TODO: remove debud if
+        if (score >= scoreToPass) {
+            QUIZ.getForm().remove(); // Remove form
+            //alert(`PASS ${score}/${scoreToPass}`); // TODO: Remove alert
+
+
+            // Make the user pass the quiz and show the button
+            passUserQuiz(USER_EMAIL, QUIZ.topic).then(
+                (res) => {
+                    debugger;
+                    QUIZ.showCertBtn();
+                }
+            );
+
+        }
+        else {
+            alert(`no pass ${score}/${scoreToPass}`); // TODO: Remove alert
+
+        }
+    }
+
+    // Fetches {answers, scroteToPass, htmlForm} from database
+    function getNewQuiz(topic, numQuestions) {
+        const endpoint = "{{url_for('api.get_quiz_html')}}" + "?topic=" + topic + "&num_questions=" + numQuestions;
+        return new Promise((resolve, reject) =>
+            $.ajax({
+                url: endpoint,
+                type: "POST",
+                success: (res) => resolve(res),
+                error: (err) => reject(err),
+            })
+        );
+    }
+
+    function getUserQuizData(userEmail) {
+        const endpoint = "{{url_for('api.get_user_quiz_data')}}" + "?email=" + userEmail;
+        return new Promise((resolve, reject) =>
+            $.ajax({
+                url: endpoint,
+                type: "GET",
+                success: (res) => resolve(res),
+                error: (err) => reject(err),
+            })
+        );
+    }
+
+
+    function passUserQuiz(userEmail, quizTopic) {
+        const endpoint = "{{url_for('api.user_pass_quiz')}}" + "?topic=" + quizTopic + "&email=" + userEmail;
+        return new Promise((resolve, reject) =>
+            $.ajax({
+                url: endpoint,
+                type: "POST",
+                success: (resp) => resolve(resp),
+                error: (err) => reject(err),
+            })
+        );
+    }
+
 </script>
 {% endblock scripts %}
-#}

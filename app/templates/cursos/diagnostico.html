@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "cursos/_quiz.html" import quiz %}
+{#{% from "cursos/_quiz.html" import quiz %}#}
 
 {% block title %}
 Inicio
@@ -202,8 +202,11 @@ Inicio
 
 <h2>Examen Autodiagnóstico</h2><br>
 
+{#
+<!-- TODO: Figure out this part -->
 {% if form and score != None and max_score != None %}
 {{quiz(form, score, max_score)}}
 {% endif %}
+#}
 
 {% endblock %}

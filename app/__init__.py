@@ -74,6 +74,7 @@ def create_app(config):
     bootstrap.init_app(app)
     pdfkit_config.wkhtmltopdf = app.config["PDFKIT_WKHTMLTOPDF_PATH"]
 
+    ################
     # Register all blueprints
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
@@ -83,7 +84,11 @@ def create_app(config):
 
     from .cursos import cursos as cursos_blueprint
     app.register_blueprint(cursos_blueprint, url_prefix="/cursos")
-    ####
+
+    from .api import api as api_blueprint
+    app.register_blueprint(api_blueprint, url_prefix="/api")
+    ################
+
 
     # Start the app scheduler
     scheduler.init_app(app)

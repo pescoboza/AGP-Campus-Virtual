@@ -211,7 +211,7 @@ class MultipleChoiceQuestion(me.Document):
 
     # A question from the bank can appear on different test types. That's why a list is used.
     topic = me.ListField(me.StringField(
-        max_length=4, choices=QUESTION_TOPICS), required=True)
+        max_length=len(QUESTION_TOPICS), choices=QUESTION_TOPICS), required=True)
     text = me.StringField(required=True)
     choices = me.ListField(me.StringField(), required=True, max_length=26)
     answer = me.IntField(required=True)
@@ -277,7 +277,7 @@ def upload_questions_from_JSON(filename, log=sys.stdout):
 
     except Exception as e:
         print("[ERROR] {}".format(e))
-
+        raise e
     else:
         print("[QUESTION UPLOADER] Succesfully uploaded questions to database from file {}.".format(
             filename), file=log)

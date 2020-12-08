@@ -1,6 +1,7 @@
 import os
 import io
 import time
+import json
 from threading import Thread
 import datetime
 from .. import pdfkit_config
@@ -223,9 +224,8 @@ def update_questions():
                 # worker.start()
                 upload_questions_from_JSON(save_filename)
             
-            except Exception as e:
-                print("[ERROR] {}".format(e))
-                flash("Ocurrió un error inesperado.")
+            except json.decoder.JSONDecodeError as e:
+                flash("Error de sintaxis: {}".format(e))
 
             else:
                 flash("El banco de preguntas ha sido actualizado.")    
@@ -240,10 +240,3 @@ def update_questions():
     
     code_body = render_template("formato_preguntas.jsonc")
     return render_template("main/update_questions.html", code_body=code_body)
-    
-
-
-@main.route("/flashed-messages", methods=["POST"])
-def flashed_messages():
-    # TODO: remove this test
-    return render_template("_flash.html")
