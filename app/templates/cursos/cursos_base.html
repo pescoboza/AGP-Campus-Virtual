@@ -77,7 +77,7 @@
 </style>
 <div id="quizContainer" class="quiz">
     <button id="takeQuizBtn" class="btn quiz-btn">Hacer examen</button>
-    <button id="downloadCertBtn" class="btn quiz-btn">Descargar certificado</button>
+    <button id="dldCertBtn" class="btn quiz-btn">Descargar certificado</button>
 </div>
 
 {# 
@@ -102,20 +102,26 @@
 {% block scripts %}
 {{super()}}
 <script>
-    const quizTopic = "{{topic}}";
-    const numQuizQuestions = {{ num_questions }};
-    const downloadCertificateLink = "{{url_for('api.redirect_certificate') + '?topic=' + topic}}";
-    const quizContainerId = "quizContainer";
-    const quizBtnId = "takeQuizBtn";
-    const downloadCertBtnId = "downloadCertBtn";
-    const fadeInClass = "fade-in";
-    const userEmail = "{{current_user.email}}";
 
+    const QUIZ = {
+        topic: "{{topic}}",
+        numQuestions: {{ num_questions }},
+        downloadCertificateLink: "{{url_for('api.redirect_certificate') + '?topic=' + topic}}",
+        fadeInClass: "fade-in",
+        containerElem: document.getElementById("quizContainer"),
+        btnElem: document.getElementById("takeQuizBtn"),
+        dldCertBtnElem: document.getElementById("dldCertBtn"),
+    };
 
+    const USER_EMAIL = "{{current_user.email}}";
 
-    const quizContElem = document.getElementById(quizContainerId);
-    const quizBtnElem = document.getElementById(quizBtnId);
-    const downloadCertBtnElem = document.getElementById(downloadCertBtnId);
+    // Add event listener on click to fetch new quiz
+    // Only works once
+    QUIZ.btnElem.onclick = () => {
+        renderNewQuiz(QUIZ.topic, QUIZ.numQuestions, QUIZ.containerElem, QUIZ.btnElem, QUIZ.fadeInClass, onClickSubmitBtn);
+        QUIZ.btnElem.onclick = null;
+    }
+
 
     // Fetches {answers, scroteToPass, htmlForm} from database
     function getNewQuiz(topic, numQuestions) {
@@ -159,11 +165,13 @@
     
     
     
-    const onClickSubmitBtn = (answers, scoreToPass, numQuestions, formElem) => {
+    function onClickSubmitBtn(answers, scoreToPass, numQuestions, formElem){
 
         if (isQuizPassed(answers, scoreToPass, numQuestions, formElem)){
 
             alert("PASS");
+
+
 
         }
         else{
@@ -171,16 +179,9 @@
 
                 // TODO: Here 
         }
-    };
-
-    // Add event listener on click to fetch new quiz
-    // Only works once
-    quizBtnElem.onclick = () => {
-        renderNewQuiz("mama", 2, quizContElem, quizBtnElem, fadeInClass, onClickSubmitBtn)
-        quizBtnElem.onclick = null;
     }
 
-
+    
     function renderNewQuiz(topic, numQuestions, quizContainerElem, btnToHideElem, fadeInClass, onClickSubmitBtn) {
                 
         const update = ({answers, scoreToPass, htmlForm}) => {
@@ -193,7 +194,7 @@
             // Add quiz questions
             quizContainerElem.innerHTML += htmlForm;
 
-            const quizFormElem = quizContElem.querySelector("form"); // Select new form
+            const quizFormElem = quizContainerElem.querySelector("form"); // Select new form
             quizFormElem.onsubmit = () => false; // Remove page refresh on submit
             quizFormElem.classList.add(fadeInClass); // Add fade in to form
             
@@ -234,23 +235,23 @@
 
 
 
-    function updateUserQuizState() {
-        // If use has passed quiz, display certificate button
-        fetchUserQuizData(userEmail).then((userQuizData) => {
-            console.log(userQuizData);
-            if (userQuizData[quizTopic].is_passed === false) {
-                downloadCertBtnElem.style.display = "none"; // Hide the certificate button
-                return;
-            }
+    // function updateUserQuizState() {
+    //     // If use has passed quiz, display certificate button
+    //     fetchUserQuizData(userEmail).then((userQuizData) => {
+    //         console.log(userQuizData);
+    //         if (userQuizData[quizTopic].is_passed === false) {
+    //             dldCertBtnElem.style.display = "none"; // Hide the certificate button
+    //             return;
+    //         }
 
-            // Add url to certificate button and show it
-            downloadCertBtnElem.onclick = () => window.open(downloadCertificateLink, "_blank");
-            downloadCertBtnElem.setAttribute("target", "_blank");
-            downloadCertBtnElem.style.display = "block";
-        });
-    }
+    //         // Add url to certificate button and show it
+    //         dldCertBtnElem.onclick = () => window.open(downloadCertificateLink, "_blank");
+    //         dldCertBtnElem.setAttribute("target", "_blank");
+    //         dldCertBtnElem.style.display = "block";
+    //     });
+    // }
 
-    updateUserQuizState();
+    // updateUserQuizState();
 
 </script>
 {% endblock scripts %}
