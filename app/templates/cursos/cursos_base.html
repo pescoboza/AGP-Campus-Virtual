@@ -75,14 +75,14 @@
 <nav id="article-navbar" class="navbar navbar-custom" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#articleCollapse.navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <div class="collapse navbar-collapse">
+        <div id="articleCollapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-center">
                 {# <!-- Article sections --> #}
                 {{article_navbar(section_headers)}}

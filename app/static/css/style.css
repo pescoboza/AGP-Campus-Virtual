@@ -197,6 +197,7 @@ a.btn {
 
 
 #topBar a.btn {
+    min-width: 100px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -205,13 +206,13 @@ a.btn {
 
 #profile,
 #register{
-    right: 60px;
+    right: 13vw;
 }
 
 #login,
 #logout
  {
-    right: 180px;
+    right: calc(13vw + 130px);
 }
 
 
