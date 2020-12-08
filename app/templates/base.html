@@ -23,7 +23,7 @@ AGP Campus Virtual
     </a>
     {# <!-- User auth links --> #}
     {% if current_user and not current_user.is_anonymous %}
-    <a id="profile" class="btn" href={{url_for("auth.perfil")}}>Pefil</a>
+    <a id="profile" class="btn" href={{url_for("auth.perfil")}}>Perfil</a>
     <a id="logout"class="btn" href={{url_for("auth.logout")}}>Cerrar Sesión</a>
     {% else %}
     <a id="login" class="btn" href={{url_for("auth.login")}}>Iniciar Sesión</a>
