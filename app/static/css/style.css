@@ -413,9 +413,7 @@ img#navbarLogo {
 #quizForm ul.pagination{
     margin: 0;
     position: absolute;
-    /* left: 50%; */
     bottom: 10px;
-    /* transform: translateX(-50%); */
 }
 
 #quizForm ul.pagination li{
@@ -444,8 +442,76 @@ img#navbarLogo {
 
 #quizForm ul.pagination li a:hover{
     background-color: var(--active);
-    
 }
+
+#quizContainer {
+    width: 100%;
+    height: 60vh;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: var(--tertiary);
+}
+
+.quiz .quiz-btn {
+    position: relative;
+    transform: translate(-50%, -50%);
+    left: 50%;
+}
+
+#takeQuizBtn {
+    top: 33%;
+}
+
+#dldCertBtn {
+    bottom: -50%;
+
+}
+
+@keyframes kf-fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation-name: kf-fade-in;
+    animation-duration: 1s;
+}
+
+@media only screen and (max-width: 786px) {
+    #quizForm .item p{
+        font-size: 1em;
+    }
+    
+    #quizForm .item ul li label{
+        font-size: 0.8em;
+    }
+    
+
+    #quizContainer {
+        height: 75vh;
+    }
+    #quizForm ul.pagination{
+        left: 50%;
+        margin: 0;
+        padding:0;
+        transform: translateX(-50%);
+        bottom: 60px;
+    }
+
+    #quizForm #submit.btn{
+        left: 50%;
+        transform: translateX(-50%);
+        right: 20px;
+        bottom: 10px;
+    }
+
+}
+
 
 /* Profile page*/
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
