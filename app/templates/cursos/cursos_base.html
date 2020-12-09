@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% from "cursos/_article.html" import article_navbar, section_header %}
 {% from "_button_link.html" import button_link %}
-{# Requires dict section_headers #}
-
 
 {% block head %}
 {{super()}}
@@ -101,7 +99,7 @@
 <!-- Quiz -->
 {{section_header("evaluacion", section_headers)}}
 <div id="quizContainer" class="quiz">
-    <button id="takeQuizBtn" class="btn quiz-btn">Hacer examen</button>
+    <button id="takeQuizBtn" class="btn quiz-btn" style="display: none;">Hacer examen</button>
     {% if topic and topic != "diag" %}
     <button id="dldCertBtn" class="btn quiz-btn" style="display: none;">Descargar certificado</button>
     {% endif %}
@@ -126,6 +124,8 @@
 
     const QUIZ = {
         userEmail: {% if current_user.email %}"{{current_user.email}}"{% else %} {{ "null" }} {% endif %},
+        certifiableTopics: ["tstc", "psta", "plmn", "mama", "crvu"],
+        isCertifiable: false,
         topic: "{{topic}}",
         numQuestions: {{ num_questions }},
         correctAnswers: [],
@@ -138,7 +138,7 @@
         alreadyPassed: false,
         modal: MODAL,
     };
-
+    QUIZ.isCertifiable = QUIZ.topic in QUIZ.certifiableTopics;
     QUIZ.getContainer = () => document.getElementById(QUIZ.containerId);
     QUIZ.getForm = () => QUIZ.getContainer().querySelector("form");
     QUIZ.getAnswerData = () => {
@@ -165,9 +165,8 @@
     QUIZ.getCertBtn = () => document.getElementById(QUIZ.dldCertBtnId);
     QUIZ.getSubmitBtn = () => document.getElementById(QUIZ.submitBtnId);
     QUIZ.btnOnClick = () => {
-        QUIZ.renderNewQuiz();
-        QUIZ.hideCertBtn();
         QUIZ.getBtn().onclick = undefined;
+        QUIZ.renderNewQuiz();
     };
     QUIZ.showBtn = () => {
         const btnElem = QUIZ.getBtn();
@@ -175,7 +174,6 @@
         btnElem.classList.add(QUIZ.fadeInClass);
         btnElem.style.display = "block";
     };
-    QUIZ.showBtn();
     QUIZ.hideBtn = () => {
         const btnElem = QUIZ.getBtn();
         btnElem.classList.remove(QUIZ.fadeInClass);
@@ -227,7 +225,7 @@
                 "Resultado de evaluación",
                 "Felicidades, has pasado la evaluación. Descarga tu certificado en el botón."
             );
-            QUIZ.moda.activate();
+            QUIZ.modal.activate();
         }
         else {
             if (QUIZ.alreadyPassed === true) {
@@ -237,7 +235,7 @@
                 "Resultado de evaluación",
                 "Inténtalo de nuevo, estuviste muy cerca."
             )
-            QUIZ.moda.activate();
+            QUIZ.modal.activate();
         }
         {% endif %}
     };
@@ -248,7 +246,9 @@
 
             // Make button disappear
             QUIZ.hideBtn();
-
+            if (QUIZ.isCertifiable){
+                QUIZ.hideCertBtn();
+            }
             // Add quiz questions
             const quizContainerElem = QUIZ.getContainer();
             QUIZ.getContainer().innerHTML += htmlForm;
@@ -256,7 +256,9 @@
             const formElem = QUIZ.getForm();
             formElem.onsubmit = () => false; // Remove page refresh on submit
             formElem.classList.add(QUIZ.fadeInClass); // Add fade in to form
-            QUIZ.getSubmitBtn().onclick = QUIZ.submitBtnOnClick;
+            const submitBtnElem = QUIZ.getSubmitBtn()
+            submitBtnElem.classList.add("btn");
+            submitBtnElem.onclick = QUIZ.submitBtnOnClick;
 
 
         };
@@ -267,12 +269,17 @@
     getUserQuizData(QUIZ.userEmail).then((data) => {
         const isPassed = data[QUIZ.topic].is_passed || false;
 
+        QUIZ.showBtn();
         if (isPassed) {
             QUIZ.alreadyPassed = true;
-            QUIZ.showCertBtn();
+            if (QUIZ.isCertifiable){
+                QUIZ.showCertBtn();
+            }
         }
         else {
-            QUIZ.hideCertBtn();
+            if (QUIZ.isCertifiable){
+                QUIZ.hideCertBtn();
+            }
         }
     });
 

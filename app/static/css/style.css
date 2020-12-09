@@ -28,11 +28,6 @@
 }
 
 
-/* ul {
-    font-weight: bold;
-    font-style: italic;
-} */
-
 /* Beautified anchors */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
@@ -397,6 +392,50 @@ img#navbarLogo {
 }
 
 /* .card .card-body .btn {} */
+
+/* Quiz form style */
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+#quizForm .item p{
+    font-size: 1.5em;
+}
+
+#quizForm .item ul{
+    list-style: none;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+
+}
+
+#quizForm .item ul li{
+    position: relative;
+    margin-bottom: 5px;
+}
+
+#quizForm .item ul li input[type="radio"]{
+    margin-top: 0.5ex;
+    position: absolute;
+    left: 5px;
+}
+
+#quizForm .item ul li label{
+    display:inline-block;
+    white-space: pre-wrap;
+    margin-left: 26px;
+    font-weight: normal;
+    font-size: 1em;
+
+}
+
+/* Profile page*/
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+#adminOptions {
+    text-align: center;
+}
+#adminOptions a.btn{
+    display: inline-block;
+    margin: 6px 6px 6px 6px;
+    width: 70%;
+}
 
 
 /*Footer style*/

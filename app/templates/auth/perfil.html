@@ -4,7 +4,7 @@
 
 {% block title %}
 Perfil
-{% endblock %}
+{% endblock title %}
 
 
 {% block page_content %}
@@ -42,12 +42,12 @@ Perfil
 
 
 {% if is_admin == True %}
-<div class="col-md-6">
+<div id="adminOptions" class="col-md-6">
     <hr>
     <h1>Opciones de Administrador</h1>
-    {{button_link( btn_text="Tablero de datos",               href=url_for("main.data_dashboard")   )}}
-    {{button_link( btn_text="Descargar reporte de usuarios",  href=url_for("main.download_report")  )}}
-    {{button_link( btn_text="Actualizar preguntas",           href=url_for("main.update_questions") )}}
+    <a href="{{url_for('main.data_dashboard')}}" class="btn">Tablero de datos</a><br>
+    <a href="{{url_for('main.download_report')}}" class="btn">Reporte de usuarios</a><br>
+    <a href="{{url_for('main.update_questions')}}" class="btn">Actualizar preguntas</a><br>
 </div>
 
 {% endif %}
