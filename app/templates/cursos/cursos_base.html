@@ -165,9 +165,8 @@
     QUIZ.getCertBtn = () => document.getElementById(QUIZ.dldCertBtnId);
     QUIZ.getSubmitBtn = () => document.getElementById(QUIZ.submitBtnId);
     QUIZ.btnOnClick = () => {
-        QUIZ.renderNewQuiz();
-        QUIZ.hideCertBtn();
         QUIZ.getBtn().onclick = undefined;
+        QUIZ.renderNewQuiz();
     };
     QUIZ.showBtn = () => {
         const btnElem = QUIZ.getBtn();
@@ -248,6 +247,7 @@
 
             // Make button disappear
             QUIZ.hideBtn();
+            QUIZ.hideCertBtn();
 
             // Add quiz questions
             const quizContainerElem = QUIZ.getContainer();
