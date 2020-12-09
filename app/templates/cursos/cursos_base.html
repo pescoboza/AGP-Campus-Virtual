@@ -91,7 +91,8 @@
         alreadyPassed: false,
         modal: MODAL,
     };
-    QUIZ.isCertifiable = QUIZ.topic in QUIZ.certifiableTopics;
+    QUIZ.isAnonymous = !QUIZ.userEmail;
+    QUIZ.isCertifiable = (!QUIZ.isAnonymous && QUIZ.topic in QUIZ.certifiableTopics );
     QUIZ.getContainer = () => document.getElementById(QUIZ.containerId);
     QUIZ.getForm = () => QUIZ.getContainer().querySelector("form");
     QUIZ.getAnswerData = () => {
@@ -218,33 +219,33 @@
         getNewQuiz(QUIZ.topic, QUIZ.numQuestions).then(update);
     };
 
+    if (!QUIZ.isAnonymous){
+        // Check that the use has passed quiz before or not
+        getUserQuizData(QUIZ.userEmail)
+        // Valid user email: link quiz to user
+        .then((data) => {
+            const isPassed = data[QUIZ.topic].is_passed || false;
 
-
-
-    // Check that the use has passed quiz before or not
-    getUserQuizData(QUIZ.userEmail)
-    // Valid user email: link quiz to user
-    .then((data) => {
-        const isPassed = data[QUIZ.topic].is_passed || false;
-
-        QUIZ.showBtn();
-        if (isPassed) {
-            QUIZ.alreadyPassed = true;
-            if (QUIZ.isCertifiable){
-                QUIZ.showCertBtn();
+            QUIZ.showBtn();
+            if (isPassed) {
+                QUIZ.alreadyPassed = true;
+                if (QUIZ.isCertifiable){
+                    QUIZ.showCertBtn();
+                }
             }
-        }
-        else {
-            if (QUIZ.isCertifiable){
-                QUIZ.hideCertBtn();
+            else {
+                if (QUIZ.isCertifiable){
+                    QUIZ.hideCertBtn();
+                }
             }
-        }
-    })
-    // Invalid user email, anonymous quiz
-    .catch((error)=>{
+        })
+
+    }
+    else{
+        // No user email, anonymous quiz
         QUIZ.showBtn();
         QUIZ.alreadyPassed = false;
-    });
+    }
 
     function onClickSubmitBtn(answers, scoreToPass, numQuestions) {
         const score = calcQuizScore(answers, numQuestions, formElem);
