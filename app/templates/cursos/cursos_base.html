@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% from "cursos/_article.html" import article_navbar, section_header %}
 {% from "_button_link.html" import button_link %}
-{# Requires dict section_headers #}
-
 
 {% block head %}
 {{super()}}
@@ -126,6 +124,8 @@
 
     const QUIZ = {
         userEmail: {% if current_user.email %}"{{current_user.email}}"{% else %} {{ "null" }} {% endif %},
+        certifiableTopics: ["tstc", "psta", "plmn", "mama", "crvu"],
+        isCertifiable: false,
         topic: "{{topic}}",
         numQuestions: {{ num_questions }},
         correctAnswers: [],
@@ -138,7 +138,7 @@
         alreadyPassed: false,
         modal: MODAL,
     };
-
+    QUIZ.isCertifiable = QUIZ.topic in QUIZ.certifiableTopics;
     QUIZ.getContainer = () => document.getElementById(QUIZ.containerId);
     QUIZ.getForm = () => QUIZ.getContainer().querySelector("form");
     QUIZ.getAnswerData = () => {
@@ -266,15 +266,20 @@
 
     // Check that the use has passed quiz before or not
     getUserQuizData(QUIZ.userEmail).then((data) => {
+        debugger;
         const isPassed = data[QUIZ.topic].is_passed || false;
 
         QUIZ.showBtn();
         if (isPassed) {
             QUIZ.alreadyPassed = true;
-            QUIZ.showCertBtn();
+            if (QUIZ.isCertifiable){
+                QUIZ.showCertBtn();
+            }
         }
         else {
-            QUIZ.hideCertBtn();
+            if (QUIZ.isCertifiable){
+                QUIZ.hideCertBtn();
+            }
         }
     });
 
