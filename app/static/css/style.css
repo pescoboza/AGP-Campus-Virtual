@@ -41,7 +41,7 @@ html {
     display: block;
     height: 80px;
     margin: -80px 0 0;
-} 
+}
 
 /* Media queries for mobile devices */
 @media only screen and (max-width: 786px) {
@@ -50,14 +50,9 @@ html {
         display: block;
         height: 300px;
         margin: -300px 0 0;
-    } 
+    }
 }
 
-/* Forms */
-/*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-p.help-block{
-    color: blue !important; /* TODO: style help block from password*/
-}
 
 /* Article images */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -201,13 +196,12 @@ a.btn {
 
 
 #profile,
-#register{
+#register {
     right: 13vw;
 }
 
 #login,
-#logout
- {
+#logout {
     right: calc(13vw + 130px);
 }
 
@@ -221,14 +215,15 @@ img#navbarLogo {
 @media only screen and (max-width: 768px) {
     #topBar a.btn {
         left: 0;
-        transform: translate(0,0);
+        transform: translate(0, 0);
         bottom: 0;
         margin-bottom: -1px;
         position: relative;
         width: 100%;
         border-radius: 0;
     }
-    img#navbarLogo{
+
+    img#navbarLogo {
         margin-bottom: 20px;
         margin-left: 0;
     }
@@ -274,18 +269,18 @@ img#navbarLogo {
     text-align: center;
 }
 
-.error h1{
+.error h1 {
     font-size: 10em;
     margin-bottom: 20px;
 }
 
-.error h2{
+.error h2 {
     font-weight: normal;
     font-size: 4em;
     margin-bottom: 60px;
 }
 
-.error p{
+.error p {
     font-size: 1.2em;
     margin-bottom: 20px;
 }
@@ -377,42 +372,42 @@ img#navbarLogo {
 
 /* Quiz form */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-#quizContainer{
+#quizContainer {
     position: relative;
 }
 
 #quizForm,
-#quizForm>#carousel-quiz{
+#quizForm>#carousel-quiz {
     position: relative;
     width: 100%;
     height: 100%;
 }
 
-#quizForm .item p{
+#quizForm .item p {
     font-size: 1.5em;
     margin-bottom: 1em;
 }
 
-#quizForm .item ul{
+#quizForm .item ul {
     list-style: none;
     padding-inline-start: 1em;
     padding-inline-end: 0;
 
 }
 
-#quizForm .item ul li{
+#quizForm .item ul li {
     position: relative;
     margin-bottom: 0.4em;
 }
 
-#quizForm .item ul li input[type="radio"]{
+#quizForm .item ul li input[type="radio"] {
     margin-top: 0.5ex;
     position: absolute;
     left: 5px;
 }
 
-#quizForm .item ul li label{
-    display:inline-block;
+#quizForm .item ul li label {
+    display: inline-block;
     white-space: pre-wrap;
     margin-left: 26px;
     font-weight: normal;
@@ -420,30 +415,31 @@ img#navbarLogo {
 }
 
 
-#quizForm #submit.btn{
+#quizForm #submit.btn {
     position: absolute;
     right: 0;
     bottom: 0;
 }
 
 
-#quizContainer form#quizForm>#carousel-quiz .carousel-inner{
+#quizContainer form#quizForm>#carousel-quiz .carousel-inner {
     height: 100%;
 }
 
-#quizForm ul.pagination{
+#quizForm ul.pagination {
     position: absolute;
     width: 50%;
     margin: 0;
     bottom: 0;
 }
 
-#quizForm ul.pagination li{
+#quizForm ul.pagination li {
     text-align: center;
     vertical-align: middle;
 }
 
-#quizForm .pagination>li>a, .pagination>li>span {
+#quizForm .pagination>li>a,
+.pagination>li>span {
     padding: 12px 12px 12px 12px;
     margin-right: 2px;
     border: none;
@@ -455,14 +451,14 @@ img#navbarLogo {
     background-color: var(--primary);
 }
 
-#quizForm ul.pagination li a{
+#quizForm ul.pagination li a {
     font-weight: bold;
     text-transform: uppercase;
     color: var(--text-color);
     background-color: var(--primary);
 }
 
-#quizForm ul.pagination li a:hover{
+#quizForm ul.pagination li a:hover {
     background-color: var(--active);
 }
 
@@ -505,26 +501,27 @@ img#navbarLogo {
 }
 
 @media only screen and (max-width: 786px) {
-    #quizForm .item p{
+    #quizForm .item p {
         font-size: 1em;
     }
-    
-    #quizForm .item ul li label{
+
+    #quizForm .item ul li label {
         font-size: 0.8em;
     }
-    
+
 
     #quizContainer {
         height: 75vh;
     }
-    #quizForm ul.pagination{
+
+    #quizForm ul.pagination {
         left: 50%;
         transform: translateX(-50%);
         width: 100%;
     }
 
     /* Make number buttions disappear on mobile */
-    #quizForm>#carousel-quiz ul.pagination li[data-target="#carousel-quiz"]{
+    #quizForm>#carousel-quiz ul.pagination li[data-target="#carousel-quiz"] {
         display: none;
     }
 
@@ -537,7 +534,8 @@ img#navbarLogo {
 #adminOptions {
     text-align: center;
 }
-#adminOptions a.btn{
+
+#adminOptions a.btn {
     display: inline-block;
     margin: 6px 6px 6px 6px;
     width: 70%;

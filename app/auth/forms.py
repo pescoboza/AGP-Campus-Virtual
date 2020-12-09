@@ -22,11 +22,7 @@ def validate_password(field):
     """
 
     password_validation_message = \
-"""La contraseña debe: 
-  - Medir entre 8 y 64 caracteres
-  - Contener al menos un número
-  - Contener al menos una letra mayúscula.
-  - Contener al menos un caracter especial: !#$%&()*+-/:;<=>?@[\]^{|}~"""
+        "La contraseña debe contener más de 8 caracteres, una letra mayúscula, un número, y un caracter especial: !#$%&()*+-/:;<=>?@[\]^{|}~"
     password = field.data
 
     if len(password) < 8 or \
