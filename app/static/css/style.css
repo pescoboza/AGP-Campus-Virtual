@@ -11,6 +11,7 @@
 
 :root {
     --primary: #67C5D2;
+    --active: #74dfed;
     --secondary: #FC8476;
     --tertiary: #FFE1A4;
     --detail-font: #FC8476;
@@ -93,27 +94,19 @@ a.btn {
 .btn:hover,
 .btn:active,
 .btn:active:focus {
-
-    border: none;
-    /* border-radius: 0; */
     padding: 12px 12px 12px 12px;
-
+    border: none;
+    border-radius: 4px;
     font-size: 14px;
     text-transform: uppercase;
     font-weight: bold;
     color: var(--text-color);
     background-color: var(--primary);
-
-
 }
 
 .btn:hover,
 .btn:active {
-    /* background-color: var(--secondary); */
-    /* background-color: #ECB5A3; */
-    background-color: #74dfed;
-    /* background-color: #EEE; */
-    /* filter: brightness(1.1); */
+    background-color: var(--active);
 }
 
 .btn:active:focus {
@@ -134,11 +127,7 @@ a.btn {
 }
 
 .list-group-item.list-group-item-action.active:hover {
-    background-color: #74dfed;
-}
-
-.my-btn {
-    margin: 8px 8px 5px 5px;
+    background-color: var(--active);
 }
 
 
@@ -163,14 +152,12 @@ a.btn {
     display: flex;
     margin-left: auto;
     margin-right: auto;
-    /*width: 50%;*/
 }
 
 
 
 .img-banner {
     width: 100%;
-    /* margin-bottom: 20px; */
 }
 
 
@@ -287,7 +274,6 @@ img#navbarLogo {
     margin-bottom: 20px;
 }
 
-/* .error a.btn */
 
 
 /* Article index */
@@ -311,7 +297,6 @@ img#navbarLogo {
 .art-index {
     left: 5px;
     text-align: left;
-    /* background-color: rgba(200, 200, 200, 0.2); */
 }
 
 .art-index .art-index-item a,
@@ -344,19 +329,6 @@ img#navbarLogo {
 
 }
 
-
-/* @media(hover: hover) and (pointer: fine) {
-    .art-index .art-index-item a{
-        font-size: 1.1em;
-        font-family: "GlacialIndifferenceBold";
-        color: rgba(59, 59, 59, 1);
-        
-    }
-    
-} */
-
-
-
 /* Activity cards */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 .row.row-eq-height.cards .col-sm-4 .card {
@@ -370,11 +342,6 @@ img#navbarLogo {
     background-color: var(--tertiary);
     border-radius: 5px;
 }
-
-/* .card .btn{
-    position: relative;
-    bottom: 0;
-} */
 
 .card .card-title {
     font-size: 1.2em;
@@ -391,10 +358,20 @@ img#navbarLogo {
     max-height: 400px;
 }
 
-/* .card .card-body .btn {} */
 
-/* Quiz form style */
+/* Quiz form */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+#quizContainer{
+    position: relative;
+}
+
+#quizForm,
+#quizForm>#carousel-quiz{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
 #quizForm .item p{
     font-size: 1.5em;
 }
@@ -423,7 +400,51 @@ img#navbarLogo {
     margin-left: 26px;
     font-weight: normal;
     font-size: 1em;
+}
 
+
+#quizForm #submit.btn{
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+}
+
+
+#quizForm ul.pagination{
+    margin: 0;
+    position: absolute;
+    /* left: 50%; */
+    bottom: 10px;
+    /* transform: translateX(-50%); */
+}
+
+#quizForm ul.pagination li{
+    text-align: center;
+    vertical-align: auto;
+}
+
+#quizForm .pagination>li>a, .pagination>li>span {
+    padding: 12px 12px 12px 12px;
+    margin-right: 2px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--text-color);
+    background-color: var(--primary);
+}
+
+#quizForm ul.pagination li a{
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--text-color);
+    background-color: var(--primary);
+}
+
+#quizForm ul.pagination li a:hover{
+    background-color: var(--active);
+    
 }
 
 /* Profile page*/
