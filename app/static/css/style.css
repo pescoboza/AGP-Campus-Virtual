@@ -41,7 +41,19 @@ html {
     display: block;
     height: 80px;
     margin: -80px 0 0;
+} 
+
+/* TODO*/
+/* Mediq queries for mobile devices */
+@media only screen and (max-width: 786px) {
+    :target:before {
+        content: "";
+        display: block;
+        height: 280px;
+        margin: -280px 0 0;
+    } 
 }
+
 
 /* Article images */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/

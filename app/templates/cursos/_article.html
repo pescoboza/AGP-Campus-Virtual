@@ -1,6 +1,6 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% macro article_index(section_headers) %}
+{% macro article_index(section_headers, collapse_id) %}
 <div class="art-index">
     {% for href, title in section_headers.items() %}
     <div class="art-index-item"><a href="{{'#' + href}}">{{title}}</a></div>
@@ -10,7 +10,7 @@
 
 {% macro article_navbar(section_headers) %}
     {% for href, title in section_headers.items() %}
-        <li><a href="{{'#'+ href}}">{{title}}</a></li>
+        <li><a href="{{'#'+ href}}" data-toggle="collapse" data-target="#{{collapse_id or 'articleCollapse'}}.navbar-collapse">{{title}}</a></li>
     {% endfor %}
 {% endmacro %}
 
