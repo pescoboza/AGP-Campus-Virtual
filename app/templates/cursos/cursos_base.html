@@ -246,8 +246,9 @@
 
             // Make button disappear
             QUIZ.hideBtn();
-            QUIZ.hideCertBtn();
-
+            if (QUIZ.isCertifiable){
+                QUIZ.hideCertBtn();
+            }
             // Add quiz questions
             const quizContainerElem = QUIZ.getContainer();
             QUIZ.getContainer().innerHTML += htmlForm;
@@ -266,7 +267,6 @@
 
     // Check that the use has passed quiz before or not
     getUserQuizData(QUIZ.userEmail).then((data) => {
-        debugger;
         const isPassed = data[QUIZ.topic].is_passed || false;
 
         QUIZ.showBtn();
