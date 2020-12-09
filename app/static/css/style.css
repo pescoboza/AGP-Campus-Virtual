@@ -412,14 +412,9 @@ img#navbarLogo {
 }
 
 #quizForm .item ul li input[type="radio"]{
-    /* display:inline; */
-    margin-top: 6px;
-    margin-left: 5px;
+    margin-top: 0.5ex;
     position: absolute;
-    left: 0;
-    /* top: 50%; */
-
-    
+    left: 5px;
 }
 
 #quizForm .item ul li label{

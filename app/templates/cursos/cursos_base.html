@@ -101,7 +101,7 @@
 <!-- Quiz -->
 {{section_header("evaluacion", section_headers)}}
 <div id="quizContainer" class="quiz">
-    <button id="takeQuizBtn" class="btn quiz-btn">Hacer examen</button>
+    <button id="takeQuizBtn" class="btn quiz-btn" style="display: none;">Hacer examen</button>
     {% if topic and topic != "diag" %}
     <button id="dldCertBtn" class="btn quiz-btn" style="display: none;">Descargar certificado</button>
     {% endif %}
@@ -174,7 +174,6 @@
         btnElem.classList.add(QUIZ.fadeInClass);
         btnElem.style.display = "block";
     };
-    QUIZ.showBtn();
     QUIZ.hideBtn = () => {
         const btnElem = QUIZ.getBtn();
         btnElem.classList.remove(QUIZ.fadeInClass);
@@ -269,6 +268,7 @@
     getUserQuizData(QUIZ.userEmail).then((data) => {
         const isPassed = data[QUIZ.topic].is_passed || false;
 
+        QUIZ.showBtn();
         if (isPassed) {
             QUIZ.alreadyPassed = true;
             QUIZ.showCertBtn();
