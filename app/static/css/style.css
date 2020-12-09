@@ -398,6 +398,39 @@ img#navbarLogo {
 
 /* .card .card-body .btn {} */
 
+/* Quiz form style */
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+#quizForm .item ul{
+    list-style: none;
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+
+}
+
+#quizForm .item ul li{
+    position: relative;
+    margin-bottom: 5px;
+}
+
+#quizForm .item ul li input[type="radio"]{
+    /* display:inline; */
+    margin-top: 6px;
+    margin-left: 5px;
+    position: absolute;
+    left: 0;
+    /* top: 50%; */
+
+    
+}
+
+#quizForm .item ul li label{
+    display:inline-block;
+    white-space: pre-wrap;
+    margin-left: 26px;
+    font-size: 12px;
+
+}
+
 
 /*Footer style*/
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
