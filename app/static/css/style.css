@@ -48,8 +48,8 @@ html {
     :target:before {
         content: "";
         display: block;
-        height: 360px;
-        margin: -360px 0 0;
+        height: 300px;
+        margin: -300px 0 0;
     } 
 }
 
