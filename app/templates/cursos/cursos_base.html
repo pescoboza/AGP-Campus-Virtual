@@ -218,8 +218,13 @@
         getNewQuiz(QUIZ.topic, QUIZ.numQuestions).then(update);
     };
 
+
+
+
     // Check that the use has passed quiz before or not
-    getUserQuizData(QUIZ.userEmail).then((data) => {
+    getUserQuizData(QUIZ.userEmail)
+    // Valid user email: link quiz to user
+    .then((data) => {
         const isPassed = data[QUIZ.topic].is_passed || false;
 
         QUIZ.showBtn();
@@ -234,21 +239,23 @@
                 QUIZ.hideCertBtn();
             }
         }
+    })
+    // Invalid user email, anonymous quiz
+    .catch((error)=>{
+        QUIZ.showBtn();
+        QUIZ.alreadyPassed = false;
     });
 
     function onClickSubmitBtn(answers, scoreToPass, numQuestions) {
         const score = calcQuizScore(answers, numQuestions, formElem);
 
-        // TODO: remove debud if
         if (score >= scoreToPass) {
             QUIZ.getForm().remove(); // Remove form
-            //alert(`PASS ${score}/${scoreToPass}`); // TODO: Remove alert
 
 
             // Make the user pass the quiz and show the button
             passUserQuiz(USER_EMAIL, QUIZ.topic).then(
                 (res) => {
-                    debugger;
                     QUIZ.showCertBtn();
                 }
             );
