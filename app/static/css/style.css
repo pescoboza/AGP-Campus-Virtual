@@ -374,18 +374,19 @@ img#navbarLogo {
 
 #quizForm .item p{
     font-size: 1.5em;
+    margin-bottom: 1em;
 }
 
 #quizForm .item ul{
     list-style: none;
-    padding-inline-start: 0;
+    padding-inline-start: 1em;
     padding-inline-end: 0;
 
 }
 
 #quizForm .item ul li{
     position: relative;
-    margin-bottom: 5px;
+    margin-bottom: 0.4em;
 }
 
 #quizForm .item ul li input[type="radio"]{
