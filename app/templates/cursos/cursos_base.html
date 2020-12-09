@@ -227,7 +227,7 @@
                 "Resultado de evaluación",
                 "Felicidades, has pasado la evaluación. Descarga tu certificado en el botón."
             );
-            QUIZ.moda.activate();
+            QUIZ.modal.activate();
         }
         else {
             if (QUIZ.alreadyPassed === true) {
@@ -237,7 +237,7 @@
                 "Resultado de evaluación",
                 "Inténtalo de nuevo, estuviste muy cerca."
             )
-            QUIZ.moda.activate();
+            QUIZ.modal.activate();
         }
         {% endif %}
     };
@@ -256,7 +256,9 @@
             const formElem = QUIZ.getForm();
             formElem.onsubmit = () => false; // Remove page refresh on submit
             formElem.classList.add(QUIZ.fadeInClass); // Add fade in to form
-            QUIZ.getSubmitBtn().onclick = QUIZ.submitBtnOnClick;
+            const submitBtnElem = QUIZ.getSubmitBtn()
+            submitBtnElem.classList.add("btn");
+            submitBtnElem.onclick = QUIZ.submitBtnOnClick;
 
 
         };
