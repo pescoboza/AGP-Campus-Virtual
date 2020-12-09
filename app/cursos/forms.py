@@ -45,7 +45,7 @@ class MultipleChoiceQuizForm(FlaskForm):
         
     questions = FieldList(FormField(MultipleChoiceQuestionForm))
     
-    submit = SubmitField("Entregar evaluación")
+    submit = SubmitField("Entregar")
 
     def get_score(self):
         return  sum([question.is_correct() for question in self.questions])

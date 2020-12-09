@@ -405,20 +405,25 @@ img#navbarLogo {
 
 #quizForm #submit.btn{
     position: absolute;
-    right: 20px;
-    bottom: 10px;
+    right: 0;
+    bottom: 0;
 }
 
 
+#quizContainer form#quizForm>#carousel-quiz .carousel-inner{
+    height: 100%;
+}
+
 #quizForm ul.pagination{
-    margin: 0;
     position: absolute;
-    bottom: 10px;
+    width: 50%;
+    margin: 0;
+    bottom: 0;
 }
 
 #quizForm ul.pagination li{
     text-align: center;
-    vertical-align: auto;
+    vertical-align: middle;
 }
 
 #quizForm .pagination>li>a, .pagination>li>span {
@@ -497,18 +502,15 @@ img#navbarLogo {
     }
     #quizForm ul.pagination{
         left: 50%;
-        margin: 0;
-        padding:0;
         transform: translateX(-50%);
-        bottom: 60px;
+        width: 100%;
     }
 
-    #quizForm #submit.btn{
-        left: 50%;
-        transform: translateX(-50%);
-        right: 20px;
-        bottom: 10px;
+    /* Make number buttions disappear on mobile */
+    #quizForm>#carousel-quiz ul.pagination li[data-target="#carousel-quiz"]{
+        display: none;
     }
+
 
 }
 
