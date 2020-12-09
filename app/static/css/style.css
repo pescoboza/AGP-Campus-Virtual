@@ -28,11 +28,6 @@
 }
 
 
-/* ul {
-    font-weight: bold;
-    font-style: italic;
-} */
-
 /* Beautified anchors */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
@@ -400,6 +395,10 @@ img#navbarLogo {
 
 /* Quiz form style */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+#quizForm .item p{
+    font-size: 1.5em;
+}
+
 #quizForm .item ul{
     list-style: none;
     padding-inline-start: 0;
@@ -427,7 +426,8 @@ img#navbarLogo {
     display:inline-block;
     white-space: pre-wrap;
     margin-left: 26px;
-    font-size: 12px;
+    font-weight: normal;
+    font-size: 1em;
 
 }
 
