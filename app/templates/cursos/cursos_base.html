@@ -142,43 +142,34 @@
     };
     QUIZ.hideCertBtn = () => {
         const dldCertBtnElem = QUIZ.getCertBtn();
+        if (!dldCertBtnElem){
+            return;
+        }
         dldCertBtnElem.classList.remove(QUIZ.fadeInClass);
         dldCertBtnElem.style.display = "none";
         dldCertBtnElem.onclick = undefined;
     };
     QUIZ.submitBtnOnClick = () => {
         const score = QUIZ.calcScore();
-        {% if topic == "diag" %}
-        QUIZ.showBtn();
-        QUIZ.getForm().remove();
-        if (score >= QUIZ.numQuestions) {
-            
-            QUIZ.modal.setContent(
-                "Resultado de diagnóstico",
-                "Felicidades, has pasado el examen diagnóstico."
-            );
-            QUIZ.modal.activate();
-        }
-        else {
-            QUIZ.modal.setContent(
-                "Resultado de diagnóstico",
-                "Inténtalo de nuevo, estuviste muy cerca."
-            );
-            QUIZ.modal.activate();
-        }
-
-        {% else %}
         QUIZ.getForm().remove();
         QUIZ.showBtn();
         if (score >= QUIZ.numQuestions) {
 
-            QUIZ.showCertBtn();
-            passUserQuiz(QUIZ.userEmail, QUIZ.topic);
+            if (QUIZ.isCertifiable){
+                QUIZ.showCertBtn();
+                passUserQuiz(QUIZ.userEmail, QUIZ.topic);
+                QUIZ.modal.setContent(
+                    "Resultado de evaluación",
+                    "Felicidades, has aprobado la evaluación. Descarga tu certificado en el botón."
+                );
+            }
+            else{
+                QUIZ.modal.setContent(
+                    "Resultado de evaluación",
+                    "Felicidades, has aprobado la evaluación."
+                );
+            }
 
-            QUIZ.modal.setContent(
-                "Resultado de evaluación",
-                "Felicidades, has pasado la evaluación. Descarga tu certificado en el botón."
-            );
             QUIZ.modal.activate();
         }
         else {
@@ -191,7 +182,6 @@
             )
             QUIZ.modal.activate();
         }
-        {% endif %}
     };
     QUIZ.renderNewQuiz = () => {
         const update = ({ answers, scoreToPass, htmlForm }) => {
@@ -200,9 +190,8 @@
 
             // Make button disappear
             QUIZ.hideBtn();
-            if (QUIZ.isCertifiable){
-                QUIZ.hideCertBtn();
-            }
+            QUIZ.hideCertBtn();
+            
             // Add quiz questions
             const quizContainerElem = QUIZ.getContainer();
             QUIZ.getContainer().innerHTML += htmlForm;

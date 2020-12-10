@@ -49,16 +49,7 @@ AGP Campus Virtual
                 <li><a href={{url_for("cursos.cancer_cervicouterino")}}>Cáncer Cervicouterino</a></li>
                 <li><a href={{url_for("cursos.cancer_prostata")}}>Cáncer en Próstata</a></li>
                 <li><a href={{url_for("cursos.cancer_testiculo")}}>Cáncer Testicular</a></li>
-                
-                {# <!-- User auth links --> 
-                {% if current_user and not current_user.is_anonymous %}
-                <li><a href={{url_for("auth.perfil")}}>Pefil</a></li>
-                <li><a href={{url_for("auth.logout")}}>Cerrar Sesión</a></li>
-                {% else %}
-                <li><a href={{url_for("auth.login")}}>Iniciar Sesión</a></li>
-                <li><a href={{url_for("auth.registrarse")}}>Registrarse</a></li>
-                {% endif %}
-                #}
+                <li><a href="{{url_for('main.contact')}}">Contacto</a></li>
             </ul>
         </div>
     </div>
@@ -76,8 +67,9 @@ AGP Campus Virtual
     {% block page_content %}{% endblock page_content %}
 </div>
 
+{% block footer %}
 {#<!-- Footer -->#}
-<footer class="container-fluid">
+<footer id="contacto" class="container-fluid">
     <div class="row">
         <div id="footer-branding" class="col-md-3">
             <a href="{{url_for('main.index')}}">
@@ -120,6 +112,7 @@ AGP Campus Virtual
         </div>
     </div>
 </footer>
+{% endblock footer %}
 {% endblock content %}
 
 

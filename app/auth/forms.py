@@ -20,44 +20,20 @@ def validate_password(field):
         - At least one special symbol (list between double quotes): "!#$%&()*+-/:;<=>?@[\]^{|}~"
         - Length between 6 and 64 characters long
     """
+
+    password_validation_message = \
+        "La contraseña debe contener más de 8 caracteres, una letra mayúscula, un número, y un caracter especial: !#$%&()*+-/:;<=>?@[\]^{|}~"
     password = field.data
-    validation = True
 
-    # Min length: 8
-    if len(password) < 8:
-        validation = False
-        raise ValidationError(Msg.UserRegistration.ERROR_PASSWORD_LENGTH)
+    if len(password) < 8 or \
+        len(password) > 64 or \
+        not any(char.isdigit() for char in password) or \
+        not any(char.isupper() for char in password) or \
+        not any(char.islower() for char in password) or \
+        not any(char in RegisterForm._special_characters for char in password):
+            raise ValidationError(password_validation_message)
 
-    # Max length: 64
-    if len(password) > 64:
-        validation = False
-        raise ValidationError(Msg.UserRegistration.ERROR_PASSWORD_LENGTH)
-
-    # At least one number
-    if not any(char.isdigit() for char in password):
-        validation = False
-        raise ValidationError(
-            Msg.UserRegistration.ERROR_PASSWORD_AT_LEAST_ONE_NUMBER)
-
-    # At least one upper case letter
-    if not any(char.isupper() for char in password):
-        validation = False
-        raise ValidationError(
-            Msg.UserRegistration.ERROR_PASSWORD_AT_LEAST_ONE_UPPERCASE)
-
-    # At least one lower case letter
-    if not any(char.islower() for char in password):
-        validation = False
-        raise ValidationError(
-            Msg.UserRegistration.ERROR_PASSWORD_AT_LEAST_ONE_LOWERCASE)
-
-    # At least one special symbol (list between double quotes): "!#$%&()*+-/:;<=>?@[\]^{|}~"
-    if not any(char in RegisterForm._special_characters for char in password):
-        validation = False
-        raise ValidationError(Msg.UserRegistration.ERROR_PASSWORD_AT_LEAST_ONE_SPECIAL_CHARACTER.format(
-            RegisterForm._special_characters_raw))
-
-    return validation
+    return True
 
 
 class LoginForm(FlaskForm):
