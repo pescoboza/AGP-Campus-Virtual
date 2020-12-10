@@ -37,6 +37,8 @@ html {
 }
 
 :target:before {
+    background-color: transparent;
+    color: transparent;
     content: "";
     display: block;
     height: 80px;
