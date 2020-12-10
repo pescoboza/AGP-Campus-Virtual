@@ -151,7 +151,6 @@ a.btn {
 
     font-size: 20px;
     text-align: justify;
-    text-justify: inner-word;
 
 }
 
@@ -353,7 +352,7 @@ img#navbarLogo {
 /* Activity cards */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 .row.row-eq-height.cards .col-sm-4 .card {
-    min-height: 28vw;
+    min-height: 385px;
 }
 
 .card {
@@ -363,6 +362,7 @@ img#navbarLogo {
     background-color: var(--tertiary);
     border-radius: 5px;
 }
+
 
 .card .card-title {
     font-size: 1.2em;
@@ -377,6 +377,16 @@ img#navbarLogo {
     width: 100%;
     height: 200px;
     max-height: 400px;
+}
+
+.card .card-body a.btn{
+    margin: 0;
+    position: absolute;
+    bottom: 20px;
+}
+
+.btn i {
+    font-size: 0.9em;
 }
 
 
