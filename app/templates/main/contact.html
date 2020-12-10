@@ -6,8 +6,8 @@ Contacto
 
 {% block head%}
 {{super()}}
-
 <style>
+    #title {font-size: 2.5em; margin-left: 30px; }
     #contactInfo h3 { margin-bottom: 2px; }
     #contactInfo p { margin-top: 0; }
     #mapBox {text-align: center;}
@@ -18,13 +18,21 @@ Contacto
     @media only screen and (max-width: 991px) {
         #contactInfo table { margin: auto;}
         #contactInfo{ text-align: center; }
+        #map{
+            width: 90%;
+            height: 230px;
+        }
+        #title {
+            margin-left: 0;
+            text-align: center;
+        }
     }
 </style>
 {% endblock head%}
 
 {% block page_content %}
-<h1>Contacto</h1>
-<div class="row">
+<h1 id="title">Contacto</h1>
+<div id="row" class="row">
     <div id="mapBox" class="container col-md-7">
         <iframe
             id="map"
