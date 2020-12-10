@@ -238,6 +238,11 @@ img#navbarLogo {
 #navbar{
     margin-bottom: 3vh;
 }
+
+#navbar ul li>a{
+    font-size: 14px;
+}
+
 #navbar.navbar.navbar-custom {
     margin-top: 0;
     text-transform: uppercase;
