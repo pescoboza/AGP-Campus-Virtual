@@ -92,7 +92,7 @@
         modal: MODAL,
     };
     QUIZ.isAnonymous = !QUIZ.userEmail;
-    QUIZ.isCertifiable = (!QUIZ.isAnonymous && QUIZ.topic in QUIZ.certifiableTopics );
+    QUIZ.isCertifiable = (!QUIZ.isAnonymous && QUIZ.certifiableTopics.includes(QUIZ.topic) );
     QUIZ.getContainer = () => document.getElementById(QUIZ.containerId);
     QUIZ.getForm = () => QUIZ.getContainer().querySelector("form");
     QUIZ.getAnswerData = () => {
@@ -154,7 +154,6 @@
         QUIZ.getForm().remove();
         QUIZ.showBtn();
         if (score >= QUIZ.numQuestions) {
-
             if (QUIZ.isCertifiable){
                 QUIZ.showCertBtn();
                 passUserQuiz(QUIZ.userEmail, QUIZ.topic);
