@@ -384,6 +384,8 @@ img#navbarLogo {
     position: absolute;
     bottom: 20px;
     width: 50%;
+    left: 50%;
+    transform: translateX(-50%);
     
 }
 
