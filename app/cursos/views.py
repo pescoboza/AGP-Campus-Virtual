@@ -8,11 +8,11 @@ from .forms import MultipleChoiceQuizForm
 
 """
 QUESTION_TOPICS = (
-    "tstc", # Cancer testicular
-    "crvu", # Cancer cervicouterino
-    "plmn", # Cancer en pulmon
-    "psta", # Cancer en prostata
-    "mama", # Cancer de mama
+    "tstc", # Cáncer testicular
+    "crvu", # Cáncer cervicouterino
+    "plmn", # Cáncer de pulmon
+    "psta", # Cáncer de prostata
+    "mama", # Cáncer de mama
     "diag"  # Examen diagnostico
 )
 """
