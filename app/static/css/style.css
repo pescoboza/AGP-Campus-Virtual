@@ -12,6 +12,7 @@
 :root {
     --primary: #67C5D2;
     --active: #74dfed;
+    --disabled: #d3d3d3;
     --secondary: #FC8476;
     --tertiary: #FFE1A4;
     --detail-font: #FC8476;
@@ -115,6 +116,11 @@ a.btn {
     font-weight: bold;
     color: var(--text-color);
     background-color: var(--primary);
+}
+
+
+.pagination ul li.disabled a {
+    background-color: var(--disabled);
 }
 
 .btn:hover,
@@ -463,8 +469,8 @@ img#navbarLogo {
     vertical-align: middle;
 }
 
-#quizForm .pagination>li>a,
-.pagination>li>span {
+#quizForm ul.pagination li>a,
+#quizForm ul.pagination li>span {
     padding: 12px 12px 12px 12px;
     margin-right: 2px;
     border: none;
@@ -476,15 +482,12 @@ img#navbarLogo {
     background-color: var(--primary);
 }
 
-#quizForm ul.pagination li a {
-    font-weight: bold;
-    text-transform: uppercase;
-    color: var(--text-color);
-    background-color: var(--primary);
-}
-
 #quizForm ul.pagination li a:hover {
     background-color: var(--active);
+}
+
+#quizForm ul.pagination li.disabled a {
+    background-color: var(--disabled);
 }
 
 #quizContainer {

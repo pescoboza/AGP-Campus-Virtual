@@ -64,6 +64,58 @@
 {% block scripts %}
 {{super()}}
 <script>
+    class PaginationController{
+        
+        constructor(nextSelector, prevSelector, pageBegin, pageEnd){
+            this.nextSelector = nextSelector;
+            this.prevSelector = prevSelector;
+            this.disabledClass = disabledClass;
+            this.pageBegin = pageBegin;
+            this.pageEnd = pageEnd;
+            this.currentPage = pageBegin;
+
+            this.getNextElem().onclick = this.goNext;
+            this.getPrevElem().onclick = this.goPrev;
+        }
+
+        disableElem(elem){elem.classList.add(this.disabledClass);}
+        enableElem(elem){ele.classList.remove(this.disabledClass);}
+        getNextElem(){ return $(this.nextSelector);}
+        getPrevElem(){ return $(this.prevSelector);}
+
+        goNext(){
+            debugger;
+            this.currentPage++;
+            
+            // Disable next if at last element
+            if (this.currentPage >= this.pageEnd){
+                this.disableElem(this.getNextElem());
+            }
+
+            // Enable previous element
+            this.enableElem(this.getPrevElem());s
+        }
+
+        goPrev(){
+            this.currentPage--;
+
+            // Disable previous element if at beginning
+            if (this.currentPage <= this.pageBegin){
+                this.disabledElem(this.getPrevElem);
+            }
+
+            // Enable last element
+            this.enableElem(this.getNextElem);
+        }
+        
+    }
+
+    let pagination = null;
+    
+    const newQuizPagination = () => new PaginationController(
+        "#quizForm ul.pagination li:has(a[class='prev'])",
+         "#quizForm ul.pagination li:has(a[class='next'])", 1, 3);
+
     const MODAL = {
         id: "modal",
         titleId: "modalTitle",
@@ -90,6 +142,8 @@
         submitBtnId: "submit",
         alreadyPassed: false,
         modal: MODAL,
+        pagination: null,
+        generatePagination: newQuizPagination,
     };
     QUIZ.isAnonymous = !QUIZ.userEmail;
     QUIZ.isCertifiable = (!QUIZ.isAnonymous && QUIZ.certifiableTopics.includes(QUIZ.topic) );
@@ -202,38 +256,13 @@
             submitBtnElem.classList.add("btn");
             submitBtnElem.onclick = QUIZ.submitBtnOnClick;
 
-
+            // Spawn the pagination contoller
+            QUIZ.pagination = QUIZ.generatePagination();
         };
         getNewQuiz(QUIZ.topic, QUIZ.numQuestions).then(update);
     };
 
-    if (!QUIZ.isAnonymous){
-        // Check that the use has passed quiz before or not
-        getUserQuizData(QUIZ.userEmail)
-        // Valid user email: link quiz to user
-        .then((data) => {
-            const isPassed = data[QUIZ.topic].is_passed || false;
-
-            QUIZ.showBtn();
-            if (isPassed) {
-                QUIZ.alreadyPassed = true;
-                if (QUIZ.isCertifiable){
-                    QUIZ.showCertBtn();
-                }
-            }
-            else {
-                if (QUIZ.isCertifiable){
-                    QUIZ.hideCertBtn();
-                }
-            }
-        });
-
-    } 
-    else {
-        // No user email, anonymous quiz
-        QUIZ.showBtn();
-        QUIZ.alreadyPassed = false;
-    }
+    
 
     function onClickSubmitBtn(answers, scoreToPass, numQuestions) {
         const score = calcQuizScore(answers, numQuestions, formElem);
@@ -293,6 +322,45 @@
             })
         );
     }
+
+
+    if (!QUIZ.isAnonymous){
+        // Check that the use has passed quiz before or not
+        getUserQuizData(QUIZ.userEmail)
+        // Valid user email: link quiz to user
+        .then((data) => {
+            const isPassed = data[QUIZ.topic].is_passed || false;
+
+            QUIZ.showBtn();
+            if (isPassed) {
+                QUIZ.alreadyPassed = true;
+                if (QUIZ.isCertifiable){
+                    QUIZ.showCertBtn();
+                }
+            }
+            else {
+                if (QUIZ.isCertifiable){
+                    QUIZ.hideCertBtn();
+                }
+            }
+        });
+
+    } 
+    else {
+        // No user email, anonymous quiz
+        QUIZ.showBtn();
+        QUIZ.alreadyPassed = false;
+    }
+}
+
+
+
+
+
+
+
+
+
 
 </script>
 {% endblock scripts %}
