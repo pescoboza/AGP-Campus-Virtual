@@ -20,3 +20,14 @@
 <h2 id ="{{href}}" class="section-header">{{section_headers[href]}}</h2>
 {% endif %}
 {% endmacro %}
+
+{% macro card(img_src, title, text, btn_link, btn_text) %}
+<div class="card">
+    <div class="card-body">
+        <img src="{{img_src}}" class="card-img-top">
+        <h5 class="card-title">{{title}}</h5>
+        <p class="card-text">{{text}}</p>
+        <a href="{{btn_link}}" class="btn" target="_blank">{{btn_text}} <i class="fas fa-external-link-alt"></i></a>
+    </div>
+</div>
+{% endmacro %}
