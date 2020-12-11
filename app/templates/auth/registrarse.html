@@ -19,7 +19,8 @@ Registrarse
     // Add link for terms and conditions to pregenerated form
     const termsAndConditionsUrl = "{{url_for('main.terms_and_conditions')}}";
     const replaceTerm = "términos y condiciones.";
-    const htmlAnchor = `<a href="${termsAndConditionsUrl}" target="_blank">${replaceTerm}</a>`;
+    const htmlAnchor = 
+    `<a href="${termsAndConditionsUrl}" target="_blank">${replaceTerm} <i class="fas fa-external-link-alt"></i></a><br>Consultar <a href="{{url_for('main.privacy_policy')}}" target="_blank">política de privacidad. <i class="fas fa-external-link-alt"></i></a>`;
     
     const label = document.querySelector(".checkbox label");
     label.innerHTML = label.innerHTML.replace(replaceTerm, htmlAnchor);
