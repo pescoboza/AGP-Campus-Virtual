@@ -422,7 +422,7 @@ img#navbarLogo {
 #quizForm .item ul {
     list-style: none;
     padding-inline-start: 1em;
-    padding-inline-end: 0;
+    padding-inline-end: 1em;
 
 }
 
@@ -442,7 +442,7 @@ img#navbarLogo {
     white-space: pre-wrap;
     margin-left: 26px;
     font-weight: normal;
-    font-size: 1em;
+    font-size: 1.2em;
 }
 
 
@@ -533,18 +533,25 @@ img#navbarLogo {
 }
 
 @media only screen and (max-width: 786px) {
-    #quizForm .item p {
-        font-size: 1em;
-    }
-
-    #quizForm .item ul li label {
-        font-size: 0.8em;
-    }
-
-
+    
     #quizContainer {
-        height: 75vh;
+        height: 85vh;
     }
+
+    #quizForm .item ul {
+        padding-inline-start: 0;
+        padding-inline-end: 0.3em;
+    
+    }
+    
+    #quizForm .item p {
+        font-size: 1.3em;
+    }
+    
+    #quizForm .item ul li label  {
+        font-size: 1.15em;
+    }
+
 
     #quizForm ul.pagination {
         left: 50%;

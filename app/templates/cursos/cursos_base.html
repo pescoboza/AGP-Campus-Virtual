@@ -82,14 +82,9 @@
             this.prevPage = 0;
 
 
-            const setCurrPage = (n) => {
-                console.debug("curr: " + n);
-                this.currPage = n;
-            }
-            const setPrevPage = (n) => {
-                console.debug("prev: " + n);
-                this.prevPage = n;
-            }
+            const setCurrPage = (n) => this.currPage = n;
+            
+            const setPrevPage = (n) => this.prevPage = n;   
 
             const handle = () => {
                 if (this.currPage === this.numSlides - 1){
