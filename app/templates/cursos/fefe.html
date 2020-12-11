@@ -1,0 +1,792 @@
+<html><head>
+
+    <title>
+Inicio
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css?rnd=1607654927565" rel="stylesheet">
+<link rel="shortcut icon" type="image/jpg" href="/static/img/AGP-icon.png">
+
+<!-- Font Awesome support  -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css?rnd=1607654927574" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+<link rel="stylesheet" href="http://localhost:5000/static/css/style.css?rnd=1607654927611">
+
+  <script data-dapp-detection="">!function(){let e=!1;function n(){if(!e){const n=document.createElement("meta");n.name="dapp-detected",document.head.appendChild(n),e=!0}}if(window.hasOwnProperty("ethereum")){if(window.__disableDappDetectionInsertion=!0,void 0===window.ethereum)return;n()}else{var t=window.ethereum;Object.defineProperty(window,"ethereum",{configurable:!0,enumerable:!1,set:function(e){window.__disableDappDetectionInsertion||n(),t=e},get:function(){if(!window.__disableDappDetectionInsertion){const e=arguments.callee;e&&e.caller&&e.caller.toString&&-1!==e.caller.toString().indexOf("getOwnPropertyNames")||n()}return t}})}}();</script></head>
+  <body>
+    
+<div id="alerts">
+    
+</div>
+<div id="topBar">
+    <a id="indexAnchor" href="/index">
+        <img id="navbarLogo" src="/static/img/AGP-Nombre.png">
+    </a>
+    
+    
+    <a id="profile" class="btn" href="/perfil">Perfil</a>
+    <a id="logout" class="btn" href="/cerrar-sesion">Cerrar Sesión</a>
+    
+</div>
+<nav id="navbar" class="navbar navbar-custom" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainCollapse.navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div id="mainCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-center">
+                
+                <li><a href="/cursos/diagnostico">Inicio</a></li>
+                <li><a href="/cursos/cancer-pulmon">Cáncer en Pulmón</a></li>
+                <li><a href="/cursos/cancer-mama">Cáncer de Mama</a></li>
+                <li><a href="/cursos/cancer-cervicouterino">Cáncer Cervicouterino</a></li>
+                <li><a href="/cursos/cancer-prostata">Cáncer en Próstata</a></li>
+                <li><a href="/cursos/cancer-testiculo">Cáncer Testicular</a></li>
+                <li><a href="/contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    
+
+<div class="modal fade" id="modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 id="modalTitle" class="modal-title">Resultado de evaluación</h4>
+            </div>
+            <div class="modal-body">
+                <p id="modalText">Felicitaciones por haber pasado el examen. Descargue su certificado en la liga.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="carouselContainer" class="container-fluid">
+    <br>
+    <div id="carouselAGP" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carouselAGP" data-slide-to="0" class=""></li>
+            <li data-target="#carouselAGP" data-slide-to="1" class=""></li>
+            <li data-target="#carouselAGP" data-slide-to="2" class=""></li>
+            <li data-target="#carouselAGP" data-slide-to="3" class=""></li>
+            <li data-target="#carouselAGP" data-slide-to="4" class=""></li>
+            <li data-target="#carouselAGP" data-slide-to="5" class=""></li>
+            <li data-target="#carouselAGP" data-slide-to="6" class=""></li>
+            <li data-target="#carouselAGP" data-slide-to="7" class=""></li>
+            <li data-target="#carouselAGP" data-slide-to="8" class="active"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item">
+                <img src="/static/img/Titulo_inicio.JPG" alt="[Imagen 1]">
+                <div class="carousel-caption">
+                    <!-- <h3>Titulo imagen 1</h3>
+                    <p>[Descripcion]</p> -->
+                </div>
+            </div>
+
+            <div class="item">
+                <img style="object-fit: contain;" src="/static/img/carousel-1.jpg" alt="[Imagen 2]">
+                <div class="carousel-caption">
+                    <h3>Mientras hay vida, hay esperanza</h3>
+                </div>
+            </div>
+
+            <div class="item">
+                <img style="object-fit: contain;" src="/static/img/carousel-2.jpg" alt="[Imagen 3]">
+                <div class="carousel-caption">
+                    <h3>Mientras hay vida, hay esperanza</h3>
+                </div>
+            </div>
+
+            <div class="item">
+                <img style="object-fit: contain;" src="/static/img/carousel-3.jpg" alt="[Imagen 4]">
+                <div class="carousel-caption">
+                    <h3>Mientras hay vida, hay esperanza</h3>
+                </div>
+            </div>
+
+            <div class="item">
+                <img style="object-fit: contain;" src="/static/img/carousel-4.jpg" alt="[Imagen 5]">
+                <div class="carousel-caption">
+                    <h3>Mientras hay vida, hay esperanza</h3>
+                </div>
+            </div>
+
+            <div class="item">
+                <img style="object-fit: contain;" src="/static/img/carousel-5.jpg" alt="[Imagen 6]">
+                <div class="carousel-caption">
+                    <h3>Mientras hay vida, hay esperanza</h3>
+                </div>
+            </div>
+
+            <div class="item">
+                <img style="object-fit: contain;" src="/static/img/carousel-6.jpg" alt="[Imagen 7]">
+                <div class="carousel-caption">
+                    <h3>Mientras hay vida, hay esperanza</h3>
+                </div>
+            </div>
+
+            <div class="item">
+                <img style="object-fit: contain;" src="/static/img/carousel-7.jpg" alt="[Imagen 8]">
+                <div class="carousel-caption">
+                    <h3>Mientras hay vida, hay esperanza</h3>
+                </div>
+            </div>
+
+            <div class="item active">
+                <img style="object-fit: contain;" src="/static/img/carousel-8.jpg" alt="[Imagen 9]">
+                <div class="carousel-caption">
+                    <h3>Mientras hay vida, hay esperanza</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#carouselAGP" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carouselAGP" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+
+
+<nav id="article-navbar" class="navbar navbar-custom" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#articleCollapse.navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div id="articleCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-center">
+                
+                
+    
+        <li><a href="#que-es-agp-campus-virtual" data-toggle="collapse" data-target="#articleCollapse.navbar-collapse">¿QUÉ ES AGP CAMPUS VIRTUAL?</a></li>
+    
+        <li><a href="#que-es-el-cancer" data-toggle="collapse" data-target="#articleCollapse.navbar-collapse">¿QUÉ ES EL CÁNCER?</a></li>
+    
+        <li><a href="#diferencia-entre-tipos-de-cancer" data-toggle="collapse" data-target="#articleCollapse.navbar-collapse">DIFERENCIA ENTRE TIPOS DE CÁNCER</a></li>
+    
+        <li><a href="#actividades" data-toggle="collapse" data-target="#articleCollapse.navbar-collapse">ACTIVIDADES</a></li>
+    
+        <li><a href="#examen-autodiagnostico" data-toggle="collapse" data-target="#articleCollapse.navbar-collapse">EXAMEN AUTODIAGNÓSTICO</a></li>
+    
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div id="page-content" class="container">
+    
+
+<!-- Article -->
+
+<br>
+
+
+<br>
+
+
+
+<!-- que-es-agp-campus-virtual -->
+<h2 id="que-es-agp-campus-virtual" class="section-header">¿QUÉ ES AGP CAMPUS VIRTUAL?</h2>
+
+
+<p>Es un sitio donde podrás encontrar información que te permita prevenir y detectar oportunamente diferentes tipos de
+    cáncer. El objetivo es que a través de varias actividades y presentaciones, puedas tener información científica de
+    este padecimiento</p><br>
+
+
+
+<!-- que-es-el-cancer -->
+<h2 id="que-es-el-cancer" class="section-header">¿QUÉ ES EL CÁNCER?</h2>
+
+
+<div>
+    <p>
+        El término cáncer se refiere a un gran número de enfermedades que pueden desarrollarse en cualquier parte del
+        cuerpo.
+        Como lo explica la Sociedad Americana del Cáncer, el cáncer se origina cuando las células crecen sin control y
+        sobrepasan en número a las células normales. Esto hace que al cuerpo le resulte difícil funcionar de
+        la manera que debería hacerlo.
+    </p>
+    <p>
+        Para muchas personas, los resultados pueden ser exitosos al someterse a los tratamientos contra el cáncer. De
+        hecho,
+        ahora más que nunca hay un mayor número de personas que tienen una vida plena después de haber recibido su
+        tratamiento contra el cáncer.
+    </p>
+    <p>
+        Existen muchos tipos de cáncer. pues no es una sola enfermedad. El cáncer puede originarse en los pulmones, en
+        el seno, en el colon o hasta en la sangre.
+        Los diferentes tipos de cáncer tienen algunas similitudes, pero son diferentes en la manera en que crecen y se
+        propagan.
+    </p>
+</div><br>
+
+
+
+<!-- diferencia-entre-tipos-de-cancer -->
+<h2 id="diferencia-entre-tipos-de-cancer" class="section-header">DIFERENCIA ENTRE TIPOS DE CÁNCER</h2>
+
+
+<div>
+    <p>
+        Algunos tipos de cáncer crecen y se propagan rápidamente mientras que otros crecen más lentamente.
+        También responden al tratamiento de diferente manera. Algunos tipos de cáncer se tratan mejor con cirugía;
+        otros responden mejor a los medicamentos,
+        lo cual se conoce como quimioterapia. A menudo se utiliza más de un tipo de tratamiento para conseguir los
+        mejores resultados.
+    </p>
+    <p>
+        Las personas con cáncer necesitan un tratamiento específico que sea el más eficaz para su tipo de cáncer.
+    </p>
+</div><br>
+
+
+
+<!-- actividades -->
+<h2 id="actividades" class="section-header">ACTIVIDADES</h2>
+
+
+<br>
+
+<div class="row row-eq-height cards">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <img src="/static/img/crucigrama.jpg" class="card-img-top">
+                <h5 class="card-title">¿Que tanto sabes sobre el
+                    cáncer?</h5>
+                <p class="card-text">Crucigrama para conocer algunos de los conceptos más <br>importantes sobre la
+                    enfermedad.</p>
+                <a href="https://puzzel.org/es/crossword/play?p=-MGLrgdFEuJx5Q_f-xy6" class="btn" target="_blank">Ir a
+                    la Actividad <i class="fas fa-external-link-alt"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <img src="/static/img/memorama.png" class="card-img-top">
+                <h5 class="card-title">¿Puedes encontrar todos los
+                    pares?</h5>
+                <p class="card-text">Memorama de relacion entre caracteristicas de la enfermedad.</p>
+                <a href="https://matchthememory.com/serviciosolidario" class="btn" target="_blank">Ir a
+                    la Actividad <i class="fas fa-external-link-alt"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <img src="/static/img/como-funciona.jpg" class="card-img-top">
+                <h5 class="card-title">¿Como funciona?</h5>
+                <p class="card-text">La enfermedad puede ser un poco confusa, <br>estar informado puede date varias
+                    ventajas.</p>
+                <a href="https://www.youtube.com/watch?v=2YDAM_5cimA" class="btn" target="_blank">Ir al
+                    Video <i class="fas fa-external-link-alt"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row row-eq-height cards">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <img src="/static/img/cuerpo.jpg" class="card-img-top">
+                <h5 class="card-title">¿Que pasa por dentro?
+                </h5>
+                <p class="card-text">Diviertete en este juego mientras aprendes sobre los sintomas y causas del
+                    cancer.
+                </p>
+                <a href="http://www.gamesforchange.org/game/cancer-game/ " class="btn" target="_blank">Ir al Juego <i class="fas fa-external-link-alt"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+
+
+<!-- examen-autodiagnostico -->
+<h2 id="examen-autodiagnostico" class="section-header">EXAMEN AUTODIAGNÓSTICO</h2>
+
+
+
+
+
+
+<!-- Quiz -->
+
+
+
+<div id="quizContainer" class="quiz">
+    <button id="takeQuizBtn" class="btn quiz-btn" style="display: none;">Hacer examen</button>
+    
+
+
+
+
+
+<form name="quiz" id="quizForm" action="" method="" class="fade-in">
+    <div id="carousel-quiz" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            
+            <div class="item active">
+                <p name="question-0-text">¿Cuáles de los siguientes son síntomas del cáncer de testículo?</p>
+                <ul id="questions-0-answer"><li><input id="questions-0-answer-0" name="questions-0-answer" type="radio" value="A"> <label for="questions-0-answer-0">Cambio en la textura o aspecto de uno o ambos testículos, Sensación de pesadez en el escroto, Acumulación de líquido en el testículo </label></li><li><input id="questions-0-answer-1" name="questions-0-answer" type="radio" value="B"> <label for="questions-0-answer-1">Tos, Dificultad para tragar alimentos o líquidos, Dificultad para respirar</label></li><li><input id="questions-0-answer-2" name="questions-0-answer" type="radio" value="C"> <label for="questions-0-answer-2">Dolor torácico, ronchas en la piel, comezón en los muslos</label></li></ul>
+            </div>
+            
+            <div class="item ">
+                <p name="question-1-text">¿Qué es el cáncer de testículo?</p>
+                <ul id="questions-1-answer"><li><input id="questions-1-answer-0" name="questions-1-answer" type="radio" value="A"> <label for="questions-1-answer-0">Es un cáncer que se origina en los testículos.</label></li><li><input id="questions-1-answer-1" name="questions-1-answer" type="radio" value="B"> <label for="questions-1-answer-1">Es un cáncer que se origina en el glande del pene.</label></li><li><input id="questions-1-answer-2" name="questions-1-answer" type="radio" value="C"> <label for="questions-1-answer-2">Se refiere a todos los cánceres que puede padecer un hombre.</label></li><li><input id="questions-1-answer-3" name="questions-1-answer" type="radio" value="D"> <label for="questions-1-answer-3">Se refiere a todos los cánceres que aparecen en la zona de la ingle del hombre.</label></li></ul>
+            </div>
+            
+            <div class="item ">
+                <p name="question-2-text">Siempre que se vean múltiples señales de cáncer de testículo se debe hacer lo siguiente:</p>
+                <ul id="questions-2-answer"><li><input id="questions-2-answer-0" name="questions-2-answer" type="radio" value="A"> <label for="questions-2-answer-0">Acudir con un médico para asegurarse de que se trata de cáncer de testículo y mantener la calma, podría no ser cáncer pero más vale prevenir.</label></li><li><input id="questions-2-answer-1" name="questions-2-answer" type="radio" value="B"> <label for="questions-2-answer-1">Dejarlo pasar, y si se agravan los síntomas es señal de cáncer de testículo.</label></li><li><input id="questions-2-answer-2" name="questions-2-answer" type="radio" value="C"> <label for="questions-2-answer-2">Automedicarse con información que consulte en el mismo momento.</label></li><li><input id="questions-2-answer-3" name="questions-2-answer" type="radio" value="D"> <label for="questions-2-answer-3">Hablar con un familiar y preguntar por remedios</label></li></ul>
+            </div>
+            
+        </div>
+
+        <!-- Controls -->
+        <ul class="pagination">
+            <!-- Left -->
+            <li>
+                <a class="left" href="#carousel-quiz" role="button" data-slide="prev">
+                    <!-- <span class="glyphicon glyphicon-chevron-left"></span> -->
+                    Anterior
+                </a>
+            </li>
+
+            <!-- Indicators -->
+            
+            <li data-target="#carousel-quiz" data-slide-to="0">
+                <a href="#question-0">1</a>
+            </li>
+            
+            <li data-target="#carousel-quiz" data-slide-to="1">
+                <a href="#question-1">2</a>
+            </li>
+            
+            <li data-target="#carousel-quiz" data-slide-to="2">
+                <a href="#question-2">3</a>
+            </li>
+            
+
+            <!-- Right -->
+            <li>
+                <a class="right" href="#carousel-quiz" role="button" data-slide="next">
+                    <!-- <span class="glyphicon glyphicon-chevron-right"></span> -->
+                    Siguiente
+                </a>
+            </li>
+        </ul>
+
+    </div> <!-- Carousel -->
+    <input id="submit" name="submit" type="submit" value="Entregar" class="btn">
+</form>
+</div>
+
+
+</div>
+
+
+
+<footer id="contacto" class="container-fluid">
+    <div class="row">
+        <div id="footer-branding" class="col-md-3">
+            <a href="/index">
+                <img id="footerLogo" src="/static/img/AGP logo PNG.png">
+            </a>
+        </div>
+        <div class="col-md-3">
+            <h3>Dirección</h3>
+            <a href="https://goo.gl/maps/YvmCNgkY3BVpnojC9" target="_blank">
+                <img class="icon" src="/static/img/location-icon.png">
+                <span>Olivares, Luis Encinas, 83138 Hermosillo, Son.</span>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <h3>Teléfono</h3>
+            <a href="tel:6622164883" target="_blank">
+                <img class="icon" src="/static/img/phone-icon.png">
+                <span>662 216 4883</span>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <h3>Redes sociales</h3>
+            <a href="https://www.facebook.com/AGPHermosillo.Oficial/" target="_blank">
+                <img class=" icon" src="/static/img/facebook-logo.png">
+                <span>AGP Hermosillo</span>
+            </a><br>
+            <a href="https://www.instagram.com/agp_hermosillo/" target="_blank">
+                <img class="icon" src="/static/img/instagram-logo.png">
+                <span>@agp_hermosillo</span>
+            </a><br>
+            <a href="https://twitter.com/agphilloOFICIAL" target="_blank">
+                <img class="icon" src="/static/img/twitter-logo.png">
+                <span>@agphilloOFICIAL</span>
+            </a><br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-center copyright">
+            Asociación George Papanicolau A. C. 2020 © Todos los derechos reservados
+        </div>
+    </div>
+</footer>
+
+
+
+
+    
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        const a = $("#quizForm #carousel-quiz ul.pagination li a.left").parent();
+        debugger;
+        a.style.display = "none";
+    </script>
+
+<script src="/static/js/reloadCachedCSS.js"></script>
+<!-- 
+<script type="text/javascript" src="/static/js/flashes.js"></script>
+<script type="text/javascript">
+    $(getAlerts("/api/flashed-messages"));
+</script> 
+-->
+
+<!-- <script>
+    setInterval(() => $("#quizForm ul.pagination li:has(a[class='prev'])").remove(), 2000);
+
+    class PaginationController{
+        
+        constructor(pageBegin, pageEnd, disabledClass, nextSelector, prevSelector){
+            this.nextSelector = nextSelector;
+            this.prevSelector = prevSelector;
+            this.disabledClass = disabledClass;
+            this.pageBegin = pageBegin;
+            this.pageEnd = pageEnd;
+            this.currentPage = pageBegin;
+
+            this.getNextElem().onclick = this.goNext;
+            this.getPrevElem().onclick = this.goPrev;
+
+            let a = this.getPrevElem();
+            this.disableElem(a);
+
+        }
+
+        disableElem(elem){elem.classList.add(this.disabledClass);}
+        enableElem(elem){ele.classList.remove(this.disabledClass);}
+        getNextElem(){ return $(this.nextSelector);}
+        getPrevElem(){ return $(this.prevSelector);}
+
+        goNext(){
+            this.currentPage++;
+            
+            // Disable next if at last element
+            if (this.currentPage >= this.pageEnd){
+                this.disableElem(this.getNextElem());
+            }
+
+            // Enable previous element
+            this.enableElem(this.getPrevElem());s
+        }
+
+        goPrev(){
+            this.currentPage--;
+
+            // Disable previous element if at beginning
+            if (this.currentPage <= this.pageBegin){
+                this.disabledElem(this.getPrevElem);
+            }
+
+            // Enable last element
+            this.enableElem(this.getNextElem);
+        }
+        
+    }
+
+    let pagination = null;
+    
+    const newQuizPagination = () => new PaginationController(
+        1, 3, "disabled",
+        "#quizForm ul.pagination li:has(a[class='prev'])",
+         "#quizForm ul.pagination li:has(a[class='next'])",);
+
+    const MODAL = {
+        id: "modal",
+        titleId: "modalTitle",
+        textId: "modalText",
+    };
+    MODAL.activate = () => $('#' + MODAL.id).modal();
+    MODAL.setContent = (title, text) => {
+        document.getElementById(MODAL.titleId).innerHTML = title;
+        document.getElementById(MODAL.textId).innerHTML = text;
+    }
+
+    const QUIZ = {
+        userEmail: "agp.campusvirtual@gmail.com",
+        certifiableTopics: ["tstc", "psta", "plmn", "mama", "crvu"],
+        isCertifiable: false,
+        topic: "diag",
+        numQuestions: 3,
+        correctAnswers: [],
+        dldCertUrl: "/api/certificado?topic=diag",
+        fadeInClass: "fade-in",
+        containerId: "quizContainer",
+        btnId: "takeQuizBtn",
+        dldCertBtnId: "dldCertBtn",
+        submitBtnId: "submit",
+        alreadyPassed: false,
+        modal: MODAL,
+        pagination: null,
+        generatePagination: newQuizPagination,
+    };
+    QUIZ.isAnonymous = !QUIZ.userEmail;
+    QUIZ.isCertifiable = (!QUIZ.isAnonymous && QUIZ.certifiableTopics.includes(QUIZ.topic) );
+    QUIZ.getContainer = () => document.getElementById(QUIZ.containerId);
+    QUIZ.getForm = () => QUIZ.getContainer().querySelector("form");
+    QUIZ.getAnswerData = () => {
+        const questionNameStr = "questions-%d-answer";
+        const form = QUIZ.getForm();
+        const answers = [];
+        for (let i = 0; i < QUIZ.numQuestions; ++i) {
+            const questionFieldName = questionNameStr.replace("%d", i);
+            answers.push(form[questionFieldName].value || null);
+        }
+        return answers;
+    };
+    QUIZ.calcScore = () => {
+        const answers = QUIZ.getAnswerData();
+        let score = 0;
+        QUIZ.correctAnswers.forEach((cans, i) => {
+            if (cans === answers[i]) {
+                score++;
+            }
+        });
+        return score;
+    }
+    QUIZ.getBtn = () => document.getElementById(QUIZ.btnId);
+    QUIZ.getCertBtn = () => document.getElementById(QUIZ.dldCertBtnId);
+    QUIZ.getSubmitBtn = () => document.getElementById(QUIZ.submitBtnId);
+    QUIZ.btnOnClick = () => {
+        QUIZ.getBtn().onclick = undefined;
+        QUIZ.renderNewQuiz();
+    };
+    QUIZ.showBtn = () => {
+        const btnElem = QUIZ.getBtn();
+        btnElem.onclick = QUIZ.btnOnClick;
+        btnElem.classList.add(QUIZ.fadeInClass);
+        btnElem.style.display = "block";
+    };
+    QUIZ.hideBtn = () => {
+        const btnElem = QUIZ.getBtn();
+        btnElem.classList.remove(QUIZ.fadeInClass);
+        btnElem.style.display = "none";
+        btnElem.onclick = undefined;
+    };
+    QUIZ.showCertBtn = () => {
+        const dldCertBtnElem = QUIZ.getCertBtn();
+        dldCertBtnElem.classList.add(QUIZ.fadeInClass);
+        dldCertBtnElem.style.display = "block";
+        dldCertBtnElem.onclick = () => window.open(QUIZ.dldCertUrl, "_blank");
+    };
+    QUIZ.hideCertBtn = () => {
+        const dldCertBtnElem = QUIZ.getCertBtn();
+        if (!dldCertBtnElem){
+            return;
+        }
+        dldCertBtnElem.classList.remove(QUIZ.fadeInClass);
+        dldCertBtnElem.style.display = "none";
+        dldCertBtnElem.onclick = undefined;
+    };
+    QUIZ.submitBtnOnClick = () => {
+        const score = QUIZ.calcScore();
+        QUIZ.getForm().remove();
+        QUIZ.showBtn();
+        if (score >= QUIZ.numQuestions) {
+            if (QUIZ.isCertifiable){
+                QUIZ.showCertBtn();
+                passUserQuiz(QUIZ.userEmail, QUIZ.topic);
+                QUIZ.modal.setContent(
+                    "Resultado de evaluación",
+                    "Felicidades, has aprobado la evaluación. Descarga tu certificado en el botón."
+                );
+            }
+            else{
+                QUIZ.modal.setContent(
+                    "Resultado de evaluación",
+                    "Felicidades, has aprobado la evaluación."
+                );
+            }
+
+            QUIZ.modal.activate();
+        }
+        else {
+            if (QUIZ.alreadyPassed === true) {
+                QUIZ.showCertBtn();
+            }
+            QUIZ.modal.setContent(
+                "Resultado de evaluación",
+                "Inténtalo de nuevo, estuviste muy cerca."
+            )
+            QUIZ.modal.activate();
+        }
+    };
+    QUIZ.renderNewQuiz = () => {
+        const update = ({ answers, scoreToPass, htmlForm }) => {
+            QUIZ.correctAnswers = answers;
+            console.log(answers); // TODO: remove this
+
+            // Make button disappear
+            QUIZ.hideBtn();
+            QUIZ.hideCertBtn();
+            
+            // Add quiz questions
+            const quizContainerElem = QUIZ.getContainer();
+            QUIZ.getContainer().innerHTML += htmlForm;
+
+            const formElem = QUIZ.getForm();
+            formElem.onsubmit = () => false; // Remove page refresh on submit
+            formElem.classList.add(QUIZ.fadeInClass); // Add fade in to form
+            const submitBtnElem = QUIZ.getSubmitBtn()
+            submitBtnElem.classList.add("btn");
+            submitBtnElem.onclick = QUIZ.submitBtnOnClick;
+
+            // Spawn the pagination contoller
+            QUIZ.pagination = QUIZ.generatePagination();
+        };
+        getNewQuiz(QUIZ.topic, QUIZ.numQuestions).then(update);
+    };
+
+    
+
+    function onClickSubmitBtn(answers, scoreToPass, numQuestions) {
+        const score = calcQuizScore(answers, numQuestions, formElem);
+
+        if (score >= scoreToPass) {
+            QUIZ.getForm().remove(); // Remove form
+
+
+            // Make the user pass the quiz and show the button
+            passUserQuiz(USER_EMAIL, QUIZ.topic).then(
+                (res) => {
+                    QUIZ.showCertBtn();
+                }
+            );
+
+        }
+        else {
+            alert(`no pass ${score}/${scoreToPass}`); // TODO: Remove alert
+
+        }
+    }
+
+    // Fetches {answers, scroteToPass, htmlForm} from database
+    function getNewQuiz(topic, numQuestions) {
+        const endpoint = "/api/get-quiz-html" + "?topic=" + topic + "&num_questions=" + numQuestions;
+        return new Promise((resolve, reject) =>
+            $.ajax({
+                url: endpoint,
+                type: "POST",
+                success: (res) => resolve(res),
+                error: (err) => reject(err),
+            })
+        );
+    }
+
+    function getUserQuizData(userEmail) {
+        const endpoint = "/api/get-user-quiz-data" + "?email=" + userEmail;
+        return new Promise((resolve, reject) =>
+            $.ajax({
+                url: endpoint,
+                type: "GET",
+                success: (res) => resolve(res),
+                error: (err) => reject(err),
+            })
+        );
+    }
+
+
+    function passUserQuiz(userEmail, quizTopic) {
+        const endpoint = "/api/user-pass-quiz" + "?topic=" + quizTopic + "&email=" + userEmail;
+        return new Promise((resolve, reject) =>
+            $.ajax({
+                url: endpoint,
+                type: "POST",
+                success: (resp) => resolve(resp),
+                error: (err) => reject(err),
+            })
+        );
+    }
+
+
+    if (!QUIZ.isAnonymous){
+        // Check that the use has passed quiz before or not
+        getUserQuizData(QUIZ.userEmail)
+        // Valid user email: link quiz to user
+        .then((data) => {
+            const isPassed = data[QUIZ.topic].is_passed || false;
+
+            QUIZ.showBtn();
+            if (isPassed) {
+                QUIZ.alreadyPassed = true;
+                if (QUIZ.isCertifiable){
+                    QUIZ.showCertBtn();
+                }
+            }
+            else {
+                if (QUIZ.isCertifiable){
+                    QUIZ.hideCertBtn();
+                }
+            }
+        });
+
+    } 
+    else {
+        // No user email, anonymous quiz
+        QUIZ.showBtn();
+        QUIZ.alreadyPassed = false;
+    }
+
+</script> -->
+
+  
+
+</body></html>
