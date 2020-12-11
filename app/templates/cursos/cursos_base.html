@@ -64,6 +64,82 @@
 {% block scripts %}
 {{super()}}
 <script>
+
+ 
+
+    class PaginationController{
+        
+
+        constructor(numSlides ,carouselId, activeClass, disabledClass, rightSelector, leftSelector, nthSelector){
+            this.numSlides = numSlides;
+            this.carouselId = carouselId;
+            this.activeClass = activeClass;
+            this.disabledClass = disabledClass;
+            this.getRightElem = rightSelector;
+            this.getLeftElem = leftSelector;
+            this.getNthElem = (n) => nthSelector(n);
+            this.currPage = 0; // Base 1
+            this.prevPage = 0;
+
+
+            const setCurrPage = (n) => this.currPage = n;
+            
+            const setPrevPage = (n) => this.prevPage = n;   
+
+            const handle = () => {
+                if (this.currPage === this.numSlides - 1){
+                    this.disableRight();
+                }else{
+                    this.enableRight();
+                }
+
+                if (this.currPage === 0){
+                    this.disableLeft();
+                }else{
+                    this.enableLeft();
+                }
+
+                this.toggleActiveNum();
+            }
+
+
+            // Spawn the pagination contoller
+            $(this.carouselId).on('slide.bs.carousel', function(evt) {
+                setPrevPage($(evt.target).find('.active').index());
+                setCurrPage($(evt.relatedTarget).index());
+                
+                handle();
+
+            });
+
+            handle();
+
+        }
+
+        enableRight(){this.getRightElem().removeClass(this.disabledClass);}
+        disableRight(){this.getRightElem().addClass(this.disabledClass);}
+
+        enableLeft(){this.getLeftElem().removeClass(this.disabledClass);}
+        disableLeft(){this.getLeftElem().addClass(this.disabledClass);}
+
+        toggleActiveNum(){
+            this.getNthElem(this.prevPage+1).removeClass(this.activeClass);
+            this.getNthElem(this.currPage+1).addClass(this.activeClass);
+        }
+
+
+    }
+    
+    const newQuizPagination = () => new PaginationController(
+        {{num_questions}},
+        "#carousel-quiz",
+        "active",
+        "disabled",
+        () => $("#carousel-quiz ul.pagination li a.right").parent(),
+        () => $("#carousel-quiz ul.pagination li a.left").parent(),
+        (n) => $(`#carousel-quiz ul.pagination li a:contains(${n})`)
+    );
+
     const MODAL = {
         id: "modal",
         titleId: "modalTitle",
@@ -90,6 +166,8 @@
         submitBtnId: "submit",
         alreadyPassed: false,
         modal: MODAL,
+        pagination: null,
+        generatePagination: newQuizPagination,
     };
     QUIZ.isAnonymous = !QUIZ.userEmail;
     QUIZ.isCertifiable = (!QUIZ.isAnonymous && QUIZ.certifiableTopics.includes(QUIZ.topic) );
@@ -202,38 +280,13 @@
             submitBtnElem.classList.add("btn");
             submitBtnElem.onclick = QUIZ.submitBtnOnClick;
 
-
+            
+            QUIZ.pagination = QUIZ.generatePagination();
         };
         getNewQuiz(QUIZ.topic, QUIZ.numQuestions).then(update);
     };
 
-    if (!QUIZ.isAnonymous){
-        // Check that the use has passed quiz before or not
-        getUserQuizData(QUIZ.userEmail)
-        // Valid user email: link quiz to user
-        .then((data) => {
-            const isPassed = data[QUIZ.topic].is_passed || false;
-
-            QUIZ.showBtn();
-            if (isPassed) {
-                QUIZ.alreadyPassed = true;
-                if (QUIZ.isCertifiable){
-                    QUIZ.showCertBtn();
-                }
-            }
-            else {
-                if (QUIZ.isCertifiable){
-                    QUIZ.hideCertBtn();
-                }
-            }
-        });
-
-    } 
-    else {
-        // No user email, anonymous quiz
-        QUIZ.showBtn();
-        QUIZ.alreadyPassed = false;
-    }
+    
 
     function onClickSubmitBtn(answers, scoreToPass, numQuestions) {
         const score = calcQuizScore(answers, numQuestions, formElem);
@@ -292,6 +345,35 @@
                 error: (err) => reject(err),
             })
         );
+    }
+
+
+    if (!QUIZ.isAnonymous){
+        // Check that the use has passed quiz before or not
+        getUserQuizData(QUIZ.userEmail)
+        // Valid user email: link quiz to user
+        .then((data) => {
+            const isPassed = data[QUIZ.topic].is_passed || false;
+
+            QUIZ.showBtn();
+            if (isPassed) {
+                QUIZ.alreadyPassed = true;
+                if (QUIZ.isCertifiable){
+                    QUIZ.showCertBtn();
+                }
+            }
+            else {
+                if (QUIZ.isCertifiable){
+                    QUIZ.hideCertBtn();
+                }
+            }
+        });
+
+    } 
+    else {
+        // No user email, anonymous quiz
+        QUIZ.showBtn();
+        QUIZ.alreadyPassed = false;
     }
 
 </script>

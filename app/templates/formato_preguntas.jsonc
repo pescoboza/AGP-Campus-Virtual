@@ -2,8 +2,8 @@
 //  topic: Lista con codigos de tema. Puede tener uno o más temas de las siguientes opciones:
 //      - tstc: Cáncer testicular
 //      - crvu: Cáncer cervicouterino
-//      - plmn: Cáncer en pulmón
-//      - psta: Cáncer en próstata
+//      - plmn: Cáncer de pulmón
+//      - psta: Cáncer de próstata
 //      - mama: Cáncer de mama
 //      - diag: Examen diagnóstico
 //  text: Texto de la pregunta.

@@ -36,11 +36,11 @@ USER_GENDERS = [
 
 QUIZ_CODES = {
     "diag": {"is_obligatory": False, "num_questions": 10, "score_to_pass": 0, "full_name": "Examen diagnóstico",   "certificate_url": None},
-    "plmn": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cancer en pulmón",      "certificate_url": "cancer-pulmon"},
-    "mama": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cancer de mama",        "certificate_url": "cancer-mama"},
-    "crvu": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cancer cervicouterino", "certificate_url": "cancer-cervicouterino"},
-    "psta": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cancer en próstata",    "certificate_url": "cancer-prostata"},
-    "tstc": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cancer testicular",     "certificate_url": "cancer-testiculo"}
+    "plmn": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cáncer de pulmón",      "certificate_url": "cancer-pulmon"},
+    "mama": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cáncer de mama",        "certificate_url": "cancer-mama"},
+    "crvu": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cáncer cervicouterino", "certificate_url": "cancer-cervicouterino"},
+    "psta": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cáncer de próstata",    "certificate_url": "cancer-prostata"},
+    "tstc": {"is_obligatory": True, "num_questions": 3,  "score_to_pass": 3, "full_name": "Cáncer testicular",     "certificate_url": "cancer-testiculo"}
 }
 
 QUESTION_TOPICS = tuple([*QUIZ_CODES])
