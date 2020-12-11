@@ -351,7 +351,7 @@ img#navbarLogo {
 
 /* Activity cards */
 /*////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-.row.row-eq-height.cards .col-sm-4 .card {
+.row.cards .card {
     min-height: 385px;
 }
 
@@ -383,6 +383,8 @@ img#navbarLogo {
     margin: 0;
     position: absolute;
     bottom: 20px;
+    width: 50%;
+    
 }
 
 .btn i {
