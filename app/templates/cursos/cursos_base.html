@@ -70,19 +70,29 @@
     class PaginationController{
         
 
-        constructor(numSlides ,carouselId, disabledClass, nextSelector, prevSelector){
+        constructor(numSlides ,carouselId, activeClass, disabledClass, rightSelector, leftSelector, nthSelector){
             this.numSlides = numSlides;
             this.carouselId = carouselId;
+            this.activeClass = activeClass;
             this.disabledClass = disabledClass;
-            this.getRightElem = nextSelector;
-            this.getLeftElem = prevSelector;
-            this.currPage = 0;
+            this.getRightElem = rightSelector;
+            this.getLeftElem = leftSelector;
+            this.getNthElem = (n) => nthSelector(n);
+            this.currPage = 0; // Base 1
+            this.prevPage = 0;
 
 
-            const setCurrPage = (n) => this.currPage = n;
+            const setCurrPage = (n) => {
+                console.debug("curr: " + n);
+                this.currPage = n;
+            }
+            const setPrevPage = (n) => {
+                console.debug("prev: " + n);
+                this.prevPage = n;
+            }
 
             const handle = () => {
-                if (this.currPage === this.numSlides-1){
+                if (this.currPage === this.numSlides - 1){
                     this.disableRight();
                 }else{
                     this.enableRight();
@@ -93,20 +103,22 @@
                 }else{
                     this.enableLeft();
                 }
+
+                this.toggleActiveNum();
             }
 
 
             // Spawn the pagination contoller
             $(this.carouselId).on('slide.bs.carousel', function(evt) {
-                const from = $(evt.target).find('.active').index();
-                const to = $(evt.relatedTarget).index();
-
-                setCurrPage(to);
+                setPrevPage($(evt.target).find('.active').index());
+                setCurrPage($(evt.relatedTarget).index());
+                
                 handle();
 
             });
 
-            this.disableLeft();
+            handle();
+
         }
 
         enableRight(){this.getRightElem().removeClass(this.disabledClass);}
@@ -115,6 +127,10 @@
         enableLeft(){this.getLeftElem().removeClass(this.disabledClass);}
         disableLeft(){this.getLeftElem().addClass(this.disabledClass);}
 
+        toggleActiveNum(){
+            this.getNthElem(this.prevPage+1).removeClass(this.activeClass);
+            this.getNthElem(this.currPage+1).addClass(this.activeClass);
+        }
 
 
     }
@@ -122,9 +138,11 @@
     const newQuizPagination = () => new PaginationController(
         {{num_questions}},
         "#carousel-quiz",
+        "active",
         "disabled",
         () => $("#carousel-quiz ul.pagination li a.right").parent(),
         () => $("#carousel-quiz ul.pagination li a.left").parent(),
+        (n) => $(`#carousel-quiz ul.pagination li a:contains(${n})`)
     );
 
     const MODAL = {

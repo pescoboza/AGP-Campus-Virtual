@@ -390,7 +390,7 @@ img#navbarLogo {
     position: absolute;
     bottom: 20px;
     width: 50%;
-    left: 50%;
+    left: 51%;
     transform: translateX(-50%);
     
 }
@@ -488,6 +488,10 @@ img#navbarLogo {
 
 #quizForm ul.pagination li.disabled a {
     background-color: var(--disabled);
+}
+
+#quizForm ul.pagination li a.active{
+    background-color: var(--active);
 }
 
 #quizContainer {
