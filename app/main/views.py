@@ -242,6 +242,10 @@ def update_questions():
     return render_template("main/update_questions.html", code_body=code_body)
 
 
+@main.route("/politica-de-privacidad", methods=["GET"])
+def privacy_policy():
+    return render_template("main/privacy_policy.html")
+
 @main.route("/terminos-y-condiciones", methods=["GET"])
 def terms_and_conditions():
     return render_template("main/terms_and_conditions.html")
