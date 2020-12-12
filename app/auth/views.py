@@ -198,16 +198,11 @@ def perfil():
         if qc == "diag":
             continue
         quiz_name = QUIZ_CODES[qc]["full_name"]
-        score, max_score = user.quiz_data[qc]["score"]  # Unpack list of two items
         is_passed = user.quiz_data[qc]["is_passed"]
-        is_obligatory = QUIZ_CODES[qc]["is_obligatory"]
         certificate_url = url_for("main.certificate", name=QUIZ_CODES[qc]["certificate_url"])
 
         quiz_info[quiz_name] = {
-            "score": score,
-            "max_score": max_score,
             "is_passed": is_passed,
-            "is_obligatory": is_obligatory,
             "certificate_url": certificate_url
         }
 

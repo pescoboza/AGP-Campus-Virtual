@@ -47,32 +47,26 @@ QUESTION_TOPICS = tuple([*QUIZ_CODES])
 
 USER_QUIZ_DATA = {
     "tstc": {  # Test code
-        "score": [0, 3],  # Actual and max score.
         "is_passed": False,  # Whether the user passed the test.
         "passed_on": ""  # Datetime timestamp
     },
     "crvu": {
-        "score": [0, 3],
         "is_passed": False,
         "passed_on": ""
     },
     "plmn": {
-        "score": [0, 3],
         "is_passed": False,
         "passed_on": ""
     },
     "psta": {
-        "score": [0, 3],
         "is_passed": False,
         "passed_on": ""
     },
     "mama": {
-        "score": [0, 3],
         "is_passed": False,
         "passed_on": ""
     },
     "diag": {
-        "score": [0, 10],
         "is_passed": False,
         "passed_on": ""
     }
