@@ -87,6 +87,9 @@ def create_app(config):
     from .cursos import cursos as cursos_blueprint
     app.register_blueprint(cursos_blueprint, url_prefix="/cursos")
 
+    from .certificate import certificate as certificate_blueprint
+    app.register_blueprint(certificate_blueprint, url_prefix="/certificado")
+
     from .api import api as api_blueprint
     app.register_blueprint(api_blueprint, url_prefix="/api")
     ################
