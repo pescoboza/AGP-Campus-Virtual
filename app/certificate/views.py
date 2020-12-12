@@ -1,4 +1,4 @@
-from flask import url_for, redirect, flash, make_response
+from flask import url_for, redirect, flash, make_response, render_template
 from flask_login import login_required, current_user
 
 from ..models import User
@@ -9,7 +9,7 @@ CERT_ROUTES = {
     "cancer-mama":           "mama",
     "cancer-cervicouterino": "crvu",
     "cancer-prostata":       "psta",
-    "cancer-testicular":     "tstc"
+    "cancer-testiculo":     "tstc"
 }
 
 CERT_NAMES = {
@@ -17,7 +17,7 @@ CERT_NAMES = {
     "cancer-mama":              "Cáncer de mama",
     "cancer-cervicouterino":    "Cáncer cervicouterino",
     "cancer-prostata":          "Cáncer de próstata",
-    "cancer-testicular":        "Cáncer testicular"
+    "cancer-testiculo":        "Cáncer testicular"
 }
 
 
@@ -27,7 +27,7 @@ def download_certificate(name):
 
     # Validate that a valid url argument for course name was entered
     if name not in CERT_ROUTES:
-        return redirect(url_for("errors.not_found_error"))
+        return render_template("errors/404.html")
 
     topic_code = CERT_ROUTES[name]
 

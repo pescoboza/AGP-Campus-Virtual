@@ -27,13 +27,13 @@ CERT_NAME = {
 }
 
 IMG_NAME = {
-    "plmn": "static/certificate/cert_plmn.jpg",
-    "mama": "static/certificate/cert_mama.jpg",
-    "crvu": "static/certificate/cert_crvu.jpg",
-    "psta": "static/certificate/cert_psta.jpg",
-    "tstc": "static/certificate/cert_tstc.jpg"
+    "plmn": "app/static/certificate/cert_plmn.jpg",
+    "mama": "app/static/certificate/cert_mama.jpg",
+    "crvu": "app/static/certificate/cert_crvu.jpg",
+    "psta": "app/static/certificate/cert_psta.jpg",
+    "tstc": "app/static/certificate/cert_tstc.jpg"
 }
-
+import os
 # Returns reportlab Canvas of certificate
 def generate_certificate(output_filename, name, topic, date=date.today(), ):
     if topic not in IMG_NAME:
