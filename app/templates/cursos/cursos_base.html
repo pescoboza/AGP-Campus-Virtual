@@ -263,7 +263,7 @@
     QUIZ.renderNewQuiz = () => {
         const update = ({ answers, scoreToPass, htmlForm }) => {
             QUIZ.correctAnswers = answers;
-            console.log(answers); // TODO: remove this
+            //console.log(answers); // NOTE: debug printing of quiz answers
 
             // Make button disappear
             QUIZ.hideBtn();
@@ -288,26 +288,26 @@
 
     
 
-    function onClickSubmitBtn(answers, scoreToPass, numQuestions) {
-        const score = calcQuizScore(answers, numQuestions, formElem);
+    // function onClickSubmitBtn(answers, scoreToPass, numQuestions) {
+    //     const score = calcQuizScore(answers, numQuestions, formElem);
 
-        if (score >= scoreToPass) {
-            QUIZ.getForm().remove(); // Remove form
+    //     if (score >= scoreToPass) {
+    //         QUIZ.getForm().remove(); // Remove form
 
 
-            // Make the user pass the quiz and show the button
-            passUserQuiz(USER_EMAIL, QUIZ.topic).then(
-                (res) => {
-                    QUIZ.showCertBtn();
-                }
-            );
+    //         // Make the user pass the quiz and show the button
+    //         passUserQuiz(USER_EMAIL, QUIZ.topic).then(
+    //             (res) => {
+    //                 QUIZ.showCertBtn();
+    //             }
+    //         );
 
-        }
-        else {
-            alert(`no pass ${score}/${scoreToPass}`); // TODO: Remove alert
+    //     }
+    //     else {
+    //         alert(`no pass ${score}/${scoreToPass}`);
 
-        }
-    }
+    //     }
+    // }
 
     // Fetches {answers, scroteToPass, htmlForm} from database
     function getNewQuiz(topic, numQuestions) {
