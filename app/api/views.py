@@ -9,7 +9,6 @@ from ..cursos.forms import MultipleChoiceQuizForm
 # Reposnds with HTML for the flashed messages
 @api.route("/flashed-messages", methods=["POST"])
 def flashed_messages():
-    # TODO: remove this test
     return render_template("_flash.html")
 
 
@@ -71,7 +70,7 @@ def generate_quiz():
 
     return  jsonify(questions)
 
-@api.route("/get-quiz-html", methods=["POST", "GET"]) # TODO: Remove GET
+@api.route("/get-quiz-html", methods=["POST"])
 def get_quiz_html():
     """
     Gives as response:

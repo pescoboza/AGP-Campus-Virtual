@@ -47,32 +47,26 @@ QUESTION_TOPICS = tuple([*QUIZ_CODES])
 
 USER_QUIZ_DATA = {
     "tstc": {  # Test code
-        "score": [0, 3],  # Actual and max score.
         "is_passed": False,  # Whether the user passed the test.
         "passed_on": ""  # Datetime timestamp
     },
     "crvu": {
-        "score": [0, 3],
         "is_passed": False,
         "passed_on": ""
     },
     "plmn": {
-        "score": [0, 3],
         "is_passed": False,
         "passed_on": ""
     },
     "psta": {
-        "score": [0, 3],
         "is_passed": False,
         "passed_on": ""
     },
     "mama": {
-        "score": [0, 3],
         "is_passed": False,
         "passed_on": ""
     },
     "diag": {
-        "score": [0, 10],
         "is_passed": False,
         "passed_on": ""
     }
@@ -101,7 +95,6 @@ class User(UserMixin, me.Document):
     registered_on = me.DateTimeField(required=True)
 
     quiz_data = me.DictField()
-    is_certified = me.BooleanField(default=False)
     certified_on = me.DateTimeField()
     perm_level = me.IntField(default=USER_PERMS["certification"])
 
@@ -149,11 +142,6 @@ class User(UserMixin, me.Document):
             if QUIZ_CODES[qc]["is_obligatory"] and not self.quiz_data[qc]["is_passed"]:
                 return False
         return True
-
-    # Gives certification to the user but does not check the tests.
-    def certify(self, certified_on=datetime.now()):
-        self.is_certified = True
-        self.certified_on = certified_on
 
     # Gets user document instance from me. Returns None if it does not exist.
     @staticmethod

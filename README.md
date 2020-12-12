@@ -3,12 +3,6 @@
 
 ## TODO
 ### Major
-- Add custom error page handlers
-- Add missing institutions
-- Add missing activities
-- Add terms and conditions
-- Proofread all text and information
-- Proofread all questions
 - Deploy
 - Apply domain name
 

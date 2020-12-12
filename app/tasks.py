@@ -17,7 +17,6 @@ TASKS = {
             hour=23, minute=59, second=59, microsecond=0)
 
     },
-    # #TODO: Comment out the test task for report updationg.
     # "test_google_sheets_report": {
     #     "func": lambda : update_google_sheets_report(drive),
     #     "trigger": "interval",
@@ -25,6 +24,5 @@ TASKS = {
     #     "name": "test_google_sheets_report",
     #     "id": "888",        
     #     "next_run_time": datetime.now() + timedelta(seconds=10)
-    # },
-
+    # }
 }

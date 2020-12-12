@@ -21,7 +21,7 @@ Perfil
 
         {% for quiz_name, info in quiz_info.items() %}
 
-        {% if info.get("is_passed", False) and info.get("certificate_url", False)%}
+        {% if info.get("is_passed", False) and info.get("certificate_url", False) %}
         <a href="{{info['certificate_url']}}" target="_blank" class="list-group-item list-group-item-action active">
             {{quiz_name}}
         </a>
