@@ -74,7 +74,7 @@ def registrarse():
         new_user.save()
 
         login_user(new_user, remember=False)
-        flash(Msg.Flash.NEW_USER.format(first_name=new_user.first_name))
+        flash("Ha iniciado sesión correctamente con su nueva cuenta.")
         return redirect(url_for("main.index"))
 
     return render_template("auth/registrarse.html", title="Registrarse", form=form)

@@ -101,7 +101,6 @@ class User(UserMixin, me.Document):
     registered_on = me.DateTimeField(required=True)
 
     quiz_data = me.DictField()
-    is_certified = me.BooleanField(default=False)
     certified_on = me.DateTimeField()
     perm_level = me.IntField(default=USER_PERMS["certification"])
 
@@ -149,11 +148,6 @@ class User(UserMixin, me.Document):
             if QUIZ_CODES[qc]["is_obligatory"] and not self.quiz_data[qc]["is_passed"]:
                 return False
         return True
-
-    # Gives certification to the user but does not check the tests.
-    def certify(self, certified_on=datetime.now()):
-        self.is_certified = True
-        self.certified_on = certified_on
 
     # Gets user document instance from me. Returns None if it does not exist.
     @staticmethod
