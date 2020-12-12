@@ -1,15 +1,24 @@
-from flask import url_for, redirect
-from flask_login import login_required
+from flask import url_for, redirect, flash, make_response
+from flask_login import login_required, current_user
 
+from ..models import User
 from . import certificate
-from .certificate import generate_certificate, 
+from .certificate import generate_certificate, timestamp_str
 
 CERT_ROUTES = {
-    "cancer-pulmon": "plmn",
-    "cancer-mama": "mama",
+    "cancer-pulmon":         "plmn",
+    "cancer-mama":           "mama",
     "cancer-cervicouterino": "crvu",
-    "cancer-prostata": "psta",
-    "cancer-testicular": "tstc"
+    "cancer-prostata":       "psta",
+    "cancer-testicular":     "tstc"
+}
+
+CERT_NAMES = {
+    "cancer-pulmon":            "Cáncer de pulmón",
+    "cancer-mama":              "Cáncer de mama",
+    "cancer-cervicouterino":    "Cáncer cervicouterino",
+    "cancer-prostata":          "Cáncer de próstata",
+    "cancer-testicular":        "Cáncer testicular"
 }
 
 
@@ -19,7 +28,9 @@ def download_certificate(name):
 
     # Validate that a valid url argument for course name was entered
     if name not in CERT_ROUTES:
-        return redirect(url_for("main.index"))
+        return redirect(url_for("errors.not_found_error"))
+
+    topic_code = CERT_ROUTES[name]
 
     # Shorthand for current_user
     cu = current_user
@@ -27,51 +38,29 @@ def download_certificate(name):
     # Fetch the current user from the database
     user = User.objects(email=cu.email).first()
     if user == None:
+        flash("Debe registrar una cuenta y aprobar la evualuación para obtener su certificado.")
         return redirect(url_for("main.index"))
 
     # Check if user has completed the quiz
-    if not user.has_passed_quiz(CERT_ROUTES[name]):
+    if not user.has_passed_quiz(topic_code):
         flash("Debe completar la evaluación al final del módulo para obtener su certificado.")
         return redirect(url_for("cursos.{}".format(name.replace('-', '_'))))
 
     
     
-    
-    
     # Current working dir to set abs path for pdfkit html resources
     cwd = os.getcwd()
 
-    # Get the certificate data: title, user name, date, course, background image and font path
-    cert_title = "Certificado Campus Virtual - {} {} {}".format(
-        cu.first_name, cu.paternal_last_name, cu.maternal_last_name)
-    cert_name = (
-        cu.first_name + ' ' + cu.paternal_last_name + ' ' + cu.maternal_last_name).upper()
-    cert_date = datetime.date.today()
-    cert_date = "{}/{}/{}".format(cert_date.day,
-                                  cert_date.month, cert_date.year)
-    cert_course_name = COURSE_CERT[name]["cert_course_name"]
-    cert_bg_img = os.path.join(
-        cwd, "app/static/img", COURSE_CERT[name]["cert_bg_img"]).replace('\\', '/')
-    cert_font_path = os.path.join(
-        cwd, "app/static/css/fonts/").replace('\\', '/')
+    full_name = "{} {} {}".format(cu.first_name, cu.paternal_last_name, cu.maternal_last_name)
+    cert_title = "Certificado de {} a {}".format(CERT_NAMES[name], full_name)
+    cert_filename = cert_title + ".pdf"
+    
+    #"{}{}{}_{}_{}".format(cu.first_name, cu.paternal_last_name, cu.maternal_last_name, CERT_ROUTES[name], timestamp_str())
 
-    # The Jinja rendered string to pass to pdf generator
-    rendered = render_template("certificate/_certificate.html",
-                               title=cert_title,
-                               name=cert_name,
-                               date=cert_date,
-                               course_name=cert_course_name,
-                               background=cert_bg_img,
-                               font_path=cert_font_path)
+    canvas = generate_certificate(cert_filename, full_name, topic_code)
 
     # Generate pdf payload using pdfkit
-    pdf = pdfkit.from_string(
-        input=rendered, output_path=False, configuration=pdfkit_config,
-        options={
-            "enable-local-file-access": None,
-            "disable-smart-shrinking": None
-        }
-    )
+    pdf = canvas.getpdfdata()
 
     # Set up the pdf response headers for a pdf file instead of regular html
     response = make_response(pdf)

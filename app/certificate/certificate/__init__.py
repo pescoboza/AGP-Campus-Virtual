@@ -32,7 +32,7 @@ IMG_NAME = {
     "tstc": "cert_tstc.jpg"
 }
 
-
+# Returns reportlab Canvas of certificate
 def generate_certificate(output_filename, name, topic, date=date.today(), ):
     if topic not in IMG_NAME:
         raise ValueError(f"Invalid topic code '{topic}'")
@@ -69,7 +69,7 @@ def generate_certificate(output_filename, name, topic, date=date.today(), ):
     canvas.drawCentredString(
         W/2, H * 0.15, "{}/{}/{}".format(date.day, date.month, date.year))
 
-    canvas.save()
+    return canvas
 
 
 def timestamp_str():
