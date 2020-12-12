@@ -1,5 +1,3 @@
-import os
-
 from config import current_config
 from app import create_app
 
