@@ -41,6 +41,7 @@ def login():
         print("[DEBUG] Login from user: {} {}".format(
             user.email, user.first_name))
 
+        flash("Ha iniciado sesión correctamente.")
         return redirect(next)
 
     return render_template("auth/login.html", title="Iniciar sesión", form=form)
@@ -83,7 +84,7 @@ def registrarse():
 def logout():
     if not current_user.is_anonymous:
         logout_user()
-        flash(Msg.Flash.LOGOUT_USER)
+        flash("Ha cerrado sesión exitosamente.")
     return redirect(url_for("main.index"))
 
 
