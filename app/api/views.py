@@ -113,7 +113,7 @@ def redirect_certificate():
         return make_response("INVALID_TOPIC", 400) # Quiz topic not found
 
     certificate_link = QUIZ_CODES[quiz_topic]["certificate_url"]
-    return redirect(url_for("main.certificate", name=certificate_link))
+    return redirect(url_for("certificate.download_certificate", name=certificate_link))
 
 
 @api.route("/user-pass-quiz", methods=["POST"])

@@ -199,7 +199,7 @@ def perfil():
             continue
         quiz_name = QUIZ_CODES[qc]["full_name"]
         is_passed = user.quiz_data[qc]["is_passed"]
-        certificate_url = url_for("main.certificate", name=QUIZ_CODES[qc]["certificate_url"])
+        certificate_url = url_for("certificate.download", name=QUIZ_CODES[qc]["certificate_url"])
 
         quiz_info[quiz_name] = {
             "is_passed": is_passed,

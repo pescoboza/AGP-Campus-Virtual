@@ -2,8 +2,7 @@ from flask import url_for, redirect, flash, make_response
 from flask_login import login_required, current_user
 
 from ..models import User
-from . import certificate
-from .certificate import generate_certificate, timestamp_str
+from . import certificate, generate_certificate, timestamp_str
 
 CERT_ROUTES = {
     "cancer-pulmon":         "plmn",
@@ -46,11 +45,7 @@ def download_certificate(name):
         flash("Debe completar la evaluación al final del módulo para obtener su certificado.")
         return redirect(url_for("cursos.{}".format(name.replace('-', '_'))))
 
-    
-    
-    # Current working dir to set abs path for pdfkit html resources
-    cwd = os.getcwd()
-
+    # Generate name for pdf certificate
     full_name = "{} {} {}".format(cu.first_name, cu.paternal_last_name, cu.maternal_last_name)
     cert_title = "Certificado de {} a {}".format(CERT_NAMES[name], full_name)
     cert_filename = cert_title + ".pdf"
@@ -59,7 +54,7 @@ def download_certificate(name):
 
     canvas = generate_certificate(cert_filename, full_name, topic_code)
 
-    # Generate pdf payload using pdfkit
+    # Generate pdf payload using reportlab
     pdf = canvas.getpdfdata()
 
     # Set up the pdf response headers for a pdf file instead of regular html

@@ -4,8 +4,6 @@ import time
 import json
 from threading import Thread
 import datetime
-from .. import pdfkit_config
-import pdfkit
 from werkzeug.utils import secure_filename
 from flask import current_app, flash, request, redirect, render_template, url_for, make_response, send_file, after_this_request
 from flask_login import current_user, login_user, logout_user, login_required
