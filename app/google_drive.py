@@ -19,7 +19,7 @@ MIME = {
 }
 
 
-def google_drive_init(creds_filename="secret/token.pickle", fallback="secret/client_secret.json"):
+def google_drive_init(creds_filename="tmp/token.pickle", fallback="secret/client_secret.json"):
     """
     Instantiates a Google Drive API v3 object from a serialized token file or
     a credentials json file. 

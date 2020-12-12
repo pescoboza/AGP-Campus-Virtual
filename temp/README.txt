@@ -1,1 +1,0 @@
-In this dir go some temporary files generated dynamically by ther server.
