@@ -5,9 +5,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from flask_apscheduler import APScheduler
-from dotenv import load_dotenv
 
-load_dotenv()
 
 class Msg:
     # TODO: Move this to a JSON and devise a better structure.

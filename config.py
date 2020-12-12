@@ -1,6 +1,7 @@
 import os
 from datetime import timedelta
 
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -30,6 +31,7 @@ class Config(object):
         "host": os.getenv("MONGO_URI"),
     }
 
+
     # FlaskLogin settings
     REMEMBER_COOKIE_DURATION = timedelta(minutes=5)
 
@@ -45,9 +47,6 @@ class Config(object):
     MAIL_DEFAULT_SENDER = os.getenv("MAIL_DEFAULT_SENDER")
     MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
     MAIL_SUBJECT_PREFIX = os.getenv("MAIL_SUBJECT_PREFIX")
-
-    # PDFkit wkhtmltopdf location
-    PDFKIT_WKHTMLTOPDF_PATH = os.getenv("PDFKIT_WKHTMLTOPDF_PATH")
 
     # File ipload folder
     UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER")
@@ -92,7 +91,6 @@ class DevConfig(Config):
     # SECRET_FOLDER = os.getenv("SECRET_FOLDER")
 
 
-
 # Configuration environments mathing each object.
 config = {
     "development": DevConfig,
@@ -101,4 +99,8 @@ config = {
     "default": DevConfig
 }
 
-current_config = config.get(os.getenv("FLASK_ENV"), config["development"])
+# current_config = config.get(os.getenv("FLASK_ENV"), config["development"])
+current_config = config["production"]
+
+if Config.MONGODB_SETTINGS["host"] is None:
+    raise ValueError("[ERROR] HELP, env variables not loading!!!!")
