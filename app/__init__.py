@@ -98,10 +98,10 @@ def create_app(config):
     app.register_blueprint(api_blueprint, url_prefix="/api")
     ################
 
-
+    ## NOTE: Se note above
     # Start the app scheduler
-    scheduler.init_app(app)
-    scheduler.start()
+    # scheduler.init_app(app)
+    # scheduler.start()
 
 
     # Create folders in config if they do not exist

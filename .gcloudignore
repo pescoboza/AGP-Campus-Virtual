@@ -25,3 +25,9 @@ Pipfile.lock
 
 # VS Code config
 .vscode/
+
+# Temporary dirs
+secret/
+temp/
+tmp/
+uploads/
