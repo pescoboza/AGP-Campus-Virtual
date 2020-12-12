@@ -49,15 +49,23 @@ login.login_message = Msg.Flash.LOGIN_REQUIRED
 mail = Mail()
 bootstrap = Bootstrap()
 
+# NOTE: For future maintainers:
+#   Commented out the google drive 
+#   functionality to make it work
+#   because validation and token creation
+#   runs from the local host.
+#   Try to find a way to indefenitely bind a
+#   Google Auth permission to the application.
+
 # Intialize google drive service
-from .google_drive import google_drive_init
-drive = google_drive_init()
+# from .google_drive import google_drive_init
+# drive = google_drive_init()
 
 # Register all shecuder tasks
-from .tasks import TASKS
-scheduler = APScheduler()
-for task in TASKS.values():
-    scheduler.add_job(**task)
+# from .tasks import TASKS
+# scheduler = APScheduler()
+# for task in TASKS.values():
+#     scheduler.add_job(**task)
 
 
 def create_app(config):
