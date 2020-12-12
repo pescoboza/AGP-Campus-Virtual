@@ -62,7 +62,7 @@ class DevConfig(Config):
     ENV = "development"
     DEBUG = True
 
-    SECRET_KEY = os.getenv("DEBUG_SECRET_KEY")
+    # SECRET_KEY = os.getenv("DEBUG_SECRET_KEY")
 
     # # FlaskMongoengine settings
     # MONGODB_SETTINGS = {
