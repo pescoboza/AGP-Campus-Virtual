@@ -1,7 +1,6 @@
 import os
 from flask import Flask
 from flask_mongoengine import MongoEngine
-from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
@@ -43,7 +42,6 @@ class Msg:
 
 
 db = MongoEngine()
-migrate = Migrate()
 login = LoginManager()
 login.login_view = "auth.login"
 login.login_message = Msg.Flash.LOGIN_REQUIRED
@@ -68,7 +66,6 @@ def create_app(config):
     app.config.from_object(config)
 
     db.init_app(app)
-    migrate.init_app(app, db)
     login.init_app(app)
     mail.init_app(app)
     bootstrap.init_app(app)
